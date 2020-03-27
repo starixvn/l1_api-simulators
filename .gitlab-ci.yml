@@ -118,7 +118,7 @@ deploy_game_lobby_simulator_SIT:
   script:
     - cp ./L1.GameLobbySimulator/game-client-config.SIT.json ./L1.GameLobbySimulator/game-client-config.json
     - git clone git@gitlab.com:l1-compiled/game-lobby-simulator-compiled.git ../game-lobby-simulator
-    - cp -R /L1.GameLobbySimulator/* ../game-lobby-simulator
+    - cp -R ./L1.GameLobbySimulator/* ../game-lobby-simulator
     - cd ../game-lobby-simulator
     - git add .
     - if [ -z "$(git status --porcelain)" ]; then echo "Nothing change"; else git commit -m "$COMMIT_MESSAGE"; fi
