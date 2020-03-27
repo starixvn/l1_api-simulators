@@ -19,7 +19,7 @@
     "cookie-parser": "^1.4.0",
     "debug": "^2.2.0",
     "express": "^4.14.0",
-    "l1.client.node-js": "file:../../api/L1.Client.NodeJS",
+    "l1.client.node-js": "file:./L1.Client.NodeJS",
     "morgan": "^1.7.0",
     "pug": "^2.0.0-beta6",
     "serve-favicon": "^2.3.0"
