@@ -46,11 +46,13 @@ deploy_ow_api_simulator_LOCAL:
     - tar -C ./build/ow-api-simulator/ -jcf - ./ | ssh root@$HOST 'tar -C /var/www/l1/ow-api-simulator/ -jxf -'
     - ssh root@$HOST 'sudo service l1-ow-api-simulator restart'
   artifacts:
-    expire_in: 2 days
+    expire_in: 1 days
     paths:
       - './build/ow-api-simulator'
   tags:
     - deploy-dotnet
+  environment:
+    name: LOCAL
   only:
     - /^deploy-local-\d{8}-\d+.*$/
     - /^deploy-local-ow-api-simulator-\d{8}-\d+.*$/
@@ -72,3 +74,35 @@ deploy_game_lobby_simulator_LOCAL:
   only:
     - /^deploy-local-\d{8}-\d+.*$/
     - /^deploy-local-game-lobby-simulator-\d{8}-\d+.*$/
+    
+deploy_ow_api_simulator_SIT:
+  stage: deploy-ow-api-simulator
+  before_script:
+    - echo "====== Setting SSH Key ======"
+    - eval $(ssh-agent -s)
+    - echo "$SSH_KEY" | ssh-add -
+    - mkdir -p ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - dotnet clean ./OW.ApiSimulator/OW.ApiSimulator.csproj
+    - dotnet restore ./OW.ApiSimulator/OW.ApiSimulator.csproj
+    - dotnet build ./OW.ApiSimulator/OW.ApiSimulator.csproj
+    - export COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+  script:   
+    - echo "====== Pushing git compiled ... ======"
+    - git clone git@gitlab.com:l1-compiled/ow-api-simulators-compiled.git ./build/ow-api-simulator
+    - dotnet publish -c SIT -r linux-x64 --self-contained false ./OW.ApiSimulator/OW.ApiSimulator.csproj -o ./build/ow-api-simulator
+    - cd ./build/ow-api-simulator
+    - git add .
+    - if [ -z "$(git status --porcelain)" ]; then echo "Nothing change"; else git commit -m "$COMMIT_MESSAGE"; fi
+    - git push -u origin master
+  artifacts:
+    expire_in: 1 days
+    paths:
+      - './build/ow-api-simulator'
+  tags:
+    - deploy-dotnet
+  environment:
+    name: SIT
+#  only:
+#    - /^deploy-local-\d{8}-\d+.*$/
+#    - /^deploy-local-ow-api-simulator-\d{8}-\d+.*$/
