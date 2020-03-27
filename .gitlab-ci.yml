@@ -115,6 +115,7 @@ deploy_game_lobby_simulator_SIT:
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     - rm -rf ../game-lobby-simulator
+    - export COMMIT_MESSAGE=$(git log -1 --pretty=%B)
   script:
     - cp ./L1.GameLobbySimulator/game-client-config.SIT.json ./L1.GameLobbySimulator/game-client-config.json
     - git clone git@gitlab.com:l1-compiled/game-lobby-simulator-compiled.git ../game-lobby-simulator
