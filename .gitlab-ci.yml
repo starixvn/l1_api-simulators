@@ -93,10 +93,13 @@ deploy_ow_api_simulator_SIT:
     - echo "====== Pushing git compiled ... ======"
     - git clone git@gitlab.com:l1-compiled/ow-api-simulators-compiled.git ./build/ow-api-simulator
     - dotnet publish -c SIT -r linux-x64 --self-contained false ./OW.ApiSimulator/OW.ApiSimulator.csproj -o ./build/ow-api-simulator
+    - cp ./OW.ApiSimulator/gitlab-ci-after-script-SIT.sh ./build/ow-api-simulator/
     - cd ./build/ow-api-simulator
     - git add .
     - if [ -z "$(git status --porcelain)" ]; then echo "Nothing change"; else git commit -m "$COMMIT_MESSAGE"; fi
     - git push -u origin master
+    - echo "==============Waiting for after script execution=============="
+    - sleep 60
   artifacts:
     expire_in: 1 days
     paths:
@@ -127,6 +130,8 @@ deploy_game_lobby_simulator_SIT:
     - git add .
     - if [ -z "$(git status --porcelain)" ]; then echo "Nothing change"; else git commit -m "$COMMIT_MESSAGE"; fi
     - git push -u origin master
+    - echo "==============Waiting for after script execution=============="
+    - sleep 60
   tags:
     - deploy-nodejs
   environment:
