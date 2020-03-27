@@ -56,6 +56,7 @@ deploy_ow_api_simulator_LOCAL:
   only:
     - /^deploy-local-\d{8}-\d+.*$/
     - /^deploy-local-ow-api-simulator-\d{8}-\d+.*$/
+    - /^deploy-ow-api-simulator-\d{8}-\d+.*$/
       
 deploy_game_lobby_simulator_LOCAL:
   stage: deploy-game-lobby-simulator
@@ -74,6 +75,7 @@ deploy_game_lobby_simulator_LOCAL:
   only:
     - /^deploy-local-\d{8}-\d+.*$/
     - /^deploy-local-game-lobby-simulator-\d{8}-\d+.*$/
+    - /^deploy-game-lobby-simulator-\d{8}-\d+.*$/
     
 deploy_ow_api_simulator_SIT:
   stage: deploy-ow-api-simulator
@@ -106,6 +108,7 @@ deploy_ow_api_simulator_SIT:
   only:
     - /^deploy-sit-\d{8}-\d+.*$/
     - /^deploy-sit-ow-api-simulator-\d{8}-\d+.*$/
+    - /^deploy-ow-api-simulator-\d{8}-\d+.*$/
 
 deploy_game_lobby_simulator_SIT:
   stage: deploy-game-lobby-simulator
@@ -128,7 +131,8 @@ deploy_game_lobby_simulator_SIT:
     - deploy-nodejs
   environment:
     name: SIT
- # only:
- #   - /^deploy-local-\d{8}-\d+.*$/
- #   - /^deploy-local-game-lobby-simulator-\d{8}-\d+.*$/
+  only:
+    - /^deploy-sit-\d{8}-\d+.*$/
+    - /^deploy-sit-game-lobby-simulator-\d{8}-\d+.*$/
+    - /^deploy-game-lobby-simulator-\d{8}-\d+.*$/
     
