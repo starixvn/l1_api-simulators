@@ -103,9 +103,9 @@ deploy_ow_api_simulator_SIT:
     - deploy-dotnet
   environment:
     name: SIT
-#  only:
-#    - /^deploy-local-\d{8}-\d+.*$/
-#    - /^deploy-local-ow-api-simulator-\d{8}-\d+.*$/
+  only:
+    - /^deploy-sit-\d{8}-\d+.*$/
+    - /^deploy-sit-ow-api-simulator-\d{8}-\d+.*$/
 
 deploy_game_lobby_simulator_SIT:
   stage: deploy-game-lobby-simulator
@@ -114,7 +114,6 @@ deploy_game_lobby_simulator_SIT:
     - echo "$SSH_KEY" | ssh-add -
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    - mkdir ../game-lobby-simulator
   script:
     - cp ./L1.GameLobbySimulator/game-client-config.SIT.json ./L1.GameLobbySimulator/game-client-config.json
     - git clone git@gitlab.com:l1-compiled/game-lobby-simulator-compiled.git ../game-lobby-simulator
