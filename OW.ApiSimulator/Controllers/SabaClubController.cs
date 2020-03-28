@@ -70,7 +70,7 @@ namespace OW.ApiSimulator.Controllers
         }
 
         [HttpPost]
-        public IActionResult Balance([FromBody] OWRequest<GetBalanceCall> request)
+        public IActionResult GetBalance([FromBody] OWRequest<GetBalanceCall> request)
         {
             var result = serviceProvider.GetRequiredService<GetBalanceResult>();
             result.Seq = request.Call?.Seq;
