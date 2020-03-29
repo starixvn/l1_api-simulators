@@ -3,52 +3,40 @@ stages:
   - deploy-ow-api-simulator
   - deploy-game-lobby-simulator
 
-deploy_member_site_simulator_LOCAL:
+before_script:
+  - eval $(ssh-agent -s)
+  - echo "$SSH_KEY" | ssh-add -
+  - mkdir -p ~/.ssh
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  - export COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+
+local_deploy_member_site_simulator:
   stage: deploy-member-site-simulator
-  before_script:
-    - echo "====== Setting SSH Key ======"
-    - eval $(ssh-agent -s)
-    - echo "$SSH_KEY" | ssh-add -
-    - mkdir -p ~/.ssh
-    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  script:   
     - dotnet clean ./L1.MemberSiteSimulation/L1.MemberSiteSimulation.csproj
     - dotnet restore ./L1.MemberSiteSimulation/L1.MemberSiteSimulation.csproj
     - dotnet build ./L1.MemberSiteSimulation/L1.MemberSiteSimulation.csproj
-  script:   
     - echo "====== Deploying ... ======"
     - dotnet publish -c LOCAL -r linux-x64 --self-contained false ./L1.MemberSiteSimulation/L1.MemberSiteSimulation.csproj -o ./build/member-site-simulator
     - tar -C ./build/member-site-simulator/ -jcf - ./ | ssh root@$HOST 'tar -C /var/www/l1/member-site-simulator/ -jxf -'
     - ssh root@$HOST 'sudo service l1-member-site-simulator restart'
-  artifacts:
-    expire_in: 2 days
-    paths:
-      - './build/member-site-simulator'
   tags:
     - deploy-dotnet
   only:
     - /^deploy-local-\d{8}-\d+.*$/
     - /^deploy-local-member-site-simulator-\d{8}-\d+.*$/
     
-deploy_ow_api_simulator_LOCAL:
+local_deploy_ow_api_simulator:
   stage: deploy-ow-api-simulator
-  before_script:
-    - echo "====== Setting SSH Key ======"
-    - eval $(ssh-agent -s)
-    - echo "$SSH_KEY" | ssh-add -
-    - mkdir -p ~/.ssh
-    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  script:   
     - dotnet clean ./OW.ApiSimulator/OW.ApiSimulator.csproj
     - dotnet restore ./OW.ApiSimulator/OW.ApiSimulator.csproj
     - dotnet build ./OW.ApiSimulator/OW.ApiSimulator.csproj
-  script:   
     - echo "====== Deploying ... ======"
     - dotnet publish -c LOCAL -r linux-x64 --self-contained false ./OW.ApiSimulator/OW.ApiSimulator.csproj -o ./build/ow-api-simulator
     - tar -C ./build/ow-api-simulator/ -jcf - ./ | ssh root@$HOST 'tar -C /var/www/l1/ow-api-simulator/ -jxf -'
     - ssh root@$HOST 'sudo service l1-ow-api-simulator restart'
-  artifacts:
-    expire_in: 1 days
-    paths:
-      - './build/ow-api-simulator'
   tags:
     - deploy-dotnet
   environment:
@@ -58,13 +46,8 @@ deploy_ow_api_simulator_LOCAL:
     - /^deploy-local-ow-api-simulator-\d{8}-\d+.*$/
     - /^deploy-ow-api-simulator-\d{8}-\d+.*$/
       
-deploy_game_lobby_simulator_LOCAL:
+local_deploy_game_lobby_simulator:
   stage: deploy-game-lobby-simulator
-  before_script:
-    - eval $(ssh-agent -s)
-    - echo "$SSH_KEY" | ssh-add -
-    - mkdir -p ~/.ssh
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
     - tar -C ./L1.GameLobbySimulator/ -jcf - ./ | ssh root@$HOST 'tar -C /var/www/l1/game-lobby-simulator/simulator/ -jxf -'
     - ssh root@$HOST 'npm install --prefix /var/www/l1/game-lobby-simulator/simulator/ && npm run build  --prefix /var/www/l1/game-lobby-simulator/simulator/ | sudo service l1-gamelobby-simulator restart'
@@ -76,33 +59,26 @@ deploy_game_lobby_simulator_LOCAL:
     - /^deploy-local-game-lobby-simulator-\d{8}-\d+.*$/
     - /^deploy-game-lobby-simulator-\d{8}-\d+.*$/
     
-deploy_ow_api_simulator_SIT:
+sit_deploy_ow_api_simulator:
   stage: deploy-ow-api-simulator
-  before_script:
-    - echo "====== Setting SSH Key ======"
-    - eval $(ssh-agent -s)
-    - echo "$SSH_KEY" | ssh-add -
-    - mkdir -p ~/.ssh
-    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  script:   
     - dotnet clean ./OW.ApiSimulator/OW.ApiSimulator.csproj
     - dotnet restore ./OW.ApiSimulator/OW.ApiSimulator.csproj
     - dotnet build ./OW.ApiSimulator/OW.ApiSimulator.csproj
-    - export COMMIT_MESSAGE=$(git log -1 --pretty=%B)
-  script:   
     - echo "====== Pushing git compiled ... ======"
     - git clone git@gitlab.com:l1-compiled/ow-api-simulators-compiled.git ./build/ow-api-simulator
     - dotnet publish -c SIT -r linux-x64 --self-contained false ./OW.ApiSimulator/OW.ApiSimulator.csproj -o ./build/ow-api-simulator
     - cp ./OW.ApiSimulator/gitlab-ci-after-script-SIT.sh ./build/ow-api-simulator/
     - cd ./build/ow-api-simulator
     - git add .
-    - if [ -z "$(git status --porcelain)" ]; then echo "Nothing change"; else git commit -m "$COMMIT_MESSAGE"; fi
-    - git push -u origin master
-    - echo "==============Waiting for after script execution=============="
-    - sleep 60
-  artifacts:
-    expire_in: 1 days
-    paths:
-      - './build/ow-api-simulator'
+    - if [ -z "$(git status --porcelain)" ]; 
+      then 
+        echo "Nothing change"; 
+      else 
+       git commit -m "$COMMIT_MESSAGE"; git push -u origin master;
+       echo "==============Waiting for after script execution==============";
+       sleep 60; 
+      fi
   tags:
     - deploy-dotnet
   environment:
@@ -112,25 +88,23 @@ deploy_ow_api_simulator_SIT:
     - /^deploy-sit-ow-api-simulator-\d{8}-\d+.*$/
     - /^deploy-ow-api-simulator-\d{8}-\d+.*$/
 
-deploy_game_lobby_simulator_SIT:
+sit_deploy_game_lobby_simulator:
   stage: deploy-game-lobby-simulator
-  before_script:
-    - eval $(ssh-agent -s)
-    - echo "$SSH_KEY" | ssh-add -
-    - mkdir -p ~/.ssh
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    - rm -rf ../game-lobby-simulator
-    - export COMMIT_MESSAGE=$(git log -1 --pretty=%B)
   script:
+    - rm -rf ../game-lobby-simulator
     - cp ./L1.GameLobbySimulator/game-client-config.SIT.json ./L1.GameLobbySimulator/game-client-config.json
     - git clone git@gitlab.com:l1-compiled/game-lobby-simulator-compiled.git ../game-lobby-simulator
     - cp -R ./L1.GameLobbySimulator/* ../game-lobby-simulator
     - cd ../game-lobby-simulator
     - git add .
-    - if [ -z "$(git status --porcelain)" ]; then echo "Nothing change"; else git commit -m "$COMMIT_MESSAGE"; fi
-    - git push -u origin master
-    - echo "==============Waiting for after script execution=============="
-    - sleep 60
+    - if [ -z "$(git status --porcelain)" ]; 
+      then 
+        echo "Nothing change"; 
+      else 
+       git commit -m "$COMMIT_MESSAGE"; git push -u origin master;
+       echo "==============Waiting for after script execution==============";
+       sleep 60; 
+      fi
   tags:
     - deploy-nodejs
   environment:
