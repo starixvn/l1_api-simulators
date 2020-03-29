@@ -23,6 +23,7 @@ namespace OW.ApiSimulator
                  .ConfigureWebHostDefaults(webBuilder =>
                  {
                      webBuilder
+                     .UseSentry()
                      .UseStartup<Startup>()
                      .UseUrls($"http://localhost:{configuration["HostingPort"]}");
                  });
