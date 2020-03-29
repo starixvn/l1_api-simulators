@@ -16,7 +16,7 @@ export default class SignIn extends React.Component {
       language: "vi-VN",
       currency: "UUS",
       seq: "d8382c1d-6ce0-433d-9233-e7358b10a70b",
-      siteId: "licensee1",
+      siteId: "4100300",
       ip: "",
       browserUserAgent: navigator.userAgent,
       auth: {
@@ -165,7 +165,7 @@ export default class SignIn extends React.Component {
                     type="text"
                     id="siteId"
                     name="Site Id"
-                    value={this.state.seq}
+                    value={this.state.siteId}
                     onChange={this.handleInputChange}
                   />
                   <Input

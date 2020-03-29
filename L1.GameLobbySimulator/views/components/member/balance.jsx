@@ -10,7 +10,7 @@ export default class Balance extends React.Component {
 
     this.state = {
       memberId: (Math.random() * 10000000) >> 0,
-      siteId: "licensee1",
+      siteId: "4100300",
       languageCode: "vi-VN",
       result: null
     };

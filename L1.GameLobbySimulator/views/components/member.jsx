@@ -10,7 +10,7 @@ export default class Member extends React.Component {
       memberId: (Math.random() * 10000000) >> 0,
       characterName: randomString(8),
       seq: "d8382c1d-6ce0-433d-9233-e7358b10a70b",
-      siteId: "licensee1",
+      siteId: "4100300",
       firstLogin: false,
       result: null
     };

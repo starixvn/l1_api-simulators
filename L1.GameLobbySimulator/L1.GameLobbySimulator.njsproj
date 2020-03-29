@@ -32,6 +32,7 @@
   <ItemGroup>
     <Content Include="app.js" />
     <Content Include="game-client-config.json" />
+    <Content Include="game-client-config.SIT.json" />
     <Content Include="middleware.js">
       <SubType>Code</SubType>
     </Content>
@@ -61,6 +62,7 @@
     <Content Include="views\components\member\notify-login.jsx" />
     <Content Include="views\components\member\place-bet.jsx" />
     <Content Include="views\components\member\void-game.jsx" />
+    <Content Include="views\components\select\currency.jsx" />
     <Content Include="views\components\select\game.jsx" />
     <Content Include="views\components\select\language.jsx" />
     <Content Include="views\components\select\select.jsx" />
@@ -84,6 +86,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="L1.Client.NodeJS\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
     <Folder Include="public\javascripts\" />
