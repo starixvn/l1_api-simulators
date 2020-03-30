@@ -23,7 +23,8 @@
     "l1.client.node-js": "file:./L1.Client.NodeJS",
     "morgan": "^1.7.0",
     "pug": "^2.0.0-beta6",
-    "serve-favicon": "^2.3.0"
+    "serve-favicon": "^2.3.0",
+    "nodemon": "^2.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
@@ -33,7 +34,6 @@
     "babel-loader": "^8.0.6",
     "concurrently": "^5.1.0",
     "history": "^4.10.1",
-    "nodemon": "^2.0.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
