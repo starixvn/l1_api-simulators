@@ -3,7 +3,7 @@ const debug = require("debug");
 
 const config = require("./game-client-config");
 const gameClient = require("l1.client.node-js")(config);
-gameClient.autoUpdateToken();
+gameClient.autoUpdateToken(console.log);
 
 const routes = require("./routes");
 const applyMiddlewares = require("./middleware");

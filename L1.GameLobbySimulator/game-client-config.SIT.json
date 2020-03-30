@@ -1,8 +1,10 @@
 {
-  "apiUrl": "http://localhost:6500",
-  "authUrl": "http://localhost:6503",
+  "apiUrl": "http://uat-api.saba.vin",
+  "authUrl": "http://10.99.99.101:7303",
   "client": {
     "id": "game-server",
     "secret": "gameserver@20luminet&"
-  }
+  },
+  "useAuthenticate": true,
+  "requestTimeout": 10000
 }
