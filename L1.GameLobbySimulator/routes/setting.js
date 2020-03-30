@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const fs = require("fs");
+const GameClient = require("l1.client.node-js")();
 
 router.get("/setting/data", async (req, res) => {
   const config = await fs.readFileSync("game-client-config.json");
-  res.send(JSON.parse(config));
+
+  res.send({ ...JSON.parse(config), expireIn: GameClient.config.expired });
 });
 
 router.post("/setting/data", async (req, res) => {
@@ -15,7 +17,6 @@ router.post("/setting/data", async (req, res) => {
     );
 
     res.send(req.body);
-    res.send(result);
   } catch (error) {
     res.send({ error });
   }

@@ -14,6 +14,7 @@ export default class GameClient extends React.Component {
         id: "",
         secret: ""
       },
+      expireIn: 0,
       useAuthenticate: false,
       requestTimeout: 0
     };
@@ -104,6 +105,12 @@ export default class GameClient extends React.Component {
                   value={this.state.client.secret}
                   onChange={this.onChangeClient}
                 />
+                <p>Bearer Token Expire In:</p>
+                <p>
+                  {this.state.expireIn
+                    ? new Date(parseInt(this.state.expireIn) * 1000).toLocaleString()
+                    : 'Not found!'}
+                </p>
               </fieldset>
             </div>
           </div>
