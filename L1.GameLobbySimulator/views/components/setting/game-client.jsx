@@ -13,7 +13,9 @@ export default class GameClient extends React.Component {
       client: {
         id: "",
         secret: ""
-      }
+      },
+      useAuthenticate: false,
+      requestTimeout: 0
     };
 
     this.onChangeValue = this.onChangeValue.bind(this);
@@ -51,11 +53,10 @@ export default class GameClient extends React.Component {
     return (
       <div className="section">
         <form onSubmit={event => this.handleSubmit(event)}>
-          <legend>General</legend>
           <div className="row">
             <div className="col-sm-12 col-md-6">
               <fieldset className="container">
-                <legend>Url</legend>
+                <legend>General</legend>
                 <Input
                   type="text"
                   id="apiUrl"
@@ -68,6 +69,20 @@ export default class GameClient extends React.Component {
                   id="authUrl"
                   name="Auth URL"
                   value={this.state.authUrl}
+                  onChange={this.onChangeValue}
+                />
+                <Input
+                  type="checkbox"
+                  id="useAuthenticate"
+                  name="Authenticate"
+                  value={this.state.useAuthenticate}
+                  onChange={this.onChangeValue}
+                />
+                <Input
+                  type="int"
+                  id="requestTimeout"
+                  name="Request Timeout"
+                  value={this.state.requestTimeout}
                   onChange={this.onChangeValue}
                 />
               </fieldset>

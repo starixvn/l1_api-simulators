@@ -42,7 +42,8 @@ export default class Input extends React.Component {
         <label htmlFor={id}>{name}</label>
         <input
           type={this.getType(type)}
-          defaultValue={value}
+          value={value}
+          checked={value}
           step={step || 1}
           id={id}
           onChange={this.handleChange}
