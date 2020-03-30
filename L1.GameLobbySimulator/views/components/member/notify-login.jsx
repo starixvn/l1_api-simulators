@@ -79,7 +79,7 @@ export default class Member extends React.Component {
                   type="checkbox"
                   id="firstLogin"
                   name="First Login"
-                  value={this.state.siteId}
+                  value={this.state.firstLogin}
                   onChange={this.handleChange}
                 />
                 <LanguageSelect
