@@ -26,6 +26,7 @@
         </Content>
     </ItemGroup>
     <ItemGroup>
+        <Content Remove="appsettings.UAT.json" />
         <Content Remove="appsettings.TEST.json" />
         <Content Remove="appsettings.SIT.json" />
         <Content Remove="appsettings.Development.json" />
