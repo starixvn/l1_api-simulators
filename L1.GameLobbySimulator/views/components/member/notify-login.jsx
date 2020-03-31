@@ -49,7 +49,7 @@ export default class Member extends React.Component {
                 <legend>Enter Portal</legend>
                 <Input
                   type="int"
-                  id="memberId"
+                  id="obCustId"
                   name="Member ID"
                   value={this.state.obCustId}
                   onChange={this.handleChange}
