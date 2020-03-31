@@ -35,15 +35,18 @@ namespace OW.ApiSimulator.Controllers
             var result = serviceProvider.GetRequiredService<EnterPortalResult>();
             result.ErrorCode = model.ErrorCode;
             result.ErrorDescription = model.ErrorDescription;
+            result.DelayTime = model.DelayTime;
 
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult EnterPortal([FromBody] OWRequest<EnterPortalCall> request)
+        public async Task<IActionResult> EnterPortal([FromBody] OWRequest<EnterPortalCall> request)
         {
             var result = serviceProvider.GetRequiredService<EnterPortalResult>();
             result.Seq = request.Call?.Seq;
+
+            await Task.Delay(result.DelayTime);
 
             return Ok(new OWResponse<EnterPortalResult>
             {
@@ -65,15 +68,18 @@ namespace OW.ApiSimulator.Controllers
             result.ErrorCode = model.ErrorCode;
             result.ErrorDescription = model.ErrorDescription;
             result.Balance = model.Balance;
+            result.DelayTime = model.DelayTime;
 
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult GetBalance([FromBody] OWRequest<GetBalanceCall> request)
+        public async Task<IActionResult> GetBalance([FromBody] OWRequest<GetBalanceCall> request)
         {
             var result = serviceProvider.GetRequiredService<GetBalanceResult>();
             result.Seq = request.Call?.Seq;
+
+            await Task.Delay(result.DelayTime);
 
             return Ok(new OWResponse<GetBalanceResult>
             {
@@ -95,12 +101,13 @@ namespace OW.ApiSimulator.Controllers
             result.ErrorCode = model.ErrorCode;
             result.ErrorDescription = model.ErrorDescription;
             result.ObTransId = model.ObTransId;
+            result.DelayTime = model.DelayTime;
 
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult PlaceBet([FromBody] OWRequest<PlaceBetCall> request)
+        public async Task<IActionResult> PlaceBet([FromBody] OWRequest<PlaceBetCall> request)
         {
             var result = serviceProvider.GetRequiredService<PlaceBetResult>();
             result.Seq = request.Call?.Seq;
@@ -111,6 +118,8 @@ namespace OW.ApiSimulator.Controllers
                 var balanceResult = serviceProvider.GetRequiredService<GetBalanceResult>();
                 result.Balance = balanceResult.Balance = balanceResult.Balance - request.Call.Amount;
             }
+
+            await Task.Delay(result.DelayTime);
 
             return Ok(new OWResponse<PlaceBetResult>
             {
@@ -131,12 +140,13 @@ namespace OW.ApiSimulator.Controllers
             var result = serviceProvider.GetRequiredService<EndGameResult>();
             result.ErrorCode = model.ErrorCode;
             result.ErrorDescription = model.ErrorDescription;
+            result.DelayTime = model.DelayTime;
 
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult EndGame([FromBody] OWRequest<EndGameCall> request)
+        public async Task<IActionResult> EndGame([FromBody] OWRequest<EndGameCall> request)
         {
             var result = serviceProvider.GetRequiredService<EndGameResult>();
 
@@ -148,6 +158,8 @@ namespace OW.ApiSimulator.Controllers
                 var balanceResult = serviceProvider.GetRequiredService<GetBalanceResult>();
                 balanceResult.Balance += request.Call.TotalWin;
             }
+
+            await Task.Delay(result.DelayTime);
 
             return Ok(new OWResponse<EndGameResult>
             {
@@ -168,12 +180,13 @@ namespace OW.ApiSimulator.Controllers
             var result = serviceProvider.GetRequiredService<VoidGameResult>();
             result.ErrorCode = model.ErrorCode;
             result.ErrorDescription = model.ErrorDescription;
+            result.DelayTime = model.DelayTime;
 
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult VoidGame([FromBody] OWRequest<VoidGameCall> request)
+        public async Task<IActionResult> VoidGame([FromBody] OWRequest<VoidGameCall> request)
         {
             var result = serviceProvider.GetRequiredService<VoidGameResult>();
             result.Seq = request.Call?.Seq;
@@ -181,6 +194,8 @@ namespace OW.ApiSimulator.Controllers
             {
                 result.ObCustId = request.Call?.ObCustId;
             }
+
+            await Task.Delay(result.DelayTime);
 
             return Ok(new OWResponse<VoidGameResult>
             {
@@ -203,15 +218,18 @@ namespace OW.ApiSimulator.Controllers
             result.ErrorDescription = model.ErrorDescription;
             result.StartTime = model.StartTime;
             result.EndTime = model.EndTime;
+            result.DelayTime = model.DelayTime;
 
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult CheckMaintenance([FromBody] OWRequest<CheckMaintenanceCall> request)
+        public async Task<IActionResult> CheckMaintenance([FromBody] OWRequest<CheckMaintenanceCall> request)
         {
             var result = serviceProvider.GetRequiredService<CheckMaintenanceResult>();
             result.Seq = request.Call?.Seq;
+
+            await Task.Delay(result.DelayTime);
 
             return Ok(new OWResponse<CheckMaintenanceResult>
             {
@@ -227,7 +245,7 @@ namespace OW.ApiSimulator.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RetrieveEndGameInfoAsync(RetriveEndGameInfoViewModel viewModel, [FromServices] ISabaClubService sabaClubService)
+        public async Task<IActionResult> RetrieveEndGameInfo(RetriveEndGameInfoViewModel viewModel, [FromServices] ISabaClubService sabaClubService)
         {
             viewModel.Result = await sabaClubService.RetrieveEndGameInfoAsync(viewModel.Request);
             return View(viewModel);
