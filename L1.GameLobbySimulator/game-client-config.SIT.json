@@ -1,5 +1,5 @@
 {
-  "apiUrl": "http://uat-api.saba.vin",
+  "apiUrl": "http://10.99.99.101:7300",
   "authUrl": "http://10.99.99.101:7303",
   "client": {
     "id": "game-server",
