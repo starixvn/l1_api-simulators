@@ -9,7 +9,7 @@ export default class Balance extends React.Component {
     super();
 
     this.state = {
-      memberId: (Math.random() * 10000000) >> 0,
+      obCustId: (Math.random() * 10000000) >> 0,
       siteId: "4100300",
       languageCode: "vi-VN",
       result: null
@@ -46,9 +46,9 @@ export default class Balance extends React.Component {
                 <legend>Balance</legend>
                 <Input
                   type="int"
-                  id="memberId"
+                  id="obCustId"
                   name="Member ID"
-                  value={this.state.memberId}
+                  value={this.state.obCustId}
                   onChange={this.handleChange}
                 />
                 <Input

@@ -9,7 +9,7 @@ export default class PlaceBet extends React.Component {
     super();
 
     this.state = {
-      memberId: (Math.random() * 10000000) >> 0,
+      obCustId: (Math.random() * 10000000) >> 0,
       siteId: "4100300",
       gameRoundId: 1,
       gameTypeId: 1,
@@ -90,9 +90,9 @@ export default class PlaceBet extends React.Component {
                 <legend>Bet</legend>
                 <Input
                   type="int"
-                  id="memberId"
+                  id="obCustId"
                   name="Member ID"
-                  value={this.state.memberId}
+                  value={this.state.obCustId}
                   onChange={this.changeValue}
                 />
                 <Input

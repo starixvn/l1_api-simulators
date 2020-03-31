@@ -9,7 +9,7 @@ export default class VoidGame extends React.Component {
     super();
 
     this.state = {
-      memberId: (Math.random() * 10000000) >> 0,
+      obCustId: (Math.random() * 10000000) >> 0,
       siteId: "4100300",
       gameRoundId: 1,
       obTransId: (Math.random() * 100) >> 0,
@@ -50,9 +50,9 @@ export default class VoidGame extends React.Component {
                 <legend>Void game</legend>
                 <Input
                   type="int"
-                  id="memberId"
+                  id="obCustId"
                   name="Member ID"
-                  value={this.state.memberId}
+                  value={this.state.obCustId}
                   onChange={this.changeValue}
                 />
                 <Input
