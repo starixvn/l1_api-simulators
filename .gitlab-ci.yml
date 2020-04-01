@@ -1,3 +1,5 @@
+image: mcr.microsoft.com/dotnet/core/sdk:3.1
+
 stages:
   - deploy-member-site-simulator
   - deploy-ow-api-simulator
@@ -14,6 +16,8 @@ before_script:
 local_deploy_member_site_simulator:
   stage: deploy-member-site-simulator
   script:   
+    - apt-get update
+    - apt-get --assume-yes install build-essential 
     - dotnet clean ./L1.MemberSiteSimulation/L1.MemberSiteSimulation.csproj
     - dotnet restore ./L1.MemberSiteSimulation/L1.MemberSiteSimulation.csproj
     - dotnet build ./L1.MemberSiteSimulation/L1.MemberSiteSimulation.csproj
@@ -22,14 +26,17 @@ local_deploy_member_site_simulator:
     - tar -C ./build/member-site-simulator/ -jcf - ./ | ssh root@$HOST 'tar -C /var/www/l1/member-site-simulator/ -jxf -'
     - ssh root@$HOST 'sudo service l1-member-site-simulator restart'
   tags:
-    - deploy-dotnet
+    - docker
   only:
     - /^deploy-local-\d{8}-\d+.*$/
     - /^deploy-local-member-site-simulator-\d{8}-\d+.*$/
     
 local_deploy_ow_api_simulator:
   stage: deploy-ow-api-simulator
+  image: mcr.microsoft.com/dotnet/core/sdk:3.1
   script:   
+    - apt-get update
+    - apt-get --assume-yes install build-essential 
     - dotnet clean ./OW.ApiSimulator/OW.ApiSimulator.csproj
     - dotnet restore ./OW.ApiSimulator/OW.ApiSimulator.csproj
     - dotnet build ./OW.ApiSimulator/OW.ApiSimulator.csproj
@@ -38,7 +45,7 @@ local_deploy_ow_api_simulator:
     - tar -C ./build/ow-api-simulator/ -jcf - ./ | ssh root@$HOST 'tar -C /var/www/l1/ow-api-simulator/ -jxf -'
     - ssh root@$HOST 'sudo service l1-ow-api-simulator restart'
   tags:
-    - deploy-dotnet
+    - docker
   environment:
     name: LOCAL
   only:
@@ -49,11 +56,13 @@ local_deploy_ow_api_simulator:
 local_deploy_game_lobby_simulator:
   stage: deploy-game-lobby-simulator
   script:
+    - apt-get update
+    - apt-get --assume-yes install build-essential 
     - tar -C ./L1.GameLobbySimulator/ -jcf - ./ | ssh root@$HOST 'tar -C /var/www/l1/game-lobby-simulator/simulator/ -jxf -'
     - ssh root@$HOST 'npm install --prefix /var/www/l1/game-lobby-simulator/simulator/ && npm run build  --prefix /var/www/l1/game-lobby-simulator/simulator/ | sudo service l1-gamelobby-simulator restart'
     - ssh root@$HOST 'chmod -R 777 /var/www/l1/game-lobby-simulator/simulator/resource /var/www/l1/game-lobby-simulator/simulator/game-client-config.json'
   tags:
-    - deploy-nodejs
+      - docker
   only:
     - /^deploy-local-\d{8}-\d+.*$/
     - /^deploy-local-game-lobby-simulator-\d{8}-\d+.*$/
@@ -80,7 +89,7 @@ sit_deploy_ow_api_simulator:
        sleep 60; 
       fi
   tags:
-    - deploy-dotnet
+    - docker
   environment:
     name: SIT
   only:
@@ -106,7 +115,7 @@ sit_deploy_game_lobby_simulator:
        sleep 60; 
       fi
   tags:
-    - deploy-nodejs
+    - docker
   environment:
     name: SIT
   only:
