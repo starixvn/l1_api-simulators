@@ -1,9 +1,7 @@
 image: mcr.microsoft.com/dotnet/core/sdk:3.1
 
 stages:
-  - deploy-member-site-simulator
-  - deploy-ow-api-simulator
-  - deploy-game-lobby-simulator
+  - deploy
 
 before_script:
   - eval $(ssh-agent -s)
@@ -14,7 +12,7 @@ before_script:
   - export COMMIT_MESSAGE=$(git log -1 --pretty=%B)
 
 local_deploy_member_site_simulator:
-  stage: deploy-member-site-simulator
+  stage: deploy
   script:   
     - apt-get update
     - apt-get --assume-yes install build-essential 
@@ -32,7 +30,7 @@ local_deploy_member_site_simulator:
     - /^deploy-local-member-site-simulator-\d{8}-\d+.*$/
     
 local_deploy_ow_api_simulator:
-  stage: deploy-ow-api-simulator
+  stage: deploy
   image: mcr.microsoft.com/dotnet/core/sdk:3.1
   script:   
     - apt-get update
@@ -54,7 +52,7 @@ local_deploy_ow_api_simulator:
     - /^deploy-ow-api-simulator-\d{8}-\d+.*$/
       
 local_deploy_game_lobby_simulator:
-  stage: deploy-game-lobby-simulator
+  stage: deploy
   script:
     - apt-get update
     - apt-get --assume-yes install build-essential 
@@ -69,7 +67,7 @@ local_deploy_game_lobby_simulator:
     - /^deploy-game-lobby-simulator-\d{8}-\d+.*$/
     
 sit_deploy_ow_api_simulator:
-  stage: deploy-ow-api-simulator
+  stage: deploy
   script:   
     - dotnet clean ./OW.ApiSimulator/OW.ApiSimulator.csproj
     - dotnet restore ./OW.ApiSimulator/OW.ApiSimulator.csproj
@@ -98,7 +96,7 @@ sit_deploy_ow_api_simulator:
     - /^deploy-ow-api-simulator-\d{8}-\d+.*$/
 
 sit_deploy_game_lobby_simulator:
-  stage: deploy-game-lobby-simulator
+  stage: deploy
   script:
     - rm -rf ../game-lobby-simulator
     - cp ./L1.GameLobbySimulator/game-client-config.SIT.json ./L1.GameLobbySimulator/game-client-config.json
