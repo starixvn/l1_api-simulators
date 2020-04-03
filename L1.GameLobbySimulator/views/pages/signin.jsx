@@ -20,7 +20,7 @@ export default class SignIn extends React.Component {
       ip: "",
       browserUserAgent: navigator.userAgent,
       auth: {
-        clientId: "game-simulator",
+        clientId: "gamesimulator",
         clientSecret: "gamesimulator@20luminet&"
       },
       token: "",
