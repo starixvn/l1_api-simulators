@@ -20,8 +20,8 @@ export default class SignIn extends React.Component {
       ip: "",
       browserUserAgent: navigator.userAgent,
       auth: {
-        clientId: "ONEworks1",
-        clientSecret: "123ONEworks1%^&uat"
+        clientId: "game-simulator",
+        clientSecret: "gamesimulator@20luminet&"
       },
       token: "",
       redirectUrl: "#",
