@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
+using OW.ApiSimulator.Models;
 using OW.ApiSimulator.Models.OW;
 
 namespace OW.ApiSimulator.Extensions
@@ -14,6 +16,7 @@ namespace OW.ApiSimulator.Extensions
             services.AddSingleton(new EndGameResult());
             services.AddSingleton(new VoidGameResult());
             services.AddSingleton(new CheckMaintenanceResult { StartTime = DateTimeOffset.UtcNow, EndTime = DateTimeOffset.UtcNow.AddHours(1) });
+            services.AddSingleton(new List<Customer>());
         }
     }
 }

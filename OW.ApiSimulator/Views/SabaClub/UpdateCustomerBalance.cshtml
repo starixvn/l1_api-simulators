@@ -1,0 +1,31 @@
+﻿@model List<OW.ApiSimulator.Models.Customer>
+
+<h3>Update Customer Balance</h3>
+
+<form method="post">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ObCustId</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                var customer = Model[i];
+
+                <tr>
+                    <td>
+                        <input class="form-control" asp-for="@Model[i].ObCustId" readonly />
+                    </td>
+                    <td>
+                        <input class="form-control" asp-for="@Model[i].Balance" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <input class="btn btn-primary" type="submit" value="Save" />
+</form>

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +23,41 @@ namespace OW.ApiSimulator.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult CreateCustomer()
+        {
+            return View(new Customer());
+        }
+
+        [HttpPost]
+        public IActionResult CreateCustomer(Customer model)
+        {
+            var customers = serviceProvider.GetRequiredService<List<Customer>>();
+            customers.Add(model);
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult UpdateCustomerBalance()
+        {
+            var customers = serviceProvider.GetRequiredService<List<Customer>>();
+            return View(customers);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateCustomerBalance(IEnumerable<Customer> model)
+        {
+            var customers = serviceProvider.GetRequiredService<List<Customer>>();
+            foreach (var updateCustomer in model)
+            {
+                var customer = customers.FirstOrDefault(x => x.ObCustId == updateCustomer.ObCustId);
+                customer.Balance = updateCustomer.Balance;
+            }
+
+            return View(model);
         }
 
         [HttpGet]
@@ -67,7 +104,6 @@ namespace OW.ApiSimulator.Controllers
             var result = serviceProvider.GetRequiredService<GetBalanceResult>();
             result.ErrorCode = model.ErrorCode;
             result.ErrorDescription = model.ErrorDescription;
-            result.Balance = model.Balance;
             result.DelayTime = model.DelayTime;
 
             return View(model);
@@ -76,8 +112,20 @@ namespace OW.ApiSimulator.Controllers
         [HttpPost]
         public async Task<IActionResult> GetBalance([FromBody] OWRequest<GetBalanceCall> request)
         {
+            var customers = serviceProvider.GetRequiredService<List<Customer>>();
+            var customer = customers.FirstOrDefault(x => x.ObCustId == request.Call.ObCustId);
+
             var result = serviceProvider.GetRequiredService<GetBalanceResult>();
             result.Seq = request.Call?.Seq;
+
+            if (result.ErrorCode == 0 && customer != null)
+            {
+                result.Balance = customer.Balance;
+            }
+            else
+            {
+                result.Balance = 0;
+            }
 
             await Task.Delay(result.DelayTime);
 
@@ -109,14 +157,20 @@ namespace OW.ApiSimulator.Controllers
         [HttpPost]
         public async Task<IActionResult> PlaceBet([FromBody] OWRequest<PlaceBetCall> request)
         {
+            var customers = serviceProvider.GetRequiredService<List<Customer>>();
+            var customer = customers.FirstOrDefault(x => x.ObCustId == request.Call.ObCustId);
+
             var result = serviceProvider.GetRequiredService<PlaceBetResult>();
             result.Seq = request.Call?.Seq;
 
-            if (result.ErrorCode == 0)
+            if (result.ErrorCode == 0 && customer != null)
             {
                 result.ObCustId = request.Call?.ObCustId;
-                var balanceResult = serviceProvider.GetRequiredService<GetBalanceResult>();
-                result.Balance = balanceResult.Balance = balanceResult.Balance - request.Call.Amount;
+                result.Balance = customer.Balance = customer.Balance - request.Call.Amount;
+            }
+            else
+            {
+                result.Balance = 0;
             }
 
             await Task.Delay(result.DelayTime);
@@ -148,15 +202,16 @@ namespace OW.ApiSimulator.Controllers
         [HttpPost]
         public async Task<IActionResult> EndGame([FromBody] OWRequest<EndGameCall> request)
         {
+            var customers = serviceProvider.GetRequiredService<List<Customer>>();
+            var customer = customers.Find(x => x.ObCustId == request.Call.ObCustId);
             var result = serviceProvider.GetRequiredService<EndGameResult>();
 
             result.Seq = request.Call?.Seq;
 
-            if (result.ErrorCode == 0)
+            if (result.ErrorCode == 0 && customer != null)
             {
                 result.ObCustId = request.Call?.ObCustId;
-                var balanceResult = serviceProvider.GetRequiredService<GetBalanceResult>();
-                balanceResult.Balance += request.Call.TotalWin;
+                customer.Balance += request.Call.TotalWin;
             }
 
             await Task.Delay(result.DelayTime);
