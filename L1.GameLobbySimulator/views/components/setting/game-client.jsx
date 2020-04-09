@@ -15,6 +15,7 @@ export default class GameClient extends React.Component {
         secret: ""
       },
       expireIn: 0,
+      owUrl: '',
       useAuthenticate: false,
       requestTimeout: 0
     };
@@ -84,6 +85,13 @@ export default class GameClient extends React.Component {
                   id="requestTimeout"
                   name="Request Timeout"
                   value={this.state.requestTimeout}
+                  onChange={this.onChangeValue}
+                />
+                <Input
+                  type="text"
+                  id="owUrl"
+                  name="OW Url"
+                  value={this.state.owUrl}
                   onChange={this.onChangeValue}
                 />
               </fieldset>

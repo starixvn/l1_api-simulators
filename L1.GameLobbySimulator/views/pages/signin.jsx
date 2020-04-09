@@ -26,7 +26,10 @@ export default class SignIn extends React.Component {
       token: "",
       redirectUrl: "#",
       verifyResult: null,
-      gameId: 1
+      gameId: 1,
+      setting: {
+        owUrl: ''
+      }
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -90,31 +93,15 @@ export default class SignIn extends React.Component {
     event.preventDefault();
   }
 
-  componentDidMount() {
-    Axios.get("/resource/currency")
-      .then(data => data.data)
-      .then(currency =>
-        Axios.get("/resource/game")
-          .then(data => data.data)
-          .then(game => ({
-            currency,
-            game
-          }))
-      )
-      .then(resource =>
-        Axios.get("/resource/language")
-          .then(data => data.data)
-          .then(language => ({ language, ...resource }))
-      )
-      .then(resource =>
-        Axios.get("https://api.ipify.org/?format=json")
-          .then(data => data.data)
-          .then(data => ({ ...data, resource }))
-      )
-      .then(data => this.setState(data));
+  async componentDidMount() {
+    const data = await Axios.get("/setting/data").then(data => data.data);
+    const ip = await Axios.get("/signin/ip", {timeout: 10000}).then(data => data.data);
+
+    this.setState({setting: data, ip});
   }
 
   render() {
+    console.log(this.state);
     return (
       <div className="container">
         <div className="section">
@@ -199,6 +186,13 @@ export default class SignIn extends React.Component {
                 </div>
               </div>
               <input className="primary" type="submit" value="Get Token" />
+              <a
+                  className="button secondary"
+                  href={this.state.setting.owUrl}
+                  target="_blank"
+                >
+                  Set Balance
+                </a>
             </fieldset>
           </form>
         </div>

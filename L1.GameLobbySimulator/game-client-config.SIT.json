@@ -6,5 +6,6 @@
     "secret": "gameserver@20luminet&"
   },
   "useAuthenticate": true,
-  "requestTimeout": 10000
+  "requestTimeout": 10000,
+  "owUrl": "http://210.57.28.115:6401/SabaClub/CreateCustomer"
 }

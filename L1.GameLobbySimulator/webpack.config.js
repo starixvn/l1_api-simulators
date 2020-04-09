@@ -12,8 +12,9 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
-          query: {
-            presets: ["@babel/preset-env", "@babel/preset-react"]
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+            plugins: ["@babel/plugin-transform-runtime"]
           },
           loader: "babel-loader"
         }
