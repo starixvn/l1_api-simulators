@@ -14,7 +14,7 @@ export default class SignIn extends React.Component {
       memberId: (Math.random() * 10000000) >> 0,
       memberName: randomString(8),
       language: "vi-VN",
-      currency: "UUS",
+      currency: "$US",
       seq: "d8382c1d-6ce0-433d-9233-e7358b10a70b",
       siteId: "4100300",
       ip: "",
@@ -188,7 +188,7 @@ export default class SignIn extends React.Component {
               <input className="primary" type="submit" value="Get Token" />
               <a
                   className="button secondary"
-                  href={this.state.setting.owUrl}
+                  href={`${this.state.setting.owUrl}?memId=${this.state.memberId}`}
                   target="_blank"
                 >
                   Set Balance
