@@ -26,16 +26,25 @@ namespace OW.ApiSimulator.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateCustomer()
+        public IActionResult CreateCustomer(int memberId)
         {
-            return View(new Customer());
+            return View(new Customer { ObCustId = memberId, Balance = 2000 });
         }
 
         [HttpPost]
         public IActionResult CreateCustomer(Customer model)
         {
             var customers = serviceProvider.GetRequiredService<List<Customer>>();
-            customers.Add(model);
+            var customer = customers.FirstOrDefault(x => x.ObCustId == model.ObCustId);
+
+            if(customer != null)
+            {
+                customer.Balance = model.Balance;
+            }
+            else
+            {
+                customers.Add(model);
+            }
 
             return View(model);
         }
