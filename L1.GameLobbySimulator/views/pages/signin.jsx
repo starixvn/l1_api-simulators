@@ -48,17 +48,6 @@ export default class SignIn extends React.Component {
     this.setState(state);
   }
 
-  handleChange(event) {
-    const state = this.state;
-    if (event.target.type === "number") {
-      state[event.target.id] = parseInt(event.target.value);
-    } else {
-      state[event.target.id] = event.target.value;
-    }
-
-    this.setState(state);
-  }
-
   handleSubmit(event) {
     const request = Object.assign({}, this.state, {
       token: null,
@@ -101,7 +90,6 @@ export default class SignIn extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div className="container">
         <div className="section">
