@@ -29,7 +29,8 @@ export default class SignIn extends React.Component {
       gameId: 1,
       setting: {
         owUrl: ''
-      }
+      },
+      domain: 'example.com'
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -170,6 +171,13 @@ export default class SignIn extends React.Component {
                     name="Client Secret"
                     value={this.state.auth.clientSecret}
                     onChange={this.handleChangeAuth}
+                  />
+                  <Input
+                    type="text"
+                    id="domain"
+                    name="Domain"
+                    value={this.state.domain}
+                    onChange={this.handleInputChange}
                   />
                 </div>
               </div>

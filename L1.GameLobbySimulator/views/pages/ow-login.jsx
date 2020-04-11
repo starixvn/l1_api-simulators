@@ -23,7 +23,8 @@ export default class LoginWithOW extends React.Component {
             gameId: 1,
             setting: {
                 owUrl: ''
-            }
+            },
+            domain: 'example.com'
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
