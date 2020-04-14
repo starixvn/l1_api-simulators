@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "Tài xỉu",
+    "name": "Tài Xỉu",
     "choice": [
       {
         "id": 1,
@@ -23,7 +23,7 @@
   },
   {
     "id": 2,
-    "name": "Xóc dĩa",
+    "name": "Xóc Dĩa",
     "choice": [
       {
         "id": 1,
@@ -53,7 +53,7 @@
   },
   {
     "id": 3,
-    "name": "Bầu cua",
+    "name": "Bầu Cua",
     "choice": [
       {
         "id": 1,
@@ -78,6 +78,48 @@
       {
         "id": 6,
         "name": "Tôm"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Tài Xỉu Siêu Tốc",
+    "choice": [
+      {
+        "id": 1,
+        "name": "Tài"
+      },
+      {
+        "id": 2,
+        "name": "Xỉu"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Chẵn Lẻ",
+    "choice": [
+      {
+        "id": 1,
+        "name": "Chẵn"
+      },
+      {
+        "id": 2,
+        "name": "Lẻ"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Chẵn Lẻ Siêu Tốc",
+    "choice": [
+      {
+        "id": 1,
+        "name": "Chẵn"
+      },
+      {
+        "id": 2,
+        "name": "Lẻ"
       }
     ]
   }
