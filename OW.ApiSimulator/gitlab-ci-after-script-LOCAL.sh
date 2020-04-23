@@ -7,7 +7,7 @@ if [ "$HEADHASH" != "$UPSTREAMHASH" ]; then
   git checkout -- .
   git pull;
   echo "Restart service";
-  sudo systemctl restart l1-ow-api-simulator.service;
+  sudo systemctl restart l2-ow-api-simulator-1.service;
 else
     echo "Up-to-date";
 fi

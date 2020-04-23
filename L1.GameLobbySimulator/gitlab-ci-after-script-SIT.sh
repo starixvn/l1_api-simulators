@@ -12,5 +12,5 @@ if [ "$HEADHASH" != "$UPSTREAMHASH" ]; then
   echo "Build"
   npm run build:sit
   echo "Restart service"
-  sudo systemctl restart l1-game-lobby-simulator-sit.service
+  sudo systemctl restart l2-game-lobby-simulator-sit.service
 fi
