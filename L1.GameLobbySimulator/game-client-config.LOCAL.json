@@ -8,5 +8,6 @@
   "expireIn": 1585629268,
   "useAuthenticate": true,
   "requestTimeout": 10000,
-  "owUrl": "http://owapi-simulator.lumigame.com/SabaClub/CreateCustomer"
+  "owUrl": "http://owapi-simulator.lumigame.com/SabaClub/CreateCustomer",
+  "port": 5002
 }
