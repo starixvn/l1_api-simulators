@@ -2,7 +2,7 @@
 
 git fetch
 HEADHASH=$(git rev-parse HEAD)
-UPSTREAMHASH=$(git rev-parse master@{upstream})
+UPSTREAMHASH=$(git rev-parse SIT@{upstream})
 if [ "$HEADHASH" != "$UPSTREAMHASH" ]; then
   git checkout -- .
   echo "Pull git"

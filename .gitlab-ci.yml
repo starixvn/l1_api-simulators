@@ -13,113 +13,17 @@ before_script:
   - git config --global user.email "luminet.minigame.app@gmail.com"
   - git config --global user.name "Luminet"
 
-local_deploy_member_site_simulator:
+.base-deploy:
   stage: deploy
-  script:   
-    - apt-get update
-    - apt-get --assume-yes install build-essential 
-    - dotnet clean ./L1.MemberSiteSimulation/L1.MemberSiteSimulation.csproj
-    - dotnet restore ./L1.MemberSiteSimulation/L1.MemberSiteSimulation.csproj
-    - dotnet build ./L1.MemberSiteSimulation/L1.MemberSiteSimulation.csproj
-    - echo "====== Deploying ... ======"
-    - dotnet publish -c LOCAL -r linux-x64 --self-contained false ./L1.MemberSiteSimulation/L1.MemberSiteSimulation.csproj -o ./build/member-site-simulator
-    - tar -C ./build/member-site-simulator/ -jcf - ./ | ssh root@$HOST 'tar -C /var/www/l1/member-site-simulator/ -jxf -'
-    - ssh root@$HOST 'sudo service l1-member-site-simulator restart'
   tags:
     - docker
-  only:
-    - /^deploy-local-\d{8}-\d+.*$/
-    - /^deploy-local-member-site-simulator-\d{8}-\d+.*$/
-    
-local_deploy_ow_api_simulator:
-  stage: deploy
-  image: mcr.microsoft.com/dotnet/core/sdk:3.1
-  script:   
-    - apt-get update
-    - apt-get --assume-yes install build-essential 
-    - dotnet clean ./OW.ApiSimulator/OW.ApiSimulator.csproj
-    - dotnet restore ./OW.ApiSimulator/OW.ApiSimulator.csproj
-    - dotnet build ./OW.ApiSimulator/OW.ApiSimulator.csproj
-    - echo "====== Deploying ... ======"
-    - dotnet publish -c LOCAL -r linux-x64 --self-contained false ./OW.ApiSimulator/OW.ApiSimulator.csproj -o ./build/ow-api-simulator
-    - tar -C ./build/ow-api-simulator/ -jcf - ./ | ssh root@$HOST 'tar -C /var/www/l1/ow-api-simulator/ -jxf -'
-    - ssh root@$HOST 'sudo service l1-ow-api-simulator restart'
-  tags:
-    - docker
-  environment:
-    name: LOCAL
-  only:
-    - /^deploy-local-\d{8}-\d+.*$/
-    - /^deploy-local-ow-api-simulator-\d{8}-\d+.*$/
-    - /^deploy-ow-api-simulator-\d{8}-\d+.*$/
-      
-local_deploy_game_lobby_simulator:
-  stage: deploy
-  script:
-    - apt-get update
-    - apt-get --assume-yes install build-essential 
-    - tar -C ./L1.GameLobbySimulator/ -jcf - ./ | ssh root@$HOST 'tar -C /var/www/l1/game-lobby-simulator/simulator/ -jxf -'
-    - ssh root@$HOST 'npm install --prefix /var/www/l1/game-lobby-simulator/simulator/ && npm run build  --prefix /var/www/l1/game-lobby-simulator/simulator/ | sudo service l1-gamelobby-simulator restart'
-    - ssh root@$HOST 'chmod -R 777 /var/www/l1/game-lobby-simulator/simulator/resource /var/www/l1/game-lobby-simulator/simulator/game-client-config.json'
-  tags:
-      - docker
-  only:
-    - /^deploy-local-\d{8}-\d+.*$/
-    - /^deploy-local-game-lobby-simulator-\d{8}-\d+.*$/
-    - /^deploy-game-lobby-simulator-\d{8}-\d+.*$/
-    
-sit_deploy_ow_api_simulator:
-  stage: deploy
-  script:   
-    - dotnet clean ./OW.ApiSimulator/OW.ApiSimulator.csproj
-    - dotnet restore ./OW.ApiSimulator/OW.ApiSimulator.csproj
-    - dotnet build ./OW.ApiSimulator/OW.ApiSimulator.csproj
-    - echo "====== Pushing git compiled ... ======"
-    - git clone git@gitlab.com:l1-compiled/ow-api-simulators-compiled.git ./build/ow-api-simulator
-    - dotnet publish -c SIT -r linux-x64 --self-contained false ./OW.ApiSimulator/OW.ApiSimulator.csproj -o ./build/ow-api-simulator
-    - cp ./OW.ApiSimulator/gitlab-ci-after-script-SIT.sh ./build/ow-api-simulator/
-    - cd ./build/ow-api-simulator
-    - git add .
-    - if [ -z "$(git status --porcelain)" ]; 
-      then 
-        echo "Nothing change"; 
-      else 
-       git commit -m "$COMMIT_MESSAGE"; git push -u origin master;
-       echo "==============Waiting for after script execution==============";
-       sleep 60; 
-      fi
-  tags:
-    - docker
-  environment:
-    name: SIT
-  only:
-    - /^deploy-sit-\d{8}-\d+.*$/
-    - /^deploy-sit-ow-api-simulator-\d{8}-\d+.*$/
-    - /^deploy-ow-api-simulator-\d{8}-\d+.*$/
+  retry:
+    max: 2
+    when:
+      - runner_system_failure
+      - forward_deployment_failure
+      - archived_failure
 
-sit_deploy_game_lobby_simulator:
-  stage: deploy
-  script:
-    - rm -rf ../game-lobby-simulator
-    - cp ./L1.GameLobbySimulator/game-client-config.SIT.json ./L1.GameLobbySimulator/game-client-config.json
-    - git clone git@gitlab.com:l1-compiled/game-lobby-simulator-compiled.git ../game-lobby-simulator
-    - cp -R ./L1.GameLobbySimulator/* ../game-lobby-simulator
-    - cd ../game-lobby-simulator
-    - git add .
-    - if [ -z "$(git status --porcelain)" ]; 
-      then 
-        echo "Nothing change"; 
-      else 
-       git commit -m "$COMMIT_MESSAGE"; git push -u origin master;
-       echo "==============Waiting for after script execution==============";
-       sleep 60; 
-      fi
-  tags:
-    - docker
-  environment:
-    name: SIT
-  only:
-    - /^deploy-sit-\d{8}-\d+.*$/
-    - /^deploy-sit-game-lobby-simulator-\d{8}-\d+.*$/
-    - /^deploy-game-lobby-simulator-\d{8}-\d+.*$/
-    
+include:
+  - .gitlab-ci-ow-api-simulator.yml
+  - .gitlab-ci-game-lobby-simulator.yml
