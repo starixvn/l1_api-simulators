@@ -1,11 +1,12 @@
 {
-  "apiUrl": "http://10.99.99.101:7300",
-  "authUrl": "http://10.99.99.101:7303",
+  "apiUrl": "http://10.99.99.101:7310",
+  "authUrl": "http://10.99.99.101:7313",
   "client": {
     "id": "game-server",
     "secret": "gameserver@20luminet&"
   },
   "useAuthenticate": true,
   "requestTimeout": 10000,
-  "owUrl": "http://210.57.28.115:6401/SabaClub/CreateCustomer"
+  "owUrl": "http://210.57.28.115:6401/SabaClub/CreateCustomer",
+  "port": 6410
 }
