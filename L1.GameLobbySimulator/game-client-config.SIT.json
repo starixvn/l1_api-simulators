@@ -1,6 +1,6 @@
 {
-  "apiUrl": "http://10.99.99.101:7310",
-  "authUrl": "http://10.99.99.101:7313",
+  "apiUrl": "http://10.99.99.101:6310",
+  "authUrl": "http://10.99.99.101:6313",
   "client": {
     "id": "game-server",
     "secret": "gameserver@20luminet&"
