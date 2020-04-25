@@ -14,7 +14,7 @@ export default class SignIn extends React.Component {
       memberId: (Math.random() * 10000000) >> 0,
       memberName: randomString(8),
       language: "vi-VN",
-      currency: "$US",
+      currency: "INH",
       seq: "d8382c1d-6ce0-433d-9233-e7358b10a70b",
       siteId: "4100300",
       ip: "",
