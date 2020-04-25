@@ -128,6 +128,8 @@ export default class SignIn extends React.Component {
                     id="gameId"
                     value={this.state.gameId}
                   />
+                </div>
+                <div className="col-sm-12 col-md-6">
                   <Input
                     type="text"
                     id="seq"
@@ -135,8 +137,6 @@ export default class SignIn extends React.Component {
                     value={this.state.seq}
                     onChange={this.handleInputChange}
                   />
-                </div>
-                <div className="col-sm-12 col-md-6">
                   <Input
                     type="text"
                     id="siteId"
@@ -157,20 +157,6 @@ export default class SignIn extends React.Component {
                     name="Browser User Agent"
                     value={this.state.browserUserAgent}
                     onChange={this.handleInputChange}
-                  />
-                  <Input
-                    type="text"
-                    id="clientId"
-                    name="Client ID"
-                    value={this.state.auth.clientId}
-                    onChange={this.handleChangeAuth}
-                  />
-                  <Input
-                    type="text"
-                    id="clientSecret"
-                    name="Client Secret"
-                    value={this.state.auth.clientSecret}
-                    onChange={this.handleChangeAuth}
                   />
                   <Input
                     type="text"
