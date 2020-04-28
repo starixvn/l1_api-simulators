@@ -37,9 +37,9 @@ local_deploy_game_lobby_simulator:
   environment:
     name: LOCAL
   only:
-    - /^deploy-local-\d{8}-\d+.*$/
-    - /^deploy-local-game-lobby-simulator-\d{8}-\d+.*$/
-    - /^deploy-game-lobby-simulator-\d{8}-\d+.*$/
+    - /^l1-deploy-local-\d{8}-\d+.*$/
+    - /^l1-deploy-local-game-lobby-simulator-\d{8}-\d+.*$/
+    - /^l1-deploy-game-lobby-simulator-\d{8}-\d+.*$/
     
 sit_deploy_game_lobby_simulator:
   extends:
@@ -48,7 +48,7 @@ sit_deploy_game_lobby_simulator:
   environment:
     name: SIT
   only:
-    - /^deploy-sit-\d{8}-\d+.*$/
-    - /^deploy-sit-game-lobby-simulator-\d{8}-\d+.*$/
-    - /^deploy-game-lobby-simulator-\d{8}-\d+.*$/
+    - /^l1-deploy-sit-\d{8}-\d+.*$/
+    - /^l1-deploy-sit-game-lobby-simulator-\d{8}-\d+.*$/
+    - /^l1-deploy-game-lobby-simulator-\d{8}-\d+.*$/
     

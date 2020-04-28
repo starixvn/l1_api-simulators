@@ -38,9 +38,9 @@ local_deploy_ow_api_simulator:
   environment:
     name: LOCAL
   only:
-    - /^deploy-local-\d{8}-\d+.*$/
-    - /^deploy-local-ow-api-simulator-\d{8}-\d+.*$/
-    - /^deploy-ow-api-simulator-\d{8}-\d+.*$/
+    - /^l1-deploy-local-\d{8}-\d+.*$/
+    - /^l1-deploy-local-ow-api-simulator-\d{8}-\d+.*$/
+    - /^l1-deploy-ow-api-simulator-\d{8}-\d+.*$/
       
 sit_deploy_ow_api_simulator:
   extends: 
@@ -49,7 +49,7 @@ sit_deploy_ow_api_simulator:
   environment:
     name: SIT
   only:
-    - /^deploy-sit-\d{8}-\d+.*$/
-    - /^deploy-sit-ow-api-simulator-\d{8}-\d+.*$/
-    - /^deploy-ow-api-simulator-\d{8}-\d+.*$/
+    - /^l1-deploy-sit-\d{8}-\d+.*$/
+    - /^l1-deploy-sit-ow-api-simulator-\d{8}-\d+.*$/
+    - /^l1-deploy-ow-api-simulator-\d{8}-\d+.*$/
     
