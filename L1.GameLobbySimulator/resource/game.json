@@ -140,5 +140,111 @@
         "name": "Hòa"
       }
     ]
+  },
+  {
+    "id": 8,
+    "name": "Keno Pro Max",
+    "choice": [
+      {
+        "id": 1,
+        "name": "Tài"
+      },
+      {
+        "id": 2,
+        "name": "Xỉu"
+      },
+      {
+        "id": 3,
+        "name": "Lẻ"
+      },
+      {
+        "id": 4,
+        "name": "Chẵn"
+      },
+      {
+        "id": 5,
+        "name": "Kim"
+      },
+      {
+        "id": 6,
+        "name": "Mộc"
+      },
+      {
+        "id": 7,
+        "name": "Thủy"
+      },
+      {
+        "id": 8,
+        "name": "Hỏa"
+      },
+      {
+        "id": 9,
+        "name": "Thổ"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Baccarat",
+    "choice": [
+      {
+        "id": 1,
+        "name": "Người chơi"
+      },
+      {
+        "id": 2,
+        "name": "Nhà cái"
+      },
+      {
+        "id": 3,
+        "name": "Hòa"
+      },
+      {
+        "id": 4,
+        "name": "Tài"
+      },
+      {
+        "id": 5,
+        "name": "Xỉu"
+      },
+      {
+        "id": 6,
+        "name": "Người chơi có đôi"
+      },
+      {
+        "id": 7,
+        "name": "Nhà cái có đôi"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Mini Xóc dĩa",
+    "choice": [
+      {
+        "id": 1,
+        "name": "Chẵn"
+      },
+      {
+        "id": 2,
+        "name": "Lẻ"
+      },
+      {
+        "id": 3,
+        "name": "3 Đỏ 1 Trắng"
+      },
+      {
+        "id": 4,
+        "name": "4 Đỏ"
+      },
+      {
+        "id": 5,
+        "name": "3 Trắng 1 Đỏ"
+      },
+      {
+        "id": 6,
+        "name": "4 Trắng"
+      }
+    ]
   }
 ]
