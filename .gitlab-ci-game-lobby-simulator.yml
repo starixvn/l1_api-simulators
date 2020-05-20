@@ -36,10 +36,14 @@ local_deploy_game_lobby_simulator:
     - .gamelobby-push-git-compiled
   environment:
     name: LOCAL
-  only:
-    - /^l1-deploy-local-\d{8}-\d+.*$/
-    - /^l1-deploy-local-game-lobby-simulator-\d{8}-\d+.*$/
-    - /^l1-deploy-game-lobby-simulator-\d{8}-\d+.*$/
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^l1-deploy-local-\d{8}-\d+.*$/
+      when: always
+    - if: $CI_COMMIT_TAG =~ /^l1-deploy-local-game-lobby-simulator-\d{8}-\d+.*$/
+      when: always
+    - if: $CI_COMMIT_TAG =~ /^l1-deploy-game-lobby-simulator-\d{8}-\d+.*$/
+      when: always
+    - when: never
     
 sit_deploy_game_lobby_simulator:
   extends:
@@ -47,8 +51,12 @@ sit_deploy_game_lobby_simulator:
     - .gamelobby-push-git-compiled
   environment:
     name: SIT
-  only:
-    - /^l1-deploy-sit-\d{8}-\d+.*$/
-    - /^l1-deploy-sit-game-lobby-simulator-\d{8}-\d+.*$/
-    - /^l1-deploy-game-lobby-simulator-\d{8}-\d+.*$/
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^l1-deploy-sit-\d{8}-\d+.*$/
+      when: always
+    - if: $CI_COMMIT_TAG =~ /^l1-deploy-sit-game-lobby-simulator-\d{8}-\d+.*$/
+      when: always
+    - if: $CI_COMMIT_TAG =~ /^l1-deploy-game-lobby-simulator-\d{8}-\d+.*$/
+      when: always
+    - when: never
     

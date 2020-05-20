@@ -37,10 +37,14 @@ local_deploy_ow_api_simulator:
     - .ow-api-push-git-compiled
   environment:
     name: LOCAL
-  only:
-    - /^l1-deploy-local-\d{8}-\d+.*$/
-    - /^l1-deploy-local-ow-api-simulator-\d{8}-\d+.*$/
-    - /^l1-deploy-ow-api-simulator-\d{8}-\d+.*$/
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^l1-deploy-local-\d{8}-\d+.*$/
+      when: always
+    - if: $CI_COMMIT_TAG =~ /^l1-deploy-local-ow-api-simulator-\d{8}-\d+.*$/
+      when: always
+    - if: $CI_COMMIT_TAG =~ /^l1-deploy-ow-api-simulator-\d{8}-\d+.*$/
+      when: always
+    - when: never
       
 sit_deploy_ow_api_simulator:
   extends: 
@@ -48,8 +52,12 @@ sit_deploy_ow_api_simulator:
     - .ow-api-push-git-compiled
   environment:
     name: SIT
-  only:
-    - /^l1-deploy-sit-\d{8}-\d+.*$/
-    - /^l1-deploy-sit-ow-api-simulator-\d{8}-\d+.*$/
-    - /^l1-deploy-ow-api-simulator-\d{8}-\d+.*$/
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^l1-deploy-sit-\d{8}-\d+.*$/
+      when: always
+    - if: $CI_COMMIT_TAG =~ /^l1-deploy-sit-ow-api-simulator-\d{8}-\d+.*$/
+      when: always
+    - if: $CI_COMMIT_TAG =~ /^l1-deploy-ow-api-simulator-\d{8}-\d+.*$/
+      when: always
+    - when: never
     
