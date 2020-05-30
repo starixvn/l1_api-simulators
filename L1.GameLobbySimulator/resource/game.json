@@ -185,6 +185,36 @@
   },
   {
     "id": 9,
+    "name": "Mini Xóc dĩa",
+    "choice": [
+      {
+        "id": 1,
+        "name": "Chẵn"
+      },
+      {
+        "id": 2,
+        "name": "Lẻ"
+      },
+      {
+        "id": 3,
+        "name": "3 Đỏ 1 Trắng"
+      },
+      {
+        "id": 4,
+        "name": "4 Đỏ"
+      },
+      {
+        "id": 5,
+        "name": "3 Trắng 1 Đỏ"
+      },
+      {
+        "id": 6,
+        "name": "4 Trắng"
+      }
+    ]
+  },
+  {
+    "id": 10,
     "name": "Baccarat",
     "choice": [
       {
@@ -216,11 +246,6 @@
         "name": "Nhà cái có đôi"
       }
     ]
-  },
-  {
-    "id": 10,
-    "name": "Mini Xóc dĩa",
-    "choice": []
   },
   {
     "id": 11,
