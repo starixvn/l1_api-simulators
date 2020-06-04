@@ -5,9 +5,10 @@
     "id": "game-server",
     "secret": "gameserver@20luminet&"
   },
-  "expireIn": 1585629268,
+  "expireIn": 1591262817,
+  "owUrl": "http://l3-ows.lumigame.com/SabaClub/CreateCustomer",
   "useAuthenticate": true,
   "requestTimeout": 10000,
-  "owUrl": "http://owapi-simulator.lumigame.com/SabaClub/CreateCustomer",
+  "localhost": "http://localhost:7456",
   "port": 5002
 }

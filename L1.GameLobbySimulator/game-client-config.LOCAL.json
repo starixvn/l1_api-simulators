@@ -9,5 +9,6 @@
   "useAuthenticate": true,
   "requestTimeout": 10000,
   "owUrl": "http://owapi-simulator.lumigame.com/SabaClub/CreateCustomer",
+  "localhost": "http://localhost:7456",
   "port": 5002
 }
