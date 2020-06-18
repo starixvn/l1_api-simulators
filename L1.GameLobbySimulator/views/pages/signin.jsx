@@ -11,7 +11,7 @@ export default class SignIn extends React.Component {
     super();
 
     this.state = {
-      memberId: (Math.random() * 10000000) >> 0,
+      memberId: 0,
       memberName: randomString(8),
       language: "vi-VN",
       currency: "$US",
@@ -88,8 +88,10 @@ export default class SignIn extends React.Component {
   async componentDidMount() {
     const data = await Axios.get("/setting/data").then(data => data.data);
     const ip = await Axios.get("/signin/ip", {timeout: 10000}).then(data => data.data);
+    const searchParams = new URLSearchParams(this.props.history.location.search);
+    const memberId = Number(searchParams.get('memberId')) || (Math.random() * 10000000) >> 0;
 
-    this.setState({setting: data, ip});
+    this.setState({setting: data, ip, memberId});
   }
 
   render() {
