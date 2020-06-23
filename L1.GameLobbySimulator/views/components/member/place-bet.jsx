@@ -15,6 +15,7 @@ export default class PlaceBet extends React.Component {
       gameTypeId: 1,
       choiceId: 1,
       amount: (Math.random() * 100) >> 0,
+      roundEndTime: new Date().toISOString(),
       currency: "UUS",
       ip: "0.0.0.0",
       languageCode: "vi-VN",
@@ -23,11 +24,11 @@ export default class PlaceBet extends React.Component {
         game: [
           {
             id: 1,
-            choice: []
-          }
+            choice: [],
+          },
         ],
-        currency: []
-      }
+        currency: [],
+      },
     };
 
     this.changeValue = this.changeValue.bind(this);
@@ -54,13 +55,13 @@ export default class PlaceBet extends React.Component {
   handleSubmit(event) {
     const request = Object.assign({}, this.state, {
       result: undefined,
-      resource: undefined
+      resource: undefined,
     });
 
     Axios.post("/member/placeBet", request)
-      .then(data => data.data)
-      .then(data => (data.error ? Promise.reject(data.error) : data))
-      .then(result => this.setState({ result }))
+      .then((data) => data.data)
+      .then((data) => (data.error ? Promise.reject(data.error) : data))
+      .then((result) => this.setState({ result }))
       .catch(showAlert);
 
     event.preventDefault();
@@ -68,16 +69,16 @@ export default class PlaceBet extends React.Component {
 
   componentDidMount() {
     Axios.get("/resource/currency")
-      .then(data => data.data)
-      .then(currency =>
+      .then((data) => data.data)
+      .then((currency) =>
         Axios.get("/resource/game")
-          .then(data => data.data)
-          .then(game => ({
+          .then((data) => data.data)
+          .then((game) => ({
             currency,
-            game
+            game,
           }))
       )
-      .then(resource => this.setState({ resource }));
+      .then((resource) => this.setState({ resource }));
   }
 
   render() {
@@ -85,7 +86,7 @@ export default class PlaceBet extends React.Component {
       <div className="section">
         <div className="row">
           <div className="col-sm-12 col-md-6">
-            <form onSubmit={event => this.handleSubmit(event)}>
+            <form onSubmit={(event) => this.handleSubmit(event)}>
               <fieldset className="container">
                 <legend>Bet</legend>
                 <Input
@@ -113,10 +114,10 @@ export default class PlaceBet extends React.Component {
                   <label htmlFor="currency">Currency</label>
                   <select
                     id="currency"
-                    onChange={event => this.handleChange(event)}
+                    onChange={(event) => this.handleChange(event)}
                     value={this.state.currency}
                   >
-                    {this.state.resource.currency.map(curr => (
+                    {this.state.resource.currency.map((curr) => (
                       <option value={curr.value} key={curr.value}>
                         {curr.name}
                       </option>
@@ -128,10 +129,10 @@ export default class PlaceBet extends React.Component {
                   <label htmlFor="gameTypeId">Game</label>
                   <select
                     id="gameTypeId"
-                    onChange={event => this.handleChange(event)}
+                    onChange={(event) => this.handleChange(event)}
                     value={this.state.gameId}
                   >
-                    {this.state.resource.game.map(game => (
+                    {this.state.resource.game.map((game) => (
                       <option value={game.id} key={game.id}>
                         {game.name}
                       </option>
@@ -143,12 +144,12 @@ export default class PlaceBet extends React.Component {
                   <label htmlFor="choiceId">Choice</label>
                   <select
                     id="choiceId"
-                    onChange={event => this.handleChange(event)}
+                    onChange={(event) => this.handleChange(event)}
                     value={this.state.choiceId}
                   >
                     {this.state.resource.game[
                       this.state.gameTypeId - 1
-                    ].choice.map(choice => (
+                    ].choice.map((choice) => (
                       <option
                         value={choice.id}
                         key={`${this.state.gameTypeId}${choice.id}`}
@@ -165,6 +166,16 @@ export default class PlaceBet extends React.Component {
                   name="Amount"
                   step="0.01"
                   value={this.state.amount}
+                  onChange={this.changeValue}
+                />
+                <Input
+                  type="datetime-local"
+                  id="roundEndTime"
+                  name="Round End Time"
+                  value={this.state.roundEndTime.substring(
+                    0,
+                    this.state.roundEndTime.length - 1
+                  )}
                   onChange={this.changeValue}
                 />
                 <Input
