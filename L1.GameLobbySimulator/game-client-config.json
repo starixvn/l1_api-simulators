@@ -9,5 +9,6 @@
   "owUrl": "http://l2-ows.lumigame.com/SabaClub/CreateCustomer",
   "useAuthenticate": true,
   "requestTimeout": 10000,
+  "localhost": "http://localhost:7456",
   "port": 9004
 }
