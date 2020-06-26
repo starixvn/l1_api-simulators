@@ -17,7 +17,8 @@ export default class GameClient extends React.Component {
       expireIn: 0,
       owUrl: '',
       useAuthenticate: false,
-      requestTimeout: 0
+      requestTimeout: 0,
+      localhost: '',
     };
 
     this.onChangeValue = this.onChangeValue.bind(this);
@@ -92,6 +93,13 @@ export default class GameClient extends React.Component {
                   id="owUrl"
                   name="OW Url"
                   value={this.state.owUrl}
+                  onChange={this.onChangeValue}
+                />
+                <Input
+                  type="text"
+                  id="localhost"
+                  name="Localhost"
+                  value={this.state.localhost}
                   onChange={this.onChangeValue}
                 />
               </fieldset>

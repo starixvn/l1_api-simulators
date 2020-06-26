@@ -11,7 +11,7 @@ export default class SignIn extends React.Component {
     super();
 
     this.state = {
-      memberId: (Math.random() * 10000000) >> 0,
+      memberId: 0,
       memberName: randomString(8),
       language: "vi-VN",
       currency: "INH",
@@ -30,7 +30,8 @@ export default class SignIn extends React.Component {
       setting: {
         owUrl: ''
       },
-      domain: 'example.com'
+      domain: 'example.com',
+      localhost: false,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -53,7 +54,8 @@ export default class SignIn extends React.Component {
     const request = Object.assign({}, this.state, {
       token: null,
       verifyResult: null,
-      resource: null
+      resource: null,
+      localhost: null,
     });
     Axios.post("/signin/sso", request)
       .then(data => data.data)
@@ -86,11 +88,16 @@ export default class SignIn extends React.Component {
   async componentDidMount() {
     const data = await Axios.get("/setting/data").then(data => data.data);
     const ip = await Axios.get("/signin/ip", {timeout: 10000}).then(data => data.data);
+    const searchParams = new URLSearchParams(this.props.history.location.search);
+    const memberId = Number(searchParams.get('memberId')) || (Math.random() * 10000000) >> 0;
 
-    this.setState({setting: data, ip});
+    this.setState({setting: data, ip, memberId});
   }
 
   render() {
+    const redirectUrl = this.state.localhost && this.state.token ?
+      `${this.state.setting.localhost}?token=${this.state.token}` :
+      this.state.redirectUrl;
     return (
       <div className="container">
         <div className="section">
@@ -127,6 +134,13 @@ export default class SignIn extends React.Component {
                     onChange={this.handleInputChange}
                     id="gameId"
                     value={this.state.gameId}
+                  />
+                  <Input
+                    type="checkbox"
+                    id="localhost"
+                    name="Localhost"
+                    value={this.state.localhost}
+                    onChange={this.handleInputChange}
                   />
                 </div>
                 <div className="col-sm-12 col-md-6">
@@ -186,10 +200,10 @@ export default class SignIn extends React.Component {
                 <label htmlFor="redirectUrl">Redirect</label>
                 <a
                   className="col-sm-12"
-                  href={this.state.redirectUrl}
+                  href={redirectUrl}
                   target="_blank"
                 >
-                  {this.state.redirectUrl}
+                  {redirectUrl}
                 </a>
               </div>
               <Input
