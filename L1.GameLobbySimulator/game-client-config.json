@@ -6,7 +6,7 @@
     "secret": "gameserver@20luminet&"
   },
   "expireIn": 1591262817,
-  "owUrl": "http://owapi-simulator.lumigame.com",
+  "owUrl": "http://owapi-simulator.lumigame.com/SabaClub/CreateCustomer",
   "useAuthenticate": true,
   "requestTimeout": 10000,
   "localhost": "http://localhost:7456",
