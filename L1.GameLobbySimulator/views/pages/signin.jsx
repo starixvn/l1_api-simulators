@@ -21,16 +21,16 @@ export default class SignIn extends React.Component {
       browserUserAgent: navigator.userAgent,
       auth: {
         clientId: "gamesimulator",
-        clientSecret: "gamesimulator@20luminet&"
+        clientSecret: "gamesimulator@20luminet&",
       },
       token: "",
       redirectUrl: "#",
       verifyResult: null,
       gameId: 1,
       setting: {
-        owUrl: ''
+        owUrl: "",
       },
-      domain: 'example.com',
+      domain: "example.com",
       localhost: false,
     };
 
@@ -58,12 +58,12 @@ export default class SignIn extends React.Component {
       localhost: null,
     });
     Axios.post("/signin/sso", request)
-      .then(data => data.data)
-      .then(data => (data.error ? Promise.reject(data.error) : data))
-      .then(token => this.setState(token))
+      .then((data) => data.data)
+      .then((data) => (data.error ? Promise.reject(data.error) : data))
+      .then((token) => this.setState(token))
       .catch(showAlert);
 
-    event.preventDefault();
+    event && event.preventDefault();
   }
 
   handleVerifyToken(event) {
@@ -72,36 +72,46 @@ export default class SignIn extends React.Component {
       {
         token: this.state.token,
         browserUserAgent: this.state.browserUserAgent,
-        ip: this.state.ip
+        ip: this.state.ip,
       }
     );
 
     Axios.post("/signin/verify", request)
-      .then(data => data.data)
-      .then(data => (data.error ? Promise.reject(data.error) : data))
-      .then(verifyResult => this.setState({ verifyResult }))
+      .then((data) => data.data)
+      .then((data) => (data.error ? Promise.reject(data.error) : data))
+      .then((verifyResult) => this.setState({ verifyResult }))
       .catch(showAlert);
 
     event.preventDefault();
   }
 
   async componentDidMount() {
-    const data = await Axios.get("/setting/data").then(data => data.data);
-    const ip = await Axios.get("/signin/ip", {timeout: 10000}).then(data => data.data);
-    const searchParams = new URLSearchParams(this.props.history.location.search);
-    const memberId = Number(searchParams.get('memberId')) || (Math.random() * 10000000) >> 0;
+    const data = await Axios.get("/setting/data").then((data) => data.data);
+    const ip = await Axios.get("/signin/ip", { timeout: 10000 }).then(
+      (data) => data.data
+    );
+    const searchParams = new URLSearchParams(
+      this.props.history.location.search
+    );
+    const memberId =
+      Number(searchParams.get("memberId")) || (Math.random() * 10000000) >> 0;
 
-    this.setState({setting: data, ip, memberId});
+    this.setState({ setting: data, ip, memberId }, () => {
+      if (Number(searchParams.get("memberId"))) {
+        this.handleSubmit();
+      }
+    });
   }
 
   render() {
-    const redirectUrl = this.state.localhost && this.state.token ?
-      `${this.state.setting.localhost}?token=${this.state.token}` :
-      this.state.redirectUrl;
+    const redirectUrl =
+      this.state.localhost && this.state.token
+        ? `${this.state.setting.localhost}?token=${this.state.token}&gameId=${this.state.gameId}`
+        : this.state.redirectUrl;
     return (
       <div className="container">
         <div className="section">
-          <form onSubmit={event => this.handleSubmit(event)}>
+          <form onSubmit={(event) => this.handleSubmit(event)}>
             <fieldset className="container">
               <legend>Get Token</legend>
               <div className="row">
@@ -183,26 +193,22 @@ export default class SignIn extends React.Component {
               </div>
               <input className="primary" type="submit" value="Get Token" />
               <a
-                  className="button secondary"
-                  href={`${this.state.setting.owUrl}?memId=${this.state.memberId}`}
-                  target="_blank"
-                >
-                  Set Balance
-                </a>
+                className="button secondary"
+                href={`${this.state.setting.owUrl}?memId=${this.state.memberId}`}
+                target="_blank"
+              >
+                Set Balance
+              </a>
             </fieldset>
           </form>
         </div>
         <div className="section">
-          <form onSubmit={event => this.handleVerifyToken(event)}>
+          <form onSubmit={(event) => this.handleVerifyToken(event)}>
             <fieldset className="container">
               <legend>Token</legend>
               <div className="input-group vertical">
                 <label htmlFor="redirectUrl">Redirect</label>
-                <a
-                  className="col-sm-12"
-                  href={redirectUrl}
-                  target="_blank"
-                >
+                <a className="col-sm-12" href={redirectUrl} target="_blank">
                   {redirectUrl}
                 </a>
               </div>
