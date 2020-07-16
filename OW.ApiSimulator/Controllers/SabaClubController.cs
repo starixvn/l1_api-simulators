@@ -314,5 +314,33 @@ namespace OW.ApiSimulator.Controllers
             viewModel.Result = await sabaClubService.RetrieveEndGameInfoAsync(viewModel.Request);
             return View(viewModel);
         }
+
+        [HttpGet]
+        public IActionResult GameTicket()
+        {
+            return View(new GameTicketRequestViewModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GameTicket(GameTicketRequestViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var service = serviceProvider.GetRequiredService<IResultPageService>();
+                var result = await service.GetQueryKey(new GameTicketRequest
+                {
+                    GameTypeId = model.GameTypeId,
+                    MemberId = model.MemberId,
+                    RoundId = model.RoundId
+                });
+
+                if (!string.IsNullOrWhiteSpace(result))
+                {
+                    return Redirect(result);
+                }
+            }
+
+            return View(model);
+        }
     }
 }
