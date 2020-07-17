@@ -7,5 +7,7 @@
         public int MemberId { get; set; }
 
         public byte GameTypeId { get; set; }
+
+        public string Culture { get; set; }
     }
 }

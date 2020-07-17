@@ -332,7 +332,7 @@ namespace OW.ApiSimulator.Controllers
                     GameTypeId = model.GameTypeId,
                     MemberId = model.MemberId,
                     RoundId = model.RoundId
-                });
+                }, model.Culture);
 
                 if (!string.IsNullOrWhiteSpace(result))
                 {

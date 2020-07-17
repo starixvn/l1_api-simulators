@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
@@ -10,7 +11,7 @@ namespace OW.ApiSimulator.Services
 {
     public interface IResultPageService
     {
-        Task<string> GetQueryKey(GameTicketRequest request);
+        Task<string> GetQueryKey(GameTicketRequest request, string culture);
     }
 
     public class ResultPageService : IResultPageService
@@ -25,7 +26,7 @@ namespace OW.ApiSimulator.Services
             configuration = optionsSnapshot.Value;
         }
 
-        public async Task<string> GetQueryKey(GameTicketRequest request)
+        public async Task<string> GetQueryKey(GameTicketRequest request, string culture)
         {
             request.Key = configuration.Key;
 
@@ -35,7 +36,7 @@ namespace OW.ApiSimulator.Services
 
             if (response.IsSuccessStatusCode)
             {
-                return $"{configuration.BaseUrl}{configuration.GameTicketEndPoint}/{responseContent}"; ;
+                return $"{configuration.BaseUrl}{culture}/{configuration.GameTicketEndPoint}/{responseContent}"; ;
             }
 
             return string.Empty;
