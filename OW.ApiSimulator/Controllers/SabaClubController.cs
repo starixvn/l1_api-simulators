@@ -331,8 +331,9 @@ namespace OW.ApiSimulator.Controllers
                 {
                     GameTypeId = model.GameTypeId,
                     MemberId = model.MemberId,
-                    RoundId = model.RoundId
-                }, model.Culture);
+                    RoundId = model.RoundId,
+                    Language = model.Culture
+                });
 
                 if (!string.IsNullOrWhiteSpace(result))
                 {
