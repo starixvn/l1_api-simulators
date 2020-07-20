@@ -11,7 +11,7 @@ namespace OW.ApiSimulator.Services
 {
     public interface IResultPageService
     {
-        Task<string> GetAccessUrl(GameTicketRequest request);
+        Task<string> GetGameTicketAccessUrl(GameTicketRequest request);
     }
 
     public class ResultPageService : IResultPageService
@@ -26,7 +26,7 @@ namespace OW.ApiSimulator.Services
             configuration = optionsSnapshot.Value;
         }
 
-        public async Task<string> GetAccessUrl(GameTicketRequest request)
+        public async Task<string> GetGameTicketAccessUrl(GameTicketRequest request)
         {
             request.Auth.ClientId = configuration.Name;
             request.Auth.ClientKey = configuration.Key;
