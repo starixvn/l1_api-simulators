@@ -27,7 +27,8 @@ namespace OW.ApiSimulator.Services
 
         public async Task<string> GetQueryKey(GameTicketRequest request)
         {
-            request.Key = configuration.Key;
+            request.Auth.ClientId = configuration.Name;
+            request.Auth.ClientKey = configuration.Key;
 
             var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, defaultMediaType);
             var response = await httpClient.PostAsync(configuration.GameTicketQueryKeyEndPoint, content);
