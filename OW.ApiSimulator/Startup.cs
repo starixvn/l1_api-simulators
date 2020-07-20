@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OW.ApiSimulator.Configuration;
 using OW.ApiSimulator.Extensions;
 using OW.ApiSimulator.Services;
 
@@ -22,9 +23,16 @@ namespace OW.ApiSimulator
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOW();
+            services.Configure<ResultPageConfiguration>(Configuration.GetSection("ResultPageConfiguration"));
+
             services.AddHttpClient<ISabaClubService, SabaClubService>(httpClient =>
             {
                 httpClient.BaseAddress = new Uri(Configuration["SabaClubSettings:BaseUrl"]);
+            });
+
+            services.AddHttpClient<IResultPageService, ResultPageService>(httpClient =>
+            {
+                httpClient.BaseAddress = new Uri(Configuration["ResultPageConfiguration:BaseUrl"]);
             });
 
             services.AddControllersWithViews();
