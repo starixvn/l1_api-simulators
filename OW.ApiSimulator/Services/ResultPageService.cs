@@ -5,12 +5,13 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using OW.ApiSimulator.Configuration;
 using OW.ApiSimulator.Models;
+using OW.ApiSimulator.Models.Saba;
 
 namespace OW.ApiSimulator.Services
 {
     public interface IResultPageService
     {
-        Task<string> GetQueryKey(GameTicketRequest request);
+        Task<string> GetAccessUrl(GameTicketRequest request);
     }
 
     public class ResultPageService : IResultPageService
@@ -25,7 +26,7 @@ namespace OW.ApiSimulator.Services
             configuration = optionsSnapshot.Value;
         }
 
-        public async Task<string> GetQueryKey(GameTicketRequest request)
+        public async Task<string> GetAccessUrl(GameTicketRequest request)
         {
             request.Auth.ClientId = configuration.Name;
             request.Auth.ClientKey = configuration.Key;
@@ -36,7 +37,9 @@ namespace OW.ApiSimulator.Services
 
             if (response.IsSuccessStatusCode)
             {
-                return responseContent; ;
+                var responseObj = JsonConvert.DeserializeObject<GetAccessUrlResult>(responseContent);
+
+                return responseObj.RedirectUrl; ;
             }
 
             return string.Empty;

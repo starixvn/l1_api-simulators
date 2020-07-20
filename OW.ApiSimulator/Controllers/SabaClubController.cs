@@ -327,7 +327,7 @@ namespace OW.ApiSimulator.Controllers
             if (ModelState.IsValid)
             {
                 var service = serviceProvider.GetRequiredService<IResultPageService>();
-                var result = await service.GetQueryKey(new GameTicketRequest
+                var result = await service.GetAccessUrl(new GameTicketRequest
                 {
                     GameTypeId = model.GameTypeId,
                     MemberId = model.MemberId,
