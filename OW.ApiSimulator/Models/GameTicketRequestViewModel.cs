@@ -2,9 +2,9 @@
 {
     public class GameTicketRequestViewModel
     {
-        public long RoundId { get; set; }
+        public long GameRoundId { get; set; }
 
-        public int MemberId { get; set; }
+        public int ObCustId { get; set; }
 
         public byte GameTypeId { get; set; }
 

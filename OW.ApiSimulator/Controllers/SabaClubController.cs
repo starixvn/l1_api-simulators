@@ -330,8 +330,8 @@ namespace OW.ApiSimulator.Controllers
                 var result = await service.GetGameTicketAccessUrl(new GameTicketRequest
                 {
                     GameTypeId = model.GameTypeId,
-                    MemberId = model.MemberId,
-                    RoundId = model.RoundId,
+                    ObCustId = model.ObCustId,
+                    GameRoundId = model.GameRoundId,
                     Language = model.Culture
                 });
 
