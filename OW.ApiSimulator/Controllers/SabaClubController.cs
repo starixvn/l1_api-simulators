@@ -37,7 +37,7 @@ namespace OW.ApiSimulator.Controllers
             var customers = serviceProvider.GetRequiredService<List<Customer>>();
             var customer = customers.FirstOrDefault(x => x.ObCustId == model.ObCustId);
 
-            if(customer != null)
+            if (customer != null)
             {
                 customer.Balance = model.Balance;
             }
@@ -342,6 +342,20 @@ namespace OW.ApiSimulator.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult AddSpin()
+        {
+            return View(new AddSpinViewModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddSpin(AddSpinViewModel viewModel, [FromServices] ISabaClubService sabaClubService)
+        {
+            viewModel.Result = await sabaClubService.AddSpinAsync(viewModel.Request);
+
+            return View(viewModel);
         }
     }
 }
