@@ -5,7 +5,9 @@ namespace OW.ApiSimulator.Models.Saba
     public class AddSpinRequest
     {
         public DateTimeOffset TimeStamp { get; set; } = DateTimeOffset.UtcNow;
-    
+
+        public string Key { get; set; } = Guid.NewGuid().ToString();
+
         public int ObCustId { get; set; }
 
         public byte Spins { get; set; }
