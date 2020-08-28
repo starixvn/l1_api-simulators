@@ -585,7 +585,7 @@
   },
   {
     "id": 19,
-    "name": "Keno Nort",
+    "name": "Keno North",
     "choice": [
       {
         "id": 1,
@@ -622,6 +622,16 @@
       {
         "id": 9,
         "name": "Thổ"
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Roulette",
+    "choice": [
+      {
+        "id": 0,
+        "name": "N/A"
       }
     ]
   }
