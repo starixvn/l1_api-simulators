@@ -10,8 +10,6 @@ namespace OW.ApiSimulator.Services
     public interface ISabaClubService
     {
         Task<SabaResponse<EndGameInfoResult>> RetrieveEndGameInfoAsync(EndGameInfoRequest request);
-
-        Task<SabaResponse<AddSpinResult>> AddSpinAsync(AddSpinRequest request);
     }
 
     public class SabaClubService : ISabaClubService
@@ -39,27 +37,6 @@ namespace OW.ApiSimulator.Services
             {
                 TimeStamp = DateTime.UtcNow,
                 Result = new EndGameInfoResult
-                {
-                    ErrorDescription = $"{response.StatusCode}-{response.ReasonPhrase}-{responseContent}"
-                }
-            };
-        }
-
-        public async Task<SabaResponse<AddSpinResult>> AddSpinAsync(AddSpinRequest request)
-        {
-            var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, defaultMediaType);
-            var response = await httpClient.PostAsync("member/AddSpins", content);
-            var responseContent = await response.Content.ReadAsStringAsync();
-
-            if (response.IsSuccessStatusCode)
-            {
-                return JsonConvert.DeserializeObject<SabaResponse<AddSpinResult>>(responseContent);
-            }
-
-            return new SabaResponse<AddSpinResult>
-            {
-                TimeStamp = DateTime.UtcNow,
-                Result = new AddSpinResult
                 {
                     ErrorDescription = $"{response.StatusCode}-{response.ReasonPhrase}-{responseContent}"
                 }

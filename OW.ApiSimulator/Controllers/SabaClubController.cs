@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using OW.ApiSimulator.Models;
 using OW.ApiSimulator.Models.OW;
+using OW.ApiSimulator.Models.Saba;
 using OW.ApiSimulator.Services;
 
 namespace OW.ApiSimulator.Controllers
@@ -342,20 +343,6 @@ namespace OW.ApiSimulator.Controllers
             }
 
             return View(model);
-        }
-
-        [HttpGet]
-        public IActionResult AddSpin()
-        {
-            return View(new AddSpinViewModel());
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> AddSpin(AddSpinViewModel viewModel, [FromServices] ISabaClubService sabaClubService)
-        {
-            viewModel.Result = await sabaClubService.AddSpinAsync(viewModel.Request);
-
-            return View(viewModel);
         }
     }
 }
