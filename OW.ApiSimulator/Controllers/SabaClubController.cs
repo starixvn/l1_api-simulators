@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using OW.ApiSimulator.Models;
 using OW.ApiSimulator.Models.OW;
+using OW.ApiSimulator.Models.Saba;
 using OW.ApiSimulator.Services;
 
 namespace OW.ApiSimulator.Controllers
@@ -37,7 +38,7 @@ namespace OW.ApiSimulator.Controllers
             var customers = serviceProvider.GetRequiredService<List<Customer>>();
             var customer = customers.FirstOrDefault(x => x.ObCustId == model.ObCustId);
 
-            if(customer != null)
+            if (customer != null)
             {
                 customer.Balance = model.Balance;
             }
