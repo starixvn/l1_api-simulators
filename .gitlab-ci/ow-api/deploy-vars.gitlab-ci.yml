@@ -1,0 +1,8 @@
+.deploy_vars_ow_api:
+  variables:
+    WORKING_PATH: /var/www/l1/ow-api-simulator/
+    DOCKER_SERVICE_NAME: l1-ow-api-simulator
+    DOCKER_IMAGE_PATH: l1/docker-registry/ow-api-simulator
+    DOCKER_FILE_PATH: ./
+    DOCKER_FILE_NAME: OWApi.Dockerfile
+    DOCKER_NETWORK_NAME: api

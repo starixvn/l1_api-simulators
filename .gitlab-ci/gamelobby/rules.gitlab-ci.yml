@@ -1,0 +1,59 @@
+.if-deploy-all: &if-deploy-all
+  if: '$CI_COMMIT_TAG =~ /^l1-deploy-\d{8}-\d+.*$/'
+
+.if-deploy-local: &if-deploy-local
+  if: '$CI_COMMIT_TAG =~ /^l1-deploy-local-\d{8}-\d+.*$/'
+
+.if-deploy-sit: &if-deploy-sit
+  if: '$CI_COMMIT_TAG =~ /^l1-deploy-sit-\d{8}-\d+.*$/'
+
+.if-deploy-uat: &if-deploy-uat
+  if: '$CI_COMMIT_TAG =~ /^l1-deploy-uat-\d{8}-\d+.*$/'
+
+.if-deploy-all-gamelobby: &if-deploy-all-gamelobby
+  if: '$CI_COMMIT_TAG =~ /^l1-deploy-gamelobby-\d{8}-\d+.*$/'
+
+.if-deploy-gamelobby-local: &if-deploy-gamelobby-local
+  if: '$CI_COMMIT_TAG =~ /^l1-deploy-local-gamelobby-\d{8}-\d+.*$/'
+
+.if-deploy-gamelobby-sit: &if-deploy-gamelobby-sit
+  if: '$CI_COMMIT_TAG =~ /^l1-deploy-sit-gamelobby-\d{8}-\d+.*$/'
+
+.if-deploy-gamelobby-uat: &if-deploy-gamelobby-uat
+  if: '$CI_COMMIT_TAG =~ /^l1-deploy-uat-gamelobby-\d{8}-\d+.*$/'
+
+.deploy-gamelobby:local:rules:
+  rules:
+    - <<: *if-deploy-local
+      when: on_success
+    - <<: *if-deploy-gamelobby-local
+      when: on_success
+    - <<: *if-deploy-all-gamelobby
+      when: on_success
+    - <<: *if-deploy-all
+      when: on_success
+    - when: never
+
+.deploy-gamelobby:sit:rules:
+  rules:
+    - <<: *if-deploy-sit
+      when: on_success
+    - <<: *if-deploy-gamelobby-sit
+      when: on_success
+    - <<: *if-deploy-all-gamelobby
+      when: on_success
+    - <<: *if-deploy-all
+      when: on_success
+    - when: never
+
+.deploy-gamelobby:uat:rules:
+  rules:
+    - <<: *if-deploy-uat
+      when: on_success
+    - <<: *if-deploy-gamelobby-uat
+      when: on_success
+    - <<: *if-deploy-all-gamelobby
+      when: on_success
+    - <<: *if-deploy-all
+      when: on_success
+    - when: never

@@ -1,0 +1,59 @@
+.if-deploy-all: &if-deploy-all
+  if: '$CI_COMMIT_TAG =~ /^l1-deploy-\d{8}-\d+.*$/'
+
+.if-deploy-local: &if-deploy-local
+  if: '$CI_COMMIT_TAG =~ /^l1-deploy-local-\d{8}-\d+.*$/'
+
+.if-deploy-sit: &if-deploy-sit
+  if: '$CI_COMMIT_TAG =~ /^l1-deploy-sit-\d{8}-\d+.*$/'
+
+.if-deploy-uat: &if-deploy-uat
+  if: '$CI_COMMIT_TAG =~ /^l1-deploy-uat-\d{8}-\d+.*$/'
+
+.if-deploy-all-ow-api: &if-deploy-all-ow-api
+  if: '$CI_COMMIT_TAG =~ /^l1-deploy-ow-api-\d{8}-\d+.*$/'
+
+.if-deploy-ow-api-local: &if-deploy-ow-api-local
+  if: '$CI_COMMIT_TAG =~ /^l1-deploy-local-ow-api-\d{8}-\d+.*$/'
+
+.if-deploy-ow-api-sit: &if-deploy-ow-api-sit
+  if: '$CI_COMMIT_TAG =~ /^l1-deploy-sit-ow-api-\d{8}-\d+.*$/'
+
+.if-deploy-ow-api-uat: &if-deploy-ow-api-uat
+  if: '$CI_COMMIT_TAG =~ /^l1-deploy-uat-ow-api-\d{8}-\d+.*$/'
+
+.deploy-ow-api:local:rules:
+  rules:
+    - <<: *if-deploy-local
+      when: on_success
+    - <<: *if-deploy-ow-api-local
+      when: on_success
+    - <<: *if-deploy-all-ow-api
+      when: on_success
+    - <<: *if-deploy-all
+      when: on_success
+    - when: never
+
+.deploy-ow-api:sit:rules:
+  rules:
+    - <<: *if-deploy-sit
+      when: on_success
+    - <<: *if-deploy-ow-api-sit
+      when: on_success
+    - <<: *if-deploy-all-ow-api
+      when: on_success
+    - <<: *if-deploy-all
+      when: on_success
+    - when: never
+
+.deploy-ow-api:uat:rules:
+  rules:
+    - <<: *if-deploy-uat
+      when: on_success
+    - <<: *if-deploy-ow-api-uat
+      when: on_success
+    - <<: *if-deploy-all-ow-api
+      when: on_success
+    - <<: *if-deploy-all
+      when: on_success
+    - when: never
