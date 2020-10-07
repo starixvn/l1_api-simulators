@@ -1,16 +1,19 @@
 # Base image
-FROM node:14-alpine3.10
+FROM node:14.10-slim
 
-# ARG NODE_ENV=production
+USER root
+
 ENV NODE_ENV $NODE_ENV
 RUN mkdir /opt/node_app && chown node:node /opt/node_app
 WORKDIR /opt/node_app
 
-USER root
-WORKDIR /opt/node_app/app
+COPY package.json package-lock.json* ./
+
+RUN npm install --loglevel verbose && npm cache clean --force
+ENV PATH /opt/node_app/node_modules/.bin:$PATH
+
+WORKDIR /opt/node_app/src
 COPY ./src .
-RUN npm install && npm cache clean --force
-ENV PATH /opt/node_app/app/node_modules/.bin:$PATH
 
 RUN webpack
 

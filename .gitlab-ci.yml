@@ -26,7 +26,9 @@ include:
   - project: 'lumi-ops/ci-scripts'
     ref: master
     file: 'docker/deploy-docker.gitlab-ci.yml'
-  # - project: 'lumi-ops/ci-scripts'
-  #   ref: master
-  #   file: 'docker/deploy-docker-cocos.gitlab-ci.yml'
+  - project: "lumi-ops/ci-scripts"
+    ref: master
+    file: "docker/deploy-swarm-service.gitlab-ci.yml"
+  - .gitlab-ci/rules.gitlab-ci.yml
   - .gitlab-ci/gamelobby/gamelobby.gitlab-ci.yml
+  - .gitlab-ci/ow-api/ow-api.gitlab-ci.yml

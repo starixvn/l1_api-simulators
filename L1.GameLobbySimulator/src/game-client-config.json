@@ -10,5 +10,5 @@
   "useAuthenticate": true,
   "requestTimeout": 10000,
   "localhost": "http://localhost:7456",
-  "port": 5002
+  "port": 8106
 }

@@ -1,4 +1,4 @@
-post_build_sit:
+post_build_gamelobby_sit:
   extends:
     - .post_build
     - .deploy:sit:rules
@@ -6,11 +6,11 @@ post_build_sit:
   environment:
     name: SIT
 
-deploy_sit:
+deploy_gamelobby_sit:
   extends:
     - .base_deploy_kbt
     - .deploy:sit:rules
-  needs: ['post_build_sit']
+  needs: ['post_build_gamelobby_sit']
   variables:
     SERVER_IP: $SIT_IP
     SERVER_USER: $SIT_USER
