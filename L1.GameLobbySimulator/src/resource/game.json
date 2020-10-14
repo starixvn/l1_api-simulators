@@ -668,5 +668,19 @@
         "name": "4 Trắng"
       }
     ]
+  },
+  {
+    "id": 24,
+    "name": "Xóc Đĩa Cân Cửa",
+    "choice": [
+      {
+        "id": 1,
+        "name": "Chẵn"
+      },
+      {
+        "id": 2,
+        "name": "Lẻ"
+      }
+    ]
   }
 ]
