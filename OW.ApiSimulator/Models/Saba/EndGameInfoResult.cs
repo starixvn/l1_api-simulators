@@ -10,6 +10,6 @@ namespace OW.ApiSimulator.Models.Saba
 
         public decimal ValidBetAmount { get; set; }
 
-        public DateTimeOffset EndTime { get; set; }
+        public DateTimeOffset? EndTime { get; set; }
     }
 }
