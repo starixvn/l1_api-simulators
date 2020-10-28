@@ -1,0 +1,4 @@
+include:
+  - .gitlab-ci/ow-api/deploy-vars.gitlab-ci.yml
+  - .gitlab-ci/ow-api/deploy-local.gitlab-ci.yml
+  - .gitlab-ci/ow-api/deploy-sit.gitlab-ci.yml

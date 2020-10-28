@@ -24,7 +24,7 @@ namespace OW.ApiSimulator
                  {
                      webBuilder
                      .UseStartup<Startup>()
-                     .UseUrls($"http://localhost:{configuration["HostingPort"]}");
+                     .UseUrls($"http://0.0.0.0:{configuration["HostingPort"]}");
                  });
         }
     }
