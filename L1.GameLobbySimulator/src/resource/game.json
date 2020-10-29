@@ -670,6 +670,16 @@
     ]
   },
   {
+    "id": 23,
+    "name": "Blackjack",
+    "choice": [
+      {
+        "id": 0,
+        "name": "N/A"
+      }
+    ]
+  },
+  {
     "id": 24,
     "name": "Xóc Đĩa Cân Cửa",
     "choice": [

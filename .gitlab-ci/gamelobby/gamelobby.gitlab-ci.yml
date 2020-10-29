@@ -1,5 +1,5 @@
 variables:
-  WORKING_PATH: /var/www/l1/gamelobby-simulator/
+  WORKING_PATH: /var/www/l1/gamelobby-simulator
   DOCKER_SERVICE_NAME: l1-gamelobby-simulator
   DOCKER_IMAGE_PATH: l1/docker-registry/gamelobby-simulator
   DOCKER_FILE_PATH: ./L1.GameLobbySimulator
@@ -8,7 +8,7 @@ variables:
   CONFIG_FILE_NAME: game-client-config
   CONFIG_FILE_EXTENSION: json
   CONFIGS_SRC_DIR_PATH: ./L1.GameLobbySimulator/src
-  CONFIG_CONTAINER_PATH: /opt/node_app/app/game-client-config.js
+  CONFIG_CONTAINER_PATH: /opt/node_app/src/game-client-config.json
 
 include:
   - .gitlab-ci/gamelobby/deploy-local.gitlab-ci.yml
