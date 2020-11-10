@@ -692,5 +692,10 @@
         "name": "Lẻ"
       }
     ]
+  },
+  {
+    "id": 26,
+    "name": "Bầu cua VIP",
+    "choice": []
   }
 ]
