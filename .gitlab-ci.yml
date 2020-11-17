@@ -1,6 +1,6 @@
-image: docker:19.03.12
+image: git3.nexdev.net:5050/lumi-ops/docker-images/docker:19.03.12
 services:
-  - docker:19.03.12-dind
+  - git3.nexdev.net:5050/lumi-ops/docker-images/docker:19.03.12-dind
 
 stages:
   - build
