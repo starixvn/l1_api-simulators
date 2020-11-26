@@ -1,27 +1,5 @@
-stages:
-  - build
-  - post-build
-  - deploy
-
 include:
-  - project: 'lumi-ops/ci-scripts'
-    ref: master
-    file: 'rules/l1-rules.gitlab-ci.yml'
-  - project: 'lumi-ops/ci-scripts'
-    ref: master
-    file: 'docker/before-script-docker.gitlab-ci.yml'
-  - project: 'lumi-ops/ci-scripts'
-    ref: master
-    file: 'docker/build-docker-image.gitlab-ci.yml'
-  - project: 'lumi-ops/ci-scripts'
-    ref: master
-    file: 'docker/build-docker-image-dotnet.gitlab-ci.yml'
-  - project: 'lumi-ops/ci-scripts'
-    ref: master
-    file: 'docker/post-build-docker-image.gitlab-ci.yml'
-  - project: "lumi-ops/ci-scripts"
-    ref: master
-    file: "docker/deploy-swarm-service.gitlab-ci.yml"
-  - .gitlab-ci/rules.gitlab-ci.yml
-  - .gitlab-ci/gamelobby/gamelobby.gitlab-ci.yml
-  - .gitlab-ci/ow-api/ow-api.gitlab-ci.yml
+  - project: "ci/luminet/api-simulators-ci"
+    ref: L1
+    file: "gitlab-ci.yml"
+    
