@@ -697,5 +697,10 @@
     "id": 26,
     "name": "Bầu cua VIP",
     "choice": []
+  },
+  {
+    "id": 27,
+    "name": "Tài xỉu Sic Bo",
+    "choice": []
   }
 ]
