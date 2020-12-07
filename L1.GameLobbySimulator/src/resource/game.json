@@ -701,11 +701,151 @@
     {
         "id": 26,
         "name": "Bầu cua VIP",
-        "choice": []
+        "choice": [
+            {
+                "id": 1,
+                "name": "Nai"
+            },
+            {
+                "id": 2,
+                "name": "Bầu"
+            },
+            {
+                "id": 3,
+                "name": "Gà"
+            },
+            {
+                "id": 4,
+                "name": "Cá"
+            },
+            {
+                "id": 5,
+                "name": "Cua"
+            },
+            {
+                "id": 6,
+                "name": "Tôm"
+            },
+            {
+                "id": 7,
+                "name": "Bộ Ba Bất Kỳ"
+            },
+            {
+                "id": 8,
+                "name": "Trên Cạn"
+            },
+            {
+                "id": 9,
+                "name": "Dưới Nước"
+            }
+        ]
     },
     {
         "id": 27,
         "name": "Cào Baccarat VIP",
-        "choice": []
+        "choice": [
+            {
+                "id": 1,
+                "name": "Nhà Con"
+            },
+            {
+                "id": 2,
+                "name": "Nhà Cái"
+            },
+            {
+                "id": 3,
+                "name": "Tài"
+            },
+            {
+                "id": 4,
+                "name": "Xỉu"
+            },
+            {
+                "id": 5,
+                "name": "Hòa"
+            },
+            {
+                "id": 6,
+                "name": "Con đôi"
+            },
+            {
+                "id": 7,
+                "name": "Cái đôi"
+            }
+        ]
+    },
+    {
+        "id": 28,
+        "name": "Xóc Đĩa Đối Kháng VIP",
+        "choice": [
+            {
+                "id": 1,
+                "name": "Nhà Con"
+            },
+            {
+                "id": 2,
+                "name": "Nhà Cái"
+            },
+            {
+                "id": 3,
+                "name": "Hòa"
+            },
+            {
+                "id": 4,
+                "name": "Tổng chẵn"
+            },
+            {
+                "id": 5,
+                "name": "Tổng lẻ"
+            },
+            {
+                "id": 6,
+                "name": "Nhà Con chẵn"
+            },
+            {
+                "id": 7,
+                "name": "Nhà Con lẻ"
+            },
+            {
+                "id": 8,
+                "name": "Nhà Con 3 đỏ"
+            },
+            {
+                "id": 9,
+                "name": "Nhà Con 1 đỏ"
+            },
+            {
+                "id": 10,
+                "name": "Nhà Con 4 đỏ"
+            },
+            {
+                "id": 11,
+                "name": "Nhà Con 4 trắng"
+            },
+            {
+                "id": 12,
+                "name": "Nhà Cái chẵn"
+            },
+            {
+                "id": 13,
+                "name": "Nhà Cái lẻ"
+            },
+            {
+                "id": 14,
+                "name": "Nhà Cái 3 đỏ"
+            },
+            {
+                "id": 15,
+                "name": "Nhà Cái 1 đỏ"
+            },
+            {
+                "id": 16,
+                "name": "Nhà Cái 4 đỏ"
+            },
+            {
+                "id": 17,
+                "name": "Nhà Cái 4 trắng"
+            }
+        ]
     }
 ]
