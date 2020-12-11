@@ -1,5 +1,10 @@
 [
     {
+        "id": 0,
+        "name": "Sảnh game",
+        "choice": []
+    },
+    {
         "id": 1,
         "name": "Tài Xỉu",
         "choice": [
