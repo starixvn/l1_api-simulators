@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using OW.ApiSimulator.Models;
 using OW.ApiSimulator.Models.OW;
-using OW.ApiSimulator.Models.Saba;
 using OW.ApiSimulator.Services;
 
 namespace OW.ApiSimulator.Controllers
@@ -192,6 +191,7 @@ namespace OW.ApiSimulator.Controllers
             });
         }
 
+
         [HttpGet]
         public IActionResult UpdateEndGameResult()
         {
@@ -343,6 +343,44 @@ namespace OW.ApiSimulator.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult UpdateHitJackpotResult()
+        {
+            return View(serviceProvider.GetRequiredService<HitJackpotResult>());
+        }
+
+        [HttpPost]
+        public IActionResult UpdateHitJackpotResult(HitJackpotResult model)
+        {
+            var result = serviceProvider.GetRequiredService<HitJackpotResult>();
+            result.ErrorCode = model.ErrorCode;
+            result.ErrorDescription = model.ErrorDescription;
+            result.ObCustId = model.ObCustId;
+            result.DelayTime = model.DelayTime;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> HitJackpot([FromBody] OWRequest<HitJackpotCall> request)
+        {
+            var result = serviceProvider.GetRequiredService<HitJackpotResult>();
+            result.Seq = request.Call?.Seq;
+
+            if (result.ErrorCode == 0)
+            {
+                result.ObCustId = request.Call?.ObCustId;
+            }
+
+            await Task.Delay(result.DelayTime);
+
+            return Ok(new OWResponse<HitJackpotResult>
+            {
+                TimeStamp = DateTimeOffset.UtcNow,
+                Result = result
+            });
         }
     }
 }
