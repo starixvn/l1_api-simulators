@@ -77,7 +77,7 @@ export default class HitJackpot extends React.Component {
 					<div className="col-sm-12 col-md-6">
 						<form onSubmit={(event) => this.handleSubmit(event)}>
 							<fieldset className="container">
-								<legend>Bet</legend>
+								<legend>Jackpot</legend>
 								<Input type="int" id="obCustId" name="Member ID" value={this.state.obCustId} onChange={this.changeValue} />
 								<Input type="text" id="siteId" name="Site ID" value={this.state.siteId} onChange={this.changeValue} />
 								<Input
