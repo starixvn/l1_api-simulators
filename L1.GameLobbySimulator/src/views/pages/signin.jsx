@@ -1,10 +1,11 @@
-import React from "react";
 import Axios from "axios";
-import { randomString, showAlert } from "../util.jsx";
+import React from "react";
+
 import Input from "../components/input.jsx";
-import LanguageSelect from "../components/select/language.jsx";
 import CurrencySelect from "../components/select/currency.jsx";
 import GameSelect from "../components/select/game.jsx";
+import LanguageSelect from "../components/select/language.jsx";
+import { randomString, showAlert } from "../util.jsx";
 
 export default class SignIn extends React.Component {
   constructor() {
@@ -26,7 +27,7 @@ export default class SignIn extends React.Component {
       token: "",
       redirectUrl: "#",
       verifyResult: null,
-      gameId: 1,
+      gameId: 0,
       setting: {
         owUrl: "",
       },
