@@ -156,6 +156,15 @@ export default class PlaceBet extends React.Component {
 									value={this.state.freeBet}
 									onChange={this.changeValue}
 								/>
+
+								<Input
+									type="checkbox"
+									id="freeSpin"
+									name="Free Spin"
+									value={this.state.freeSpin}
+									onChange={this.changeValue}
+								/>
+
 								<Input
 									type="float"
 									id="contributionRate"
