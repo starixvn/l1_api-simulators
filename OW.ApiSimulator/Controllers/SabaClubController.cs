@@ -28,7 +28,7 @@ namespace OW.ApiSimulator.Controllers
         [HttpGet]
         public IActionResult CreateCustomer(int memId)
         {
-            return View(new Customer { ObCustId = memId, Balance = 2000 });
+            return View(new Customer { ObCustId = memId, Balance = 2000, MinBet = 1, MaxBet = 2000 });
         }
 
         [HttpPost]
@@ -37,9 +37,11 @@ namespace OW.ApiSimulator.Controllers
             var customers = serviceProvider.GetRequiredService<List<Customer>>();
             var customer = customers.FirstOrDefault(x => x.ObCustId == model.ObCustId);
 
-            if(customer != null)
+            if (customer != null)
             {
                 customer.Balance = model.Balance;
+                customer.MinBet = model.MinBet;
+                customer.MaxBet = model.MaxBet;
             }
             else
             {
@@ -90,6 +92,19 @@ namespace OW.ApiSimulator.Controllers
         public async Task<IActionResult> EnterPortal([FromBody] OWRequest<EnterPortalCall> request)
         {
             var result = serviceProvider.GetRequiredService<EnterPortalResult>();
+            var customers = serviceProvider.GetRequiredService<List<Customer>>();
+            var loginCustomer = customers.FirstOrDefault(x => x.ObCustId == request.Call.ObCustId);
+
+            if (result.ErrorCode == 0)
+            {
+                result.MinBet = loginCustomer?.MinBet ?? 0;
+                result.MaxBet = loginCustomer?.MaxBet ?? 0;
+            }
+            else
+            {
+                result.MinBet = result.MaxBet = 0;
+            }
+
             result.Seq = request.Call?.Seq;
 
             await Task.Delay(result.DelayTime);
@@ -181,6 +196,9 @@ namespace OW.ApiSimulator.Controllers
             {
                 result.Balance = 0;
             }
+
+            result.MinBet = customer?.MinBet ?? 0;
+            result.MaxBet = customer?.MaxBet ?? 0;
 
             await Task.Delay(result.DelayTime);
 
