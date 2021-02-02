@@ -1,6 +1,6 @@
 {
-	"apiUrl": "http://l2_game_api_LOCAL_1:5000",
-	"authUrl": "http://l2_auth_api_LOCAL_1:5000",
+	"apiUrl": "http://l2-api1.lumigame.com",
+	"authUrl": "http://l2-auth1.lumigame.com",
 	"client": {
 		"id": "game-server",
 		"secret": "gameserver@20luminet&"
