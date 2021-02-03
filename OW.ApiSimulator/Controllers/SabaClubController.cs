@@ -197,8 +197,15 @@ namespace OW.ApiSimulator.Controllers
                 result.Balance = 0;
             }
 
-            result.MinBet = customer?.MinBet ?? 0;
-            result.MaxBet = customer?.MaxBet ?? 0;
+            if (result.ErrorCode == 0 || result.ErrorCode == 3003 || result.ErrorCode == 3009)
+            {
+                result.MinBet = customer?.MinBet ?? 0;
+                result.MaxBet = customer?.MaxBet ?? 0;
+            }
+            else
+            {
+                result.MinBet = result.MaxBet = 0;
+            }
 
             await Task.Delay(result.DelayTime);
 
