@@ -66,6 +66,8 @@ namespace OW.ApiSimulator.Controllers
             {
                 var customer = customers.FirstOrDefault(x => x.ObCustId == updateCustomer.ObCustId);
                 customer.Balance = updateCustomer.Balance;
+                customer.MinBet = updateCustomer.MaxBet;
+                customer.MinBet = updateCustomer.MaxBet;
             }
 
             return View(model);
