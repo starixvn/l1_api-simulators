@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace OW.ApiSimulator.Configuration
+﻿namespace OW.ApiSimulator.Configuration
 {
     public class ResultPageConfiguration
     {

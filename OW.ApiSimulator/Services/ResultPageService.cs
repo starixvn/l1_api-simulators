@@ -39,7 +39,7 @@ namespace OW.ApiSimulator.Services
             {
                 var responseObj = JsonConvert.DeserializeObject<GetAccessUrlResult>(responseContent);
 
-                return responseObj.RedirectUrl; ;
+                return responseObj.RedirectUrl; 
             }
 
             return string.Empty;
