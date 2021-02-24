@@ -343,47 +343,5 @@ namespace OW.ApiSimulator.Controllers
 
             return View(model);
         }
-
-        [HttpGet]
-        public IActionResult UpdateHitJackpotResult()
-        {
-            return View(serviceProvider.GetRequiredService<HitJackpotResult>());
-        }
-
-        [HttpPost]
-        public IActionResult UpdateHitJackpotResult(HitJackpotResult model)
-        {
-            var result = serviceProvider.GetRequiredService<HitJackpotResult>();
-            result.ErrorCode = model.ErrorCode;
-            result.ErrorDescription = model.ErrorDescription;
-            result.ObCustId = model.ObCustId;
-            result.DelayTime = model.DelayTime;
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> HitJackpot([FromBody] OWRequest<HitJackpotCall> request)
-        {
-            var customers = serviceProvider.GetRequiredService<List<Customer>>();
-            var customer = customers.Find(x => x.ObCustId == request.Call.ObCustId);
-            var result = serviceProvider.GetRequiredService<HitJackpotResult>();
-
-            result.Seq = request.Call?.Seq;
-
-            if (result.ErrorCode == 0 && customer != null)
-            {
-                result.ObCustId = request.Call?.ObCustId;
-                customer.Balance += request.Call.WinningAmount;
-            }
-
-            await Task.Delay(result.DelayTime);
-
-            return Ok(new OWResponse<HitJackpotResult>
-            {
-                TimeStamp = DateTimeOffset.UtcNow,
-                Result = result
-            });
-        }
     }
 }
