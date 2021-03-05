@@ -8,6 +8,8 @@
             <tr>
                 <th>ObCustId</th>
                 <th>Balance</th>
+                <th>Min Bet</th>
+                <th>Max Bet</th>
             </tr>
         </thead>
         <tbody>
@@ -21,6 +23,12 @@
                     </td>
                     <td>
                         <input class="form-control" asp-for="@Model[i].Balance" />
+                    </td>
+                    <td>
+                        <input class="form-control" asp-for="@Model[i].MinBet" />
+                    </td>
+                    <td>
+                        <input class="form-control" asp-for="@Model[i].MaxBet" />
                     </td>
                 </tr>
             }
