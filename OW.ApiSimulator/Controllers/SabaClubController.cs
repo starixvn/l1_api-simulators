@@ -370,5 +370,57 @@ namespace OW.ApiSimulator.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult UpdateGetBetLimitResult()
+        {
+            return View(serviceProvider.GetRequiredService<GetBetLimitResult>());
+        }
+
+        [HttpPost]
+        public IActionResult UpdateGetBetLimitResult(GetBetLimitResult model)
+        {
+            var result = serviceProvider.GetRequiredService<GetBetLimitResult>();
+            result.ErrorCode = model.ErrorCode;
+            result.ErrorDescription = model.ErrorDescription;
+            result.DelayTime = model.DelayTime;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetBetLimit([FromBody] OWRequest<GetBetLimitCall> request)
+        {
+            var result = serviceProvider.GetRequiredService<GetBetLimitResult>();
+            result.Seq = request.Call?.Seq;
+
+            if (result.ErrorCode == 0)
+            {
+                var customers = serviceProvider.GetRequiredService<List<Customer>>();
+                var customer = customers.FirstOrDefault(x => x.ObCustId == request.Call.ObCustId);
+
+                if (customer != null)
+                {
+                    result.MinBet = customer.MinBet;
+                    result.MaxBet = customer.MaxBet;
+                }
+                else
+                {
+                    result.MinBet = result.MaxBet = 0;
+                }
+            }
+            else
+            {
+                result.MinBet = result.MaxBet = 0;
+            }
+
+            await Task.Delay(result.DelayTime);
+
+            return Ok(new OWResponse<GetBetLimitResult>
+            {
+                TimeStamp = DateTimeOffset.UtcNow,
+                Result = result
+            });
+        }
     }
 }
