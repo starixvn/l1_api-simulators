@@ -18,6 +18,7 @@ namespace OW.ApiSimulator.Extensions
             services.AddSingleton(new CheckMaintenanceResult { StartTime = DateTimeOffset.UtcNow, EndTime = DateTimeOffset.UtcNow.AddHours(1) });
             services.AddSingleton(new List<Customer>());
             services.AddSingleton(new HitJackpotResult());
+            services.AddSingleton(new GetBetLimitResult());
         }
     }
 }
