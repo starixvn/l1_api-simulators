@@ -8,12 +8,12 @@ RUN mkdir /app && chown node:node /app
 WORKDIR /app
 
 COPY package.json yarn.lock ./
+COPY ./src .
 
 RUN yarn install
 ENV PATH /app/node_modules/.bin:$PATH
 
-WORKDIR /app/src
-COPY ./src .
+#WORKDIR /app/src
 
 RUN webpack
 
