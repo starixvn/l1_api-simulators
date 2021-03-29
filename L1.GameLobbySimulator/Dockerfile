@@ -7,13 +7,12 @@ ENV NODE_ENV $NODE_ENV
 RUN mkdir /app && chown node:node /app
 WORKDIR /app
 
-COPY package.json package-lock.json* ./
-
-RUN npm install --loglevel verbose && npm cache clean --force
-ENV PATH /app/node_modules/.bin:$PATH
-
+COPY package.json yarn.lock ./
 WORKDIR /app/src
 COPY ./src .
+
+RUN yarn install --production
+ENV PATH /app/node_modules/.bin:$PATH
 
 RUN webpack
 
