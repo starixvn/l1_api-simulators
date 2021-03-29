@@ -8,7 +8,6 @@ RUN mkdir /app && chown node:node /app
 WORKDIR /app
 
 COPY package.json yarn.lock ./
-WORKDIR /app/src
 COPY ./src .
 
 RUN yarn install --production
