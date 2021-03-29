@@ -1,5 +1,5 @@
 include:
-  - project: "ci/luminet/api-simulators-ci"
-    ref: L1
+  - project: "ci/repos-ci/pentagon_l1_game_lobby_simulator"
+    ref: master
     file: "gitlab-ci.yml"
     
