@@ -8,5 +8,5 @@
   "useAuthenticate": true,
   "requestTimeout": 10000,
   "owUrl": "http://210.57.28.120:6411/SabaClub/CreateCustomer",
-  "port": 6410
+  "port": 5000
 }

@@ -1,5 +1,5 @@
 # Base image
-FROM git3.nexdev.net:5050/lumi-ops/docker-images/node:14.10-slim
+FROM registry.nexdev.net:5050/docker/node:14.15.1-slim
 
 USER root
 
