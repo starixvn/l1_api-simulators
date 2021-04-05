@@ -33,6 +33,7 @@ export default class SignIn extends React.Component {
 			},
 			domain: "example.com",
 			localhost: false,
+			mobile: false
 		};
 
 		this.handleInputChange = this.handleInputChange.bind(this);
@@ -100,10 +101,13 @@ export default class SignIn extends React.Component {
 	}
 
 	render() {
-		const redirectUrl =
-			this.state.localhost && this.state.token
-				? `${this.state.setting.localhost}?token=${this.state.token}&gameId=${this.state.gameId}`
-				: this.state.redirectUrl;
+
+		let redirectUrl=this.state.redirectUrl;
+		const {localhost, token}=this.state;
+		if(localhost && token){
+			redirectUrl=this.state.mobile?`${this.state.setting.mobileLocalhost}?token=${token}`:`${this.state.setting.localhost}?token=${token}&gameId=${this.state.gameId}`
+		}
+
 		return (
 			<div className="container">
 				<div className="section">
@@ -134,6 +138,13 @@ export default class SignIn extends React.Component {
 										id="localhost"
 										name="Localhost"
 										value={this.state.localhost}
+										onChange={this.handleInputChange}
+									/>
+									<Input
+										type="checkbox"
+										id="mobile"
+										name="Mobile"
+										value={this.state.mobile}
 										onChange={this.handleInputChange}
 									/>
 								</div>
