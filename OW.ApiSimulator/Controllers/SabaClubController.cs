@@ -142,6 +142,7 @@ namespace OW.ApiSimulator.Controllers
             var customer = customers.FirstOrDefault(x => x.ObCustId == request.Call.ObCustId);
 
             var result = new GetBalanceResult();
+
             var resultTemplate = serviceProvider.GetRequiredService<GetBalanceResult>();
             result.Seq = request.Call?.Seq;
 
