@@ -108,7 +108,7 @@ export default class SignIn extends React.Component {
 				? `${this.state.setting.mobileLocalhost}?token=${token}`
 				: `${this.state.setting.localhost}?token=${token}&gameId=${this.state.gameId}`;
 		}
-
+		
 		return (
 			<div className="container">
 				<div className="section">
@@ -192,7 +192,7 @@ export default class SignIn extends React.Component {
 							<legend>Token</legend>
 							<div className="input-group vertical">
 								<label htmlFor="redirectUrl">Redirect</label>
-								<a className="col-sm-12" href={redirectUrl} target="_blank">
+								<a className="col-sm-12" style={{color:"#0277bd" }} onClick={()=>window.open(redirectUrl,"_blank","width=1523,height=884")}>
 									{redirectUrl}
 								</a>
 							</div>
