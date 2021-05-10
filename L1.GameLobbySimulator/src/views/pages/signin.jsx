@@ -192,7 +192,7 @@ export default class SignIn extends React.Component {
 							<legend>Token</legend>
 							<div className="input-group vertical">
 								<label htmlFor="redirectUrl">Redirect</label>
-								<a className="col-sm-12" style={{color:"#0277bd" }} onClick={()=>window.open(redirectUrl,"_blank",`width=${this.state.isMobi ? 1280 : 1523},height=884`)}>
+								<a className="col-sm-12" style={{color:"#0277bd" }} onClick={()=>window.open(redirectUrl,"_blank",`width=${this.state.isMobi ? 1270 : 1523},height=884`)}>
 									{redirectUrl}
 								</a>
 							</div>
