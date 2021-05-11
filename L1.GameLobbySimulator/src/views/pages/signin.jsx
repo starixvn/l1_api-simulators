@@ -17,6 +17,7 @@ export default class SignIn extends React.Component {
             language: "vi-VN",
             currency: "INH",
             seq: "d,y,lumi",
+			siteName: "lumi",
             siteId: "4100300",
             ip: "",
             browserUserAgent: navigator.userAgent,
@@ -34,6 +35,7 @@ export default class SignIn extends React.Component {
             domain: "example.com",
             localhost: false,
             isMobi: false,
+			isCash: true,
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -134,6 +136,13 @@ export default class SignIn extends React.Component {
                                     <CurrencySelect onChange={this.handleInputChange} id="currency" value={this.state.currency} />
                                     <GameSelect onChange={this.handleInputChange} id="gameId" value={this.state.gameId} />
                                     <Input
+										type="text"
+										id="siteName"
+										name="SiteName"
+										value={this.state.siteName}
+										onChange={this.handleInputChange}
+									/>
+									<Input
                                         type="checkbox"
                                         id="localhost"
                                         name="Localhost"
@@ -172,6 +181,13 @@ export default class SignIn extends React.Component {
                                         value={this.state.domain}
                                         onChange={this.handleInputChange}
                                     />
+									<Input
+										type="checkbox"
+										id="isCash"
+										name="Is Cash"
+										value={this.state.isCash}
+										onChange={this.handleInputChange}
+									/>
                                 </div>
                             </div>
                             <input className="primary" type="submit" value="Get Token" />
