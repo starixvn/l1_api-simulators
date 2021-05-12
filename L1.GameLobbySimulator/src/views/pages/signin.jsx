@@ -22,8 +22,8 @@ export default class SignIn extends React.Component {
             ip: "",
             browserUserAgent: navigator.userAgent,
             auth: {
-                clientId: "gamesimulator",
-                clientSecret: "gamesimulator@20luminet&",
+				clientId: "vgsimulator",
+				clientSecret: "vgsimulator@20luminet&",
             },
             token: "",
             redirectUrl: "#",
@@ -138,7 +138,7 @@ export default class SignIn extends React.Component {
                                     <Input
 										type="text"
 										id="siteName"
-										name="SiteName"
+										name="Site Name"
 										value={this.state.siteName}
 										onChange={this.handleInputChange}
 									/>
