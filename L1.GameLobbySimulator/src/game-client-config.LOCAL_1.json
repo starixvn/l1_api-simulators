@@ -10,5 +10,6 @@
     "requestTimeout": 10000,
     "owUrl": "http://l1-ows1.lumigame.com/SabaClub/CreateCustomer",
     "localhost": "http://localhost:7456",
+    "mobileLocalhost": "http://localhost:3000",
     "port": 5000
 }

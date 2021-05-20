@@ -1,9 +1,10 @@
+import { createBrowserHistory } from "history";
 import React from "react";
 import ReactDOM from "react-dom";
-import { createBrowserHistory } from "history";
-import { Router, Switch, Route, Redirect } from "react-router-dom";
-import routes from "./routes.jsx";
+import { Redirect, Route, Router, Switch } from "react-router-dom";
+
 import Header from "./components/header.jsx";
+import routes from "./routes.jsx";
 
 const history = createBrowserHistory();
 
