@@ -141,19 +141,22 @@ namespace OW.ApiSimulator.Controllers
             var customers = serviceProvider.GetRequiredService<List<Customer>>();
             var customer = customers.FirstOrDefault(x => x.ObCustId == request.Call.ObCustId);
 
-            var result = serviceProvider.GetRequiredService<GetBalanceResult>();
+            var result = new GetBalanceResult();
+            var resultTemplate = serviceProvider.GetRequiredService<GetBalanceResult>();
             result.Seq = request.Call?.Seq;
 
-            if (result.ErrorCode == 0 && customer != null)
+            if (resultTemplate.ErrorCode == 0 && customer != null)
             {
                 result.Balance = customer.Balance;
             }
             else
             {
                 result.Balance = 0;
+                result.ErrorCode = resultTemplate.ErrorCode;
+                result.ErrorDescription = resultTemplate.ErrorDescription;
             }
 
-            await Task.Delay(result.DelayTime);
+            await Task.Delay(resultTemplate.DelayTime);
 
             return Ok(new OWResponse<GetBalanceResult>
             {
