@@ -1,0 +1,15 @@
+{
+	"apiUrl": "http://l1-api2.lumigame.com",
+	"authUrl": "http://l1-auth2.lumigame.com",
+	"client": {
+		"id": "game-server",
+		"secret": "gameserver@20luminet&"
+	},
+	"expireIn": 1585629268,
+	"useAuthenticate": true,
+	"requestTimeout": 10000,
+	"owUrl": "http://l1-ows2.lumigame.com/SabaClub/CreateCustomer",
+	"localhost": "http://localhost:7456",
+	"mobileLocalhost": "http://localhost:3000",
+	"port": 5000
+}
