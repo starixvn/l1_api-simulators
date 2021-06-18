@@ -35,18 +35,9 @@ namespace OW.ApiSimulator.Controllers
         public IActionResult CreateCustomer(Customer model)
         {
             var customers = serviceProvider.GetRequiredService<List<Customer>>();
-            var customer = customers.FirstOrDefault(x => x.ObCustId == model.ObCustId);
 
-            if (customer != null)
-            {
-                customer.Balance = model.Balance;
-                customer.MinBet = model.MinBet;
-                customer.MaxBet = model.MaxBet;
-            }
-            else
-            {
-                customers.Add(model);
-            }
+            customers.RemoveAll(x => x.ObCustId == model.ObCustId);
+            customers.Add(model);
 
             return View(model);
         }
@@ -148,16 +139,18 @@ namespace OW.ApiSimulator.Controllers
 
             if (resultTemplate.ErrorCode == 0 && customer != null)
             {
-                result.Balance = customer.Balance;
+                result.Balance = customer.Balance;  
             }
             else
             {
                 result.Balance = 0;
-                result.ErrorCode = resultTemplate.ErrorCode;
                 result.ErrorDescription = resultTemplate.ErrorDescription;
             }
 
-            await Task.Delay(resultTemplate.DelayTime);
+            var delayTime = customer?.Delay.GetBalance > 0 ? customer.Delay.GetBalance : resultTemplate.DelayTime;
+            result.ErrorCode = customer?.ErrorCode.GetBalance > 0 ? customer.ErrorCode.GetBalance : resultTemplate.ErrorCode;
+
+            await Task.Delay(delayTime);
 
             return Ok(new OWResponse<GetBalanceResult>
             {
@@ -193,6 +186,9 @@ namespace OW.ApiSimulator.Controllers
             var result = serviceProvider.GetRequiredService<PlaceBetResult>();
             result.Seq = request.Call?.Seq;
 
+            var delayTime = customer?.Delay.PlaceBet > 0 ? customer.Delay.PlaceBet : result.DelayTime;
+            result.ErrorCode = customer?.ErrorCode.PlaceBet > 0 ? customer.ErrorCode.PlaceBet : result.ErrorCode;
+
             if (result.ErrorCode == 0 && customer != null)
             {
                 result.ObCustId = request.Call?.ObCustId;
@@ -213,7 +209,7 @@ namespace OW.ApiSimulator.Controllers
                 result.MinBet = result.MaxBet = 0;
             }
 
-            await Task.Delay(result.DelayTime);
+            await Task.Delay(delayTime);
 
             return Ok(new OWResponse<PlaceBetResult>
             {
@@ -245,6 +241,8 @@ namespace OW.ApiSimulator.Controllers
             var customers = serviceProvider.GetRequiredService<List<Customer>>();
             var customer = customers.Find(x => x.ObCustId == request.Call.ObCustId);
             var result = serviceProvider.GetRequiredService<EndGameResult>();
+            var delayTime = customer?.Delay.EndGame > 0 ? customer.Delay.EndGame : result.DelayTime;
+            result.ErrorCode = customer?.ErrorCode.EndGame > 0 ? customer.ErrorCode.EndGame : result.ErrorCode;
 
             result.Seq = request.Call?.Seq;
 
@@ -254,7 +252,7 @@ namespace OW.ApiSimulator.Controllers
                 customer.Balance += request.Call.TotalWin;
             }
 
-            await Task.Delay(result.DelayTime);
+            await Task.Delay(delayTime);
 
             return Ok(new OWResponse<EndGameResult>
             {
@@ -437,14 +435,15 @@ namespace OW.ApiSimulator.Controllers
         [HttpPost]
         public async Task<IActionResult> GetBetLimit([FromBody] OWRequest<GetBetLimitCall> request)
         {
+            var customers = serviceProvider.GetRequiredService<List<Customer>>();
+            var customer = customers.FirstOrDefault(x => x.ObCustId == request.Call.ObCustId);
             var result = serviceProvider.GetRequiredService<GetBetLimitResult>();
             result.Seq = request.Call?.Seq;
+            var delayTime = customer?.Delay.GetBetLimit > 0 ? customer.Delay.GetBetLimit : result.DelayTime;
+            result.ErrorCode = customer?.ErrorCode.GetBetLimit > 0 ? customer.ErrorCode.GetBetLimit : result.ErrorCode;
 
             if (result.ErrorCode == 0)
             {
-                var customers = serviceProvider.GetRequiredService<List<Customer>>();
-                var customer = customers.FirstOrDefault(x => x.ObCustId == request.Call.ObCustId);
-
                 if (customer != null)
                 {
                     result.MinBet = customer.MinBet;
@@ -460,7 +459,7 @@ namespace OW.ApiSimulator.Controllers
                 result.MinBet = result.MaxBet = 0;
             }
 
-            await Task.Delay(result.DelayTime);
+            await Task.Delay(delayTime);
 
             return Ok(new OWResponse<GetBetLimitResult>
             {

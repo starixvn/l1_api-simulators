@@ -19,5 +19,49 @@
         <label asp-for="MaxBet"></label>
         <input class="form-control" asp-for="MaxBet" />
     </div>
+    <h4>Delay Time</h4>
+    <div class="form-group row">
+        <div class="col-6">
+            <label asp-for="Delay.GetBalance">GetBalance</label>
+            <input class="form-control" asp-for="Delay.GetBalance" />
+        </div>
+        <div class="col-6">
+            <label asp-for="Delay.PlaceBet">PlaceBet</label>
+            <input class="form-control" asp-for="Delay.PlaceBet" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-6">
+            <label asp-for="Delay.EndGame">EndGame</label>
+            <input class="form-control" asp-for="Delay.EndGame" />
+        </div>
+        <div class="col-6">
+            <label asp-for="Delay.GetBetLimit">EndGame</label>
+            <input class="form-control" asp-for="Delay.GetBetLimit" />
+        </div>
+    </div>
+    <h4>Error Codes</h4>
+    <div class="form-group row">
+        <div class="col-6">
+            <label asp-for="ErrorCode.GetBalance">GetBalance</label>
+            <input class="form-control" asp-for="ErrorCode.GetBalance" />
+        </div>
+        <div class="col-6">
+            <label asp-for="ErrorCode.PlaceBet">PlaceBet</label>
+            <input class="form-control" asp-for="ErrorCode.PlaceBet" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-6">
+            <label asp-for="ErrorCode.EndGame">EndGame</label>
+            <input class="form-control" asp-for="ErrorCode.EndGame" />
+        </div>
+        <div class="col-6">
+            <label asp-for="ErrorCode.GetBetLimit">GetBetLimit</label>
+            <input class="form-control" asp-for="ErrorCode.GetBetLimit" />
+        </div>
+    </div>
+
     <input class="btn btn-primary" type="submit" value="Save" />
 </form>
