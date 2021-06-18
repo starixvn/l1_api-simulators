@@ -8,7 +8,7 @@
     "expireIn": 1585629268,
     "useAuthenticate": true,
     "requestTimeout": 10000,
-    "owUrl": "http://l2-ows.lumigame.com/SabaClub/CreateCustomer",
+    "owUrl": "https://l2-ows.lumigame.com/SabaClub/CreateCustomer",
     "localhost": "http://localhost:7456",
     "mobileLocalhost": "http://localhost:3000",
     "port": 5000
