@@ -227,7 +227,7 @@ namespace OW.ApiSimulator.Controllers
         {
             var errorCode = customer?.ErrorCode.PlaceBet > 0 ? customer.ErrorCode.PlaceBet : result.ErrorCode;
 
-            return amount > customer?.Balance ? 3002 : errorCode;
+            return (customer != null && amount > customer.Balance) ? 3002 : errorCode;
         }
 
         [HttpGet]
