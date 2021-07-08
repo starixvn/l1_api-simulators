@@ -204,7 +204,7 @@ namespace OW.ApiSimulator.Controllers
                 result.Balance = 0;
             }
 
-            if (result.ErrorCode == 0 || result.ErrorCode == 3003 || result.ErrorCode == 3009)
+            if (result.ErrorCode == 0 || result.ErrorCode == 3003 || result.ErrorCode == 3009 || result.ErrorCode == 3002)
             {
                 result.MinBet = customer?.MinBet ?? 0;
                 result.MaxBet = customer?.MaxBet ?? 0;
