@@ -139,7 +139,7 @@ namespace OW.ApiSimulator.Controllers
 
             if (resultTemplate.ErrorCode == 0 && customer != null)
             {
-                result.Balance = customer.Balance;  
+                result.Balance = customer.Balance;
             }
             else
             {
@@ -183,23 +183,29 @@ namespace OW.ApiSimulator.Controllers
             var customers = serviceProvider.GetRequiredService<List<Customer>>();
             var customer = customers.FirstOrDefault(x => x.ObCustId == request.Call.ObCustId);
 
-            var result = serviceProvider.GetRequiredService<PlaceBetResult>();
+            var result = new PlaceBetResult();
+            var resultTemplate = serviceProvider.GetRequiredService<PlaceBetResult>();
             result.Seq = request.Call?.Seq;
 
-            var delayTime = customer?.Delay.PlaceBet > 0 ? customer.Delay.PlaceBet : result.DelayTime;
-            result.ErrorCode = customer?.ErrorCode.PlaceBet > 0 ? customer.ErrorCode.PlaceBet : result.ErrorCode;
+            var delayTime = customer?.Delay.PlaceBet > 0 ? customer.Delay.PlaceBet : result.DelayTime;            
+            result.ErrorCode = GetPlaceBetErrorCode(resultTemplate, customer, request.Call.Amount);
 
             if (result.ErrorCode == 0 && customer != null)
             {
                 result.ObCustId = request.Call?.ObCustId;
-                result.Balance = customer.Balance = customer.Balance - request.Call.Amount;
+
+                if (request.Call.Amount <= customer.Balance)
+                {
+                    customer.Balance -= request.Call.Amount;
+                    result.Balance = customer.Balance;
+                }
             }
             else
             {
                 result.Balance = 0;
             }
 
-            if (result.ErrorCode == 0 || result.ErrorCode == 3003 || result.ErrorCode == 3009)
+            if (result.ErrorCode == 0 || result.ErrorCode == 3003 || result.ErrorCode == 3009 || result.ErrorCode == 3002)
             {
                 result.MinBet = customer?.MinBet ?? 0;
                 result.MaxBet = customer?.MaxBet ?? 0;
@@ -216,6 +222,13 @@ namespace OW.ApiSimulator.Controllers
                 TimeStamp = DateTimeOffset.UtcNow,
                 Result = result
             });
+        }
+
+        private static int GetPlaceBetErrorCode(PlaceBetResult result, Customer customer, decimal amount)
+        {
+            var errorCode = customer?.ErrorCode.PlaceBet > 0 ? customer.ErrorCode.PlaceBet : result.ErrorCode;
+
+            return (customer != null && amount > customer.Balance) ? 3002 : errorCode;
         }
 
         [HttpGet]
