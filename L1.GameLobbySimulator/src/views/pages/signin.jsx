@@ -108,8 +108,8 @@ export default class SignIn extends React.Component {
   }
 
   handleReloadIframe() {
-      const iFrameElement = this.iFrameRef.current;
-      iFrameElement.src = iFrameElemen.src;
+    const iFrameElement = this.iFrameRef.current;
+    iFrameElement.src = iFrameElement.src;
   }
 
   render() {
@@ -225,6 +225,7 @@ export default class SignIn extends React.Component {
                   <h3 class="section">
                     Set Balance
                     <svg
+                      cursor="pointer"
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
                       height="20"
