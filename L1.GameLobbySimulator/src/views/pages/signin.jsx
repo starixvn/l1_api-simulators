@@ -38,6 +38,7 @@ export default class SignIn extends React.Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleChangeAuth = this.handleChangeAuth.bind(this);
+    this.handleReloadIframe = this.handleReloadIframe.bind(this);
 
     this.iFrameRef = React.createRef();
   }
