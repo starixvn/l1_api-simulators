@@ -18,6 +18,7 @@ export default class SignIn extends React.Component {
       currency: "$US",
       seq: "d,y,lumi",
       siteId: "4100300",
+      siteName: "lumi",
       ip: "",
       browserUserAgent: navigator.userAgent,
       auth: {
@@ -186,6 +187,13 @@ export default class SignIn extends React.Component {
                     id="siteId"
                     name="Site Id"
                     value={this.state.siteId}
+                    onChange={this.handleInputChange}
+                  />
+                     <Input
+                    type="text"
+                    id="siteName"
+                    name="Site Name"
+                    value={this.state.siteName}
                     onChange={this.handleInputChange}
                   />
                   <Input
