@@ -2,6 +2,7 @@ import Axios from "axios";
 import React from "react";
 
 import Input from "../components/input.jsx";
+import AppType from "../components/select/app-type.jsx";
 import CurrencySelect from "../components/select/currency.jsx";
 import GameSelect from "../components/select/game.jsx";
 import LanguageSelect from "../components/select/language.jsx";
@@ -34,7 +35,7 @@ export default class SignIn extends React.Component {
       },
       domain: "example.com",
       localhost: false,
-      isMobi: false,
+      appType: 1,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -101,9 +102,9 @@ export default class SignIn extends React.Component {
     );
     const memberId =
       Number(searchParams.get("memberId")) || (Math.random() * 10000000) >> 0;
-    const isMobi = Boolean(searchParams.get("mobi")) || false;
+    const appType = parseInt(searchParams.get("appType")) || 1;
 
-    this.setState({ setting: data, ip, memberId, isMobi }, () => {
+    this.setState({ setting: data, ip, memberId, appType }, () => {
       this.handleSubmit();
     });
   }
@@ -166,12 +167,10 @@ export default class SignIn extends React.Component {
                     value={this.state.localhost}
                     onChange={this.handleInputChange}
                   />
-                  <Input
-                    type="checkbox"
-                    id="isMobi"
-                    name="Mobile"
-                    value={this.state.isMobi}
+                  <AppType
                     onChange={this.handleInputChange}
+                    id="appType"
+                    value={this.state.appType}
                   />
                 </div>
                 <div className="col-sm-12 col-md-6">
@@ -276,11 +275,7 @@ export default class SignIn extends React.Component {
                   className="col-sm-12"
                   style={{ color: "#0277bd" }}
                   onClick={() =>
-                    window.open(
-                      redirectUrl,
-                      "_blank",
-                      `width=${this.state.isMobi ? 1270 : 1523},height=884`
-                    )
+                    window.open(redirectUrl, "_blank", "width=1523,height=884")
                   }
                 >
                   {redirectUrl}
