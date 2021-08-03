@@ -1,5 +1,4 @@
 import React from "react";
-import Select from "./select.jsx";
 
 export default class AppType extends React.Component {
   constructor(props) {
@@ -18,19 +17,24 @@ export default class AppType extends React.Component {
     };
   }
 
-  handleChange(data) {
-    this.props.onChange(data);
+  handleChange(event) {
+    this.props.onChange({ appType: event.target.value });
   }
 
   render() {
-    const { value, id } = this.props;
-    return (
-      <Select
-        {...this.state}
-        id={id}
-        value={value}
-        onChange={this.handleChange}
-      />
-    );
+    const { value } = this.props;
+    return this.state.options.map((type) => (
+      <div className="input-group">
+        <input
+          type="radio"
+          id={type.value}
+          name="appType"
+          value={type.value}
+          onChange={this.handleChange}
+          checked={type.value === value}
+        />
+        <label htmlFor={type.value}>{type.name}</label>
+      </div>
+    ));
   }
 }
