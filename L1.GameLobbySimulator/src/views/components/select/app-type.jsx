@@ -18,8 +18,7 @@ export default class AppType extends React.Component {
   }
 
   handleChange(event) {
-    console.log(event);
-    this.props.onChange({ appType: event.target.value });
+    this.props.onChange({ appType: parseInt(event.target.value) });
   }
 
   render() {
