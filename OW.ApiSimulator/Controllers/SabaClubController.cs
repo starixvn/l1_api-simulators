@@ -28,7 +28,7 @@ namespace OW.ApiSimulator.Controllers
         [HttpGet]
         public IActionResult CreateCustomer(int memId)
         {
-            return View(new Customer { ObCustId = memId, Balance = 2000, MinBet = 1, MaxBet = 2000 });
+            return View(new Customer { ObCustId = memId, Balance = 2000, MinBet = 1, MaxBet = 3000 });
         }
 
         [HttpPost]
