@@ -118,9 +118,10 @@ export default class SignIn extends React.Component {
     let redirectUrl = this.state.redirectUrl;
     const { localhost, token } = this.state;
     if (localhost && token) {
-      redirectUrl = this.state.appType === 2
-        ? `${this.state.setting.mobileLocalhost}?token=${token}`
-        : `${this.state.setting.localhost}?token=${token}&gameId=${this.state.gameId}`;
+      redirectUrl =
+        this.state.appType === 2
+          ? `${this.state.setting.mobileLocalhost}?token=${token}`
+          : `${this.state.setting.localhost}?token=${token}&gameId=${this.state.gameId}`;
     }
 
     return (
@@ -188,7 +189,7 @@ export default class SignIn extends React.Component {
                     value={this.state.siteId}
                     onChange={this.handleInputChange}
                   />
-                     <Input
+                  <Input
                     type="text"
                     id="siteName"
                     name="Site Name"
@@ -264,6 +265,12 @@ export default class SignIn extends React.Component {
               </div>
             </fieldset>
           </form>
+          {this.state.appType === 3 && token && (
+            <iframe
+              src={redirectUrl}
+              style={{ width: "100%", height: "calc(100vw *9 / 16)" }}
+            />
+          )}
         </div>
         <div className="section">
           <form onSubmit={(event) => this.handleVerifyToken(event)}>
