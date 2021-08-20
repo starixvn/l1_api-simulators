@@ -28,7 +28,7 @@ namespace OW.ApiSimulator.Controllers
         [HttpGet]
         public IActionResult CreateCustomer(int memId)
         {
-            return View(new Customer { ObCustId = memId, Balance = 2000, MinBet = 1, MaxBet = 2000 });
+            return View(new Customer { ObCustId = memId, Balance = 2000, MinBet = 1, MaxBet = 3000 });
         }
 
         [HttpPost]
@@ -181,13 +181,13 @@ namespace OW.ApiSimulator.Controllers
         public async Task<IActionResult> PlaceBet([FromBody] OWRequest<PlaceBetCall> request)
         {
             var customers = serviceProvider.GetRequiredService<List<Customer>>();
-            var customer = customers.FirstOrDefault(x => x.ObCustId == request.Call.ObCustId);
+            var customer = customers?.FirstOrDefault(x => x.ObCustId == request.Call.ObCustId);
 
             var result = new PlaceBetResult();
             var resultTemplate = serviceProvider.GetRequiredService<PlaceBetResult>();
             result.Seq = request.Call?.Seq;
 
-            var delayTime = customer?.Delay.PlaceBet > 0 ? customer.Delay.PlaceBet : result.DelayTime;            
+            var delayTime = customer?.Delay.PlaceBet > 0 ? customer.Delay.PlaceBet : resultTemplate.DelayTime;            
             result.ErrorCode = GetPlaceBetErrorCode(resultTemplate, customer, request.Call.Amount);
 
             if (result.ErrorCode == 0 && customer != null)
@@ -251,12 +251,13 @@ namespace OW.ApiSimulator.Controllers
         [HttpPost]
         public async Task<IActionResult> EndGame([FromBody] OWRequest<EndGameCall> request)
         {
+            var result = new EndGameResult();
             var customers = serviceProvider.GetRequiredService<List<Customer>>();
             var customer = customers.Find(x => x.ObCustId == request.Call.ObCustId);
-            var result = serviceProvider.GetRequiredService<EndGameResult>();
-            var delayTime = customer?.Delay.EndGame > 0 ? customer.Delay.EndGame : result.DelayTime;
-            result.ErrorCode = customer?.ErrorCode.EndGame > 0 ? customer.ErrorCode.EndGame : result.ErrorCode;
+            var resultTemplate = serviceProvider.GetRequiredService<EndGameResult>();
 
+            var delayTime = customer?.Delay.EndGame > 0 ? customer.Delay.EndGame : resultTemplate.DelayTime;
+            result.ErrorCode = customer?.ErrorCode.EndGame > 0 ? customer.ErrorCode.EndGame : resultTemplate.ErrorCode;
             result.Seq = request.Call?.Seq;
 
             if (result.ErrorCode == 0 && customer != null)
