@@ -5,7 +5,7 @@
     "main": "src/app.js",
     "scripts": {
         "start": "nodemon .",
-        "webpack:dev": "webpack --watch --mode development",
+        "webpack:dev": "webpack --watch --mode development --config ./src/webpack.config.js",
         "dev": "concurrently --kill-others \"npm run webpack:dev\" \"nodemon .\"",
         "build": "webpack /app",
         "build:sit": "webpack && cp game-client-config.SIT.json game-client-config.json",
