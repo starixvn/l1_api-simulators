@@ -20,7 +20,6 @@ export default class SignIn extends React.Component {
             seq: "d,y,lumi",
 			siteName: "lumi",
             siteId: "4100300",
-            siteName: "lumi",
             ip: "",
             browserUserAgent: navigator.userAgent,
             auth: {
@@ -145,14 +144,7 @@ export default class SignIn extends React.Component {
                                     />
                                     <LanguageSelect onChange={this.handleInputChange} id="language" value={this.state.language} />
                                     <CurrencySelect onChange={this.handleInputChange} id="currency" value={this.state.currency} />
-                                    <GameSelect onChange={this.handleInputChange} id="gameId" value={this.state.gameId} />
-                                    <Input
-										type="text"
-										id="siteName"
-										name="Site Name"
-										value={this.state.siteName}
-										onChange={this.handleInputChange}
-									/>
+                                    <GameSelect onChange={this.handleInputChange} id="gameId" value={this.state.gameId} />                                   
 									<Input
                                         type="checkbox"
                                         id="localhost"
