@@ -1,0 +1,26 @@
+[
+  {
+    "name": "1W",
+    "value": "1W",
+    "data": {
+      "auth": {
+        "partnerId": "gamesimulator",
+        "partnerSecret": "gamesimulator@20luminet&",
+        "clientId": "gamesimulator",
+        "clientSecret": "gamesimulator@20luminet&"
+      }
+    }
+  },
+  {
+    "name": "SBO",
+    "value": "SBO",
+    "data": {
+      "auth": {
+        "partnerId": "sbo_gamesimulator",
+        "partnerSecret": "sbo_gamesimulator@20luminet&",
+        "clientId": "sbo_gamesimulator",
+        "clientSecret": "sbo_gamesimulator@20luminet&"
+      }
+    }
+  }
+]
