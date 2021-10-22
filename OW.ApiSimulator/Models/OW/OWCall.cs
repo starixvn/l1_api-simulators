@@ -1,4 +1,6 @@
-﻿namespace OW.ApiSimulator.Models.OW
+﻿using System;
+
+namespace OW.ApiSimulator.Models.OW
 {
     public class OWCall
     {
@@ -7,5 +9,7 @@
         public int ObCustId { get; set; }
 
         public string SiteId { get; set; }
+
+        public DateTimeOffset TimeStamp { get; set; }
     }
 }
