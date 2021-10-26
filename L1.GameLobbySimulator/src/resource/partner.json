@@ -16,9 +16,9 @@
     "value": "SBO",
     "data": {
       "auth": {
-        "partnerId": "sbo_gamesimulator",
+        "partnerId": "sbogamesimulator",
         "partnerSecret": "sbo_gamesimulator@20luminet&",
-        "clientId": "sbo_gamesimulator",
+        "clientId": "sbogamesimulator",
         "clientSecret": "sbo_gamesimulator@20luminet&"
       }
     }
