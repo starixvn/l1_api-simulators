@@ -3,11 +3,9 @@ import React from "react";
 
 import Input from "../components/input.jsx";
 import AppType from "../components/select/app-type.jsx";
-import CurrencySelect from "../components/select/currency.jsx";
 import GameSelect from "../components/select/game.jsx";
 import LanguageSelect from "../components/select/language.jsx";
 import { randomString, showAlert } from "../util.jsx";
-import PartnerSelect from "../components/select/partner.jsx";
 
 export default class SignIn extends React.Component {
   constructor() {
@@ -24,8 +22,8 @@ export default class SignIn extends React.Component {
       ip: "",
       browserUserAgent: navigator.userAgent,
       auth: {
-        clientId: "gamesimulator",
-        clientSecret: "gamesimulator@20luminet&",
+        partnerId: "ONEworks1",
+        partnerSecret: "ONEworks1@20luminet&",
       },
       token: "",
       redirectUrl: "#",
@@ -153,19 +151,24 @@ export default class SignIn extends React.Component {
                     id="language"
                     value={this.state.language}
                   />
-                  <CurrencySelect
-                    onChange={this.handleInputChange}
+                  <Input
+                    type="text"
                     id="currency"
+                    name="Currency"
                     value={this.state.currency}
+                    onChange={this.handleInputChange}
                   />
                   <GameSelect
                     onChange={this.handleInputChange}
                     id="gameId"
                     value={this.state.gameId}
                   />
-                  <PartnerSelect
+                  <Input
+                    type="text"
+                    id="browserUserAgent"
+                    name="Browser User Agent"
+                    value={this.state.browserUserAgent}
                     onChange={this.handleInputChange}
-                    id="partner"
                   />
                   <Input
                     type="checkbox"
@@ -211,17 +214,24 @@ export default class SignIn extends React.Component {
                   />
                   <Input
                     type="text"
-                    id="browserUserAgent"
-                    name="Browser User Agent"
-                    value={this.state.browserUserAgent}
-                    onChange={this.handleInputChange}
-                  />
-                  <Input
-                    type="text"
                     id="domain"
                     name="Domain"
                     value={this.state.domain}
                     onChange={this.handleInputChange}
+                  />
+                  <Input
+                    type="text"
+                    id="partnerId"
+                    name="Partner Id"
+                    value={this.state.auth.partnerId}
+                    onChange={this.handleChangeAuth}
+                  />
+                  <Input
+                    type="text"
+                    id="partnerSecret"
+                    name="Partner Secret"
+                    value={this.state.auth.partnerSecret}
+                    onChange={this.handleChangeAuth}
                   />
                 </div>
               </div>
