@@ -10,6 +10,8 @@
 
         public decimal MaxBet { get; set; }
 
+        public string Partner { get; set; }
+
         public DelayTime Delay { get; set; } = new DelayTime();
 
         public CustomerErrorCode ErrorCode { get; set; } = new CustomerErrorCode();
