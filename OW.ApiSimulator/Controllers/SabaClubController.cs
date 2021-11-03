@@ -294,8 +294,8 @@ namespace OW.ApiSimulator.Controllers
         [HttpPost]
         public async Task<IActionResult> GetBetLimit([FromBody] GetBetLimitCall request, [FromRoute] string partner)
         {
-            var customers = serviceProvider.GetRequiredService<List<Customer>>();
-            var customer = customers.FirstOrDefault(x => x.ObCustId == request.ObCustId);
+            var selectedPartner = serviceProvider.GetRequiredService<List<Partner>>().FirstOrDefault(x => x.Name == partner);
+            var customer = selectedPartner.Customers.FirstOrDefault(x => x.ObCustId == request.ObCustId);
             var result = serviceProvider.GetRequiredService<GetBetLimitResult>();
             result.Seq = request.Seq;
             var delayTime = customer?.Delay.GetBetLimit > 0 ? customer.Delay.GetBetLimit : result.DelayTime;
