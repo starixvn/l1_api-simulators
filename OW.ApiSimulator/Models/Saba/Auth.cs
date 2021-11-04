@@ -4,6 +4,6 @@
     {
         public string PartnerId { get; set; } = "ONEworks1";
 
-        public string PartnerSecret { get; set; } = "123licensee1%^&sit";
+        public string PartnerSecret { get; set; } = "ONEworks1@20luminet&";
     }
 }
