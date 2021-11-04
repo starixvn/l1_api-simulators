@@ -406,18 +406,18 @@ namespace OW.ApiSimulator.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> HitJackpot([FromBody] OWRequest<HitJackpotCall> request)
+        public async Task<IActionResult> HitJackpot([FromBody] HitJackpotCall request)
         {
             var customers = serviceProvider.GetRequiredService<List<Customer>>();
-            var customer = customers.Find(x => x.ObCustId == request.Call.ObCustId);
+            var customer = customers.Find(x => x.ObCustId == request.ObCustId);
             var result = serviceProvider.GetRequiredService<HitJackpotResult>();
 
-            result.Seq = request.Call?.Seq;
+            result.Seq = request?.Seq;
 
             if (result.ErrorCode == 0 && customer != null)
             {
-                result.ObCustId = request.Call?.ObCustId;
-                customer.Balance += request.Call.WinningAmount;
+                result.ObCustId = request?.ObCustId;
+                customer.Balance += request.WinningAmount;
             }
 
             await Task.Delay(result.DelayTime);
