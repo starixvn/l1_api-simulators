@@ -28,8 +28,8 @@ namespace OW.ApiSimulator.Services
 
         public async Task<string> GetGameTicketAccessUrl(GameTicketRequest request)
         {
-            request.Auth.ClientId = configuration.Name;
-            request.Auth.ClientKey = configuration.Key;
+            request.Auth.PartnerId = configuration.Name;
+            request.Auth.PartnerSecret = configuration.Key;
 
             var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, defaultMediaType);
             var response = await httpClient.PostAsync(configuration.GameTicketQueryKeyEndPoint, content);
