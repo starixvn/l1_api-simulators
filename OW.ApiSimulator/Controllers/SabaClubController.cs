@@ -40,7 +40,7 @@ namespace OW.ApiSimulator.Controllers
         [Route("/[controller]/[action]")]
         public IActionResult CreateCustomer(Customer model)
         {
-            var selectedPartner = serviceProvider.GetRequiredService<List<Partner>>().FirstOrDefault(x => x.Name == model.Partner);
+            var selectedPartner = GetPartner(model.Partner);
 
             selectedPartner.Customers.RemoveAll(x => x.ObCustId == model.ObCustId);
             selectedPartner.Customers.Add(model);
@@ -76,7 +76,7 @@ namespace OW.ApiSimulator.Controllers
         [HttpPost]
         public async Task<IActionResult> EnterPortal([FromBody] EnterPortalCall request, [FromRoute] string partner)
         {
-            var selectedPartner = serviceProvider.GetRequiredService<List<Partner>>().FirstOrDefault(x => x.Name == partner);
+            var selectedPartner = GetPartner(partner);
             var result = selectedPartner.EnterPortalResult;
             var loginCustomer = selectedPartner.Customers.FirstOrDefault(x => x.ObCustId == request.ObCustId);
 
@@ -104,7 +104,7 @@ namespace OW.ApiSimulator.Controllers
         [HttpPost]
         public async Task<IActionResult> GetBalance([FromBody] GetBalanceCall request, [FromRoute] string partner)
         {
-            var selectedPartner = serviceProvider.GetRequiredService<List<Partner>>().FirstOrDefault(x => x.Name == partner);
+            var selectedPartner = GetPartner(partner);
             var customer = selectedPartner.Customers.FirstOrDefault(x => x.ObCustId == request.ObCustId);
 
             var result = new GetBalanceResult();
@@ -137,7 +137,7 @@ namespace OW.ApiSimulator.Controllers
         [HttpPost]
         public async Task<IActionResult> PlaceBet([FromBody] PlaceBetCall request, [FromRoute] string partner)
         {
-            var selectedPartner = serviceProvider.GetRequiredService<List<Partner>>().FirstOrDefault(x => x.Name == partner);
+            var selectedPartner = GetPartner(partner);
             var customer = selectedPartner.Customers.FirstOrDefault(x => x.ObCustId == request.ObCustId);
 
             var result = new PlaceBetResult();
@@ -191,7 +191,7 @@ namespace OW.ApiSimulator.Controllers
         [HttpPost]
         public async Task<IActionResult> EndGame([FromBody] EndGameCall request, [FromRoute] string partner)
         {
-            var selectedPartner = serviceProvider.GetRequiredService<List<Partner>>().FirstOrDefault(x => x.Name == partner);
+            var selectedPartner = GetPartner(partner);
             var result = new EndGameResult();
             var customer = selectedPartner.Customers.Find(x => x.ObCustId == request.ObCustId);
             var resultTemplate = selectedPartner.EndGameResult;
@@ -218,7 +218,7 @@ namespace OW.ApiSimulator.Controllers
         [HttpPost]
         public async Task<IActionResult> VoidGame([FromBody] VoidGameCall request, [FromRoute] string partner)
         {
-            var selectedPartner = serviceProvider.GetRequiredService<List<Partner>>().FirstOrDefault(x => x.Name == partner);
+            var selectedPartner = GetPartner(partner);
             var result = selectedPartner.VoidGameResult;
             result.Seq = request.Seq;
             if (result.ErrorCode == 0)
@@ -238,7 +238,7 @@ namespace OW.ApiSimulator.Controllers
         [HttpPost]
         public async Task<IActionResult> CheckMaintenance([FromBody] CheckMaintenanceCall request, [FromRoute] string partner)
         {
-            var selectedPartner = serviceProvider.GetRequiredService<List<Partner>>().FirstOrDefault(x => x.Name == partner);
+            var selectedPartner = GetPartner(partner);
             var result = selectedPartner.CheckMaintenanceResult;
             result.Seq = request.Seq;
 
@@ -294,9 +294,9 @@ namespace OW.ApiSimulator.Controllers
         [HttpPost]
         public async Task<IActionResult> GetBetLimit([FromBody] GetBetLimitCall request, [FromRoute] string partner)
         {
-            var selectedPartner = serviceProvider.GetRequiredService<List<Partner>>().FirstOrDefault(x => x.Name == partner);
+            var selectedPartner = GetPartner(partner) ;
             var customer = selectedPartner.Customers.FirstOrDefault(x => x.ObCustId == request.ObCustId);
-            var result = serviceProvider.GetRequiredService<GetBetLimitResult>();
+            var result = selectedPartner.GetBetLimitResult;
             result.Seq = request.Seq;
             var delayTime = customer?.Delay.GetBetLimit > 0 ? customer.Delay.GetBetLimit : result.DelayTime;
             result.ErrorCode = customer?.ErrorCode.GetBetLimit > 0 ? customer.ErrorCode.GetBetLimit : result.ErrorCode;
@@ -331,7 +331,7 @@ namespace OW.ApiSimulator.Controllers
         [Route("/[controller]/[action]")]
         public IActionResult UpdatePartner(string name)
         {
-            var selectedPartner = serviceProvider.GetRequiredService<List<Partner>>().FirstOrDefault(x => x.Name == name);
+            var selectedPartner = GetPartner(name);
 
             return View(selectedPartner);
         }
@@ -340,7 +340,7 @@ namespace OW.ApiSimulator.Controllers
         [Route("/[controller]/[action]")]
         public IActionResult UpdatePartner(Partner model)
         {
-            var selectedPartner = serviceProvider.GetRequiredService<List<Partner>>().FirstOrDefault(x => x.Name == model.Name);
+            var selectedPartner = GetPartner(model.Name);
             selectedPartner.EnterPortalResult = model.EnterPortalResult;
             selectedPartner.GetBalanceResult = model.GetBalanceResult;
             selectedPartner.PlaceBetResult = model.PlaceBetResult;
@@ -350,6 +350,11 @@ namespace OW.ApiSimulator.Controllers
             selectedPartner.GetBetLimitResult = model.GetBetLimitResult;
 
             return View(selectedPartner);
+        }
+
+        private Partner GetPartner(string partnerName)
+        {
+            return serviceProvider.GetRequiredService<List<Partner>>().FirstOrDefault(x => string.Compare(x.Name, partnerName, true) == 0);
         }
     }
 }
