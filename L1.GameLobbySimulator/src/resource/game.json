@@ -884,6 +884,16 @@
         ]
     },
     {
+    "id": 39,
+    "name": "Casino Hold'em Poker",
+      "choice": [
+      {
+        "id": 0,
+        "name": "N/A"
+      }
+    ]
+  },
+  {
         "id": 45,
         "name": "High Low",
         "choice": [
