@@ -12,7 +12,7 @@ export default class SignIn extends React.Component {
     super();
 
     this.state = {
-      memberId: 0,
+      obCustId: 0,
       memberName: randomString(8),
       language: "vi-VN",
       currency: "$US",
@@ -100,11 +100,11 @@ export default class SignIn extends React.Component {
     const searchParams = new URLSearchParams(
       this.props.history.location.search
     );
-    const memberId =
-      Number(searchParams.get("memberId")) || (Math.random() * 10000000) >> 0;
+    const obCustId =
+      Number(searchParams.get("obCustId")) || (Math.random() * 10000000) >> 0;
     const appType = parseInt(searchParams.get("appType")) || 1;
 
-    this.setState({ setting: data, ip, memberId, appType }, () => {
+    this.setState({ setting: data, ip, obCustId, appType }, () => {
       this.handleSubmit();
     });
   }
@@ -134,9 +134,9 @@ export default class SignIn extends React.Component {
                 <div className="col-sm-12 col-md-6">
                   <Input
                     type="int"
-                    id="memberId"
+                    id="obCustId"
                     name="Member ID"
-                    value={this.state.memberId}
+                    value={this.state.obCustId}
                     onChange={this.handleInputChange}
                   />
                   <Input
@@ -270,7 +270,7 @@ export default class SignIn extends React.Component {
                   <div class="section">
                     <iframe
                       ref={this.iFrameRef}
-                      src={`${this.state.setting.owUrl}?memId=${this.state.memberId}`}
+                      src={`${this.state.setting.owUrl}?memId=${this.state.obCustId}`}
                       width="800"
                       height="500"
                       frameborder="0"
