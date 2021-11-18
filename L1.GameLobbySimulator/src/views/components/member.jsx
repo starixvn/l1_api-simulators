@@ -54,11 +54,11 @@ export default class Member extends React.Component {
                 <legend>Notify Login</legend>
 
                 <div className="input-group vertical">
-                  <label htmlFor="memberId">Member ID</label>
+                  <label htmlFor="obCustId">Member ID</label>
                   <input
                     type="number"
-                    defaultValue={this.state.memberId}
-                    id="memberId"
+                    defaultValue={this.state.obCustId}
+                    id="obCustId"
                     placeholder="Member ID"
                     onChange={event => this.handleChange(event)}
                   />
