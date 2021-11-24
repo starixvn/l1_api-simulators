@@ -14,5 +14,17 @@
   {
     "value": "id-ID",
     "name": " Indonesia"
+  },
+  {
+    "value": "zh-CN",
+    "name": "Chinese Simplified"
+  },
+  {
+    "value": "zh-TW",
+    "name": "Chinese Original"
+  },
+  {
+    "value": "zh-Hans",
+    "name": "Chinese New Simplified"
   }
 ]
