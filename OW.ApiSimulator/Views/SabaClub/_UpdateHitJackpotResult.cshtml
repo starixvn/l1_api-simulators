@@ -1,8 +1,8 @@
 ﻿@model OW.ApiSimulator.Models.OW.HitJackpotResult
 
-<h3>Update Hit Jackpot Result</h3>
 
-<form method="post">
+<fieldset>
+    <legend>Update Hit Jackpot Result</legend>
     <div class="form-group">
         <label asp-for="ErrorCode"></label>
         <input class="form-control" asp-for="ErrorCode" />
@@ -20,4 +20,4 @@
         <input class="form-control" asp-for="DelayTime" />
     </div>
     <input class="btn btn-primary" type="submit" value="Save" />
-</form>
+</fieldset>

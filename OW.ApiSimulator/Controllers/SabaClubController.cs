@@ -297,24 +297,13 @@ namespace OW.ApiSimulator.Controllers
             return View(serviceProvider.GetRequiredService<HitJackpotResult>());
         }
 
-        [HttpPost]
-        public IActionResult UpdateHitJackpotResult(HitJackpotResult model)
-        {
-            var result = serviceProvider.GetRequiredService<HitJackpotResult>();
-            result.ErrorCode = model.ErrorCode;
-            result.ErrorDescription = model.ErrorDescription;
-            result.ObCustId = model.ObCustId;
-            result.DelayTime = model.DelayTime;
-
-            return View(model);
-        }
 
         [HttpPost]
-        public async Task<IActionResult> HitJackpot([FromBody] HitJackpotCall request)
+        public async Task<IActionResult> HitJackpot([FromBody] HitJackpotCall request, [FromRoute] string partner)
         {
-            var customers = serviceProvider.GetRequiredService<List<Customer>>();
-            var customer = customers.Find(x => x.ObCustId == request.ObCustId);
-            var result = serviceProvider.GetRequiredService<HitJackpotResult>();
+            var selectedPartner = GetPartner(partner) ;
+            var customer = selectedPartner.Customers.FirstOrDefault(x => x.ObCustId == request.ObCustId);
+            var result = selectedPartner.HitJackpotResult;
 
             result.Seq = request?.Seq;
 
@@ -390,6 +379,7 @@ namespace OW.ApiSimulator.Controllers
             selectedPartner.VoidGameResult = model.VoidGameResult;
             selectedPartner.CheckMaintenanceResult = model.CheckMaintenanceResult;
             selectedPartner.GetBetLimitResult = model.GetBetLimitResult;
+            selectedPartner.HitJackpotResult = model.HitJackpotResult;
 
             return View(selectedPartner);
         }

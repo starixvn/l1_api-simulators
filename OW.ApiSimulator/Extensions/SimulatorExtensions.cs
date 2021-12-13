@@ -10,7 +10,6 @@ namespace OW.ApiSimulator.Extensions
         {
             var partners = Constants.Partners.Select(x => new Partner(x));
             services.AddSingleton(partners.ToList());
-            services.AddSingleton(new HitJackpotResult());
         }
     }
 }
