@@ -1,10 +1,10 @@
 const path = require("path");
 
 module.exports = {
-  entry: "./views/index.jsx",
+  entry: "./src/views/index.jsx",
   output: {
     path: path.join(__dirname, "public"),
-    filename: "bundle.js"
+    filename: "bundle.js",
   },
   module: {
     rules: [
@@ -14,11 +14,11 @@ module.exports = {
         use: {
           options: {
             presets: ["@babel/preset-env", "@babel/preset-react"],
-            plugins: ["@babel/plugin-transform-runtime"]
+            plugins: ["@babel/plugin-transform-runtime"],
           },
-          loader: "babel-loader"
-        }
-      }
-    ]
-  }
+          loader: "babel-loader",
+        },
+      },
+    ],
+  },
 };

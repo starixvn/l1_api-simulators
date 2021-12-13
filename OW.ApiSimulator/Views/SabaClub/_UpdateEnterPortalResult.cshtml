@@ -1,7 +1,7 @@
-﻿@model OW.ApiSimulator.Models.OW.EndGameResult
+﻿@model OW.ApiSimulator.Models.OW.EnterPortalResult
 
-<h3>Update End Game Result</h3>
-<form method="post">
+<fieldset>
+    <legend>Update Enter Portal Result</legend>
     <div class="form-group">
         <label asp-for="ErrorCode"></label>
         <input class="form-control" asp-for="ErrorCode" />
@@ -14,5 +14,4 @@
         <label asp-for="DelayTime"></label>
         <input class="form-control" asp-for="DelayTime" />
     </div>
-    <input class="btn btn-primary" type="submit" value="Save" />
-</form>
+</fieldset>

@@ -17,7 +17,5 @@ namespace OW.ApiSimulator.Models.Saba
         public string Seq { get; set; } = Guid.NewGuid().ToString();
 
         public Auth Auth { get; set; } = new Auth();
-
-        public bool FreeBet { get; set; }
     }
 }

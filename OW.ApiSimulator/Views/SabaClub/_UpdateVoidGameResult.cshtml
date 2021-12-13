@@ -1,8 +1,7 @@
-﻿@model OW.ApiSimulator.Models.OW.GetBetLimitResult
+﻿@model OW.ApiSimulator.Models.OW.VoidGameResult
 
-<h3>Update Get Bet Limit Result</h3>
-
-<form method="post">
+<fieldset>
+    <legend>Update Void Game Result</legend>
     <div class="form-group">
         <label asp-for="ErrorCode"></label>
         <input class="form-control" asp-for="ErrorCode" />
@@ -15,5 +14,4 @@
         <label asp-for="DelayTime"></label>
         <input class="form-control" asp-for="DelayTime" />
     </div>
-    <input class="btn btn-primary" type="submit" value="Save" />
-</form>
+</fieldset>

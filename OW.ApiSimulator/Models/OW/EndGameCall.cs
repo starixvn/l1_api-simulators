@@ -15,7 +15,5 @@ namespace OW.ApiSimulator.Models.OW
         public decimal ValidBetAmount { get; set; }
 
         public DateTimeOffset EndTime { get; set; }
-
-        public bool FreeBet { get; set; }
     }
 }

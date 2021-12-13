@@ -1,8 +1,7 @@
 ﻿@model OW.ApiSimulator.Models.OW.PlaceBetResult
 
-<h3>Update Place Bet Result</h3>
-
-<form method="post">
+<fieldset>
+    <legend>Update Place Bet  Result</legend>
     <div class="form-group">
         <label asp-for="ErrorCode"></label>
         <input class="form-control" asp-for="ErrorCode" />
@@ -19,5 +18,4 @@
         <label asp-for="DelayTime"></label>
         <input class="form-control" asp-for="DelayTime" />
     </div>
-    <input class="btn btn-primary" type="submit" value="Save" />
-</form>
+</fieldset>

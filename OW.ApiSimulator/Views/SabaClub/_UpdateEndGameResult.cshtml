@@ -1,8 +1,8 @@
-﻿@model OW.ApiSimulator.Models.OW.VoidGameResult
+﻿@model OW.ApiSimulator.Models.OW.EndGameResult
 
-<h3>Update Void Game Result</h3>
 
-<form method="post">
+<fieldset>
+    <legend>Update End Game Result</legend>
     <div class="form-group">
         <label asp-for="ErrorCode"></label>
         <input class="form-control" asp-for="ErrorCode" />
@@ -15,5 +15,4 @@
         <label asp-for="DelayTime"></label>
         <input class="form-control" asp-for="DelayTime" />
     </div>
-    <input class="btn btn-primary" type="submit" value="Save" />
-</form>
+</fieldset>

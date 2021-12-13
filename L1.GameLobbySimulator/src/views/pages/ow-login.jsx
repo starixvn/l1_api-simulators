@@ -8,7 +8,7 @@ export default class LoginWithOW extends React.Component {
         super();
 
         this.state = {
-            memberId: (Math.random() * 10000000) >> 0,
+            obCustId: (Math.random() * 10000000) >> 0,
             memberName: randomString(8),
             language: "vi-VN",
             currency: "$US",
@@ -67,9 +67,9 @@ export default class LoginWithOW extends React.Component {
                             <legend>Login</legend>
                             <Input
                                 type="int"
-                                id="memberId"
+                                id="obCustId"
                                 name="Member ID"
-                                value={this.state.memberId}
+                                value={this.state.obCustId}
                                 onChange={this.handleInputChange}
                             />
                             <Input

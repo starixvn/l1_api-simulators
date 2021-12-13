@@ -7,7 +7,7 @@ export default class Member extends React.Component {
     super();
 
     this.state = {
-      memberId: (Math.random() * 10000000) >> 0,
+      obCustId: (Math.random() * 10000000) >> 0,
       characterName: randomString(8),
       seq: "d8382c1d-6ce0-433d-9233-e7358b10a70b",
       siteId: "4100300",
@@ -54,11 +54,11 @@ export default class Member extends React.Component {
                 <legend>Notify Login</legend>
 
                 <div className="input-group vertical">
-                  <label htmlFor="memberId">Member ID</label>
+                  <label htmlFor="obCustId">Member ID</label>
                   <input
                     type="number"
-                    defaultValue={this.state.memberId}
-                    id="memberId"
+                    defaultValue={this.state.obCustId}
+                    id="obCustId"
                     placeholder="Member ID"
                     onChange={event => this.handleChange(event)}
                   />

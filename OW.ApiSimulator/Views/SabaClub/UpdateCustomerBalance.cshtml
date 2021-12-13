@@ -6,6 +6,7 @@
     <table class="table table-bordered">
         <thead>
             <tr>
+                <th>Partner</th>
                 <th>ObCustId</th>
                 <th>Balance</th>
                 <th>Min Bet</th>
@@ -17,20 +18,23 @@
             {
                 var customer = Model[i];
 
-                <tr>
-                    <td>
-                        <input class="form-control" asp-for="@Model[i].ObCustId" readonly />
-                    </td>
-                    <td>
-                        <input class="form-control" asp-for="@Model[i].Balance" />
-                    </td>
-                    <td>
-                        <input class="form-control" asp-for="@Model[i].MinBet" />
-                    </td>
-                    <td>
-                        <input class="form-control" asp-for="@Model[i].MaxBet" />
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    <input class="form-control" asp-for="@Model[i].Partner" readonly />
+                </td>
+                <td>
+                    <input class="form-control" asp-for="@Model[i].ObCustId" readonly />
+                </td>
+                <td>
+                    <input class="form-control" asp-for="@Model[i].Balance" />
+                </td>
+                <td>
+                    <input class="form-control" asp-for="@Model[i].MinBet" />
+                </td>
+                <td>
+                    <input class="form-control" asp-for="@Model[i].MaxBet" />
+                </td>
+            </tr>
             }
         </tbody>
     </table>

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using OW.ApiSimulator.Models;
-using OW.ApiSimulator.Models.OW;
 
 namespace OW.ApiSimulator.Extensions
 {
@@ -10,15 +8,9 @@ namespace OW.ApiSimulator.Extensions
     {
         public static void AddOW(this IServiceCollection services)
         {
-            services.AddSingleton(new EnterPortalResult());
-            services.AddSingleton(new GetBalanceResult());
-            services.AddSingleton(new PlaceBetResult());
-            services.AddSingleton(new EndGameResult());
-            services.AddSingleton(new VoidGameResult());
-            services.AddSingleton(new CheckMaintenanceResult { StartTime = DateTimeOffset.UtcNow, EndTime = DateTimeOffset.UtcNow.AddHours(1) });
-            services.AddSingleton(new List<Customer>());
+            var partners = Constants.Partners.Select(x => new Partner(x));
+            services.AddSingleton(partners.ToList());
             services.AddSingleton(new HitJackpotResult());
-            services.AddSingleton(new GetBetLimitResult());
         }
     }
 }
