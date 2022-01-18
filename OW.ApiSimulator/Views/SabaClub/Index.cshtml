@@ -1,4 +1,6 @@
-﻿<div>
+﻿@inject List<Partner> Partners
+
+<div>
     <div>Customer</div>
     <ul>
         <li><a target="_blank" asp-action="CreateCustomer">Create</a></li>
@@ -7,16 +9,14 @@
 </div>
 
 <div>
-    <div>Update OW Results:</div>
+    <div>Update Partner Results:</div>
     <ul>
-        <li><a target="_blank" asp-action="UpdateEnterPortalResult">Enter Portal</a></li>
-        <li><a target="_blank" asp-action="UpdateGetBalanceResult">Get Balance</a></li>
-        <li><a target="_blank" asp-action="UpdatePlaceBetResult">Place Bet</a></li>
-        <li><a target="_blank" asp-action="UpdateEndGameResult">End Game</a></li>
-        <li><a target="_blank" asp-action="UpdateVoidGameResult">Void Game</a></li>
-        <li><a target="_blank" asp-action="UpdateCheckMaintenanceResult">Check Maintenance</a></li>
-        <li><a target="_blank" asp-action="UpdateHitJackpotResult">Hit Jackpot</a></li>
-        <li><a target="_blank" asp-action="UpdateGetBetLimitResult">Get Bet Limit</a></li>
+        @foreach (var partner in Partners)
+        {
+            <li><a target="_blank" asp-action="UpdatePartner" asp-route-name="@partner.Name">@partner.Name</a></li>
+
+        }
+
     </ul>
 </div>
 

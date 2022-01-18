@@ -5,6 +5,10 @@
 <form method="post">
     <input class="btn btn-primary" type="submit" value="Save" />
     <div class="form-group">
+        <label>Partner</label>
+        <select class="form-control" asp-items="@Constants.Partners.Select(x => new SelectListItem(x, x))"  asp-for="Partner" ></select>
+    </div>
+    <div class="form-group">
         <label asp-for="ObCustId"></label>
         <input class="form-control" asp-for="ObCustId" />
     </div>
