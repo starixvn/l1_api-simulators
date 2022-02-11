@@ -36,10 +36,10 @@ const sendPostRequest =
         delete params.languageCode;
       }
 
-      if (generateAccessKey && params.auth.partnerSecret) {
+      if (generateAccessKey && params.auth.operatorSecret) {
         const hashResult = hmacSHA256(
           JSON.stringify(params),
-          params.auth.partnerSecret
+          params.auth.operatorSecret
         );
         const hashString = Base64.stringify(hashResult);
         config.headers["Access-Key"] = hashString;
