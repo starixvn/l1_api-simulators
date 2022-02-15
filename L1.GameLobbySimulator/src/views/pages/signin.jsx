@@ -7,6 +7,10 @@ import GameSelect from "../components/select/game.jsx";
 import LanguageSelect from "../components/select/language.jsx";
 import { randomString, showAlert } from "../util.jsx";
 
+const partnerMapper = {
+  "ONEworks1": "ow",
+  "SBO": "sbo"
+}
 export default class SignIn extends React.Component {
   constructor() {
     super();
@@ -271,7 +275,7 @@ export default class SignIn extends React.Component {
                   <div class="section">
                     <iframe
                       ref={this.iFrameRef}
-                      src={`${this.state.setting.owUrl}?memId=${this.state.obCustId}`}
+                      src={`${this.state.setting.owUrl}?memId=${this.state.obCustId}&&partner=${partnerMapper[this.state.auth.partnerId]}`}
                       width="800"
                       height="500"
                       frameborder="0"
