@@ -329,11 +329,13 @@ namespace OW.ApiSimulator.Controllers
         public async Task<IActionResult> GetBetLimit([FromBody] GetBetLimitCall request, [FromRoute] string partner)
         {
             var selectedPartner = GetPartner(partner);
+            var result = new GetBetLimitResult();
             var customer = selectedPartner.Customers.FirstOrDefault(x => x.ObCustId == request.ObCustId);
-            var result = selectedPartner.GetBetLimitResult;
+            var resultTemplate = selectedPartner.GetBetLimitResult;
             result.Seq = request.Seq;
-            var delayTime = customer?.Delay.GetBetLimit > 0 ? customer.Delay.GetBetLimit : result.DelayTime;
-            result.ErrorCode = customer?.ErrorCode.GetBetLimit > 0 ? customer.ErrorCode.GetBetLimit : result.ErrorCode;
+
+            var delayTime = customer?.Delay.GetBetLimit > 0 ? customer.Delay.GetBetLimit : resultTemplate.DelayTime;
+            result.ErrorCode = customer?.ErrorCode.GetBetLimit > 0 ? customer.ErrorCode.GetBetLimit : resultTemplate.ErrorCode;
 
             if (result.ErrorCode == 0)
             {

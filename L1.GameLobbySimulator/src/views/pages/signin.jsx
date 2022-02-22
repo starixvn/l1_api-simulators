@@ -226,16 +226,16 @@ export default class SignIn extends React.Component {
                   />
                   <Input
                     type="text"
-                    id="partnerId"
-                    name="Partner Id"
-                    value={this.state.auth.partnerId}
+                    id="operatorId"
+                    name="Operator Id"
+                    value={this.state.auth.operatorId}
                     onChange={this.handleChangeAuth}
                   />
                   <Input
                     type="text"
-                    id="partnerSecret"
-                    name="Partner Secret"
-                    value={this.state.auth.partnerSecret}
+                    id="operatorSecret"
+                    name="Operator Secret"
+                    value={this.state.auth.operatorSecret}
                     onChange={this.handleChangeAuth}
                   />
                 </div>
@@ -275,7 +275,7 @@ export default class SignIn extends React.Component {
                   <div class="section">
                     <iframe
                       ref={this.iFrameRef}
-                      src={`${this.state.setting.owUrl}?memId=${this.state.obCustId}&&partner=${partnerMapper[this.state.auth.partnerId]}`}
+                      src={`${this.state.setting.owUrl}?memId=${this.state.obCustId}&&partner=${partnerMapper[this.state.auth.operatorId]}`}
                       width="800"
                       height="500"
                       frameborder="0"

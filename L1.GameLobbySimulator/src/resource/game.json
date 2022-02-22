@@ -1765,7 +1765,16 @@
 		}
 
 	  ]
-
+  },
+  {
+    "id": 39,
+    "name": "Casino Hold'em",
+    "choice": [
+      {
+        "id": 0,
+        "name": "N/A"
+      }
+    ]
 	}
 
 ]
