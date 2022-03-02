@@ -26,8 +26,8 @@ export default class SignIn extends React.Component {
       ip: "",
       browserUserAgent: navigator.userAgent,
       auth: {
-				partnerId: "ONEworksVGCash",
-				partnerSecret: "VG@SC123",
+				operatorId: "ONEworksVGCash",
+				operatorSecret: "VG@SC123",
       },
       token: "",
       redirectUrl: "#",
