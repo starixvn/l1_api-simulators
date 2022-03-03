@@ -882,5 +882,19 @@
         "name": "N/A"
       }
     ]
+  },
+  {
+    "id": 45,
+    "name": "High Low",
+    "choice": [
+      {
+        "id": 0,
+        "name": "High"
+      },
+      {
+        "id": 1,
+        "name": "Low"
+      }
+    ]
   }
 ]
