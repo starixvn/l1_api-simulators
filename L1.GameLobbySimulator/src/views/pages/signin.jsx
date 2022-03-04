@@ -7,7 +7,7 @@ import GameSelect from "../components/select/game.jsx";
 import LanguageSelect from "../components/select/language.jsx";
 import { randomString, showAlert } from "../util.jsx";
 
-const partnerMapper = {
+const operatorMapper = {
   "ONEworks1": "ow",
   "SBO": "sbo"
 }
@@ -16,8 +16,8 @@ export default class SignIn extends React.Component {
     super();
 
     this.state = {
-      obCustId: 0,
-      memberName: randomString(8),
+      playerId: 0,
+      playerName: randomString(8),
       language: "vi-VN",
             currency: "INH",
       seq: "d,y,lumi",
@@ -106,11 +106,11 @@ export default class SignIn extends React.Component {
     const searchParams = new URLSearchParams(
       this.props.history.location.search
     );
-    const obCustId =
+    const playerId =
       Number(searchParams.get("obCustId")) || (Math.random() * 10000000) >> 0;
     const appType = parseInt(searchParams.get("appType")) || 1;
 
-    this.setState({ setting: data, ip, obCustId, appType }, () => {
+    this.setState({ setting: data, ip, playerId, appType }, () => {
       this.handleSubmit();
     });
   }
@@ -140,16 +140,16 @@ export default class SignIn extends React.Component {
                 <div className="col-sm-12 col-md-6">
                   <Input
                     type="int"
-                    id="obCustId"
+                    id="playerId"
                     name="Member ID"
-                    value={this.state.obCustId}
+                    value={this.state.playerId}
                     onChange={this.handleInputChange}
                   />
                   <Input
                     type="text"
-                    id="memberName"
+                    id="playerName"
                     name="Member Username"
-                    value={this.state.memberName}
+                    value={this.state.playerName}
                     onChange={this.handleInputChange}
                   />
                   <LanguageSelect
@@ -283,7 +283,7 @@ export default class SignIn extends React.Component {
                   <div class="section">
                     <iframe
                       ref={this.iFrameRef}
-                      src={`${this.state.setting.owUrl}?memId=${this.state.obCustId}&&partner=${partnerMapper[this.state.auth.operatorId]}`}
+                      src={`${this.state.setting.owUrl}?memId=${this.state.playerId}&&operator=${operatorMapper[this.state.auth.operatorId]}`}
                       width="800"
                       height="500"
                       frameborder="0"

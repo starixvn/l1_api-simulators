@@ -10,7 +10,7 @@ namespace OW.ApiSimulator.Models.Saba
 
         public byte GameTypeId { get; set; }
 
-        public int ObCustId { get; set; }
+        public int PlayerId { get; set; }
 
         public string SiteId { get; set; }
 

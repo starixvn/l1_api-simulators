@@ -6,8 +6,8 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Partner</th>
-                <th>ObCustId</th>
+                <th>Operator</th>
+                <th>PlayerId</th>
                 <th>Balance</th>
                 <th>Min Bet</th>
                 <th>Max Bet</th>
@@ -20,10 +20,10 @@
 
             <tr>
                 <td>
-                    <input class="form-control" asp-for="@Model[i].Partner" readonly />
+                    <input class="form-control" asp-for="@Model[i].Operator" readonly />
                 </td>
                 <td>
-                    <input class="form-control" asp-for="@Model[i].ObCustId" readonly />
+                    <input class="form-control" asp-for="@Model[i].PlayerId" readonly />
                 </td>
                 <td>
                     <input class="form-control" asp-for="@Model[i].Balance" />

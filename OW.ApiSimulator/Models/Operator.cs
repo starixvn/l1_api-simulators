@@ -4,13 +4,13 @@ using OW.ApiSimulator.Models.OW;
 
 namespace OW.ApiSimulator.Models
 {
-    public class Partner
+    public class Operator
     {
-        public Partner()
+        public Operator()
         {
         }
 
-        public Partner(string name)
+        public Operator(string name)
         {
             Name = name;
             Customers = new List<Customer>();

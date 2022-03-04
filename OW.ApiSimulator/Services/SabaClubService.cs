@@ -29,7 +29,7 @@ namespace OW.ApiSimulator.Services
             var content = new StringContent(requestBody, Encoding.UTF8, defaultMediaType);
 
             httpClient.DefaultRequestHeaders.Add("Access-Key", CreateAccessKey(request.Auth.OperatorSecret, requestBody));
-            var response = await httpClient.PostAsync("member/RetrieveEndGameInfo", content);
+            var response = await httpClient.PostAsync("Player/RetrieveEndGameInfo", content);
             var responseContent = await response.Content.ReadAsStringAsync();
 
             if (response.IsSuccessStatusCode)
