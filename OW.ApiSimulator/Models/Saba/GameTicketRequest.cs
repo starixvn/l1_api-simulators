@@ -11,6 +11,8 @@
         public Auth Auth { get; set; } = new Auth();
 
         public string Language { get; set; }
+
+        public bool FreeBet { get; set; }
     }
 
     public class Auth
