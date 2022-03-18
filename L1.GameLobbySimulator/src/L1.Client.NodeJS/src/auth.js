@@ -7,7 +7,8 @@ const metadata = [
   },
   {
     action: "/signin/index",
-    name: "singleSignOn"
+    name: "singleSignOn",
+    generateAccessKey: true
   }
 ];
 

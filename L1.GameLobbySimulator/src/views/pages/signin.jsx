@@ -7,6 +7,10 @@ import GameSelect from "../components/select/game.jsx";
 import LanguageSelect from "../components/select/language.jsx";
 import { randomString, showAlert } from "../util.jsx";
 
+const partnerMapper = {
+  "ONEworks1": "ow",
+  "SBO": "sbo"
+}
 export default class SignIn extends React.Component {
   constructor() {
     super();
@@ -22,8 +26,8 @@ export default class SignIn extends React.Component {
       ip: "",
       browserUserAgent: navigator.userAgent,
       auth: {
-				partnerId: "ONEworksVGCash",
-				partnerSecret: "VG@SC123",
+				operatorId: "ONEworksVGCash",
+				operatorSecret: "VG@SC123",
       },
       token: "",
       redirectUrl: "#",
@@ -222,16 +226,16 @@ export default class SignIn extends React.Component {
                   />
                   <Input
                     type="text"
-                    id="partnerId"
-                    name="Partner Id"
-                    value={this.state.auth.partnerId}
+                    id="operatorId"
+                    name="Operator Id"
+                    value={this.state.auth.operatorId}
                     onChange={this.handleChangeAuth}
                   />
                   <Input
                     type="text"
-                    id="partnerSecret"
-                    name="Partner Secret"
-                    value={this.state.auth.partnerSecret}
+                    id="operatorSecret"
+                    name="Operator Secret"
+                    value={this.state.auth.operatorSecret}
                     onChange={this.handleChangeAuth}
                   />
                 </div>
@@ -271,7 +275,7 @@ export default class SignIn extends React.Component {
                   <div class="section">
                     <iframe
                       ref={this.iFrameRef}
-                      src={`${this.state.setting.owUrl}?memId=${this.state.obCustId}`}
+                      src={`${this.state.setting.owUrl}?memId=${this.state.obCustId}&&partner=${partnerMapper[this.state.auth.operatorId]}`}
                       width="800"
                       height="500"
                       frameborder="0"

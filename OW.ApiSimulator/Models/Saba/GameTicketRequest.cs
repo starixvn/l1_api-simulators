@@ -11,12 +11,14 @@
         public Auth Auth { get; set; } = new Auth();
 
         public string Language { get; set; }
+
+        public bool FreeBet { get; set; }
     }
 
     public class Auth
     {
-        public string PartnerId { get; set; }
+        public string OperatorId { get; set; }
 
-        public string PartnerSecret { get; set; }
+        public string OperatorSecret { get; set; }
     }
 }

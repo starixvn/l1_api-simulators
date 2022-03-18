@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -24,7 +25,10 @@ namespace OW.ApiSimulator.Services
 
         public async Task<SabaResponse<EndGameInfoResult>> RetrieveEndGameInfoAsync(EndGameInfoRequest request)
         {
-            var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, defaultMediaType);
+            var requestBody = JsonConvert.SerializeObject(request);
+            var content = new StringContent(requestBody, Encoding.UTF8, defaultMediaType);
+
+            httpClient.DefaultRequestHeaders.Add("Access-Key", CreateAccessKey(request.Auth.OperatorSecret, requestBody));
             var response = await httpClient.PostAsync("member/RetrieveEndGameInfo", content);
             var responseContent = await response.Content.ReadAsStringAsync();
 
@@ -41,6 +45,15 @@ namespace OW.ApiSimulator.Services
                     ErrorDescription = $"{response.StatusCode}-{response.ReasonPhrase}-{responseContent}"
                 }
             };
+        }
+
+        private string CreateAccessKey(string secretKey, string data)
+        {
+
+            var hmac = new HMACSHA256(Encoding.ASCII.GetBytes(secretKey));
+            var hashResult = hmac.ComputeHash(Encoding.ASCII.GetBytes(data));
+
+            return Convert.ToBase64String(hashResult);
         }
     }
 }
