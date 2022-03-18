@@ -59,9 +59,19 @@ export default class SignIn extends React.Component {
     this.handleReloadIframe = this.handleReloadIframe.bind(this);
 
     this.iFrameRef = React.createRef();
+    this.instantRef = React.createRef();
   }
 
   handleInputChange(data) {
+    if (
+      this.state.appType === 3 &&
+      data.instantMode &&
+      this.state.instantMode !== data.instantMode
+    ) {
+      const iFrameElement = this.instantRef.current;
+      iFrameElement.src = iFrameElement.src;
+    }
+
     this.setState(data);
   }
 
@@ -302,6 +312,7 @@ export default class SignIn extends React.Component {
           </form>
           {this.state.appType === 3 && token && (
             <iframe
+              ref={this.instantRef}
               src={redirectUrl}
               style={this.instantModeSize[instantMode]}
             />
