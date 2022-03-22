@@ -41,6 +41,7 @@ export default class SignIn extends React.Component {
       appType: 1,
 			isCash: true,
       partner: "1W",
+      disableJackpotGames: false
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -173,6 +174,13 @@ export default class SignIn extends React.Component {
                     id="browserUserAgent"
                     name="Browser User Agent"
                     value={this.state.browserUserAgent}
+                    onChange={this.handleInputChange}
+                  />
+                  <Input
+                    type="checkbox"
+                    id="disableJackpotGames"
+                    name="Disable Jackpot Games"
+                    value={this.state.disableJackpotGames}
                     onChange={this.handleInputChange}
                   />
                   <Input
