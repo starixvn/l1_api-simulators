@@ -192,7 +192,7 @@ namespace OW.ApiSimulator.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EndGame([FromBody] EndGameCall request, [FromRoute] string @operator)
+        public async Task<IActionResult> EndRound([FromBody] EndGameCall request, [FromRoute] string @operator)
         {
             var selectedOperator = GetOperator(@operator);
             var result = new EndGameResult();
@@ -219,7 +219,7 @@ namespace OW.ApiSimulator.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> VoidGame([FromBody] VoidGameCall request, [FromRoute] string @operator)
+        public async Task<IActionResult> VoidRound([FromBody] VoidGameCall request, [FromRoute] string @operator)
         {
             var selectedOperator = GetOperator(@operator);
             var result = selectedOperator.VoidGameResult;
