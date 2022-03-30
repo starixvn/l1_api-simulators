@@ -8,9 +8,9 @@ import LanguageSelect from "../components/select/language.jsx";
 import { randomString, showAlert } from "../util.jsx";
 
 const operatorMapper = {
-  "ONEworks1": "ow",
-  "SBO": "sbo"
-}
+  ONEworks1: "ow",
+  SBO: "sbo",
+};
 export default class SignIn extends React.Component {
   constructor() {
     super();
@@ -19,15 +19,15 @@ export default class SignIn extends React.Component {
       playerId: 0,
       playerName: randomString(8),
       language: "vi-VN",
-            currency: "INH",
+      currency: "INH",
       seq: "d,y,lumi",
       siteId: "4100300",
-			siteName: "lumi",
+      siteName: "lumi",
       ip: "",
       browserUserAgent: navigator.userAgent,
       auth: {
-				operatorId: "ONEworksVGCash",
-				operatorSecret: "VG@SC123",
+        operatorId: "ONEworksVGCash",
+        operatorSecret: "VG@SC123",
       },
       token: "",
       redirectUrl: "#",
@@ -39,9 +39,10 @@ export default class SignIn extends React.Component {
       domain: "example.com",
       localhost: false,
       appType: 1,
-			isCash: true,
+      isCash: true,
       partner: "1W",
-      disableJackpotGames: false
+      disableJackpotGames: false,
+      operatorToken: "ONEworksVGCashToken",
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -246,6 +247,13 @@ export default class SignIn extends React.Component {
                     value={this.state.auth.operatorSecret}
                     onChange={this.handleChangeAuth}
                   />
+                  <Input
+                    type="text"
+                    id="operatorToken"
+                    name="Operator Token"
+                    value={this.state.operatorToken}
+                    onChange={this.handleInputChange}
+                  />
                 </div>
               </div>
               <input className="primary" type="submit" value="Get Token" />
@@ -283,7 +291,11 @@ export default class SignIn extends React.Component {
                   <div class="section">
                     <iframe
                       ref={this.iFrameRef}
-                      src={`${this.state.setting.owUrl}?memId=${this.state.playerId}&&operator=${operatorMapper[this.state.auth.operatorId]}`}
+                      src={`${this.state.setting.owUrl}?memId=${
+                        this.state.playerId
+                      }&&operator=${
+                        operatorMapper[this.state.auth.operatorId]
+                      }`}
                       width="800"
                       height="500"
                       frameborder="0"
