@@ -7,27 +7,27 @@ import GameSelect from "../components/select/game.jsx";
 import LanguageSelect from "../components/select/language.jsx";
 import { randomString, showAlert } from "../util.jsx";
 
-const partnerMapper = {
-  "ONEworks1": "ow",
-  "SBO": "sbo"
-}
+const operatorMapper = {
+  ONEworks1: "ow",
+  SBO: "sbo",
+};
 export default class SignIn extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      obCustId: 0,
-      memberName: randomString(8),
+      playerId: 0,
+      playerName: randomString(8),
       language: "vi-VN",
-            currency: "INH",
+      currency: "INH",
       seq: "d,y,lumi",
       siteId: "4100300",
-			siteName: "lumi",
+      siteName: "lumi",
       ip: "",
       browserUserAgent: navigator.userAgent,
       auth: {
-				operatorId: "ONEworksVGCash",
-				operatorSecret: "VG@SC123",
+        operatorId: "ONEworksVGCash",
+        operatorSecret: "VG@SC123",
       },
       token: "",
       redirectUrl: "#",
@@ -39,8 +39,10 @@ export default class SignIn extends React.Component {
       domain: "example.com",
       localhost: false,
       appType: 1,
-			isCash: true,
+      isCash: true,
       partner: "1W",
+      disableJackpotGames: false,
+      operatorToken: "ONEworksVGCashToken",
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -105,11 +107,11 @@ export default class SignIn extends React.Component {
     const searchParams = new URLSearchParams(
       this.props.history.location.search
     );
-    const obCustId =
+    const playerId =
       Number(searchParams.get("obCustId")) || (Math.random() * 10000000) >> 0;
     const appType = parseInt(searchParams.get("appType")) || 1;
 
-    this.setState({ setting: data, ip, obCustId, appType }, () => {
+    this.setState({ setting: data, ip, playerId, appType }, () => {
       this.handleSubmit();
     });
   }
@@ -139,16 +141,16 @@ export default class SignIn extends React.Component {
                 <div className="col-sm-12 col-md-6">
                   <Input
                     type="int"
-                    id="obCustId"
+                    id="playerId"
                     name="Member ID"
-                    value={this.state.obCustId}
+                    value={this.state.playerId}
                     onChange={this.handleInputChange}
                   />
                   <Input
                     type="text"
-                    id="memberName"
+                    id="playerName"
                     name="Member Username"
-                    value={this.state.memberName}
+                    value={this.state.playerName}
                     onChange={this.handleInputChange}
                   />
                   <LanguageSelect
@@ -173,6 +175,13 @@ export default class SignIn extends React.Component {
                     id="browserUserAgent"
                     name="Browser User Agent"
                     value={this.state.browserUserAgent}
+                    onChange={this.handleInputChange}
+                  />
+                  <Input
+                    type="checkbox"
+                    id="disableJackpotGames"
+                    name="Disable Jackpot Games"
+                    value={this.state.disableJackpotGames}
                     onChange={this.handleInputChange}
                   />
                   <Input
@@ -238,6 +247,13 @@ export default class SignIn extends React.Component {
                     value={this.state.auth.operatorSecret}
                     onChange={this.handleChangeAuth}
                   />
+                  <Input
+                    type="text"
+                    id="operatorToken"
+                    name="Operator Token"
+                    value={this.state.operatorToken}
+                    onChange={this.handleInputChange}
+                  />
                 </div>
               </div>
               <input className="primary" type="submit" value="Get Token" />
@@ -275,7 +291,11 @@ export default class SignIn extends React.Component {
                   <div class="section">
                     <iframe
                       ref={this.iFrameRef}
-                      src={`${this.state.setting.owUrl}?memId=${this.state.obCustId}&&partner=${partnerMapper[this.state.auth.operatorId]}`}
+                      src={`${this.state.setting.owUrl}?memId=${
+                        this.state.playerId
+                      }&&operator=${
+                        operatorMapper[this.state.auth.operatorId]
+                      }`}
                       width="800"
                       height="500"
                       frameborder="0"

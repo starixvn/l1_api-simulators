@@ -2,7 +2,7 @@
 {
     public class Customer
     {
-        public int ObCustId { get; set; }
+        public int PlayerId { get; set; }
 
         public decimal Balance { get; set; }
 
@@ -10,7 +10,7 @@
 
         public decimal MaxBet { get; set; }
 
-        public string Partner { get; set; }
+        public string Operator { get; set; }
 
         public DelayTime Delay { get; set; } = new DelayTime();
 

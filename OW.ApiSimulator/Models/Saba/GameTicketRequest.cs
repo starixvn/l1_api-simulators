@@ -4,7 +4,7 @@
     {
         public long GameRoundId { get; set; }
 
-        public int ObCustId { get; set; }
+        public int PlayerId { get; set; }
 
         public byte GameTypeId { get; set; }
 
