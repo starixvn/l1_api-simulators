@@ -179,6 +179,7 @@ export default class SignIn extends React.Component {
                   style={{cursor: "pointer"}}
                 >
                   Advance
+                  <img src="/images/icon-expand.png" alt="landscape-icon" style={{width:'20px', 'vertical-align': 'middle', padding: '5px', transform: !this.state.expandAdvanceSetting ? 'rotate(180deg)' : null }}/>
                 </legend>
                 <div className="row" style={{display: this.state.expandAdvanceSetting ? "flex" : "none"}}>
                   <div className="col-sm-12 col-md-6">
