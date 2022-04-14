@@ -7,5 +7,7 @@ namespace OW.ApiSimulator.Models
         public EndGameInfoRequest Request { get; set; } = new EndGameInfoRequest();
 
         public SabaResponse<EndGameInfoResult> Result { get; set; }
+
+        public string Environment { get; set; }
     }
 }
