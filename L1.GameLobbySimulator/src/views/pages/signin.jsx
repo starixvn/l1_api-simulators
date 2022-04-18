@@ -137,10 +137,9 @@ export default class SignIn extends React.Component {
       <div className="container">
         <div className="section">
           <form onSubmit={(event) => this.handleSubmit(event)}>
-
-              <fieldset>
-                <legend>Basic</legend>
-                <div className="row">
+            <fieldset>
+              <legend>Basic</legend>
+              <div className="row">
                 <div className="col-sm-12 col-md-6">
                   <Input
                     type="int"
@@ -149,13 +148,12 @@ export default class SignIn extends React.Component {
                     value={this.state.playerId}
                     onChange={this.handleInputChange}
                   />
-                  
+
                   <AppType
                     onChange={this.handleInputChange}
                     id="appType"
                     value={this.state.appType}
                   />
-               
                 </div>
                 <div className="col-sm-12 col-md-6">
                   <Input
@@ -174,93 +172,113 @@ export default class SignIn extends React.Component {
                   />
                 </div>
               </div>
-              </fieldset>
-              <fieldset>
-                <legend 
-                  onClick={() => this.setState({expandAdvanceSetting: !this.state.expandAdvanceSetting})}
-                  style={{cursor: "pointer"}}
-                >
-                  Advance
-                  <img src="/images/icon-expand.png" alt="landscape-icon" style={{width:'20px', 'vertical-align': 'middle', padding: '5px', transform: !this.state.expandAdvanceSetting ? 'rotate(180deg)' : null }}/>
-                </legend>
-                <div className="row" style={{display: this.state.expandAdvanceSetting ? "flex" : "none"}}>
-                  <div className="col-sm-12 col-md-6">
-                    <Input
-                      type="text"
-                      id="siteId"
-                      name="Site Id"
-                      value={this.state.siteId}
-                      onChange={this.handleInputChange}
-                    />
-                    <Input
-                      type="text"
-                      id="siteName"
-                      name="Site Name"
-                      value={this.state.siteName}
-                      onChange={this.handleInputChange}
-                    />
-                    <LanguageSelect
-                      onChange={this.handleInputChange}
-                      id="language"
-                      value={this.state.language}
-                    />
-            
-                    <GameSelect
-                      onChange={this.handleInputChange}
-                      id="gameId"
-                      value={this.state.gameId}
-                    />
-                    <Input
-                      type="text"
-                      id="browserUserAgent"
-                      name="Browser User Agent"
-                      value={this.state.browserUserAgent}
-                      onChange={this.handleInputChange}
-                    />
+            </fieldset>
+            <fieldset>
+              <legend
+                onClick={() =>
+                  this.setState({
+                    expandAdvanceSetting: !this.state.expandAdvanceSetting,
+                  })
+                }
+                style={{ cursor: "pointer" }}
+              >
+                Advance
+                <img
+                  src="/images/icon-expand.png"
+                  alt="landscape-icon"
+                  style={{
+                    width: "20px",
+                    "vertical-align": "middle",
+                    padding: "5px",
+                    transform: !this.state.expandAdvanceSetting
+                      ? "rotate(180deg)"
+                      : null,
+                  }}
+                />
+              </legend>
+              <div
+                className="row"
+                style={{
+                  display: this.state.expandAdvanceSetting ? "flex" : "none",
+                }}
+              >
+                <div className="col-sm-12 col-md-6">
+                  <Input
+                    type="text"
+                    id="siteId"
+                    name="Site Id"
+                    value={this.state.siteId}
+                    onChange={this.handleInputChange}
+                  />
+                  <Input
+                    type="text"
+                    id="siteName"
+                    name="Site Name"
+                    value={this.state.siteName}
+                    onChange={this.handleInputChange}
+                  />
+                  <LanguageSelect
+                    onChange={this.handleInputChange}
+                    id="language"
+                    value={this.state.language}
+                  />
+
+                  <GameSelect
+                    onChange={this.handleInputChange}
+                    id="gameId"
+                    value={this.state.gameId}
+                  />
+                  <Input
+                    type="text"
+                    id="browserUserAgent"
+                    name="Browser User Agent"
+                    value={this.state.browserUserAgent}
+                    onChange={this.handleInputChange}
+                  />
+                  <Input
+                    type="checkbox"
                     id="disableJackpotGames"
                     name="Disable Jackpot Games"
                     value={this.state.disableJackpotGames}
                     onChange={this.handleInputChange}
                   />
+                </div>
+                <div className="col-sm-12 col-md-6">
                   <Input
-                    type="checkbox"
-                  </div>
-                  <div className="col-sm-12 col-md-6">
-                    <Input
-                      type="text"
-                      id="seq"
-                      name="SEQ"
-                      value={this.state.seq}
-                      onChange={this.handleInputChange}
-                    />
-                    <Input
-                      type="text"
-                      id="ip"
-                      name="IP"
-                      value={this.state.ip}
-                      onChange={this.handleInputChange}
-                    />
-                    <Input
-                      type="text"
-                      id="domain"
-                      name="Domain"
-                      value={this.state.domain}
-                      onChange={this.handleInputChange}
-                    />
-                    <Input
-                      type="text"
-                      id="operatorId"
-                      name="Operator Id"
-                      value={this.state.auth.operatorId}
-                      onChange={this.handleChangeAuth}
-                    />
-                    <Input
-                      type="text"
-                      id="operatorSecret"
-                      name="Operator Secret"
-                      value={this.state.auth.operatorSecret}
-                      onChange={this.handleChangeAuth}
-                    />
+                    type="text"
+                    id="seq"
+                    name="SEQ"
+                    value={this.state.seq}
+                    onChange={this.handleInputChange}
+                  />
+                  <Input
+                    type="text"
+                    id="ip"
+                    name="IP"
+                    value={this.state.ip}
+                    onChange={this.handleInputChange}
+                  />
+                  <Input
+                    type="text"
+                    id="domain"
+                    name="Domain"
+                    value={this.state.domain}
+                    onChange={this.handleInputChange}
+                  />
+                  <Input
+                    type="text"
+                    id="operatorId"
+                    name="Operator Id"
+                    value={this.state.auth.operatorId}
+                    onChange={this.handleChangeAuth}
+                  />
+                  <Input
+                    type="text"
+                    id="operatorSecret"
+                    name="Operator Secret"
+                    value={this.state.auth.operatorSecret}
+                    onChange={this.handleChangeAuth}
+                  />
                   <Input
                     type="text"
                     id="operatorToken"
@@ -268,89 +286,85 @@ export default class SignIn extends React.Component {
                     value={this.state.operatorToken}
                     onChange={this.handleInputChange}
                   />
-                  </div>
-              </div>
-              </fieldset>
-              
-              <div className="row">
-                    <div className="col-sm-4">
-                     
-                  <Input
-                    type="checkbox"
-                        id="localhost"
-                        name="Localhost"
-                        value={this.state.localhost}
-                        onChange={this.handleInputChange}
-                      />
-                    </div>
-                    <div className="col-sm-4">
-                      <Input
-                        type="checkbox"
-                        id="isOpenOnIframe"
-                        name="Load On Iframe"
-                        value={this.state.isOpenOnIframe}
-                        onChange={this.handleInputChange}
-                      />
-                    </div>
-                    <div className="col-sm-4">
-                      <Input
-                          type="checkbox"
-                      id="disableJackpotGames"
-                      name="Disable Jackpot Games"
-                      value={this.state.disableJackpotGames}
-                      onChange={this.handleInputChange}
-                  />
-                    </div>
-                  </div>
-              <input className="primary" type="submit" value="Get Token" />
-              <label className="button secondary" for="modal-control">
-                Set Balance
-              </label>
-              <input type="checkbox" id="modal-control" class="modal" />
-              <div role="dialog" aria-labelledby="dialog-title">
-                <div
-                  class="card"
-                  style={{ maxWidth: "800px", maxHeight: "800px" }}
-                >
-                  <label for="modal-control" class="modal-close"></label>
-                  <h3 class="section">
-                    Set Balance
-                    <svg
-                      cursor="pointer"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="feather feather-refresh-cw"
-                      onClick={this.handleReloadIframe}
-                    >
-                      <polyline points="23 4 23 10 17 10"></polyline>
-                      <polyline points="1 20 1 14 7 14"></polyline>
-                      <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
-                    </svg>
-                  </h3>
-                  <div class="section">
-                    <iframe
-                      ref={this.iFrameRef}
-                      src={`${this.state.setting.owUrl}?memId=${
-                        this.state.playerId
-                      }&&operator=${
-                        operatorMapper[this.state.auth.operatorId]
-                      }`}
-                      width="800"
-                      height="500"
-                      frameborder="0"
-                      allowtransparency="true"
-                    />
-                  </div>
                 </div>
               </div>
-        
+            </fieldset>
+
+            <div className="row">
+              <div className="col-sm-4">
+                <Input
+                  type="checkbox"
+                  id="localhost"
+                  name="Localhost"
+                  value={this.state.localhost}
+                  onChange={this.handleInputChange}
+                />
+              </div>
+              <div className="col-sm-4">
+                <Input
+                  type="checkbox"
+                  id="isOpenOnIframe"
+                  name="Load On Iframe"
+                  value={this.state.isOpenOnIframe}
+                  onChange={this.handleInputChange}
+                />
+              </div>
+              <div className="col-sm-4">
+                <Input
+                  type="checkbox"
+                  id="disableJackpotGames"
+                  name="Disable Jackpot Games"
+                  value={this.state.disableJackpotGames}
+                  onChange={this.handleInputChange}
+                />
+              </div>
+            </div>
+            <input className="primary" type="submit" value="Get Token" />
+            <label className="button secondary" for="modal-control">
+              Set Balance
+            </label>
+            <input type="checkbox" id="modal-control" class="modal" />
+            <div role="dialog" aria-labelledby="dialog-title">
+              <div
+                class="card"
+                style={{ maxWidth: "800px", maxHeight: "800px" }}
+              >
+                <label for="modal-control" class="modal-close"></label>
+                <h3 class="section">
+                  Set Balance
+                  <svg
+                    cursor="pointer"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-refresh-cw"
+                    onClick={this.handleReloadIframe}
+                  >
+                    <polyline points="23 4 23 10 17 10"></polyline>
+                    <polyline points="1 20 1 14 7 14"></polyline>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                  </svg>
+                </h3>
+                <div class="section">
+                  <iframe
+                    ref={this.iFrameRef}
+                    src={`${this.state.setting.owUrl}?memId=${
+                      this.state.playerId
+                    }&&operator=${operatorMapper[this.state.auth.operatorId]}`}
+                    width="800"
+                    height="500"
+                    frameborder="0"
+                    allowtransparency="true"
+                  />
+                </div>
+              </div>
+            </div>
           </form>
           {(this.state.appType === 3 || this.state.isOpenOnIframe) && token && (
             <iframe
