@@ -19,15 +19,15 @@ export default class SignIn extends React.Component {
       obCustId: 0,
       memberName: randomString(8),
       language: "vi-VN",
-            currency: "INH",
+      currency: "$US",
       seq: "d,y,lumi",
       siteId: "4100300",
 			siteName: "lumi",
       ip: "",
       browserUserAgent: navigator.userAgent,
       auth: {
-				operatorId: "ONEworksVGCash",
-				operatorSecret: "VG@SC123",
+        partnerId: "ONEworks1",
+				partnerSecret: "ONEworks1@20luminet&",
       },
       token: "",
       redirectUrl: "#",
@@ -40,7 +40,6 @@ export default class SignIn extends React.Component {
       localhost: false,
       isOpenOnIframe: false,
       appType: 1,
-			isCash: true,
       partner: "1W",
       expandAdvanceSetting: false
     };
@@ -240,16 +239,16 @@ export default class SignIn extends React.Component {
                     />
                     <Input
                       type="text"
-                      id="operatorId"
-                      name="Operator Id"
-                      value={this.state.auth.operatorId}
+                      id="partnerId"
+                      name="Partner Id"
+                      value={this.state.auth.partnerId}
                       onChange={this.handleChangeAuth}
                     />
                     <Input
                       type="text"
-                      id="operatorSecret"
-                      name="Operator Secret"
-                      value={this.state.auth.operatorSecret}
+                      id="partnerSecret"
+                      name="Partner Secret"
+                      value={this.state.auth.partnerSecret}
                       onChange={this.handleChangeAuth}
                     />
                   </div>
@@ -321,7 +320,7 @@ export default class SignIn extends React.Component {
                   <div class="section">
                     <iframe
                       ref={this.iFrameRef}
-                      src={`${this.state.setting.owUrl}?memId=${this.state.obCustId}&&partner=${partnerMapper[this.state.auth.operatorId]}`}
+                      src={`${this.state.setting.owUrl}?memId=${this.state.obCustId}&&partner=${partnerMapper[this.state.auth.partnerId]}`}
                       width="800"
                       height="500"
                       frameborder="0"
