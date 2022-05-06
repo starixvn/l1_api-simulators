@@ -42,7 +42,8 @@ export default class SignIn extends React.Component {
       appType: 1,
       partner: "1W",
       expandAdvanceSetting: false,
-      instantMode: 1
+      instantMode: 1,
+      devIp: ""
     };
 
     this.instantModeSize = {
@@ -90,6 +91,7 @@ export default class SignIn extends React.Component {
       verifyResult: null,
       resource: null,
       localhost: null,
+      devIp: null
     });
     Axios.post("/signin/sso", request)
       .then((data) => data.data)
@@ -143,12 +145,19 @@ export default class SignIn extends React.Component {
 
   render() {
     let redirectUrl = this.state.redirectUrl;
-    const { localhost, token,instantMode } = this.state;
-    if (localhost && token) {
-      redirectUrl =
+    const { localhost, token,instantMode, devIp } = this.state;
+    if ( token) {
+      if(localhost) {
+        redirectUrl =
         this.state.appType === 2
           ? `${this.state.setting.mobileLocalhost}?token=${token}`
           : `${this.state.setting.localhost}?token=${token}&gameId=${this.state.gameId}`;
+      }
+
+      if(devIp) {
+        redirectUrl = `${devIp}?token=${token}`
+      }
+
     }
 
     return (
@@ -280,7 +289,6 @@ export default class SignIn extends React.Component {
               
               <div className="row">
                     <div className="col-sm-4">
-                     
                   <Input
                     type="checkbox"
                         id="localhost"
@@ -308,6 +316,15 @@ export default class SignIn extends React.Component {
                   />
                     </div>
                   </div>
+              <div className="row">
+              <Input
+                    type="text"
+                        id="devIp"
+                        name="Dev Machine IP"
+                        value={this.state.devIp}
+                        onChange={this.handleInputChange}
+                      />
+              </div>
               <input className="primary" type="submit" value="Get Token" />
               <label className="button secondary" for="modal-control">
                 Set Balance
