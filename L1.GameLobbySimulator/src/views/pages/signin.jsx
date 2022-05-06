@@ -45,16 +45,38 @@ export default class SignIn extends React.Component {
       disableJackpotGames: false,
       expandAdvanceSetting: false,
       operatorToken: "ONEworksVGCashToken",
+      instantMode: 1,
+    };
+
+    this.instantModeSize = {
+      1: {
+        width: "224px",
+        height: "370px",
+      },
+      2: {
+        width: "812px",
+        height: "456px",
+      },
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleChangeAuth = this.handleChangeAuth.bind(this);
     this.handleReloadIframe = this.handleReloadIframe.bind(this);
 
+    this.instantRef = React.createRef();
     this.iFrameRef = React.createRef();
   }
 
   handleInputChange(data) {
+    if (
+      this.state.appType === 3 &&
+      data.instantMode &&
+      this.state.instantMode !== data.instantMode
+    ) {
+      const iFrameElement = this.instantRef.current;
+      iFrameElement.src = iFrameElement.src;
+    }
+
     this.setState(data);
   }
 
@@ -125,7 +147,7 @@ export default class SignIn extends React.Component {
 
   render() {
     let redirectUrl = this.state.redirectUrl;
-    const { localhost, token } = this.state;
+    const { localhost, token, instantMode } = this.state;
     if (localhost && token) {
       redirectUrl =
         this.state.appType === 2
@@ -153,6 +175,8 @@ export default class SignIn extends React.Component {
                     onChange={this.handleInputChange}
                     id="appType"
                     value={this.state.appType}
+                    instantMode={this.state.instantMode}
+                    isOpenOnIframe={this.state.isOpenOnIframe}
                   />
                 </div>
                 <div className="col-sm-12 col-md-6">
@@ -368,8 +392,9 @@ export default class SignIn extends React.Component {
           </form>
           {(this.state.appType === 3 || this.state.isOpenOnIframe) && token && (
             <iframe
+              ref={this.instantRef}
               src={redirectUrl}
-              style={{ width: "100%", height: "calc(100vw *9 / 16)" }}
+              style={this.instantModeSize[instantMode]}
             />
           )}
         </div>
