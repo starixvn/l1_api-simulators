@@ -1,6 +1,6 @@
 import Axios from "axios";
 import React from "react";
-
+import QRCode from "react-qr-code";
 import Input from "../components/input.jsx";
 import AppType from "../components/select/app-type.jsx";
 import GameSelect from "../components/select/game.jsx";
@@ -155,7 +155,7 @@ export default class SignIn extends React.Component {
       }
 
       if(devIp) {
-        redirectUrl = `${devIp}?token=${token}`
+        redirectUrl = `http://${devIp}?token=${token}`
       }
 
     }
@@ -317,13 +317,16 @@ export default class SignIn extends React.Component {
                     </div>
                   </div>
               <div className="row">
-              <Input
+                <div className="col-sm-4">
+                <Input
                     type="text"
                         id="devIp"
                         name="Dev Machine IP"
                         value={this.state.devIp}
                         onChange={this.handleInputChange}
                       />
+                </div>
+    
               </div>
               <input className="primary" type="submit" value="Get Token" />
               <label className="button secondary" for="modal-control">
@@ -385,6 +388,8 @@ export default class SignIn extends React.Component {
               <legend>Token</legend>
               <div className="input-group vertical">
                 <label htmlFor="redirectUrl">Redirect</label>
+                <QRCode value={redirectUrl} size={128}></QRCode>
+
                 <a
                   className="col-sm-12"
                   style={{ color: "#0277bd" }}
@@ -400,6 +405,7 @@ export default class SignIn extends React.Component {
                 >
                   {redirectUrl}
                 </a>
+
               </div>
               <Input
                 type="text"
