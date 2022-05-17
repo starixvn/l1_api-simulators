@@ -19,7 +19,7 @@ export default class SignIn extends React.Component {
       playerId: 0,
       playerName: randomString(8),
       language: "vi-VN",
-      currency: "INH",
+      currency: "$US",
       seq: "d,y,lumi",
       siteId: "4100300",
       siteName: "lumi",
