@@ -2,7 +2,6 @@ import React from "react";
 
 import Balance from "../components/member/balance.jsx";
 import EndGame from "../components/member/end-game.jsx";
-import HitJackpot from "../components/member/hit-jackpot.jsx";
 import NotifyLogin from "../components/member/notify-login.jsx";
 import PlaceBet from "../components/member/place-bet.jsx";
 import VoidGame from "../components/member/void-game.jsx";
@@ -16,7 +15,6 @@ class MemberPage extends React.Component {
 				<PlaceBet />
 				<EndGame />
 				<VoidGame />
-				<HitJackpot />
 			</div>
 		);
 	}
