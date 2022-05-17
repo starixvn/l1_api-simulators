@@ -9,10 +9,10 @@ const appSelectorConfig = {
     { value: 2, name: "Saba Mobi" },
     { value: 3, name: "Mini Saba.Club" },
   ],
-    instantModes: [
-      { value: 1, name: "Portrait" },
-      { value: 2, name: "Landscape" },
-    ],
+  instantModes: [
+    { value: 1, name: "Portrait" },
+    { value: 2, name: "Landscape" },
+  ],
 };
 
 export default class AppType extends React.Component {
@@ -32,16 +32,17 @@ export default class AppType extends React.Component {
   }
   
   render() {
-    const { value,id, instantMode, isOpenOnIframe } = this.props;
+    const { value, id, instantMode, isOpenOnIframe } = this.props;
 
-    return<>
-      <Select
-        {...appSelectorConfig}
-        id={id}
-        value={value}
-        onChange={this.handleChange}
-      />
-     {(value === 3 || isOpenOnIframe) &&
+    return (
+      <>
+        <Select
+          {...appSelectorConfig}
+          id={id}
+          value={value}
+          onChange={this.handleChange}
+        />
+        {(value === 3 || isOpenOnIframe) &&
           appSelectorConfig.instantModes.map((mode) => (
             <div className="input-group">
               <input
@@ -53,8 +54,9 @@ export default class AppType extends React.Component {
                 checked={mode.value === instantMode}
               />
               <label htmlFor={`${mode.value}${mode.name}`}>{mode.name}</label>
-          </div>
+            </div>
           ))}
       </>
+    );
   }
 }

@@ -24,11 +24,9 @@ namespace OW.ApiSimulator
         {
             services.AddOW();
             services.Configure<ResultPageConfiguration>(Configuration.GetSection("ResultPageConfiguration"));
+            services.Configure<SabaClubSettings>(Configuration.GetSection("SabaClubSettings"));
 
-            services.AddHttpClient<ISabaClubService, SabaClubService>(httpClient =>
-            {
-                httpClient.BaseAddress = new Uri(Configuration["SabaClubSettings:BaseUrl"]);
-            });
+            services.AddHttpClient<ISabaClubService, SabaClubService>();
 
             services.AddHttpClient<IResultPageService, ResultPageService>(httpClient =>
             {

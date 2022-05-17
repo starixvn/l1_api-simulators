@@ -4,7 +4,7 @@
     {
         public int? ObTransId { get; set; }
 
-        public int? ObCustId { get; set; }
+        public int? PlayerId { get; set; }
 
         public decimal Balance { get; set; }
 

@@ -8,8 +8,8 @@ namespace OW.ApiSimulator.Extensions
     {
         public static void AddOW(this IServiceCollection services)
         {
-            var partners = Constants.Partners.Select(x => new Partner(x));
-            services.AddSingleton(partners.ToList());
+            var operators = Constants.Operators.Select(x => new Operator(x));
+            services.AddSingleton(operators.ToList());
         }
     }
 }

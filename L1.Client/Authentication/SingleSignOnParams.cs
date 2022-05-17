@@ -14,7 +14,10 @@
             string iP,
             string browserUserAgent,
             string seq,
-            byte? gameTypeId)
+            byte? gameTypeId,
+            string siteName,
+            bool isCash,
+            bool isMobi)
             : this(
                   clientId,
                   clientSecret,
@@ -26,7 +29,10 @@
                   iP,
                   browserUserAgent,
                   seq,
-                  gameTypeId)
+                  gameTypeId,
+                  siteName,
+                  isCash,
+                  isMobi)
         {
         }
 
@@ -41,7 +47,10 @@
             string iP,
             string browserUserAgent,
             string seq,
-            byte? gameTypeId)
+            byte? gameTypeId,
+            string siteName,
+            bool isCash,
+            bool isMobi)
         {
             Auth = new Auth
             {
@@ -58,6 +67,9 @@
             BrowserUserAgent = browserUserAgent;
             Seq = seq;
             GameTypeId = gameTypeId;
+            SiteName = siteName;
+            IsCash = isCash;
+            IsMobi = isMobi;
         }
 
         public string ClientId { get; }
@@ -79,6 +91,12 @@
         public string Seq { get; }
 
         public byte? GameTypeId { get; }
+
+        public string SiteName { get; }
+
+        public bool IsCash { get; }
+
+        public bool IsMobi { get; }
 
         public Auth Auth { get; }
     }

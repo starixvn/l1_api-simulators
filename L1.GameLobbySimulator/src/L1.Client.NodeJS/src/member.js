@@ -24,7 +24,11 @@ const metadata = [
 	{
 		action: "/Member/EnterPortal",
 		name: "enterPortal",
-	}
+	},
+	{
+		action: "/Member/HitJackpot",
+		name: "hitJackpot",
+	},
 ];
 
 module.exports = (config) => createAction(metadata, config);
