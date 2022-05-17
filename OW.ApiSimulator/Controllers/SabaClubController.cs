@@ -265,7 +265,7 @@ namespace OW.ApiSimulator.Controllers
         [Route("/[controller]/[action]")]
         public async Task<IActionResult> RetrieveEndGameInfo(RetriveEndGameInfoViewModel viewModel, [FromServices] ISabaClubService sabaClubService)
         {
-            viewModel.Result = await sabaClubService.RetrieveEndGameInfoAsync(viewModel.Request);
+            viewModel.Result = await sabaClubService.RetrieveEndGameInfoAsync(viewModel.Request, viewModel.Environment);
             return View(viewModel);
         }
 

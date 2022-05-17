@@ -3,28 +3,34 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using OW.ApiSimulator.Configuration;
 using OW.ApiSimulator.Models.Saba;
 
 namespace OW.ApiSimulator.Services
 {
     public interface ISabaClubService
     {
-        Task<SabaResponse<EndGameInfoResult>> RetrieveEndGameInfoAsync(EndGameInfoRequest request);
+        Task<SabaResponse<EndGameInfoResult>> RetrieveEndGameInfoAsync(EndGameInfoRequest request, string environment);
     }
 
     public class SabaClubService : ISabaClubService
     {
         private readonly HttpClient httpClient;
         private const string defaultMediaType = "application/json";
+        private readonly SabaClubSettings settings;
 
-        public SabaClubService(HttpClient httpClient)
+        public SabaClubService(HttpClient httpClient, IOptionsSnapshot<SabaClubSettings> optionsSnapshot)
         {
             this.httpClient = httpClient;
+            settings = optionsSnapshot.Value;
         }
 
-        public async Task<SabaResponse<EndGameInfoResult>> RetrieveEndGameInfoAsync(EndGameInfoRequest request)
+        public async Task<SabaResponse<EndGameInfoResult>> RetrieveEndGameInfoAsync(EndGameInfoRequest request, string environment)
         {
+            httpClient.BaseAddress = new Uri(settings.EnvironmentBaseUrls[environment]);
+
             var requestBody = JsonConvert.SerializeObject(request);
             var content = new StringContent(requestBody, Encoding.UTF8, defaultMediaType);
 
