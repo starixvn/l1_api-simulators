@@ -413,7 +413,7 @@ export default class SignIn extends React.Component {
                   <iframe
                     ref={this.iFrameRef}
                     src={`${this.state.setting.owUrl}?memId=${
-                      this.state.obCustId
+                      this.state.playerId
                     }&&operator=${operatorMapper[this.state.auth.operatorId]}`}
                     width="800"
                     height="500"
