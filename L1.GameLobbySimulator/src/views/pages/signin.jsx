@@ -20,7 +20,6 @@ export default class SignIn extends React.Component {
       playerName: randomString(8),
       language: "vi-VN",
       currency: "$US",
-      seq: "d,y,lumi",
       siteId: "4100300",
       siteName: "lumi",
       ip: "",
@@ -300,13 +299,6 @@ export default class SignIn extends React.Component {
                   />
                 </div>
                 <div className="col-sm-12 col-md-6">
-                  <Input
-                    type="text"
-                    id="seq"
-                    name="SEQ"
-                    value={this.state.seq}
-                    onChange={this.handleInputChange}
-                  />
                   <Input
                     type="text"
                     id="ip"
