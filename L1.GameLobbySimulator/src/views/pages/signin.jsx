@@ -7,6 +7,10 @@ import GameSelect from "../components/select/game.jsx";
 import LanguageSelect from "../components/select/language.jsx";
 import { randomString, showAlert } from "../util.jsx";
 
+const partnerMapper = {
+  ONEworks1: "ow",
+  SBO: "sbo",
+};
 export default class SignIn extends React.Component {
   constructor() {
     super();
@@ -36,6 +40,18 @@ export default class SignIn extends React.Component {
       localhost: false,
       appType: 1,
       partner: "1W",
+      instantMode: 1,
+    };
+
+    this.instantModeSize = {
+      1: {
+        width: "224px",
+        height: "370px",
+      },
+      2: {
+        width: "812px",
+        height: "456px",
+      },
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -43,9 +59,19 @@ export default class SignIn extends React.Component {
     this.handleReloadIframe = this.handleReloadIframe.bind(this);
 
     this.iFrameRef = React.createRef();
+    this.instantRef = React.createRef();
   }
 
   handleInputChange(data) {
+    if (
+      this.state.appType === 3 &&
+      data.instantMode &&
+      this.state.instantMode !== data.instantMode
+    ) {
+      const iFrameElement = this.instantRef.current;
+      iFrameElement.src = iFrameElement.src;
+    }
+
     this.setState(data);
   }
 
@@ -116,7 +142,7 @@ export default class SignIn extends React.Component {
 
   render() {
     let redirectUrl = this.state.redirectUrl;
-    const { localhost, token } = this.state;
+    const { localhost, token, instantMode } = this.state;
     if (localhost && token) {
       redirectUrl =
         this.state.appType === 2
@@ -181,6 +207,7 @@ export default class SignIn extends React.Component {
                     onChange={this.handleInputChange}
                     id="appType"
                     value={this.state.appType}
+                    instantMode={this.state.instantMode}
                   />
                 </div>
                 <div className="col-sm-12 col-md-6">
@@ -270,7 +297,9 @@ export default class SignIn extends React.Component {
                   <div class="section">
                     <iframe
                       ref={this.iFrameRef}
-                      src={`${this.state.setting.owUrl}?memId=${this.state.obCustId}`}
+                      src={`${this.state.setting.owUrl}?memId=${
+                        this.state.obCustId
+                      }&&partner=${partnerMapper[this.state.auth.partnerId]}`}
                       width="800"
                       height="500"
                       frameborder="0"
@@ -283,8 +312,9 @@ export default class SignIn extends React.Component {
           </form>
           {this.state.appType === 3 && token && (
             <iframe
+              ref={this.instantRef}
               src={redirectUrl}
-              style={{ width: "100%", height: "calc(100vw *9 / 16)" }}
+              style={this.instantModeSize[instantMode]}
             />
           )}
         </div>
