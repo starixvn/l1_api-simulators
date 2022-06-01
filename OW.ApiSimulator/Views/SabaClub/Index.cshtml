@@ -1,4 +1,4 @@
-﻿@inject List<Partner> Partners
+﻿@inject List<Operator> Operators
 
 <div>
     <div>Customer</div>
@@ -9,11 +9,11 @@
 </div>
 
 <div>
-    <div>Update Partner Results:</div>
+    <div>Update Operator Results:</div>
     <ul>
-        @foreach (var partner in Partners)
+        @foreach (var @operator in Operators)
         {
-            <li><a target="_blank" asp-action="UpdatePartner" asp-route-name="@partner.Name">@partner.Name</a></li>
+            <li><a target="_blank" asp-action="UpdateOperator" asp-route-name="@(@operator.Name)">@(@operator.Name)</a></li>
 
         }
 

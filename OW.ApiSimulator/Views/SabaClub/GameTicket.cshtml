@@ -3,12 +3,12 @@
     <fieldset>
         <legend>Auth</legend>
         <div class="form-group">
-            <label asp-for="Request.Auth.PartnerId"></label>
-            <input class="form-control" asp-for="Request.Auth.PartnerId" />
+            <label asp-for="Request.Auth.OperatorId"></label>
+            <input class="form-control" asp-for="Request.Auth.OperatorId" />
         </div>
         <div class="form-group">
-            <label asp-for="Request.Auth.PartnerSecret"></label>
-            <input class="form-control" asp-for="Request.Auth.PartnerSecret" />
+            <label asp-for="Request.Auth.OperatorSecret"></label>
+            <input class="form-control" asp-for="Request.Auth.OperatorSecret" />
         </div>
     </fieldset><div class="form-group">
         <label>Game Type</label>
@@ -20,7 +20,7 @@
     </div>
     <div class="form-group">
         <label>Member Id</label>
-        <input class="form-control" type="number" asp-for="Request.ObCustId" />
+        <input class="form-control" type="number" asp-for="Request.PlayerId" />
     </div>
 
     <div class="form-group">
@@ -33,6 +33,11 @@
             <option value="zh-CN">Chinese (Simplified)</option>
             <option value="zh-TW">Chinese (Original)</option>
         </select>
+    </div>
+
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" asp-for="Request.FreeBet" />
+        <label class="form-check-label" asp-for="Request.FreeBet"></label>
     </div>
     <input class="btn btn-primary" type="submit" value="Submit" />
 </form>

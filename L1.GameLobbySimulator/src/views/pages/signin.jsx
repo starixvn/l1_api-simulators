@@ -1,13 +1,13 @@
 import Axios from "axios";
 import React from "react";
-
+import QRCode from "react-qr-code";
 import Input from "../components/input.jsx";
 import AppType from "../components/select/app-type.jsx";
 import GameSelect from "../components/select/game.jsx";
 import LanguageSelect from "../components/select/language.jsx";
 import { randomString, showAlert } from "../util.jsx";
 
-const partnerMapper = {
+const operatorMapper = {
   ONEworks1: "ow",
   SBO: "sbo",
 };
@@ -16,18 +16,17 @@ export default class SignIn extends React.Component {
     super();
 
     this.state = {
-      obCustId: 0,
-      memberName: randomString(8),
+      playerId: 0,
+      playerName: randomString(8),
       language: "vi-VN",
       currency: "$US",
-      seq: "d,y,lumi",
       siteId: "4100300",
       siteName: "lumi",
       ip: "",
       browserUserAgent: navigator.userAgent,
       auth: {
-        partnerId: "ONEworks1",
-        partnerSecret: "ONEworks1@20luminet&",
+        operatorId: "ONEworks1",
+        operatorSecret: "ONEworks1@20luminet&",
       },
       token: "",
       redirectUrl: "#",
@@ -38,9 +37,26 @@ export default class SignIn extends React.Component {
       },
       domain: "example.com",
       localhost: false,
+      isOpenOnIframe: false,
       appType: 1,
+      isCash: true,
       partner: "1W",
+      expandAdvanceSetting: false,
       instantMode: 1,
+      devIp: "",
+      operatorToken: "ONEworks1Token",
+      instantMode: 1,
+    };
+
+    this.instantModeSize = {
+      1: {
+        width: "224px",
+        height: "370px",
+      },
+      2: {
+        width: "812px",
+        height: "456px",
+      },
     };
 
     this.instantModeSize = {
@@ -58,8 +74,8 @@ export default class SignIn extends React.Component {
     this.handleChangeAuth = this.handleChangeAuth.bind(this);
     this.handleReloadIframe = this.handleReloadIframe.bind(this);
 
-    this.iFrameRef = React.createRef();
     this.instantRef = React.createRef();
+    this.iFrameRef = React.createRef();
   }
 
   handleInputChange(data) {
@@ -89,6 +105,7 @@ export default class SignIn extends React.Component {
       verifyResult: null,
       resource: null,
       localhost: null,
+      devIp: null,
     });
     Axios.post("/signin/sso", request)
       .then((data) => data.data)
@@ -126,11 +143,11 @@ export default class SignIn extends React.Component {
     const searchParams = new URLSearchParams(
       this.props.history.location.search
     );
-    const obCustId =
+    const playerId =
       Number(searchParams.get("obCustId")) || (Math.random() * 10000000) >> 0;
     const appType = parseInt(searchParams.get("appType")) || 1;
 
-    this.setState({ setting: data, ip, obCustId, appType }, () => {
+    this.setState({ setting: data, ip, playerId, appType }, () => {
       this.handleSubmit();
     });
   }
@@ -142,40 +159,51 @@ export default class SignIn extends React.Component {
 
   render() {
     let redirectUrl = this.state.redirectUrl;
-    const { localhost, token, instantMode } = this.state;
-    if (localhost && token) {
-      redirectUrl =
-        this.state.appType === 2
-          ? `${this.state.setting.mobileLocalhost}?token=${token}`
-          : `${this.state.setting.localhost}?token=${token}&gameId=${this.state.gameId}`;
+    const { localhost, token, instantMode, devIp } = this.state;
+    if (token) {
+      if (localhost) {
+        redirectUrl =
+          this.state.appType === 2
+            ? `${this.state.setting.mobileLocalhost}?token=${token}`
+            : `${this.state.setting.localhost}?token=${token}&gameId=${this.state.gameId}`;
+      }
+
+      if (devIp) {
+        redirectUrl = `http://${devIp}?token=${token}`;
+      }
     }
 
     return (
       <div className="container">
         <div className="section">
           <form onSubmit={(event) => this.handleSubmit(event)}>
-            <fieldset className="container">
-              <legend>Get Token</legend>
+            <fieldset>
+              <legend>Basic</legend>
               <div className="row">
                 <div className="col-sm-12 col-md-6">
                   <Input
                     type="int"
-                    id="obCustId"
+                    id="playerId"
                     name="Member ID"
-                    value={this.state.obCustId}
+                    value={this.state.playerId}
                     onChange={this.handleInputChange}
                   />
+
+                  <AppType
+                    onChange={this.handleInputChange}
+                    id="appType"
+                    value={this.state.appType}
+                    instantMode={this.state.instantMode}
+                    isOpenOnIframe={this.state.isOpenOnIframe}
+                  />
+                </div>
+                <div className="col-sm-12 col-md-6">
                   <Input
                     type="text"
-                    id="memberName"
+                    id="playerName"
                     name="Member Username"
-                    value={this.state.memberName}
+                    value={this.state.playerName}
                     onChange={this.handleInputChange}
-                  />
-                  <LanguageSelect
-                    onChange={this.handleInputChange}
-                    id="language"
-                    value={this.state.language}
                   />
                   <Input
                     type="text"
@@ -184,40 +212,39 @@ export default class SignIn extends React.Component {
                     value={this.state.currency}
                     onChange={this.handleInputChange}
                   />
-                  <GameSelect
-                    onChange={this.handleInputChange}
-                    id="gameId"
-                    value={this.state.gameId}
-                  />
-                  <Input
-                    type="text"
-                    id="browserUserAgent"
-                    name="Browser User Agent"
-                    value={this.state.browserUserAgent}
-                    onChange={this.handleInputChange}
-                  />
-                  <Input
-                    type="checkbox"
-                    id="localhost"
-                    name="Localhost"
-                    value={this.state.localhost}
-                    onChange={this.handleInputChange}
-                  />
-                  <AppType
-                    onChange={this.handleInputChange}
-                    id="appType"
-                    value={this.state.appType}
-                    instantMode={this.state.instantMode}
-                  />
                 </div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend
+                onClick={() =>
+                  this.setState({
+                    expandAdvanceSetting: !this.state.expandAdvanceSetting,
+                  })
+                }
+                style={{ cursor: "pointer" }}
+              >
+                Advance
+                <img
+                  src="/images/icon-expand.png"
+                  alt="landscape-icon"
+                  style={{
+                    width: "20px",
+                    "vertical-align": "middle",
+                    padding: "5px",
+                    transform: !this.state.expandAdvanceSetting
+                      ? "rotate(180deg)"
+                      : null,
+                  }}
+                />
+              </legend>
+              <div
+                className="row"
+                style={{
+                  display: this.state.expandAdvanceSetting ? "flex" : "none",
+                }}
+              >
                 <div className="col-sm-12 col-md-6">
-                  <Input
-                    type="text"
-                    id="seq"
-                    name="SEQ"
-                    value={this.state.seq}
-                    onChange={this.handleInputChange}
-                  />
                   <Input
                     type="text"
                     id="siteId"
@@ -232,6 +259,46 @@ export default class SignIn extends React.Component {
                     value={this.state.siteName}
                     onChange={this.handleInputChange}
                   />
+                  <LanguageSelect
+                    onChange={this.handleInputChange}
+                    id="language"
+                    value={this.state.language}
+                  />
+
+                  <Input
+                    type="text"
+                    id="siteId"
+                    name="Site Id"
+                    value={this.state.siteId}
+                    onChange={this.handleInputChange}
+                  />
+                  <Input
+                    type="text"
+                    id="siteName"
+                    name="Site Name"
+                    value={this.state.siteName}
+                    onChange={this.handleInputChange}
+                  />
+                  <LanguageSelect
+                    onChange={this.handleInputChange}
+                    id="language"
+                    value={this.state.language}
+                  />
+
+                  <GameSelect
+                    onChange={this.handleInputChange}
+                    id="gameId"
+                    value={this.state.gameId}
+                  />
+                  <Input
+                    type="text"
+                    id="browserUserAgent"
+                    name="Browser User Agent"
+                    value={this.state.browserUserAgent}
+                    onChange={this.handleInputChange}
+                  />
+                </div>
+                <div className="col-sm-12 col-md-6">
                   <Input
                     type="text"
                     id="ip"
@@ -248,69 +315,108 @@ export default class SignIn extends React.Component {
                   />
                   <Input
                     type="text"
-                    id="partnerId"
-                    name="Partner Id"
-                    value={this.state.auth.partnerId}
+                    id="operatorId"
+                    name="Operator Id"
+                    value={this.state.auth.operatorId}
                     onChange={this.handleChangeAuth}
                   />
                   <Input
                     type="text"
-                    id="partnerSecret"
-                    name="Partner Secret"
-                    value={this.state.auth.partnerSecret}
+                    id="operatorSecret"
+                    name="Operator Secret"
+                    value={this.state.auth.operatorSecret}
                     onChange={this.handleChangeAuth}
+                  />
+                  <Input
+                    type="text"
+                    id="operatorToken"
+                    name="Operator Token"
+                    value={this.state.operatorToken}
+                    onChange={this.handleInputChange}
                   />
                 </div>
               </div>
-              <input className="primary" type="submit" value="Get Token" />
-              <label className="button secondary" for="modal-control">
-                Set Balance
-              </label>
-              <input type="checkbox" id="modal-control" class="modal" />
-              <div role="dialog" aria-labelledby="dialog-title">
-                <div
-                  class="card"
-                  style={{ maxWidth: "800px", maxHeight: "800px" }}
-                >
-                  <label for="modal-control" class="modal-close"></label>
-                  <h3 class="section">
-                    Set Balance
-                    <svg
-                      cursor="pointer"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="feather feather-refresh-cw"
-                      onClick={this.handleReloadIframe}
-                    >
-                      <polyline points="23 4 23 10 17 10"></polyline>
-                      <polyline points="1 20 1 14 7 14"></polyline>
-                      <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
-                    </svg>
-                  </h3>
-                  <div class="section">
-                    <iframe
-                      ref={this.iFrameRef}
-                      src={`${this.state.setting.owUrl}?memId=${
-                        this.state.obCustId
-                      }&&partner=${partnerMapper[this.state.auth.partnerId]}`}
-                      width="800"
-                      height="500"
-                      frameborder="0"
-                      allowtransparency="true"
-                    />
-                  </div>
+            </fieldset>
+
+            <div className="row">
+              <div className="col-sm-4">
+                <Input
+                  type="checkbox"
+                  id="localhost"
+                  name="Localhost"
+                  value={this.state.localhost}
+                  onChange={this.handleInputChange}
+                />
+              </div>
+              <div className="col-sm-4">
+                <Input
+                  type="checkbox"
+                  id="isOpenOnIframe"
+                  name="Load On Iframe"
+                  value={this.state.isOpenOnIframe}
+                  onChange={this.handleInputChange}
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-sm-4">
+                <Input
+                  type="text"
+                  id="devIp"
+                  name="Dev Machine IP"
+                  value={this.state.devIp}
+                  onChange={this.handleInputChange}
+                />
+              </div>
+            </div>
+            <input className="primary" type="submit" value="Get Token" />
+            <label className="button secondary" for="modal-control">
+              Set Balance
+            </label>
+            <input type="checkbox" id="modal-control" class="modal" />
+            <div role="dialog" aria-labelledby="dialog-title">
+              <div
+                class="card"
+                style={{ maxWidth: "800px", maxHeight: "800px" }}
+              >
+                <label for="modal-control" class="modal-close"></label>
+                <h3 class="section">
+                  Set Balance
+                  <svg
+                    cursor="pointer"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-refresh-cw"
+                    onClick={this.handleReloadIframe}
+                  >
+                    <polyline points="23 4 23 10 17 10"></polyline>
+                    <polyline points="1 20 1 14 7 14"></polyline>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                  </svg>
+                </h3>
+                <div class="section">
+                  <iframe
+                    ref={this.iFrameRef}
+                    src={`${this.state.setting.owUrl}?memId=${
+                      this.state.playerId
+                    }&&operator=${operatorMapper[this.state.auth.operatorId]}`}
+                    width="800"
+                    height="500"
+                    frameborder="0"
+                    allowtransparency="true"
+                  />
                 </div>
               </div>
-            </fieldset>
+            </div>
           </form>
-          {this.state.appType === 3 && token && (
+          {(this.state.appType === 3 || this.state.isOpenOnIframe) && token && (
             <iframe
               ref={this.instantRef}
               src={redirectUrl}
@@ -324,6 +430,7 @@ export default class SignIn extends React.Component {
               <legend>Token</legend>
               <div className="input-group vertical">
                 <label htmlFor="redirectUrl">Redirect</label>
+                <QRCode value={redirectUrl} size={128}></QRCode>
                 <a
                   className="col-sm-12"
                   style={{ color: "#0277bd" }}

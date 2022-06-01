@@ -2,6 +2,6 @@
 {
     public class EndGameResult : OWResult
     {
-        public int? ObCustId { get; set; }
+        public int? PlayerId { get; set; }
     }
 }

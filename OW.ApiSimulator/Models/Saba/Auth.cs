@@ -2,8 +2,8 @@
 {
     public class Auth
     {
-        public string PartnerId { get; set; } = "ONEworks1";
+        public string OperatorId { get; set; } = "ONEworksVGCash";
 
-        public string PartnerSecret { get; set; } = "ONEworks1@20luminet&";
+        public string OperatorSecret { get; set; } = "VG@SC123";
     }
 }

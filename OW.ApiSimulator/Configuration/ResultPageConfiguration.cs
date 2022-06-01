@@ -7,9 +7,5 @@
         public string GameTicketEndPoint { get; set; }
 
         public string GameTicketQueryKeyEndPoint { get; set; }
-
-        public string Key { get; set; }
-
-        public string Name { get; set; }
     }
 }

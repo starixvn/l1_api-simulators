@@ -4,19 +4,21 @@
     {
         public long GameRoundId { get; set; }
 
-        public int ObCustId { get; set; }
+        public int PlayerId { get; set; }
 
         public byte GameTypeId { get; set; }
 
         public Auth Auth { get; set; } = new Auth();
 
         public string Language { get; set; }
+
+        public bool FreeBet { get; set; }
     }
 
     public class Auth
     {
-        public string PartnerId { get; set; }
+        public string OperatorId { get; set; }
 
-        public string PartnerSecret { get; set; }
+        public string OperatorSecret { get; set; }
     }
 }
