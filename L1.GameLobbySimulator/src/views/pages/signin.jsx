@@ -191,7 +191,7 @@ export default class SignIn extends React.Component {
                       <Input
                         type="int"
                         id="playerId"
-                        name="Member ID"
+                        name="Player ID"
                         value={this.state.playerId}
                         onChange={this.handleInputChange}
                       />
