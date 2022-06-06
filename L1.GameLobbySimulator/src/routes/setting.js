@@ -5,7 +5,6 @@ const GameClient = require("l1.client.node-js")();
 
 router.get("/setting/data", async (req, res) => {
   const config = await fs.readFileSync("src/game-client-config.json");
-
   res.send({ ...JSON.parse(config), expireIn: GameClient.config.expired });
 });
 

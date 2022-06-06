@@ -6,11 +6,13 @@ import AppType from "../components/select/app-type.jsx";
 import GameSelect from "../components/select/game.jsx";
 import LanguageSelect from "../components/select/language.jsx";
 import { randomString, showAlert } from "../util.jsx";
+import GameLobbyURLMapper from '../constants/lobby-url';
 
 const operatorMapper = {
   ONEworks1: "ow",
   SBO: "sbo",
 };
+
 export default class SignIn extends React.Component {
   constructor() {
     super();
@@ -160,6 +162,8 @@ export default class SignIn extends React.Component {
   render() {
     let redirectUrl = this.state.redirectUrl;
     const { localhost, token, instantMode, devIp } = this.state;
+    const qrURL = `${GameLobbyURLMapper[this.state.setting.env]}/signin?obCustId=${this.state.playerId}` 
+
     if (token) {
       if (localhost) {
         redirectUrl =
@@ -181,14 +185,21 @@ export default class SignIn extends React.Component {
               <legend>Basic</legend>
               <div className="row">
                 <div className="col-sm-12 col-md-6">
-                  <Input
-                    type="int"
-                    id="playerId"
-                    name="Member ID"
-                    value={this.state.playerId}
-                    onChange={this.handleInputChange}
-                  />
-
+                  <div className="row">
+                    
+                    <div className="col-sm-10 col-md-11">
+                      <Input
+                        type="int"
+                        id="playerId"
+                        name="Member ID"
+                        value={this.state.playerId}
+                        onChange={this.handleInputChange}
+                      />
+                    </div>
+                    <div className="col-sm-2 col-md-1">
+                      <QRCode value={qrURL} size={75}></QRCode>
+                    </div>
+                  </div>
                   <AppType
                     onChange={this.handleInputChange}
                     id="appType"
@@ -430,7 +441,6 @@ export default class SignIn extends React.Component {
               <legend>Token</legend>
               <div className="input-group vertical">
                 <label htmlFor="redirectUrl">Redirect</label>
-                <QRCode value={redirectUrl} size={128}></QRCode>
                 <a
                   className="col-sm-12"
                   style={{ color: "#0277bd" }}

@@ -1,4 +1,5 @@
 {
+    "evn": "DEV",
     "apiUrl": "http://l2-api.lumigame.com",
     "authUrl": "http://l2-auth.lumigame.com",
     "client": {
