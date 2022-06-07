@@ -162,7 +162,7 @@ export default class SignIn extends React.Component {
   render() {
     let redirectUrl = this.state.redirectUrl;
     const { localhost, token, instantMode, devIp } = this.state;
-    const qrURL = `${GameLobbyURLMapper[this.state.setting.env]}/signin?obCustId=${this.state.playerId}` 
+    const qrURL = `${GameLobbyURLMapper[this.state.setting.evn]}/signin?obCustId=${this.state.playerId}` 
 
     if (token) {
       if (localhost) {
