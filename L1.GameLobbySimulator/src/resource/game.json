@@ -926,5 +926,15 @@
         "name": "N/A"
       }
     ]
+  },
+  {
+    "id": 48,
+    "name": "Blockchain Baccarat",
+    "choice": [
+      {
+        "id": 0,
+        "name": "N/A"
+      }
+    ]
   }
 ]
