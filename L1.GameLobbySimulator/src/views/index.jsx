@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 
 import Header from "./components/header.jsx";
+import Environment from "./components/select/environment.jsx";
 import routes from "./routes.jsx";
 
 const history = createBrowserHistory();

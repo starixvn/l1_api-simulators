@@ -35,14 +35,23 @@ export default class AppType extends React.Component {
     const { value, id, instantMode, isOpenOnIframe } = this.props;
 
     return (
-      <>
-        <Select
-          {...appSelectorConfig}
-          id={id}
-          value={value}
-          onChange={this.handleChange}
+      <div className="input-group vertical">
+      <label>App Type</label>
+      <div>
+      {appSelectorConfig.options.map(option => (<div className="input-group">
+        <input
+          type="radio"
+          id={option.value}
+          name="appType"
+          value={option.value}
+          onChange={() =>this.handleChange({appType: option.value})}
+          checked={option.value === value}
         />
-        {(value === 3 || isOpenOnIframe) &&
+        <label htmlFor={option.value}>{option.name}</label>
+      </div>))}
+  
+      <div>
+      {(value === 3 || isOpenOnIframe) &&
           appSelectorConfig.instantModes.map((mode) => (
             <div className="input-group">
               <input
@@ -56,7 +65,11 @@ export default class AppType extends React.Component {
               <label htmlFor={`${mode.value}${mode.name}`}>{mode.name}</label>
             </div>
           ))}
-      </>
+      </div>
+        
+      </div>
+        
+      </div>
     );
   }
 }
