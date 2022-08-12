@@ -1,7 +1,6 @@
 {
-    "evn": "DEV",
-    "apiUrl": "http://l2-api.lumigame.com",
-    "authUrl": "http://l2-auth.lumigame.com",
+    "apiUrl": "http://l1-api.lumigame.com",
+    "authUrl": "http://l1-auth.lumigame.com",
     "client": {
         "id": "game-server",
         "secret": "gameserver@20luminet&"
