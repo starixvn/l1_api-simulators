@@ -864,6 +864,26 @@
     ]
   },
   {
+    "id": 49,
+    "name": "Way To Goal",
+    "choice": [
+      {
+        "id": 0,
+        "name": "N/A"
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "name": "Mega Big Small",
+    "choice": [
+      {
+        "id": 0,
+        "name": "N/A"
+      }
+    ]
+  },
+  {
     "id": 52,
     "name": "Mega Keno",
     "choice": [
