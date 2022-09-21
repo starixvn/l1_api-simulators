@@ -6,11 +6,18 @@ import AppType from "../components/select/app-type.jsx";
 import GameSelect from "../components/select/game.jsx";
 import LanguageSelect from "../components/select/language.jsx";
 import { randomString, showAlert } from "../util.jsx";
-import GameLobbyURLMapper from '../constants/lobby-url';
+import {
+  SC1GameLobbyURLMapper,
+  VG2GameLobbyURLMapper,
+} from "../constants/lobby-url";
+import config from "../../game-client-config.json";
 
 const operatorMapper = {
   ONEworks1: "ow",
   SBO: "sbo",
+};
+const IsSystemTypeSC1 = () => {
+  return config.systemType === "SC1";
 };
 
 export default class SignIn extends React.Component {
@@ -21,14 +28,15 @@ export default class SignIn extends React.Component {
       playerId: 0,
       playerName: randomString(8),
       language: "vi-VN",
-      currency: "$US",
+      currency: IsSystemTypeSC1() ? "$US" : "INH",
+      seq: "d,y,lumi",
       siteId: "4100300",
       siteName: "lumi",
       ip: "",
       browserUserAgent: navigator.userAgent,
       auth: {
-        operatorId: "ONEworks1",
-        operatorSecret: "ONEworks1@20luminet&",
+        operatorId: IsSystemTypeSC1() ? "ONEworks1" : "ONEworksVGCash",
+        operatorSecret: IsSystemTypeSC1() ? "ONEworks1@20luminet&" : "VG@SC123",
       },
       token: "",
       redirectUrl: "#",
@@ -43,11 +51,13 @@ export default class SignIn extends React.Component {
       appType: 1,
       isCash: true,
       partner: "1W",
+      disableJackpotGames: false,
       expandAdvanceSetting: false,
       instantMode: 1,
       devIp: "",
-      operatorToken: "ONEworks1Token",
-      instantMode: 1,
+      operatorToken: IsSystemTypeSC1()
+        ? "ONEworks1Token"
+        : "ONEworksVGCashToken",
     };
 
     this.instantModeSize = {
@@ -112,7 +122,9 @@ export default class SignIn extends React.Component {
     Axios.post("/signin/sso", request)
       .then((data) => data.data)
       .then((data) => (data.error ? Promise.reject(data.error) : data))
-      .then((token) => this.setState(token))
+      .then((token) => {
+        this.setState(token);
+      })
       .catch(showAlert);
 
     event && event.preventDefault();
@@ -148,7 +160,6 @@ export default class SignIn extends React.Component {
     const playerId =
       Number(searchParams.get("obCustId")) || (Math.random() * 10000000) >> 0;
     const appType = parseInt(searchParams.get("appType")) || 1;
-
     this.setState({ setting: data, ip, playerId, appType }, () => {
       this.handleSubmit();
     });
@@ -161,15 +172,18 @@ export default class SignIn extends React.Component {
 
   render() {
     let redirectUrl = this.state.redirectUrl;
-    const { localhost, token, instantMode, devIp } = this.state;
-    const qrURL = `${GameLobbyURLMapper[this.state.setting.evn]}/signin?obCustId=${this.state.playerId}` 
+    const { localhost, token, instantMode, devIp, setting } = this.state;
+    const url = IsSystemTypeSC1()
+      ? SC1GameLobbyURLMapper[setting.evn]
+      : VG2GameLobbyURLMapper[setting.evn];
+    const qrURL = `${url}/signin?obCustId=${this.state.playerId}`;
 
     if (token) {
       if (localhost) {
         redirectUrl =
           this.state.appType === 2
-            ? `${this.state.setting.mobileLocalhost}?token=${token}`
-            : `${this.state.setting.localhost}?token=${token}&gameId=${this.state.gameId}`;
+            ? `${setting.mobileLocalhost}?token=${token}`
+            : `${setting.localhost}?token=${token}&gameId=${this.state.gameId}`;
       }
 
       if (devIp) {
@@ -186,7 +200,6 @@ export default class SignIn extends React.Component {
               <div className="row">
                 <div className="col-sm-12 col-md-6">
                   <div className="row">
-                    
                     <div className="col-sm-10 col-md-11">
                       <Input
                         type="int"
@@ -368,6 +381,17 @@ export default class SignIn extends React.Component {
                   onChange={this.handleInputChange}
                 />
               </div>
+              {!IsSystemTypeSC1() && (
+                <div className="col-sm-4">
+                  <Input
+                    type="checkbox"
+                    id="disableJackpotGames"
+                    name="Disable Jackpot Games"
+                    value={this.state.disableJackpotGames}
+                    onChange={this.handleInputChange}
+                  />
+                </div>
+              )}
             </div>
             <div className="row">
               <div className="col-sm-4">

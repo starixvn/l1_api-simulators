@@ -1,15 +1,17 @@
 {
-    "apiUrl": "http://l1-api.lumigame.com",
-    "authUrl": "http://l1-auth.lumigame.com",
-    "client": {
-        "id": "game-server",
-        "secret": "gameserver@20luminet&"
-    },
-    "expireIn": 1591262817,
-    "owUrl": "https://owapi-simulator.lumigame.com/SabaClub/CreateCustomer",
-    "useAuthenticate": true,
-    "requestTimeout": 10000,
-    "localhost": "http://localhost:7456",
-    "mobileLocalhost": "http://localhost:3000",
-    "port": 8106
+  "env": "DEV",
+  "systemType": "SC1",
+  "apiUrl": "https://api.lumigame.com",
+  "authUrl": "https://auth.lumigame.com",
+  "client": {
+    "id": "game-server",
+    "secret": "gameserver@20luminet&"
+  },
+  "expireIn": 1591262817,
+  "owUrl": "http://localhost:5001/SabaClub/CreateCustomer",
+  "useAuthenticate": true,
+  "requestTimeout": 10000,
+  "localhost": "http://localhost:7456",
+  "mobileLocalhost": "http://localhost:3000",
+  "port": 8106
 }

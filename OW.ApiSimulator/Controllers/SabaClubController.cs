@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using OW.ApiSimulator.Models;
 using OW.ApiSimulator.Models.OW;
-using OW.ApiSimulator.Services;
 
 namespace OW.ApiSimulator.Controllers
 {
@@ -255,45 +254,35 @@ namespace OW.ApiSimulator.Controllers
         }
 
         [HttpGet]
-        [Route("/[controller]/[action]")]
-        public IActionResult RetrieveEndGameInfo([FromRoute] string @operator)
+        public IActionResult UpdateHitJackpotResult()
         {
-            return View(new RetriveEndGameInfoViewModel());
+            return View(serviceProvider.GetRequiredService<HitJackpotResult>());
         }
 
         [HttpPost]
-        [Route("/[controller]/[action]")]
-        public async Task<IActionResult> RetrieveEndGameInfo(RetriveEndGameInfoViewModel viewModel, [FromServices] ISabaClubService sabaClubService)
+        public async Task<IActionResult> HitJackpot([FromBody] HitJackpotCall request, [FromRoute] string @operator)
         {
-            viewModel.Result = await sabaClubService.RetrieveEndGameInfoAsync(viewModel.Request, viewModel.Environment);
-            return View(viewModel);
-        }
+            var selectedOperator = GetOperator(@operator);
+            var customer = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == request.PlayerId);
+            var result = selectedOperator.HitJackpotResult;
 
-        [HttpGet]
-        [Route("/[controller]/[action]")]
-        public IActionResult GameTicket()
-        {
-            return View(new GameTicketRequestViewModel());
-        }
+            result.Seq = request?.Seq;
 
-        [HttpPost]
-        [Route("/[controller]/[action]")]
-        public async Task<IActionResult> GameTicket(GameTicketRequestViewModel model)
-        {
-            if (ModelState.IsValid)
+            if (result.ErrorCode == 0 && customer != null)
             {
-                var service = serviceProvider.GetRequiredService<IResultPageService>();
-                var result = await service.GetGameTicketAccessUrl(model.Request);
-
-                if (!string.IsNullOrWhiteSpace(result))
-                {
-                    return Redirect(result);
-                }
+                result.PlayerId = request?.PlayerId;
+                customer.Balance += request.WinningAmount;
             }
 
-            return View(model);
+            await Task.Delay(result.DelayTime);
+
+            return Ok(new OWResponse<HitJackpotResult>
+            {
+                TimeStamp = DateTimeOffset.UtcNow,
+                Result = result
+            });
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> GetBetLimit([FromBody] GetBetLimitCall request, [FromRoute] string @operator)
         {
@@ -353,6 +342,7 @@ namespace OW.ApiSimulator.Controllers
             selectedOperator.VoidGameResult = model.VoidGameResult;
             selectedOperator.CheckMaintenanceResult = model.CheckMaintenanceResult;
             selectedOperator.GetBetLimitResult = model.GetBetLimitResult;
+            selectedOperator.HitJackpotResult = model.HitJackpotResult;
 
             return View(selectedOperator);
         }

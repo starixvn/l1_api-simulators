@@ -12,19 +12,6 @@
         </PackageReference>
     </ItemGroup>
     <ItemGroup>
-        <None Include="appsettings.Development.json">
-            <IsTransformFile>true</IsTransformFile>
-            <DependentUpon>appsettings.json</DependentUpon>
-        </None>
-        <None Include="appsettings.SIT.json">
-            <IsTransformFile>true</IsTransformFile>
-            <DependentUpon>appsettings.json</DependentUpon>
-        </None>
-        <None Include="appsettings.UAT.json">
-            <TransformOnBuild>true</TransformOnBuild>
-        </None>
-    </ItemGroup>
-    <ItemGroup>
         <Content Update="appsettings.json">
             <TransformOnBuild>true</TransformOnBuild>
         </Content>
