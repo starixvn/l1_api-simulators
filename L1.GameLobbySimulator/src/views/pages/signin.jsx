@@ -11,6 +11,7 @@ import config from "../../game-client-config.json";
 
 const operatorMapper = {
     ONEworks1: "ow",
+    ONEworksVGCash: "ow",
     SBO: "sbo"
 };
 const IsSystemTypeSC1 = () => {
@@ -163,8 +164,7 @@ export default class SignIn extends React.Component {
     async componentDidMount() {
         const data = await Axios.get("/setting/data").then((data) => data.data);
         const ip = await Axios.get("/signin/ip", { timeout: 10000 }).then((data) => data.data);
-
-        this.setState({ setting: data, ip, playerId, appType }, () => {
+        this.setState({ setting: data, ip }, () => {
             this.handleSubmit();
         });
     }
