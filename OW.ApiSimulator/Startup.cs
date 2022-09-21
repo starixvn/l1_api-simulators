@@ -20,7 +20,7 @@ namespace OW.ApiSimulator
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOW();
-
+            services.AddCors();
             services.AddControllersWithViews();
             services.AddMvc();
         }
@@ -42,7 +42,13 @@ namespace OW.ApiSimulator
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseCors(builder =>
+            {
+                builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

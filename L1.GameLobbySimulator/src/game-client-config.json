@@ -8,7 +8,7 @@
     "secret": "gameserver@20luminet&"
   },
   "expireIn": 1591262817,
-  "owUrl": "http://localhost:5001/SabaClub/CreateCustomer",
+  "owUrl": "http://localhost:5001/SabaClub",
   "useAuthenticate": true,
   "requestTimeout": 10000,
   "localhost": "http://localhost:7456",

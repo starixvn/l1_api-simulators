@@ -50,6 +50,19 @@ namespace OW.ApiSimulator.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [Route("/[controller]/[action]")]
+        public IActionResult SetDefaultBalance([FromQuery] int playerId, [FromQuery] string @operator)
+        {
+            var selectedOperator = GetOperator(@operator);
+            var player = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == playerId) ?? new Customer { PlayerId = playerId, Balance = 2000, MinBet = 1, MaxBet = 3000 };
+            player.Balance = 2000;
+            selectedOperator.Customers.RemoveAll(x => x.PlayerId == playerId);
+            selectedOperator.Customers.Add(player);
+
+            return Json(true);
+        }
+
         [HttpGet]
         [Route("/[controller]/[action]")]
         public IActionResult UpdateCustomerBalance()

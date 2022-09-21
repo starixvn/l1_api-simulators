@@ -4,29 +4,44 @@ import ReactDOM from "react-dom";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 
 import Header from "./components/header.jsx";
-import Environment from "./components/select/environment.jsx";
 import routes from "./routes.jsx";
 
 const history = createBrowserHistory();
 
 class Application extends React.Component {
-  render() {
-    return (
-      <Router history={history}>
-        <Header />
-        <Switch>
-          {routes.map(({ path, component }, key) => (
-            <Route
-              key={key}
-              path={path}
-              render={props => React.createElement(component, props)}
-            />
-          ))}
-          <Redirect to={routes[0].path} />
-        </Switch>
-      </Router>
-    );
-  }
+    constructor() {
+        super();
+        const searchParams = new URLSearchParams(history.location.search);
+        this.state = {
+            playerId: Number(searchParams.get("obCustId")) || (Math.random() * 10000000) >> 0,
+            appType: parseInt(searchParams.get("appType")) || 1
+        };
+        this.handleChangeInput = this.handleChangeInput.bind(this);
+    }
+
+    handleChangeInput(data) {
+        this.setState(data);
+    }
+
+    render() {
+        const { playerId, appType } = this.state;
+        const defaultProps = {
+            playerId,
+            appType,
+            handleChangeInput: this.handleChangeInput
+        };
+        return (
+            <Router history={history}>
+                <Header {...defaultProps} />
+                <Switch>
+                    {routes.map(({ path, component }, key) => (
+                        <Route key={key} path={path} render={(props) => React.createElement(component, { ...props, ...defaultProps })} />
+                    ))}
+                    <Redirect to={routes[0].path} />
+                </Switch>
+            </Router>
+        );
+    }
 }
 
 ReactDOM.render(<Application />, document.getElementById("app"));
