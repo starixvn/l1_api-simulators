@@ -1,8 +1,8 @@
 {
-    "evn": "LOCAL",
-    "systemType": "VG2",
-    "apiUrl": "https://l2-api.lumigame.com",
-    "authUrl": "https://l2-auth.lumigame.com",
+    "evn": "DEV",
+    "systemType": "SC1",
+    "apiUrl": "https://api.lumigame.com",
+    "authUrl": "https://auth.lumigame.com",
     "client": {
         "id": "game-server",
         "secret": "gameserver@20luminet&"

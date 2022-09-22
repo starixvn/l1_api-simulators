@@ -148,9 +148,9 @@ export default class SignIn extends React.Component {
         event.preventDefault();
     }
 
-    handleClickSetDefaultBalance() {
+    handleClickSetDefaultBalance(balance = 2000) {
         const { setting, playerId, auth } = this.state;
-        Axios.post(`${setting.owUrl}/SetDefaultBalance?playerId=${playerId}&operator=${operatorMapper[auth.operatorId]}`)
+        Axios.post(`${setting.owUrl}/SetDefaultBalance?playerId=${playerId}&operator=${operatorMapper[auth.operatorId]}&balance=${balance}`)
             .then((data) => {
                 this.setState({ setDefaultBalance: data.data }, () => {
                     this.timeout = setTimeout(() => {
@@ -166,6 +166,10 @@ export default class SignIn extends React.Component {
         const ip = await Axios.get("/signin/ip", { timeout: 10000 }).then((data) => data.data);
         this.setState({ setting: data, ip }, () => {
             this.handleSubmit();
+            const searchParams = new URLSearchParams(this.props.history.location.search);
+            if (searchParams.get("balance")) {
+                this.handleClickSetDefaultBalance(Number(searchParams.get("balance")));
+            }
         });
     }
 
@@ -374,8 +378,8 @@ export default class SignIn extends React.Component {
                                 />
                             </div>
                         </div>
-                        <input className="primary" type="submit" value="Get Token" />
-                        <label className="button secondary" for="modal-control">
+                        <input className="primary" type="submit" value="Get Token" id="get-token" />
+                        <label className="button secondary" for="modal-control" id="set-balance">
                             Set Balance
                         </label>
                         <input type="checkbox" id="modal-control" class="modal" />
@@ -417,7 +421,13 @@ export default class SignIn extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <input type="button" className="tertiary" value="Set Default Balance" onClick={this.handleClickSetDefaultBalance} />
+                        <input
+                            type="button"
+                            id="set-default-balance"
+                            className="tertiary"
+                            value="Set Default Balance"
+                            onClick={this.handleClickSetDefaultBalance}
+                        />
                         {setDefaultBalance && <p style={{ color: "green", fontWeight: "bold" }}>Set balance successfully!</p>}
                     </form>
                     {(this.state.appType === 3 || this.state.isOpenOnIframe) && token && (
@@ -436,6 +446,7 @@ export default class SignIn extends React.Component {
                                     onClick={() =>
                                         window.open(redirectUrl, "_blank", `width=${this.state.appType === 2 ? 1270 : 1523},height=884`)
                                     }
+                                    id="redirect"
                                 >
                                     {redirectUrl}
                                 </a>
