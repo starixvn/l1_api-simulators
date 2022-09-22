@@ -12,6 +12,7 @@ namespace OW.ApiSimulator.Controllers
     [Route("{operator}/[controller]/[action]")]
     public class SabaClubController : Controller
     {
+        private const string SC1 = "SC1";
         private readonly IServiceProvider serviceProvider;
 
         public SabaClubController(IServiceProvider serviceProvider)
@@ -30,12 +31,12 @@ namespace OW.ApiSimulator.Controllers
 
         [HttpGet]
         [Route("/[controller]/[action]")]
-        public IActionResult CreateCustomer(int memId, string @operator)
+        public IActionResult CreateCustomer(int memId, string @operator, string systemType = "SC1")
         {
             var selectedOperator = GetOperator(@operator);
             var customer = selectedOperator?.Customers.FirstOrDefault(x => x.PlayerId == memId);
 
-            return View(customer ?? new Customer { PlayerId = memId, Balance = 2000, MinBet = 1, MaxBet = 3000 });
+            return View(customer ?? new Customer { PlayerId = memId, Balance = 2000, MinBet = (systemType.Equals(SC1) ? 1 : 10), MaxBet = (systemType.Equals(SC1) ? 3000 : 20000) });
         }
 
         [HttpPost]
@@ -52,10 +53,11 @@ namespace OW.ApiSimulator.Controllers
 
         [HttpPost]
         [Route("/[controller]/[action]")]
-        public IActionResult SetDefaultBalance([FromQuery] int playerId, [FromQuery] string @operator, [FromQuery] int balance = 2000)
+        public IActionResult SetDefaultBalance([FromQuery] int playerId, [FromQuery] string @operator, [FromQuery] int balance = 2000, [FromQuery] string systemType = "SC1")
         {
             var selectedOperator = GetOperator(@operator);
-            var player = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == playerId) ?? new Customer { PlayerId = playerId, Balance = 2000, MinBet = 1, MaxBet = 3000 };
+            var player = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == playerId)
+                ?? new Customer { PlayerId = playerId, Balance = 2000, MinBet = (systemType.Equals(SC1) ? 1 : 10), MaxBet = (systemType.Equals(SC1) ? 3000 : 20000) };
             player.Balance = balance;
             selectedOperator.Customers.RemoveAll(x => x.PlayerId == playerId);
             selectedOperator.Customers.Add(player);

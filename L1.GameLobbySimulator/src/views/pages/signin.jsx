@@ -150,7 +150,11 @@ export default class SignIn extends React.Component {
 
     handleClickSetDefaultBalance(balance = 2000) {
         const { setting, playerId, auth } = this.state;
-        Axios.post(`${setting.owUrl}/SetDefaultBalance?playerId=${playerId}&operator=${operatorMapper[auth.operatorId]}&balance=${balance}`)
+        Axios.post(
+            `${setting.owUrl}/SetDefaultBalance?playerId=${playerId}&operator=${
+                operatorMapper[auth.operatorId]
+            }&balance=${balance}&systemType=${config.systemType}`
+        )
             .then((data) => {
                 this.setState({ setDefaultBalance: data.data }, () => {
                     this.timeout = setTimeout(() => {
@@ -412,7 +416,7 @@ export default class SignIn extends React.Component {
                                         ref={this.iFrameRef}
                                         src={`${this.state.setting.owUrl}/CreateCustomer?memId=${this.state.playerId}&&operator=${
                                             operatorMapper[this.state.auth.operatorId]
-                                        }`}
+                                        }&systemType=${config.systemType}`}
                                         width="800"
                                         height="500"
                                         frameborder="0"
