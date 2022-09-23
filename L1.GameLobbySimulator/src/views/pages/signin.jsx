@@ -170,10 +170,7 @@ export default class SignIn extends React.Component {
         const ip = await Axios.get("/signin/ip", { timeout: 10000 }).then((data) => data.data);
         this.setState({ setting: data, ip }, () => {
             this.handleSubmit();
-            const searchParams = new URLSearchParams(this.props.history.location.search);
-            if (searchParams.get("balance")) {
-                this.handleClickSetDefaultBalance(Number(searchParams.get("balance")));
-            }
+            this.props.balance && this.handleClickSetDefaultBalance(this.props.balance);
         });
     }
 

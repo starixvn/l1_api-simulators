@@ -14,7 +14,8 @@ class Application extends React.Component {
         const searchParams = new URLSearchParams(history.location.search);
         this.state = {
             playerId: Number(searchParams.get("obCustId")) || (Math.random() * 10000000) >> 0,
-            appType: parseInt(searchParams.get("appType")) || 1
+            appType: parseInt(searchParams.get("appType")) || 1,
+            balance: Number(searchParams.get("balance")) || 0
         };
         this.handleChangeInput = this.handleChangeInput.bind(this);
     }
@@ -24,10 +25,11 @@ class Application extends React.Component {
     }
 
     render() {
-        const { playerId, appType } = this.state;
+        const { playerId, appType, balance } = this.state;
         const defaultProps = {
             playerId,
             appType,
+            balance,
             handleChangeInput: this.handleChangeInput
         };
         return (

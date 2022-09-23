@@ -4,7 +4,8 @@ import config from "../../../game-client-config.json";
 
 export default class Environment extends React.Component {
     handleChange(data) {
-        const url = `${data}signin?obCustId=${this.props.playerId}&appType=${this.props.appType}`;
+        let url = `${data}signin?obCustId=${this.props.playerId}&appType=${this.props.appType}`;
+        this.props.balance && (url += `&balance=${this.props.balance}`);
         window.location.replace(url);
     }
 
