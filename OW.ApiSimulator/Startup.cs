@@ -1,12 +1,9 @@
-using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using OW.ApiSimulator.Configuration;
 using OW.ApiSimulator.Extensions;
-using OW.ApiSimulator.Services;
 
 namespace OW.ApiSimulator
 {
@@ -23,16 +20,7 @@ namespace OW.ApiSimulator
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOW();
-            services.Configure<ResultPageConfiguration>(Configuration.GetSection("ResultPageConfiguration"));
-            services.Configure<SabaClubSettings>(Configuration.GetSection("SabaClubSettings"));
-
-            services.AddHttpClient<ISabaClubService, SabaClubService>();
-
-            services.AddHttpClient<IResultPageService, ResultPageService>(httpClient =>
-            {
-                httpClient.BaseAddress = new Uri(Configuration["ResultPageConfiguration:BaseUrl"]);
-            });
-
+            services.AddCors();
             services.AddControllersWithViews();
             services.AddMvc();
         }
@@ -54,7 +42,13 @@ namespace OW.ApiSimulator
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseCors(builder =>
+            {
+                builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

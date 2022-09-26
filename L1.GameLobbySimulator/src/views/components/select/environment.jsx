@@ -1,32 +1,31 @@
 import React from "react";
-import GameLobbyURLMapper from '../../constants/lobby-url';
-
-const options = Object.keys(GameLobbyURLMapper).map((env) => ({value: GameLobbyURLMapper[env], name: env}));
+import { SC1GameLobbyURLMapper, VG2GameLobbyURLMapper } from "../../constants/lobby-url";
+import config from "../../../game-client-config.json";
 
 export default class Environment extends React.Component {
-  handleChange(data) {
-    window.location.replace(data)
-  }
+    handleChange(data) {
+        let url = `${data}signin?obCustId=${this.props.playerId}&appType=${this.props.appType}`;
+        this.props.balance && (url += `&balance=${this.props.balance}`);
+        window.location.replace(url);
+    }
 
-
-  render() {
-    const url = window.location.host;
-    const currentEnv = Object.keys(GameLobbyURLMapper).find(key => GameLobbyURLMapper[key].includes(url));
-
-    return (
-      <select
-          className="input"
-          type="string"
-          id="env"
-          onChange={event => this.handleChange(event.target.value)}
-          value={currentEnv}
-        >
-          {options.map(option => (
-            <option value={option.value} key={option.value}>
-              {option.name}
+    getOptions = (URLMapper) => {
+        return Object.keys(URLMapper).map((env, index) => (
+            <option value={URLMapper[env]} key={index}>
+                {env}
             </option>
-          ))}
-        </select>
-    );
-  }
+        ));
+    };
+
+    render() {
+        const url = window.location.host;
+        const URLMapper = config.systemType === "SC1" ? SC1GameLobbyURLMapper : VG2GameLobbyURLMapper;
+        const currentEnv = Object.values(URLMapper).find((value) => value.includes(url));
+
+        return (
+            <select className="input" type="string" id="env" onChange={(event) => this.handleChange(event.target.value)} value={currentEnv}>
+                {this.getOptions(URLMapper)}
+            </select>
+        );
+    }
 }

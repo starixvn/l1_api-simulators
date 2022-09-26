@@ -1,12 +1,14 @@
 {
-    "apiUrl": "http://l1-api.lumigame.com",
-    "authUrl": "http://l1-auth.lumigame.com",
+    "evn": "DEV",
+    "systemType": "SC1",
+    "apiUrl": "https://api.lumigame.com",
+    "authUrl": "https://auth.lumigame.com",
     "client": {
         "id": "game-server",
         "secret": "gameserver@20luminet&"
     },
     "expireIn": 1591262817,
-    "owUrl": "https://owapi-simulator.lumigame.com/SabaClub/CreateCustomer",
+    "owUrl": "http://localhost:5001/SabaClub",
     "useAuthenticate": true,
     "requestTimeout": 10000,
     "localhost": "http://localhost:7456",

@@ -2,7 +2,41 @@ include:
   - project: "ci/repos-ci/pentagon_l1_game_lobby_simulator"
     ref: master
     file: "gitlab-ci.yml"
+  - project: "ci/repos-ci/pentagon_l2_game_lobby_simulator"
+    ref: master
+    file: "gitlab-ci-mixing.yml"
   - project: "ci/repos-ci/pentagon_l1_ow_api_simulator"
     ref: master
     file: "gitlab-ci-mixing.yml"
-    
+  - project: "ci/repos-ci/pentagon_l2_ow_api_simulator"
+    ref: master
+    file: "gitlab-ci-mixing.yml"
+
+.base_transform_config_script: &base_transform_config_script
+  stage: transform-config
+
+  tags:
+    - docker
+
+  script:
+    - echo "====== Build ReactJS ======"
+    - echo $DEPLOY_ENV
+    - echo $STACK_NAME
+    - cp ./L1.GameLobbySimulator/src/configs/$STACK_NAME/game-client-config.$DEPLOY_ENV.json ./L1.GameLobbySimulator/src/game-client-config.json
+    - cat ./L1.GameLobbySimulator/src/game-client-config.json
+
+  artifacts:
+    paths:
+      - ./L1.GameLobbySimulator/src/game-client-config.json
+    expire_in: 1 day
+
+.base_transform_config_l1_game_lobby_simulator:
+  <<: *base_transform_config_script
+  extends:
+    - .deploy_vars_l1_game_lobby_simulator
+    - .build:image:l1_game_lobby_simulator:rules
+.base_transform_config_l2_game_lobby_simulator:
+  <<: *base_transform_config_script
+  extends:
+    - .deploy_vars_l2_game_lobby_simulator
+    - .build:image:l2_game_lobby_simulator:rules

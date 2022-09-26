@@ -21,6 +21,7 @@ namespace OW.ApiSimulator.Models
             VoidGameResult = new VoidGameResult();
             CheckMaintenanceResult = new CheckMaintenanceResult { StartTime = DateTimeOffset.UtcNow, EndTime = DateTimeOffset.UtcNow.AddHours(1) };
             GetBetLimitResult = new GetBetLimitResult();
+            HitJackpotResult = new HitJackpotResult();
         }
 
         public string Name { get; set; }
@@ -33,5 +34,6 @@ namespace OW.ApiSimulator.Models
         public VoidGameResult VoidGameResult { get; set; }
         public CheckMaintenanceResult CheckMaintenanceResult { get; set; }
         public GetBetLimitResult GetBetLimitResult { get; set; }
+        public HitJackpotResult HitJackpotResult { get; set; }
     }
 }

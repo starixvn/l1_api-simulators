@@ -32,7 +32,6 @@
   <ItemGroup>
     <Content Include="app.js" />
     <Content Include="game-client-config.json" />
-    <Content Include="game-client-config.SIT.json" />
     <Content Include="L1.Client.NodeJS\index.js" />
     <Content Include="L1.Client.NodeJS\package.json" />
     <Content Include="middleware.js">
