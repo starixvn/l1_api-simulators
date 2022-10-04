@@ -169,6 +169,9 @@ export default class SignIn extends React.Component {
         const data = await Axios.get("/setting/data").then((data) => data.data);
         const ip = await Axios.get("/signin/ip", { timeout: 10000 }).then((data) => data.data);
         this.setState({ setting: data, ip }, () => {
+            this.iFrameRef.current.src = `${data.owUrl}/CreateCustomer?memId=${this.state.playerId}&&operator=${
+                operatorMapper[this.state.auth.operatorId]
+            }&systemType=${config.systemType}`;
             this.handleSubmit();
             this.props.balance && this.handleClickSetDefaultBalance(this.props.balance);
         });
@@ -409,16 +412,7 @@ export default class SignIn extends React.Component {
                                     </svg>
                                 </h3>
                                 <div class="section">
-                                    <iframe
-                                        ref={this.iFrameRef}
-                                        src={`${this.state.setting.owUrl}/CreateCustomer?memId=${this.state.playerId}&&operator=${
-                                            operatorMapper[this.state.auth.operatorId]
-                                        }&systemType=${config.systemType}`}
-                                        width="800"
-                                        height="500"
-                                        frameborder="0"
-                                        allowtransparency="true"
-                                    />
+                                    <iframe ref={this.iFrameRef} src="" width="800" height="500" frameborder="0" allowtransparency="true" />
                                 </div>
                             </div>
                         </div>
