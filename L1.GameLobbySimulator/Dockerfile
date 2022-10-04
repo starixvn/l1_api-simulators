@@ -11,4 +11,6 @@ COPY . .
 RUN yarn install
 RUN yarn build
 
+HEALTHCHECK --interval=10s CMD node src/healthcheck.js
+
 CMD [ "node", "src/app.js" ]
