@@ -97,6 +97,8 @@ export default class SignIn extends React.Component {
 
         if (data.playerId || data.appType) {
             this.props.handleChangeInput(data);
+            if (data.playerId) {
+            }
         }
 
         this.setState(data);
@@ -182,8 +184,10 @@ export default class SignIn extends React.Component {
     }
 
     handleReloadIframe() {
-        const iFrameElement = this.iFrameRef.current;
-        iFrameElement.src = iFrameElement.src;
+        const { auth, setting, playerId } = this.state;
+        this.iFrameRef.current.src = `${setting.owUrl}/CreateCustomer?memId=${playerId}&&operator=${
+            operatorMapper[auth.operatorId]
+        }&systemType=${config.systemType}`;
     }
 
     render() {
@@ -195,7 +199,7 @@ export default class SignIn extends React.Component {
         if (token) {
             if (localhost) {
                 redirectUrl =
-          this.state.appType === 2 || this.state.appType === 4
+                    this.state.appType === 2 || this.state.appType === 4
                         ? `${setting.mobileLocalhost}?token=${token}`
                         : `${setting.localhost}?token=${token}&gameId=${this.state.gameId}`;
             }
@@ -386,7 +390,12 @@ export default class SignIn extends React.Component {
                         <label className="button secondary" for="modal-control" id="set-balance">
                             Set Balance
                         </label>
-                        <input type="checkbox" id="modal-control" class="modal" />
+                        <input
+                            type="checkbox"
+                            id="modal-control"
+                            class="modal"
+                            onChange={(event) => event.target.checked && this.handleReloadIframe()}
+                        />
                         <div role="dialog" aria-labelledby="dialog-title">
                             <div class="card" style={{ maxWidth: "800px", maxHeight: "800px" }}>
                                 <label for="modal-control" class="modal-close"></label>
