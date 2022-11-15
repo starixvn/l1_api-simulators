@@ -150,8 +150,9 @@ export default class SignIn extends React.Component {
         event.preventDefault();
     }
 
-    handleClickSetDefaultBalance(balance = 2000) {
+    handleClickSetDefaultBalance(value) {
         const { setting, playerId, auth } = this.state;
+        const balance = !isNaN(value) ? value : IsSystemTypeSC1() ? 2000 : 20000;
         Axios.post(
             `${setting.owUrl}/SetDefaultBalance?playerId=${playerId}&operator=${
                 operatorMapper[auth.operatorId]
