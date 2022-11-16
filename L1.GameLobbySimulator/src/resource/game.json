@@ -971,5 +971,15 @@
         "id": 59,
         "name": "Fruit Slot",
         "choice": []
-    }
+    },
+    {
+        "id": 60,
+        "name": "Fan Tan",
+        "choice": [
+          {
+            "id": 0,
+            "name": "N/A"
+          }
+        ]
+   }
 ]
