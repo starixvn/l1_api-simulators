@@ -4,9 +4,14 @@ import config from "../../../game-client-config.json";
 
 export default class Environment extends React.Component {
     handleChange(data) {
-        let url = `${data}signin?obCustId=${this.props.playerId}&appType=${this.props.appType}`;
-        this.props.balance && (url += `&balance=${this.props.balance}`);
-        window.location.replace(url);
+        if(location.pathname.includes("login")) {
+            window.location.replace(data+'login');
+        }
+        else {
+            let url = `${data}signin?obCustId=${this.props.playerId}&appType=${this.props.appType}`;
+            this.props.balance && (url += `&balance=${this.props.balance}`);
+            window.location.replace(url);
+        }
     }
 
     getOptions = (URLMapper) => {

@@ -34,7 +34,7 @@ class Application extends React.Component {
         };
         return (
             <Router history={history}>
-                <Header {...defaultProps} />
+                {!location.pathname.includes("login") && <Header {...defaultProps} /> }
                 <Switch>
                     {routes.map(({ path, component }, key) => (
                         <Route key={key} path={path} render={(props) => React.createElement(component, { ...props, ...defaultProps })} />

@@ -76,6 +76,7 @@
     <Content Include="views\pages\member.jsx" />
     <Content Include="views\pages\setting.jsx" />
     <Content Include="views\pages\signin.jsx">
+    <Content Include="views\pages\login.jsx">
       <SubType>Code</SubType>
     </Content>
     <Content Include="views\routes.jsx">

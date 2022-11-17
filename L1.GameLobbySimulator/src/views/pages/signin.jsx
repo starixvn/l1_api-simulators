@@ -97,8 +97,6 @@ export default class SignIn extends React.Component {
 
         if (data.playerId || data.appType) {
             this.props.handleChangeInput(data);
-            if (data.playerId) {
-            }
         }
 
         this.setState(data);
