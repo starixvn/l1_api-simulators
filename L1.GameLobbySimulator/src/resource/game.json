@@ -981,5 +981,10 @@
             "name": "N/A"
           }
         ]
-   }
+   },
+   {
+        "id": 62,
+        "name": "Fortune Cat",
+        "choice": []
+    }
 ]
