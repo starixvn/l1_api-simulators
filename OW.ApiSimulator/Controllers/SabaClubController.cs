@@ -43,6 +43,10 @@ namespace OW.ApiSimulator.Controllers
         [Route("/[controller]/[action]")]
         public IActionResult CreateCustomer(Customer model)
         {
+            if (model.Operator == Constants.Operators[2])
+            {
+                model.Operator = Constants.Operators[0];
+            }
             var selectedOperator = GetOperator(model.Operator);
 
             selectedOperator.Customers.RemoveAll(x => x.PlayerId == model.PlayerId);

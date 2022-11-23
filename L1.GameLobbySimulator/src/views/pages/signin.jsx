@@ -12,7 +12,8 @@ import config from "../../game-client-config.json";
 const operatorMapper = {
     ONEworks1: "ow",
     ONEworksVGCash: "ow",
-    SBO: "sbo"
+    SBO: "sbo",
+    ONEworks_VG: "ow"
 };
 const IsSystemTypeSC1 = () => {
     return config.systemType === "SC1";
@@ -184,7 +185,7 @@ export default class SignIn extends React.Component {
 
     handleReloadIframe() {
         const { auth, setting, playerId } = this.state;
-        this.iFrameRef.current.src = `${setting.owUrl}/CreateCustomer?memId=${playerId}&&operator=${
+        this.iFrameRef.current.src = `${setting.owUrl}/CreateCustomer?memId=${playerId}&operator=${
             operatorMapper[auth.operatorId]
         }&systemType=${config.systemType}`;
     }
