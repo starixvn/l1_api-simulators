@@ -976,15 +976,25 @@
         "id": 60,
         "name": "Fan Tan",
         "choice": [
-          {
-            "id": 0,
-            "name": "N/A"
-          }
+            {
+                "id": 0,
+                "name": "N/A"
+            }
         ]
    },
    {
         "id": 62,
         "name": "Fortune Cat",
         "choice": []
+    },
+    {
+        "id": 61,
+        "name": "Win Three Cards",
+        "choice": [
+            {
+                "id": 0,
+                "name": "N/A"
+            }
+        ]
     }
 ]
