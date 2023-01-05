@@ -13,5 +13,8 @@
   "owUrl": "https://l1-ows2.lumigame.com/SabaClub",
   "localhost": "http://localhost:7456",
   "mobileLocalhost": "http://localhost:3000",
-  "port": 5000
+  "port": 5000,
+  "corsUrls": [
+    "http://localhost:3001"
+  ]
 }

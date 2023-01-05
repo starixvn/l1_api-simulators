@@ -13,5 +13,8 @@
     "requestTimeout": 10000,
     "localhost": "http://localhost:7456",
     "mobileLocalhost": "http://localhost:3000",
-    "port": 8106
+    "port": 8106,
+    "corsUrls": [
+        "http://localhost:3001"
+    ]
 }

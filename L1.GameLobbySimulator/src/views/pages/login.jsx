@@ -105,7 +105,7 @@ export default class Login extends React.Component {
             appType: 1,
         };
 
-        await Axios.post(
+        await Axios.post( 
             `${setting.owUrl}/SetDefaultBalance?playerId=${username}&operator=${
                 operatorMapper[request.auth.operatorId]
             }&balance=${20000}&systemType=${config.systemType}`
