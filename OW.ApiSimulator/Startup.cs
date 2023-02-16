@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OW.ApiSimulator._Shared;
 using OW.ApiSimulator.Extensions;
 
 namespace OW.ApiSimulator
@@ -19,6 +20,9 @@ namespace OW.ApiSimulator
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var appSettings = new AppSettings(Configuration);
+
+            services.AddSingleton<IAppSettings>(appSettings);
             services.AddOW();
             services.AddCors();
             services.AddControllersWithViews();

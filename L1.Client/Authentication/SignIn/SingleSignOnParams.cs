@@ -2,7 +2,8 @@
 {
     public class SingleSignOnParams
     {
-        private const string DefaultLanguageCode = "vi-VN";
+        private const string DefaultLanguageCode = "en-US";
+        private const string DefaultOperatorToken = "ONEworks1Token";
 
         public SingleSignOnParams(
             string clientId,
@@ -37,8 +38,8 @@
         }
 
         public SingleSignOnParams(
-            string clientId,
-            string clientSecret,
+            string operatorId,
+            string operatorSecret,
             string siteId,
             int memberId,
             string memberName,
@@ -54,13 +55,11 @@
         {
             Auth = new Auth
             {
-                ClientId = clientId,
-                ClientSecret = clientSecret
+                OperatorId = operatorId,
+                OperatorSecret = operatorSecret
             };
 
             SiteId = siteId;
-            MemberId = memberId;
-            MemberName = memberName;
             Language = language;
             Currency = currency;
             IP = iP;
@@ -69,42 +68,45 @@
             GameTypeId = gameTypeId;
             SiteName = siteName;
             IsCash = isCash;
-            IsMobi = isMobi;
         }
 
-        public string ClientId { get; }
+        public string Seq { get; set; }
 
-        public string SiteId { get; }
+        public string SiteId { get; set; }
 
-        public int MemberId { get; }
+        public string Domain { get; set; }
 
-        public string MemberName { get; }
+        public string BrowserUserAgent { get; set; }
 
-        public string Language { get; }
+        public string Currency { get; set; }
 
-        public string IP { get; }
+        public string Language { get; set; }
 
-        public string Currency { get; }
+        public string IP { get; set; }
 
-        public string BrowserUserAgent { get; }
+        public int PlayerId { get; set; }
 
-        public string Seq { get; }
+        public string PlayerName { get; set; }
 
-        public byte? GameTypeId { get; }
+        public byte? GameTypeId { get; set; }
 
-        public string SiteName { get; }
+        public byte AppType { get; set; } = AppTypes.SabaClub;
 
-        public bool IsCash { get; }
+        public string SiteName { get; set; }
 
-        public bool IsMobi { get; }
+        public Auth Auth { get; set; }
 
-        public Auth Auth { get; }
+        public string OperatorToken { get; set; } = DefaultOperatorToken;
+
+        public bool DisableJackpotGames { get; set; }
+
+        public bool IsCash { get; set; }
     }
 
     public class Auth
     {
-        public string ClientId { get; set; }
+        public string OperatorId { get; set; }
 
-        public string ClientSecret { get; set; }
+        public string OperatorSecret { get; set; }
     }
 }

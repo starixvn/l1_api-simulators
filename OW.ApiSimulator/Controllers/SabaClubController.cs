@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using L1.Client;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using OW.ApiSimulator._Shared;
 using OW.ApiSimulator.Models;
 using OW.ApiSimulator.Models.OW;
 
@@ -14,10 +16,12 @@ namespace OW.ApiSimulator.Controllers
     {
         private const string SC1 = "SC1";
         private readonly IServiceProvider serviceProvider;
+        private readonly IAppSettings appSettings;
 
-        public SabaClubController(IServiceProvider serviceProvider)
+        public SabaClubController(IServiceProvider serviceProvider, IAppSettings appSettings)
         {
             this.serviceProvider = serviceProvider;
+            this.appSettings = appSettings;
         }
 
         [HttpGet]
@@ -371,6 +375,32 @@ namespace OW.ApiSimulator.Controllers
         private Operator GetOperator(string operatorName)
         {
             return serviceProvider.GetRequiredService<List<Operator>>().FirstOrDefault(x => string.Compare(x.Name, operatorName, true) == 0);
+        }
+
+        [HttpPost]
+        [Route("/[controller]/[action]")]
+        public async Task<IActionResult> Login(LoginCall request)
+        {
+            var authClient = new AuthenticationClient(new Uri(appSettings.ApiUrl));
+
+            var signInParams = new SingleSignOnParams(
+                Constants.OperatorIds["ow"],
+                "ONEworks1@20luminet&",
+                request.Call.SiteId,
+                request.Call.ObCustId,
+                request.Call.ObCustName,
+                request.Call.Currency,
+                request.Call.Ip,
+                request.Call.BrowserUserAgent,
+                request.Call.Seq,
+                (byte)request.Call.GameId,
+                request.Call.SiteName,
+                false,
+                request.Call.IsMobi ?? false);
+
+            var result = await authClient.SingleSignOnAsync(signInParams);
+
+            return Ok(result);
         }
     }
 }

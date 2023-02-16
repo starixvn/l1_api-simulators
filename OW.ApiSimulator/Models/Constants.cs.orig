@@ -1,0 +1,26 @@
+<<<<<<< HEAD
+﻿using System.Collections.Generic;
+
+=======
+﻿using System.Collections.Generic;
+
+>>>>>>> 8fb98f0 (feat: implement OW api Login)
+namespace OW.ApiSimulator.Models
+{
+    public static class Constants
+    {
+<<<<<<< HEAD
+        public static readonly string[] Operators = { "ow", "sbo", "ow_vg", "pff", "ONEworksSeal888" };
+        public static readonly Dictionary<string, string> ForcedToUseOWOperatorsMapper = new Dictionary<string, string>{{ "ow_vg", "ow"}, { "ONEworksSeal888", "ow" } };
+    }    
+=======
+        public static readonly string[] Operators = { "ow", "sbo", "ow_vg", "pff" };
+
+        public static readonly Dictionary<string, string> OperatorIds = new Dictionary<string,string>
+        {
+            {"ow", "ONEworks1" },
+            {"sbo", "ONEworksVGCash" }
+        };
+    }
+>>>>>>> 8fb98f0 (feat: implement OW api Login)
+}

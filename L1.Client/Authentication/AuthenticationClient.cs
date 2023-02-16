@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -14,19 +15,23 @@ namespace L1.Client
     public class AuthenticationClient : IAuthenticationClient
     {
         private readonly HttpClient client;
-        private readonly AuthenticationInfo authenticationInfo;
 
-        public AuthenticationClient(AuthenticationInfo authenticationInfo)
+        private const string singInEndpoint = "signin/index";
+
+        public AuthenticationClient(Uri apiUri)
         {
-            this.authenticationInfo = authenticationInfo;
-            client = HttpClientManager.GetApiClient(authenticationInfo.ApiUri);
+            client = HttpClientManager.GetApiClient(apiUri);
         }
 
         public async Task<SingleSignOnResult> SingleSignOnAsync(SingleSignOnParams signOnParams, Action<string> errorHandler = null)
         {
-            var paramContent = new StringContent(JsonConvert.SerializeObject(signOnParams), Encoding.UTF8, "application/json");
-            const string endpoint = "signin/index";
-            var response = await client.PostAsync(endpoint, paramContent);
+            var jsonContent = JsonConvert.SerializeObject(signOnParams);
+            var paramContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+            client.DefaultRequestHeaders.Remove("Access-Key");
+            client.DefaultRequestHeaders.Add("Access-Key", HashHMACHex(signOnParams.Auth.OperatorSecret, jsonContent));
+
+            var response = await client.PostAsync(singInEndpoint, paramContent);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -39,5 +44,17 @@ namespace L1.Client
 
             return new SingleSignOnResult(new Uri(signInResponse.RedirectUrl));
         }
+
+        private string HashHMACHex(string keyHex, string messageHex)
+        {
+
+            HMACSHA256 hashObject = new HMACSHA256(Encoding.UTF8.GetBytes(keyHex));
+
+            var signature = hashObject.ComputeHash(Encoding.UTF8.GetBytes(messageHex));
+
+            return Convert.ToBase64String(signature);
+        }
     }
+
+    
 }
