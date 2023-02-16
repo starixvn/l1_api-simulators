@@ -2,6 +2,7 @@ FROM hub.lumigame.com/base/dotnet/core/sdk:3.1 AS builder
 
 WORKDIR /src
 
+COPY ./L1.Client ./L1.Client
 COPY ./OW.ApiSimulator/OW.ApiSimulator.csproj ./OW.ApiSimulator/OW.ApiSimulator.csproj
 
 WORKDIR /src/OW.ApiSimulator
