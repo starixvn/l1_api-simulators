@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L1.Client", "L1.Client\L1.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OW.ApiSimulator", "OW.ApiSimulator\OW.ApiSimulator.csproj", "{DBA8F8DA-75FC-4F37-8089-FF6648D0D655}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OW.DirectLoginSimulator", "OW.DirectLoginSimulator\OW.DirectLoginSimulator.csproj", "{0FBC73AF-E176-4CD1-84DF-E46C00AF8946}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,11 +31,13 @@ Global
 		{AE0A6657-AB7A-4C8D-8395-42A9386B2DDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE0A6657-AB7A-4C8D-8395-42A9386B2DDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE0A6657-AB7A-4C8D-8395-42A9386B2DDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FBC73AF-E176-4CD1-84DF-E46C00AF8946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FBC73AF-E176-4CD1-84DF-E46C00AF8946}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FBC73AF-E176-4CD1-84DF-E46C00AF8946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FBC73AF-E176-4CD1-84DF-E46C00AF8946}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {518D8074-0A9E-4A68-9805-72577565CDA7}
