@@ -40,7 +40,16 @@ namespace OW.ApiSimulator.Controllers
             var selectedOperator = GetOperator(@operator);
             var customer = selectedOperator?.Customers.FirstOrDefault(x => x.PlayerId == memId);
 
-            return View(customer ?? new Customer { PlayerId = memId, Balance = 2000, MinBet = (systemType.Equals(SC1) ? 1 : 10), MaxBet = (systemType.Equals(SC1) ? 3000 : 20000) });
+            return View(customer ??
+                new Customer
+                {
+                    PlayerId = memId,
+                    Username = $"username_{memId}",
+                    Balance = 2000,
+                    MinBet = (systemType.Equals(SC1) ? 1 : 10),
+                    MaxBet = (systemType.Equals(SC1) ? 3000 : 20000),
+                    Currency = (systemType.Equals(SC1) ? "$US" : "INH"),
+                });
         }
 
         [HttpPost]
@@ -399,6 +408,27 @@ namespace OW.ApiSimulator.Controllers
                 request.Call.IsMobi ?? false);
 
             var result = await authClient.SingleSignOnAsync(signInParams);
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("{username}")]
+        public IActionResult GetMemberInfo([FromRoute] string username, [FromRoute] string @operator)
+        {
+            var selectedOperator = GetOperator(@operator);
+            var result = new MemberInfoResult();
+            var customer = selectedOperator.Customers.Find(x => x.Username == username);
+
+            result.ErrorCode = customer?.ErrorCode.DirectLogin ?? 0;
+
+            if (result.ErrorCode == 0 && customer != null)
+            {
+                result.UserId = customer.PlayerId;
+                result.Username = customer.Username;
+                result.Currency = customer.Currency;
+                result.SiteName = customer.SiteName;
+            }
 
             return Ok(result);
         }
