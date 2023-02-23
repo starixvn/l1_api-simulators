@@ -6,8 +6,8 @@
         private const string DefaultOperatorToken = "ONEworks1Token";
 
         public SingleSignOnParams(
-            string clientId,
-            string clientSecret,
+            string operatorId,
+            string operatorSecret,
             string siteId,
             int memberId,
             string memberName,
@@ -20,8 +20,8 @@
             bool isCash,
             bool isMobi)
             : this(
-                  clientId,
-                  clientSecret,
+                  operatorId,
+                  operatorSecret,
                   siteId,
                   memberId,
                   memberName,
