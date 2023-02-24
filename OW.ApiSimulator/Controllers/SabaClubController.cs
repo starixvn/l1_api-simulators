@@ -387,8 +387,8 @@ namespace OW.ApiSimulator.Controllers
         }
 
         [HttpPost]
-        [Route("/[controller]/[action]")]
-        public async Task<IActionResult> Login(LoginCall request)
+        [Route("/api/SabaClubInternal/Login")]
+        public async Task<IActionResult> Login([FromBody]LoginCall request)
         {
             var authClient = new AuthenticationClient(new Uri(appSettings.ApiUrl));
 
