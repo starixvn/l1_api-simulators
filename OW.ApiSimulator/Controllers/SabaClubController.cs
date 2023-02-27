@@ -403,6 +403,7 @@ namespace OW.ApiSimulator.Controllers
                     request.Call.SiteId,
                     request.Call.ObCustId,
                     request.Call.ObCustName,
+                    request.Call.Language,
                     request.Call.Currency,
                     request.Call.Ip,
                     request.Call.BrowserUserAgent,

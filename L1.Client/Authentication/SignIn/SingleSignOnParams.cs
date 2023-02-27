@@ -9,8 +9,8 @@
             string operatorId,
             string operatorSecret,
             string siteId,
-            int memberId,
-            string memberName,
+            int playerId,
+            string playerName,
             string currency,
             string iP,
             string browserUserAgent,
@@ -23,8 +23,8 @@
                   operatorId,
                   operatorSecret,
                   siteId,
-                  memberId,
-                  memberName,
+                  playerId,
+                  playerName,
                   DefaultLanguageCode,
                   currency,
                   iP,
@@ -41,8 +41,8 @@
             string operatorId,
             string operatorSecret,
             string siteId,
-            int memberId,
-            string memberName,
+            int playerId,
+            string playerName,
             string language,
             string currency,
             string iP,
@@ -68,6 +68,8 @@
             GameTypeId = gameTypeId;
             SiteName = siteName;
             IsCash = isCash;
+            PlayerId = playerId;
+            PlayerName = playerName;
         }
 
         public string Seq { get; set; }
