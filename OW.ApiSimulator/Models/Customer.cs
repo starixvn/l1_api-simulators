@@ -49,5 +49,7 @@
         public int EnterPortal { get; set; } = 0;
 
         public int DirectLogin { get; set; } = 0;
+
+        public int OWLogin { get; set; } = 0;
     }
 }

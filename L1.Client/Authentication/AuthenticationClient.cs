@@ -9,7 +9,7 @@ namespace L1.Client
 {
     public interface IAuthenticationClient
     {
-        Task<SingleSignOnResult> SingleSignOnAsync(SingleSignOnParams signOnParams, Action<string> errorHandler = null);
+        Task<SingleSignOnResponse> SingleSignOnAsync(SingleSignOnParams signOnParams, Action<string> errorHandler = null);
     }
 
     public class AuthenticationClient : IAuthenticationClient
@@ -23,7 +23,7 @@ namespace L1.Client
             client = HttpClientManager.GetApiClient(apiUri);
         }
 
-        public async Task<SingleSignOnResult> SingleSignOnAsync(SingleSignOnParams signOnParams, Action<string> errorHandler = null)
+        public async Task<SingleSignOnResponse> SingleSignOnAsync(SingleSignOnParams signOnParams, Action<string> errorHandler = null)
         {
             var jsonContent = JsonConvert.SerializeObject(signOnParams);
             var paramContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
@@ -36,18 +36,18 @@ namespace L1.Client
             if (!response.IsSuccessStatusCode)
             {
                 errorHandler?.Invoke($"{response.StatusCode}-{response.ReasonPhrase}-{await response.Content.ReadAsStringAsync()}");
-                return new SingleSignOnResult(Error.CreateErrorFromResponseStatusCode(response.StatusCode));
+                var error = Error.CreateErrorFromResponseStatusCode(response.StatusCode);
+                return new SingleSignOnResponse(new SingleSignOnResult(error.Code, error.Message, signOnParams.Seq));
             }
 
             var responseContent = await response.Content.ReadAsStringAsync();
             var signInResponse = JsonConvert.DeserializeObject<SignInResponse>(responseContent);
 
-            return new SingleSignOnResult(new Uri(signInResponse.RedirectUrl));
+            return new SingleSignOnResponse(new SingleSignOnResult(new Uri(signInResponse.RedirectUrl), signOnParams.Seq));
         }
 
         private string HashHMACHex(string keyHex, string messageHex)
         {
-
             HMACSHA256 hashObject = new HMACSHA256(Encoding.UTF8.GetBytes(keyHex));
 
             var signature = hashObject.ComputeHash(Encoding.UTF8.GetBytes(messageHex));
@@ -55,6 +55,4 @@ namespace L1.Client
             return Convert.ToBase64String(signature);
         }
     }
-
-    
 }

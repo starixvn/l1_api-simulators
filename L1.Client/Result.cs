@@ -1,14 +1,22 @@
-﻿namespace L1.Client
+﻿using System;
+
+namespace L1.Client
 {
     public abstract class Result
     {
-        public Result(Error error)
+        public Result(int errorCode, string errorDescription, string seq)
         {
-            Error = error;
+            ErrorCode = errorCode;
+            ErrorDescription = errorDescription;
+            Seq = seq;
         }
 
-        public Error Error { get; }
+        public int ErrorCode { get;  }
 
-        public bool IsSuccessful() => Error == null;
+        public string ErrorDescription { get; }
+
+        public string Seq { get; }
+
+        public bool IsSuccessful() => ErrorCode == 0;
     }
 }

@@ -388,28 +388,36 @@ namespace OW.ApiSimulator.Controllers
 
         [HttpPost]
         [Route("/api/SabaClubInternal/Login")]
-        public async Task<IActionResult> Login([FromBody]LoginCall request)
+        public async Task<IActionResult> Login([FromBody] LoginCall request)
         {
-            var authClient = new AuthenticationClient(new Uri(appSettings.ApiUrl));
+            var selectedOperator = GetOperator("ow");
+            var customer = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == request.Call.ObCustId);
 
-            var signInParams = new SingleSignOnParams(
-                Constants.OperatorIds["ow"],
-                "ONEworks1@20luminet&",
-                request.Call.SiteId,
-                request.Call.ObCustId,
-                request.Call.ObCustName,
-                request.Call.Currency,
-                request.Call.Ip,
-                request.Call.BrowserUserAgent,
-                request.Call.Seq,
-                (byte)request.Call.GameId,
-                request.Call.SiteName,
-                false,
-                request.Call.IsMobi ?? false);
+            if (customer?.ErrorCode.OWLogin == 0)
+            {
+                var authClient = new AuthenticationClient(new Uri(appSettings.ApiUrl));
 
-            var result = await authClient.SingleSignOnAsync(signInParams);
+                var signInParams = new SingleSignOnParams(
+                    Constants.OperatorIds["ow"],
+                    "ONEworks1@20luminet&",
+                    request.Call.SiteId,
+                    request.Call.ObCustId,
+                    request.Call.ObCustName,
+                    request.Call.Currency,
+                    request.Call.Ip,
+                    request.Call.BrowserUserAgent,
+                    request.Call.Seq,
+                    (byte)request.Call.GameId,
+                    request.Call.SiteName,
+                    false,
+                    request.Call.IsMobi ?? false);
 
-            return Ok(result);
+                var result = await authClient.SingleSignOnAsync(signInParams);
+
+                return Ok(result);
+            }
+
+            return Ok(new SingleSignOnResponse(new SingleSignOnResult(customer.ErrorCode.OWLogin, string.Empty, request.Call.Seq)));
         }
 
         [HttpGet]
