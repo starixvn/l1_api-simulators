@@ -23,7 +23,7 @@ var version1Set = app.NewApiVersionSet()
     .ReportApiVersions()
     .Build();
 
-app.MapGet("/healthcheck", () => Results.Ok("Member Api is running!"));
+app.MapGet("/", () => Results.Ok("Member Api is running!"));
 
 app.MapPost("/v{version:apiVersion}/auth/login", async ([FromBody] MemberLogin model, [FromServices] IOWHandler handler) =>
 {

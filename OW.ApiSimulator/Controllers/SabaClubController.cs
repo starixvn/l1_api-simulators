@@ -429,7 +429,7 @@ namespace OW.ApiSimulator.Controllers
             var result = new MemberInfoResult();
             var customer = selectedOperator.Customers.Find(x => x.Username == username);
 
-            result.ErrorCode = customer?.ErrorCode.DirectLogin ?? 0;
+            result.ErrorCode = customer?.ErrorCode.MemberLogin ?? 0;
 
             if (result.ErrorCode == 0 && customer != null)
             {
