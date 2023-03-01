@@ -76,7 +76,13 @@ namespace OW.ApiSimulator.Controllers
         {
             var selectedOperator = GetOperator(@operator);
             var player = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == playerId)
-                ?? new Customer { PlayerId = playerId, Balance = 2000, MinBet = (systemType.Equals(SC1) ? 1 : 10), MaxBet = (systemType.Equals(SC1) ? 3000 : 20000) };
+                ?? new Customer
+                {
+                    PlayerId = playerId,
+                    Balance = 2000,
+                    MinBet = (systemType.Equals(SC1) ? 1 : 10),
+                    MaxBet = (systemType.Equals(SC1) ? 3000 : 20000)
+                };
             player.Balance = balance;
             selectedOperator.Customers.RemoveAll(x => x.PlayerId == playerId);
             selectedOperator.Customers.Add(player);
@@ -427,7 +433,7 @@ namespace OW.ApiSimulator.Controllers
         {
             var selectedOperator = GetOperator(@operator);
             var result = new MemberInfoResult();
-            var customer = selectedOperator.Customers.Find(x => x.Username == username);
+            var customer = selectedOperator.Customers.Find(x => string.Equals(x.Username, username, StringComparison.InvariantCultureIgnoreCase));
 
             result.ErrorCode = customer?.ErrorCode.MemberLogin ?? 0;
 
