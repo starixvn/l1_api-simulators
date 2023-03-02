@@ -1,6 +1,7 @@
 import React from "react";
-import Select from "./select.jsx";
 import Axios from "axios";
+import Input from "../input.jsx";
+import config from "../../../game-client-config.json";
 
 export default class DeepLink extends React.Component {
     constructor(props) {
@@ -22,11 +23,11 @@ export default class DeepLink extends React.Component {
     componentDidMount() {
         Axios.get("/resource/deeplink")
             .then((data) => data.data)
-            .then(({ urls }) => this.setState({ options: urls.map((url) => ({ value: url, name: url })) }));
+            .then(({ value }) => this.props.onChange({ [this.props.id]: `${value}?uri=${config.connectSiteUrl}` }));
     }
 
     render() {
         const { value, id } = this.props;
-        return <Select {...this.state} id={id} value={value} onChange={this.handleChange} />;
+        return <Input value={value} id={id} onChange={this.handleChange} />;
     }
 }

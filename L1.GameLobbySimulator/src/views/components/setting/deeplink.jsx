@@ -8,7 +8,7 @@ export default class DeepLink extends React.Component {
         super();
 
         this.state = {
-            URLs: [],
+            url: "",
             newURL: ""
         };
 
@@ -18,7 +18,7 @@ export default class DeepLink extends React.Component {
     componentDidMount() {
         Axios.get("/resource/deeplink")
             .then((data) => data.data)
-            .then((data) => this.setState({ URLs: data.urls }));
+            .then((data) => this.setState({ url: data.value }));
     }
 
     onChangeValue(data) {
@@ -26,13 +26,10 @@ export default class DeepLink extends React.Component {
     }
 
     handleSubmit(event) {
-        const URLs = this.state.URLs;
-        const newURL = this.state.newURL;
-        URLs.unshift(newURL);
-        Axios.post("/resource/deeplink", { urls: URLs })
+        Axios.post("/resource/deeplink", { value: this.state.newURL })
             .then((data) => data.data)
             .then((data) => (data.error ? Promise.reject(data.error) : data))
-            .then(({ urls }) => this.setState({ URLs: urls }))
+            .then(({ value }) => this.setState({ url: value }))
             .catch(showAlert);
 
         event.preventDefault();
@@ -52,15 +49,11 @@ export default class DeepLink extends React.Component {
                         <div className="col-sm-12 col-md-6">
                             <fieldset className="container">
                                 <legend>Supported</legend>
-                                <ul>
-                                    {this.state.URLs.map((url) => {
-                                        return <li key={url}>{url}</li>;
-                                    })}
-                                </ul>
+                                <ul>{this.state.url}</ul>
                             </fieldset>
                         </div>
                     </div>
-                    <input className="primary" type="submit" value="Add" />
+                    <input className="primary" type="submit" value="Update" />
                 </form>
             </div>
         );

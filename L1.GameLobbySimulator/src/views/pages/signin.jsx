@@ -5,7 +5,7 @@ import Input from "../components/input.jsx";
 import AppType from "../components/select/app-type.jsx";
 import GameSelect from "../components/select/game.jsx";
 import LanguageSelect from "../components/select/language.jsx";
-import DeepLinkSelect from "../components/select/deeplink.jsx";
+import DeepLinkInput from "../components/select/deeplink.jsx";
 import { showAlert } from "../util.jsx";
 import { SC1GameLobbyURLMapper, VG2GameLobbyURLMapper } from "../constants/lobby-url";
 import config from "../../game-client-config.json";
@@ -508,7 +508,7 @@ export default class SignIn extends React.Component {
                             <form>
                                 <fieldset className="container">
                                     <legend>Deep Link</legend>
-                                    <DeepLinkSelect onChange={this.handleInputChange} id="deeplink" value={this.state.deeplink} />
+                                    <DeepLinkInput onChange={this.handleInputChange} id="deeplink" value={this.state.deeplink} />
                                     <QRCode value={this.state.deeplink} size={120} className="mt-2"></QRCode>
                                 </fieldset>
                             </form>
