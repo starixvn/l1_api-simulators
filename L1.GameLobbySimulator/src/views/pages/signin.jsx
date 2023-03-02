@@ -28,6 +28,7 @@ export default class SignIn extends React.Component {
 
         this.state = {
             playerId: props.playerId,
+            playerName: `username_${props.playerId}`,
             language: "vi-VN",
             currency: IsSystemTypeSC1() ? "$US" : "INH",
             seq: "d,y,lumi",
@@ -156,12 +157,12 @@ export default class SignIn extends React.Component {
     }
 
     handleClickSetDefaultBalance(value) {
-        const { setting, playerId, auth } = this.state;
+        const { setting, playerId, auth, playerName } = this.state;
         const balance = !isNaN(value) ? value : IsSystemTypeSC1() ? 2000 : 20000;
         Axios.post(
             `${setting.owUrl}/SetDefaultBalance?playerId=${playerId}&operator=${
                 operatorMapper[auth.operatorId]
-            }&balance=${balance}&systemType=${config.systemType}`
+            }&balance=${balance}&systemType=${config.systemType}&username=${playerName}`
         )
             .then((data) => {
                 this.setState({ setDefaultBalance: data.data }, () => {
@@ -255,7 +256,7 @@ export default class SignIn extends React.Component {
                                     />
                                 </div>
                                 <div className="col-sm-12 col-md-6">
-                                    <Input type="text" id="playerName" name="Player Username" value={`username_${this.state.playerId}`} />
+                                    <Input type="text" id="playerName" name="Player Username" value={this.state.playerName} onChange={this.handleInputChange} />
                                     <Input
                                         type="text"
                                         id="currency"

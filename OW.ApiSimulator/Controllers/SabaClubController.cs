@@ -72,13 +72,14 @@ namespace OW.ApiSimulator.Controllers
 
         [HttpPost]
         [Route("/[controller]/[action]")]
-        public IActionResult SetDefaultBalance([FromQuery] int playerId, [FromQuery] string @operator, [FromQuery] int balance = 2000, [FromQuery] string systemType = "SC1")
+        public IActionResult SetDefaultBalance([FromQuery] int playerId, [FromQuery] string username, [FromQuery] string @operator, [FromQuery] int balance = 2000, [FromQuery] string systemType = "SC1")
         {
             var selectedOperator = GetOperator(@operator);
             var player = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == playerId)
                 ?? new Customer
                 {
                     PlayerId = playerId,
+                    Username = username,
                     Balance = 2000,
                     MinBet = (systemType.Equals(SC1) ? 1 : 10),
                     MaxBet = (systemType.Equals(SC1) ? 3000 : 20000)
