@@ -60,7 +60,8 @@ export default class SignIn extends React.Component {
             operatorToken: IsSystemTypeSC1() ? "ONEworks1Token" : "ONEworksVGCashToken",
             setDefaultBalance: false,
             ref: "",
-            deeplink: ""
+            deeplink: "",
+            isApp: false
             returnUrl: "",
             isApp: false
         };
@@ -256,7 +257,13 @@ export default class SignIn extends React.Component {
                                     />
                                 </div>
                                 <div className="col-sm-12 col-md-6">
-                                    <Input type="text" id="playerName" name="Player Username" value={this.state.playerName} onChange={this.handleInputChange} />
+                                    <Input
+                                        type="text"
+                                        id="playerName"
+                                        name="Player Username"
+                                        value={this.state.playerName}
+                                        onChange={this.handleInputChange}
+                                    />
                                     <Input
                                         type="text"
                                         id="currency"
@@ -365,7 +372,7 @@ export default class SignIn extends React.Component {
                         <div className="row">
                             <div className="col-sm-6">
                                 <div className="row">
-                                    <div className="col-sm-4">
+                                    <div className="col-sm-2">
                                         <Input
                                             type="checkbox"
                                             id="localhost"
@@ -374,7 +381,7 @@ export default class SignIn extends React.Component {
                                             onChange={this.handleInputChange}
                                         />
                                     </div>
-                                    <div className="col-sm-4">
+                                    <div className="col-sm-2">
                                         <Input
                                             type="checkbox"
                                             id="isOpenOnIframe"
