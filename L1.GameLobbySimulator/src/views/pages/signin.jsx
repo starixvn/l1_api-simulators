@@ -106,6 +106,7 @@ export default class SignIn extends React.Component {
 
         if (data.playerId || data.appType) {
             this.props.handleChangeInput(data);
+            data.playerId && this.setState({ playerName: `username_${data.playerId}` });
         }
 
         this.setState(data);
@@ -370,114 +371,111 @@ export default class SignIn extends React.Component {
                         </fieldset>
 
                         <div className="row">
-                            <div className="col-sm-6">
-                                <div className="row">
-                                    <div className="col-sm-2">
+                            <div className="col-md-12 row">
+                                <div className="col-sm-3 col-md-2">
+                                    <Input
+                                        type="checkbox"
+                                        id="localhost"
+                                        name="Localhost"
+                                        value={this.state.localhost}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </div>
+                                <div className="col-sm-3 col-md-2">
+                                    <Input
+                                        type="checkbox"
+                                        id="isOpenOnIframe"
+                                        name="Load On Iframe"
+                                        value={this.state.isOpenOnIframe}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </div>
+                                <div className="col-sm-3 col-md-2">
+                                    <Input
+                                        type="checkbox"
+                                        id="isApp"
+                                        name="Is App"
+                                        value={this.state.isApp}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </div>
+                                {!IsSystemTypeSC1() && (
+                                    <div className="col-sm-4">
                                         <Input
                                             type="checkbox"
-                                            id="localhost"
-                                            name="Localhost"
-                                            value={this.state.localhost}
+                                            id="disableJackpotGames"
+                                            name="Disable Jackpot Games"
+                                            value={this.state.disableJackpotGames}
                                             onChange={this.handleInputChange}
                                         />
                                     </div>
-                                    <div className="col-sm-2">
-                                        <Input
-                                            type="checkbox"
-                                            id="isOpenOnIframe"
-                                            name="Load On Iframe"
-                                            value={this.state.isOpenOnIframe}
-                                    onChange={this.handleInputChange}
-                                />
+                                )}
                             </div>
-                            <div className="col-sm-2">
-                                <Input
-                                    type="checkbox"
-                                    id="isApp"
-                                    name="Is App"
-                                    value={this.state.isApp}
-                                            onChange={this.handleInputChange}
-                                        />
-                                    </div>
-                                    {!IsSystemTypeSC1() && (
-                                        <div className="col-sm-4">
-                                            <Input
-                                                type="checkbox"
-                                                id="disableJackpotGames"
-                                                name="Disable Jackpot Games"
-                                                value={this.state.disableJackpotGames}
-                                                onChange={this.handleInputChange}
-                                            />
-                                        </div>
-                                    )}
+                            <div className="col-md-12 row">
+                                <div className="col-sm-8">
+                                    <Input
+                                        type="text"
+                                        id="devIp"
+                                        name="Dev Machine IP"
+                                        value={this.state.devIp}
+                                        onChange={this.handleInputChange}
+                                    />
                                 </div>
-                                <div className="row">
-                                    <div className="col-sm-8">
-                                        <Input
-                                            type="text"
-                                            id="devIp"
-                                            name="Dev Machine IP"
-                                            value={this.state.devIp}
-                                            onChange={this.handleInputChange}
-                                        />
-                                    </div>
-                                </div>
-                                <input className="primary" type="submit" value="Get Token" id="get-token" />
-                                <label className="button secondary" for="modal-control" id="set-balance">
-                                    Set Balance
-                                </label>
-                                <input
-                                    type="checkbox"
-                                    id="modal-control"
-                                    class="modal"
-                                    onChange={(event) => event.target.checked && this.handleReloadIframe()}
-                                />
-                                <div role="dialog" aria-labelledby="dialog-title">
-                                    <div class="card" style={{ maxWidth: "800px", maxHeight: "800px" }}>
-                                        <label for="modal-control" class="modal-close"></label>
-                                        <h3 class="section">
-                                            Set Balance
-                                            <svg
-                                                cursor="pointer"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="20"
-                                                height="20"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                stroke-width="2"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                class="feather feather-refresh-cw"
-                                                onClick={this.handleReloadIframe}
-                                            >
-                                                <polyline points="23 4 23 10 17 10"></polyline>
-                                                <polyline points="1 20 1 14 7 14"></polyline>
-                                                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
-                                            </svg>
-                                        </h3>
-                                        <div class="section">
-                                            <iframe
-                                                ref={this.iFrameRef}
-                                                src=""
-                                                width="800"
-                                                height="500"
-                                                frameborder="0"
-                                                allowtransparency="true"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                                <input
-                                    type="button"
-                                    id="set-default-balance"
-                                    className="tertiary"
-                                    value="Set Default Balance"
-                                    onClick={this.handleClickSetDefaultBalance}
-                                />
                             </div>
+                            <input className="primary" type="submit" value="Get Token" id="get-token" />
+                            <label className="button secondary" for="modal-control" id="set-balance">
+                                Set Balance
+                            </label>
+                            <input
+                                type="checkbox"
+                                id="modal-control"
+                                class="modal"
+                                onChange={(event) => event.target.checked && this.handleReloadIframe()}
+                            />
+                            <div role="dialog" aria-labelledby="dialog-title">
+                                <div class="card" style={{ maxWidth: "800px", maxHeight: "800px" }}>
+                                    <label for="modal-control" class="modal-close"></label>
+                                    <h3 class="section">
+                                        Set Balance
+                                        <svg
+                                            cursor="pointer"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            class="feather feather-refresh-cw"
+                                            onClick={this.handleReloadIframe}
+                                        >
+                                            <polyline points="23 4 23 10 17 10"></polyline>
+                                            <polyline points="1 20 1 14 7 14"></polyline>
+                                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                                        </svg>
+                                    </h3>
+                                    <div class="section">
+                                        <iframe
+                                            ref={this.iFrameRef}
+                                            src=""
+                                            width="800"
+                                            height="500"
+                                            frameborder="0"
+                                            allowtransparency="true"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <input
+                                type="button"
+                                id="set-default-balance"
+                                className="tertiary"
+                                value="Set Default Balance"
+                                onClick={this.handleClickSetDefaultBalance}
+                            />
                         </div>
-
                         {setDefaultBalance && <p style={{ color: "green", fontWeight: "bold" }}>Set balance successfully!</p>}
                     </form>
                     {(this.state.appType === 3 || this.state.isOpenOnIframe) && token && (
@@ -486,7 +484,7 @@ export default class SignIn extends React.Component {
                 </div>
                 <div className="section">
                     <div className="row">
-                        <div className="col-sm-6">
+                        <div className="col-sm-12 col-md-6">
                             <form onSubmit={(event) => this.handleVerifyToken(event)}>
                                 <fieldset className="container">
                                     <legend>Token</legend>
@@ -512,7 +510,7 @@ export default class SignIn extends React.Component {
                                 </fieldset>
                             </form>
                         </div>
-                        <div className="col-sm-6">
+                        <div className="col-sm-12 col-md-6">
                             <form>
                                 <fieldset className="container">
                                     <legend>Deep Link</legend>

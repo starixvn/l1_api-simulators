@@ -84,6 +84,7 @@ namespace OW.ApiSimulator.Controllers
                     MinBet = (systemType.Equals(SC1) ? 1 : 10),
                     MaxBet = (systemType.Equals(SC1) ? 3000 : 20000)
                 };
+            player.Username = username;
             player.Balance = balance;
             selectedOperator.Customers.RemoveAll(x => x.PlayerId == playerId);
             selectedOperator.Customers.Add(player);
