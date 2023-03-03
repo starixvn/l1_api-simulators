@@ -159,12 +159,12 @@ export default class SignIn extends React.Component {
     }
 
     handleClickSetDefaultBalance(value) {
-        const { setting, playerId, auth, playerName } = this.state;
+        const { setting, playerId, auth, playerName, currency } = this.state;
         const balance = !isNaN(value) ? value : IsSystemTypeSC1() ? 2000 : 20000;
         Axios.post(
             `${setting.owUrl}/SetDefaultBalance?playerId=${playerId}&operator=${
                 operatorMapper[auth.operatorId]
-            }&balance=${balance}&systemType=${config.systemType}&username=${playerName}`
+            }&balance=${balance}&systemType=${config.systemType}&username=${playerName}&currency=${currency}`
         )
             .then((data) => {
                 this.setState({ setDefaultBalance: data.data }, () => {
