@@ -58,7 +58,8 @@ export default class SignIn extends React.Component {
             operatorToken: IsSystemTypeSC1() ? "ONEworks1Token" : "ONEworksVGCashToken",
             setDefaultBalance: false,
             ref: "",
-            returnUrl: ""
+            returnUrl: "",
+            isApp: false
         };
 
         this.instantModeSize = {
@@ -210,6 +211,15 @@ export default class SignIn extends React.Component {
             if (devIp) {
                 redirectUrl = `http://${devIp}?token=${token}`;
             }
+
+            if (
+                redirectUrl &&
+                !redirectUrl.includes("appType") &&
+                (this.state.appType === 1 || this.state.appType === 5) &&
+                this.state.isApp
+            ) {
+                redirectUrl = `${redirectUrl}&appType=5`;
+            }
         }
 
         return (
@@ -356,7 +366,7 @@ export default class SignIn extends React.Component {
                         </fieldset>
 
                         <div className="row">
-                            <div className="col-sm-4">
+                            <div className="col-sm-2">
                                 <Input
                                     type="checkbox"
                                     id="localhost"
@@ -365,12 +375,21 @@ export default class SignIn extends React.Component {
                                     onChange={this.handleInputChange}
                                 />
                             </div>
-                            <div className="col-sm-4">
+                            <div className="col-sm-2">
                                 <Input
                                     type="checkbox"
                                     id="isOpenOnIframe"
                                     name="Load On Iframe"
                                     value={this.state.isOpenOnIframe}
+                                    onChange={this.handleInputChange}
+                                />
+                            </div>
+                            <div className="col-sm-2">
+                                <Input
+                                    type="checkbox"
+                                    id="isApp"
+                                    name="Is App"
+                                    value={this.state.isApp}
                                     onChange={this.handleInputChange}
                                 />
                             </div>
