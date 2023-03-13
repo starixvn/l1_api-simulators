@@ -1,18 +1,9 @@
 include:
-  - project: "ci/repos-ci/pentagon_l1_game_lobby_simulator"
-    ref: master
-    file: "gitlab-ci.yml"
-  - project: "ci/repos-ci/pentagon_l2_game_lobby_simulator"
-    ref: master
-    file: "gitlab-ci-mixing.yml"
-  - project: "ci/repos-ci/pentagon_l1_ow_api_simulator"
-    ref: master
-    file: "gitlab-ci-mixing.yml"
-  - project: "ci/repos-ci/pentagon_l2_ow_api_simulator"
-    ref: master
-    file: "gitlab-ci-mixing.yml"
+  - project: ci/core-cicd
+    ref: main
+    file: luminet.gitlab-ci.yml
 
-.base_transform_config_script: &base_transform_config_script
+.base_transform_config: &base_transform_config
   stage: transform-config
 
   tags:
@@ -29,14 +20,3 @@ include:
     paths:
       - ./L1.GameLobbySimulator/src/game-client-config.json
     expire_in: 1 day
-
-.base_transform_config_l1_game_lobby_simulator:
-  <<: *base_transform_config_script
-  extends:
-    - .deploy_vars_l1_game_lobby_simulator
-    - .build:image:l1_game_lobby_simulator:rules
-.base_transform_config_l2_game_lobby_simulator:
-  <<: *base_transform_config_script
-  extends:
-    - .deploy_vars_l2_game_lobby_simulator
-    - .build:image:l2_game_lobby_simulator:rules

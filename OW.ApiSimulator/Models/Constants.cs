@@ -2,6 +2,6 @@
 {
     public static class Constants
     {
-        public static readonly string[] Operators = { "ow", "sbo", "ow_vg" };
+        public static readonly string[] Operators = { "ow", "sbo", "ow_vg", "pff" };
     }
 }

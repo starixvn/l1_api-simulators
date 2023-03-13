@@ -13,17 +13,21 @@ const app = express();
 
 const corsOptions = {
     origin: (origin, callback) => {
-        if (config.corsUrls.includes(origin) || !origin) {
+        if (!config.enableCors) {
             callback(null, true);
         } else {
-            callback(new Error(`Test test Not allowed by CORS ${origin}`));
+            if (config.corsUrls?.includes(origin) || !origin) {
+                callback(null, true);
+            } else {
+                callback(new Error(`Test test Not allowed by CORS ${origin}`));
+            }
         }
     }
 };
 
 app.use(
     cors({
-        origin: "*"
+        origin: corsOptions
     })
 );
 

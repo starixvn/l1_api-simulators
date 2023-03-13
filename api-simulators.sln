@@ -5,11 +5,7 @@ VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L1.Client", "L1.Client\L1.Client.csproj", "{AC709B9F-823D-4B2B-B134-E1D3CC2D1CB2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "L1.MemberSiteSimulation", "L1.MemberSiteSimulation\L1.MemberSiteSimulation.csproj", "{7A39B92E-EBAE-4F11-BDFD-A768ED4CDE12}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OW.ApiSimulator", "OW.ApiSimulator\OW.ApiSimulator.csproj", "{DBA8F8DA-75FC-4F37-8089-FF6648D0D655}"
-EndProject
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "L1.GameLobbySimulator", "L1.GameLobbySimulator\L1.GameLobbySimulator.njsproj", "{AE0A6657-AB7A-4C8D-8395-42A9386B2DDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

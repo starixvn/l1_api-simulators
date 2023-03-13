@@ -13,7 +13,8 @@ const operatorMapper = {
     ONEworks1: "ow",
     ONEworksVGCash: "ow",
     SBO: "sbo",
-    ONEworks_VG: "ow"
+    ONEworks_VG: "ow",
+    PFF: "pff"
 };
 const IsSystemTypeSC1 = () => {
     return config.systemType === "SC1";

@@ -12,6 +12,9 @@
         </PackageReference>
     </ItemGroup>
     <ItemGroup>
+        <ProjectReference Include="..\L1.Client\L1.Client.csproj" />
+    </ItemGroup>
+    <ItemGroup>
         <Content Update="appsettings.json">
             <TransformOnBuild>true</TransformOnBuild>
         </Content>
