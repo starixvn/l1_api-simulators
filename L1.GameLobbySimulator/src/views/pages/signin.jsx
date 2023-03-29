@@ -56,7 +56,9 @@ export default class SignIn extends React.Component {
             instantMode: 1,
             devIp: "",
             operatorToken: IsSystemTypeSC1() ? "ONEworks1Token" : "ONEworksVGCashToken",
-            setDefaultBalance: false
+            setDefaultBalance: false,
+            ref: "",
+            returnUrl: ""
         };
 
         this.instantModeSize = {
@@ -310,6 +312,7 @@ export default class SignIn extends React.Component {
                                         value={this.state.browserUserAgent}
                                         onChange={this.handleInputChange}
                                     />
+                                    <Input type="text" id="ref" name="Ref" value={this.state.ref} onChange={this.handleInputChange} />
                                 </div>
                                 <div className="col-sm-12 col-md-6">
                                     <Input type="text" id="ip" name="IP" value={this.state.ip} onChange={this.handleInputChange} />
@@ -339,6 +342,13 @@ export default class SignIn extends React.Component {
                                         id="operatorToken"
                                         name="Operator Token"
                                         value={this.state.operatorToken}
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <Input
+                                        type="text"
+                                        id="returnUrl"
+                                        name="Return Url"
+                                        value={this.state.returnUrl}
                                         onChange={this.handleInputChange}
                                     />
                                 </div>
