@@ -204,7 +204,7 @@ export default class SignIn extends React.Component {
                 redirectUrl =
                     this.state.appType === 2 || this.state.appType === 4
                         ? `${setting.mobileLocalhost}?token=${token}`
-                        : `${setting.localhost}?token=${token}&gameId=${this.state.gameId}`;
+                        : `${setting.localhost}?token=${token}&gameId=${this.state.gameId}&ref=${this.state.ref}&rurl=${window.btoa(this.state.returnUrl)}`;
             }
 
             if (devIp) {
