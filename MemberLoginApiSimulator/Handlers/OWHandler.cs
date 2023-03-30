@@ -33,7 +33,7 @@ namespace MemberLoginApiSimulator.Handlers
                 {
                     UserID = memberInfoResult.UserId,
                     UserName = memberInfoResult.Username,
-                    SiteID = model.SiteID,
+                    SiteID = int.Parse(model.SiteID),
                     SiteName = memberInfoResult.SiteName,
                     UserInfo = new UserInfo
                     {
