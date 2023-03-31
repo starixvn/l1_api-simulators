@@ -1,5 +1,5 @@
 # Base image
-FROM registry.nexdev.net:5050/docker/node:14.15.1-slim
+FROM hub.lumigame.com/base/node:14.15.1-slim
 
 USER root
 
