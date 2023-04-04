@@ -1006,5 +1006,15 @@
                 "name": "N/A"
             }
         ]
+    },
+    {
+        "id": 64,
+        "name": "Magic Forest",
+        "choice": [
+            {
+                "id": 0,
+                "name": "N/A"
+            }
+        ]
     }
 ]
