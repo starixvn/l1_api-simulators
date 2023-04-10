@@ -35,6 +35,7 @@ namespace MemberLoginApiSimulator.Handlers
                     UserName = memberInfoResult.Username,
                     SiteID = int.Parse(model.SiteID),
                     SiteName = memberInfoResult.SiteName,
+                    AgentSite = memberInfoResult.SiteName,
                     UserInfo = new UserInfo
                     {
                         Currency = memberInfoResult.Currency
