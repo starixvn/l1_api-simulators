@@ -61,7 +61,7 @@ export default class SignIn extends React.Component {
             setDefaultBalance: false,
             ref: "",
             deeplink: "",
-            isApp: false
+            isApp: false,
             returnUrl: "",
             isApp: false
         };
