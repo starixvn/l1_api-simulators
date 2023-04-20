@@ -7,7 +7,7 @@ ENV NODE_ENV $NODE_ENV
 RUN mkdir /app && chown node:node /app
 WORKDIR /app
 
-COPY . .
+COPY ./L1.GameLobbySimulator .
 RUN yarn install
 RUN yarn build
 
