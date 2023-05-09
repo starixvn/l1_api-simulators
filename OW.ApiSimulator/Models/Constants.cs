@@ -12,5 +12,15 @@ namespace OW.ApiSimulator.Models
             {"ow", "ONEworks1" },
             {"sbo", "ONEworksVGCash" }
         };
+
+        public static readonly Dictionary<string, string> LoginLanguageMapper = new Dictionary<string, string>
+        {
+            {"en", "en-US" },
+            {"vn", "vi-VN" },
+            {"ch", "zh-TW" },
+            {"cs", "zh-CN" },
+            {"th", "th-TH" },
+            {"id", "id-ID" },
+        };
     }    
 }
