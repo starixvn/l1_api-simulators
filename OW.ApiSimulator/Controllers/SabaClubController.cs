@@ -43,10 +43,12 @@ namespace OW.ApiSimulator.Controllers
         [Route("/[controller]/[action]")]
         public IActionResult CreateCustomer(Customer model)
         {
-            if (model.Operator == Constants.Operators[2])
+            var forcedToUseOWOperator = Constants.ForcedToUseOWOperatorsMapper.FirstOrDefault(_operator => _operator.Key == model.Operator);
+            if(forcedToUseOWOperator.Key != null)
             {
-                model.Operator = Constants.Operators[0];
+                model.Operator = forcedToUseOWOperator.Value;
             }
+          
             var selectedOperator = GetOperator(model.Operator);
 
             selectedOperator.Customers.RemoveAll(x => x.PlayerId == model.PlayerId);
