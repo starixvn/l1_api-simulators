@@ -1,14 +1,14 @@
 import Axios from "axios";
 import React from "react";
 import QRCode from "react-qr-code";
+import config from "../../game-client-config.json";
 import Input from "../components/input.jsx";
 import AppType from "../components/select/app-type.jsx";
+import DeepLinkInput from "../components/select/deeplink.jsx";
 import GameSelect from "../components/select/game.jsx";
 import LanguageSelect from "../components/select/language.jsx";
-import DeepLinkInput from "../components/select/deeplink.jsx";
+import { SC1GameLobbyURLMapper, VG2GameLobbyURLMapper, sedieTestingLocalUrl } from "../constants/lobby-url";
 import { showAlert } from "../util.jsx";
-import { SC1GameLobbyURLMapper, VG2GameLobbyURLMapper } from "../constants/lobby-url";
-import config from "../../game-client-config.json";
 
 const operatorMapper = {
     ONEworks1: "ow",
@@ -50,6 +50,7 @@ export default class SignIn extends React.Component {
             domain: "example.com",
             localhost: false,
             isOpenOnIframe: false,
+            isSedieTesting: false,
             appType: props.appType,
             isCash: true,
             partner: "1W",
@@ -201,8 +202,9 @@ export default class SignIn extends React.Component {
 
     render() {
         let redirectUrl = this.state.redirectUrl;
-        const { localhost, token, instantMode, devIp, setting, setDefaultBalance } = this.state;
+        const { localhost, token, instantMode, devIp, setting, setDefaultBalance, isSedieTesting, language } = this.state;
         const url = IsSystemTypeSC1() ? SC1GameLobbyURLMapper[setting.evn] : VG2GameLobbyURLMapper[setting.evn];
+
         const qrURL = `${url}/signin?obCustId=${this.state.playerId}`;
 
         if (token) {
@@ -210,7 +212,9 @@ export default class SignIn extends React.Component {
                 redirectUrl =
                     this.state.appType === 2 || this.state.appType === 4
                         ? `${setting.mobileLocalhost}?token=${token}`
-                        : `${setting.localhost}?token=${token}&gameId=${this.state.gameId}&ref=${this.state.ref}&rurl=${window.btoa(this.state.returnUrl)}`;
+                        : `${setting.localhost}?token=${token}&gameId=${this.state.gameId}&ref=${this.state.ref}&rurl=${window.btoa(
+                              this.state.returnUrl
+                          )}`;
             }
 
             if (devIp) {
@@ -224,6 +228,10 @@ export default class SignIn extends React.Component {
                 this.state.isApp
             ) {
                 redirectUrl = `${redirectUrl}&appType=5`;
+            }
+
+            if (isSedieTesting) {
+                redirectUrl = `${sedieTestingLocalUrl}?token=${token}&lang=${language}`;
             }
         }
 
@@ -410,6 +418,15 @@ export default class SignIn extends React.Component {
                                         />
                                     </div>
                                 )}
+                                <div className="col-sm-3">
+                                    <Input
+                                        type="checkbox"
+                                        id="isSedieTesting"
+                                        name="Test Sedie"
+                                        value={this.state.isSedieTesting}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </div>
                             </div>
                             <div className="col-md-12 row">
                                 <div className="col-sm-8">
