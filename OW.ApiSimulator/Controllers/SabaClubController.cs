@@ -36,7 +36,7 @@ namespace OW.ApiSimulator.Controllers
             var selectedOperator = GetOperator(@operator);
             var customer = selectedOperator?.Customers.FirstOrDefault(x => x.PlayerId == memId);
 
-            return View(customer ?? new Customer { PlayerId = memId, Balance = 2000, MinBet = (systemType.Equals(SC1) ? 1 : 10), MaxBet = (systemType.Equals(SC1) ? 3000 : 20000) });
+            return View(customer ?? new Customer { PlayerId = memId, Balance = 2000, MinBet = (systemType.Equals(SC1) ? 1 : 10), MaxBet = (systemType.Equals(SC1) ? 5000 : 20000) });
         }
 
         [HttpPost]
@@ -63,7 +63,7 @@ namespace OW.ApiSimulator.Controllers
         {
             var selectedOperator = GetOperator(@operator);
             var player = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == playerId)
-                ?? new Customer { PlayerId = playerId, Balance = 2000, MinBet = (systemType.Equals(SC1) ? 1 : 10), MaxBet = (systemType.Equals(SC1) ? 3000 : 20000) };
+                ?? new Customer { PlayerId = playerId, Balance = 2000, MinBet = (systemType.Equals(SC1) ? 1 : 10), MaxBet = (systemType.Equals(SC1) ? 5000 : 20000) };
             player.Balance = balance;
             selectedOperator.Customers.RemoveAll(x => x.PlayerId == playerId);
             selectedOperator.Customers.Add(player);
