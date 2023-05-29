@@ -14,5 +14,5 @@ export const SedieTestingLocalUrlMapper = {
     LOCAL: "https://sedie-client-base.lumigame.com",
     LOCAL_1: "https://sedie-client-base1.lumigame.com",
     LOCAL_2: "https://sedie-client-base2.lumigame.com",
-    LOCAL_3: "https://sedie-client-base3.lumigame.com"
+    LOCAL_3: "https://l1-proxy3.lumigame.com/game-client-2/"
 };

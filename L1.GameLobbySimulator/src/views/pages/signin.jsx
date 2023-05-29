@@ -7,7 +7,7 @@ import AppType from "../components/select/app-type.jsx";
 import DeepLinkInput from "../components/select/deeplink.jsx";
 import GameSelect from "../components/select/game.jsx";
 import LanguageSelect from "../components/select/language.jsx";
-import { SC1GameLobbyURLMapper, VG2GameLobbyURLMapper, SedieTestingLocalUrlMapper } from "../constants/lobby-url";
+import { SC1GameLobbyURLMapper, SedieTestingLocalUrlMapper, VG2GameLobbyURLMapper } from "../constants/lobby-url";
 import { showAlert } from "../util.jsx";
 
 const operatorMapper = {
@@ -231,7 +231,9 @@ export default class SignIn extends React.Component {
             }
 
             if (isSedieTesting) {
-                redirectUrl=`${SedieTestingLocalUrlMapper[setting.evn] }?token=${token}&lang=${language}`;
+                redirectUrl = `${SedieTestingLocalUrlMapper[setting.evn]}?token=${token}&lang=${language}&ref=${
+                    this.state.ref
+                }&rurl=${window.btoa(this.state.returnUrl)}`;
             }
         }
 
