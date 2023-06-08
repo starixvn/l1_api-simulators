@@ -127,7 +127,8 @@ export default class SignIn extends React.Component {
             verifyResult: null,
             resource: null,
             localhost: null,
-            devIp: null
+            devIp: null,
+            gameTypeId: this.state.gameId
         });
         Axios.post("/signin/sso", request)
             .then((data) => data.data)
