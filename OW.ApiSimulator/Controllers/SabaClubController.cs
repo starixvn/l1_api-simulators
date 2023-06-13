@@ -402,11 +402,11 @@ namespace OW.ApiSimulator.Controllers
         }
 
         [HttpPost]
-        [Route("/api/SabaClubInternal/Login")]
+        [Route("/api/IntgGames/Login")]
         public async Task<IActionResult> Login([FromBody] LoginCall request)
         {
             var selectedOperator = GetOperator("ow");
-            var customer = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == request.Call.ObCustId);
+            var customer = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == request.CustInfo.ObCustId);
 
             if (customer?.ErrorCode.OWLogin == 0)
             {
@@ -415,25 +415,25 @@ namespace OW.ApiSimulator.Controllers
                 var signInParams = new SingleSignOnParams(
                     Constants.OperatorIds["ow"],
                     "ONEworks1@20luminet&",
-                    request.Call.SiteId,
-                    request.Call.ObCustId,
-                    request.Call.ObCustName,
-                    Constants.LoginLanguageMapper[request.Call.Language],
-                    request.Call.Currency,
-                    request.Call.Ip,
-                    request.Call.BrowserUserAgent,
-                    request.Call.Seq,
-                    (byte)request.Call.GameId,
-                    request.Call.SiteName,
+                    request.CustInfo.SiteId,
+                    request.CustInfo.ObCustId,
+                    request.CustInfo.ObCustName,
+                    Constants.LoginLanguageMapper[request.CustInfo.Language],
+                    request.CustInfo.Currency,
+                    request.CustInfo.Ip,
+                    request.CustInfo.BrowserUserAgent,
+                    request.Seq,
+                    0,
+                    request.CustInfo.Site,
                     false,
-                    request.Call.IsMobi ?? false);
+                    false);
 
                 var result = await authClient.SingleSignOnAsync(signInParams);
 
                 return Ok(result);
             }
 
-            return Ok(new SingleSignOnResponse(new SingleSignOnResult(customer.ErrorCode.OWLogin, string.Empty, request.Call.Seq)));
+            return Ok(new SingleSignOnResponse(new SingleSignOnResult(customer.ErrorCode.OWLogin, string.Empty, request.Seq)));
         }
 
         [HttpGet]
