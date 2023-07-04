@@ -11,8 +11,8 @@ export const VG2GameLobbyURLMapper = {
 };
 
 export const SedieTestingLocalUrlMapper = {
-    LOCAL: "https://sedie-client-base.lumigame.com",
-    LOCAL_1: "https://sedie-client-base1.lumigame.com",
-    LOCAL_2: "https://sedie-client-base2.lumigame.com",
+    LOCAL: "https://l1-proxy.lumigame.com/site-2/",
+    LOCAL_1: "https://l1-proxy1.lumigame.com/site-2/",
+    LOCAL_2: "https://l1-proxy2.lumigame.com/site-2/",
     LOCAL_3: "https://l1-proxy3.lumigame.com/site-2/"
 };
