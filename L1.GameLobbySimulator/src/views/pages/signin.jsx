@@ -1,14 +1,14 @@
 import Axios from "axios";
 import React from "react";
 import QRCode from "react-qr-code";
+import config from "../../game-client-config.json";
 import Input from "../components/input.jsx";
 import AppType from "../components/select/app-type.jsx";
+import DeepLinkInput from "../components/select/deeplink.jsx";
 import GameSelect from "../components/select/game.jsx";
 import LanguageSelect from "../components/select/language.jsx";
-import DeepLinkInput from "../components/select/deeplink.jsx";
-import { showAlert } from "../util.jsx";
 import { SC1GameLobbyURLMapper, VG2GameLobbyURLMapper } from "../constants/lobby-url";
-import config from "../../game-client-config.json";
+import { showAlert } from "../util.jsx";
 
 const operatorMapper = {
     ONEworks1: "ow",
@@ -61,7 +61,7 @@ export default class SignIn extends React.Component {
             setDefaultBalance: false,
             ref: "",
             deeplink: "",
-            isApp: false
+            isApp: false,
             returnUrl: "",
             isApp: false
         };
