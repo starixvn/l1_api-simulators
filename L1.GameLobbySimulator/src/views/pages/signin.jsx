@@ -210,7 +210,9 @@ export default class SignIn extends React.Component {
                 redirectUrl =
                     this.state.appType === 2 || this.state.appType === 4
                         ? `${setting.mobileLocalhost}?token=${token}`
-                        : `${setting.localhost}?token=${token}&gameId=${this.state.gameId}&ref=${this.state.ref}&rurl=${window.btoa(this.state.returnUrl)}`;
+                        : `${setting.localhost}?token=${token}&gameId=${this.state.gameId}&ref=${this.state.ref}&rurl=${window.btoa(
+                              this.state.returnUrl
+                          )}`;
             }
 
             if (devIp) {
@@ -399,17 +401,15 @@ export default class SignIn extends React.Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </div>
-                                {!IsSystemTypeSC1() && (
-                                    <div className="col-sm-4">
-                                        <Input
-                                            type="checkbox"
-                                            id="disableJackpotGames"
-                                            name="Disable Jackpot Games"
-                                            value={this.state.disableJackpotGames}
-                                            onChange={this.handleInputChange}
-                                        />
-                                    </div>
-                                )}
+                                <div className="col-sm-4">
+                                    <Input
+                                        type="checkbox"
+                                        id="disableJackpotGames"
+                                        name="Disable Jackpot Games"
+                                        value={this.state.disableJackpotGames}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </div>
                             </div>
                             <div className="col-md-12 row">
                                 <div className="col-sm-8">
