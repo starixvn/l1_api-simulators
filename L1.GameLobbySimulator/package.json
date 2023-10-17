@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon ./src",
     "webpack:dev": "webpack --watch --mode development --config ./src/webpack.config.js",
-    "dev": "concurrently --kill-others \"npm run webpack:dev\" \"nodemon .\"",
+    "dev": "set NODE_OPTIONS=--openssl-legacy-provider && concurrently --kill-others \"npm run webpack:dev\" \"nodemon .\"",
     "build": "webpack --config ./src/webpack.config.js"
   },
   "description": "GameLobbySimulator",

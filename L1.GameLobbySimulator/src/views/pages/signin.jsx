@@ -176,6 +176,25 @@ export default class SignIn extends React.Component {
             .catch(showAlert);
     }
 
+    redirectToInstantVersion() {
+        const request = Object.assign({}, this.state, {
+            token: null,
+            verifyResult: null,
+            resource: null,
+            localhost: null,
+            devIp: null,
+            appType: 3
+        });
+
+        Axios.post("/signin/sso", request)
+            .then((data) => data.data)
+            .then((data) => (data.error ? Promise.reject(data.error) : data))
+            .then((data) => {
+                window.location.href = data.redirectUrl;
+            })
+            .catch(showAlert);
+    }
+
     async componentDidMount() {
         const data = await Axios.get("/setting/data").then((data) => data.data);
         const ip = await Axios.get("/signin/ip", { timeout: 10000 }).then((data) => data.data);
@@ -474,6 +493,13 @@ export default class SignIn extends React.Component {
                                 className="tertiary"
                                 value="Set Default Balance"
                                 onClick={this.handleClickSetDefaultBalance}
+                            />
+                            <input
+                                type="button"
+                                id="redirect-to-Game"
+                                className="tertiary"
+                                value="Redirect To Instant Version"
+                                onClick={() => {this.redirectToInstantVersion();}}
                             />
                         </div>
                         {setDefaultBalance && <p style={{ color: "green", fontWeight: "bold" }}>Set balance successfully!</p>}
