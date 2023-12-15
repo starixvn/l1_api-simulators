@@ -121,6 +121,7 @@ export default class SignIn extends React.Component {
     }
 
     handleSubmit(event) {
+        console.log("handleSubmit", this.state);
         const request = Object.assign({}, this.state, {
             token: null,
             verifyResult: null,
@@ -259,7 +260,7 @@ export default class SignIn extends React.Component {
                                     <div className="row">
                                         <div className="col-sm-10 col-md-11">
                                             <Input
-                                                type="int"
+                                                type="text"
                                                 id="playerId"
                                                 name="Player ID"
                                                 value={this.state.playerId}
@@ -499,7 +500,9 @@ export default class SignIn extends React.Component {
                                 id="redirect-to-Game"
                                 className="tertiary"
                                 value="Redirect To Instant Version"
-                                onClick={() => {this.redirectToInstantVersion();}}
+                                onClick={() => {
+                                    this.redirectToInstantVersion();
+                                }}
                             />
                         </div>
                         {setDefaultBalance && <p style={{ color: "green", fontWeight: "bold" }}>Set balance successfully!</p>}

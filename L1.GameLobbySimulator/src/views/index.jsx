@@ -13,7 +13,7 @@ class Application extends React.Component {
         super();
         const searchParams = new URLSearchParams(history.location.search);
         this.state = {
-            playerId: Number(searchParams.get("obCustId")) || (Math.random() * 10000000) >> 0,
+            playerId: searchParams.get("obCustId") || ((Math.random() * 10000000) >> 0).toString(),
             appType: parseInt(searchParams.get("appType")) || 1,
             balance: Number(searchParams.get("balance")) || 0
         };
@@ -34,7 +34,7 @@ class Application extends React.Component {
         };
         return (
             <Router history={history}>
-                {!location.pathname.includes("login") && <Header {...defaultProps} /> }
+                {!location.pathname.includes("login") && <Header {...defaultProps} />}
                 <Switch>
                     {routes.map(({ path, component }, key) => (
                         <Route key={key} path={path} render={(props) => React.createElement(component, { ...props, ...defaultProps })} />
