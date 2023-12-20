@@ -1,0 +1,20 @@
+{
+    "evn": "LOCAL_2",
+    "systemType": "VG2",
+    "apiUrl": "http://l2_sg_api_local_2:5000",
+    "authUrl": "http://l2_auth_api_local_2:5000",
+    "client": {
+        "id": "game-server",
+        "secret": "gameserver@20luminet&"
+    },
+    "expireIn": 1585629268,
+    "useAuthenticate": true,
+    "requestTimeout": 10000,
+    "owUrl": "https://l2-ows2.lumigame.com/SabaClub",
+    "localhost": "http://localhost:7456",
+    "mobileLocalhost": "http://localhost:3000",
+    "port": 5000,
+    "connectSiteUrl": "https://connectsite.lumigame.com/login",
+    "enableCors": true,
+    "corsUrls": ["https://l2-info2.lumigame.com/", "http://localhost:3001"]
+}

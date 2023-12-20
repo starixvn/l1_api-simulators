@@ -8,4 +8,5 @@ export const SC1GameLobbyURLMapper = {
 export const VG2GameLobbyURLMapper = {
   LOCAL: "https://l2-glbs.lumigame.com/",
   LOCAL_1: "https://l2-glbs1.lumigame.com/",
+  LOCAL_2: "https://l2-glbs2.lumigame.com/",
 };
