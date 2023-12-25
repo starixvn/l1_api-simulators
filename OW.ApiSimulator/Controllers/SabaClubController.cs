@@ -84,6 +84,7 @@ namespace OW.ApiSimulator.Controllers
             var player = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == playerId)
                 ?? new Customer
                 {
+                    Operator = @operator,
                     PlayerId = playerId,
                     Username = username,
                     Balance = 2000,
