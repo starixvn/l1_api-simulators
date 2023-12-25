@@ -35,7 +35,7 @@ namespace OW.ApiSimulator.Controllers
 
         [HttpGet]
         [Route("/[controller]/[action]")]
-        public IActionResult CreateCustomer(int memId, string @operator, string systemType = "SC1")
+        public IActionResult CreateCustomer(string memId, string @operator, string systemType = "SC1")
         {
             var selectedOperator = GetOperator(@operator);
             var customer = selectedOperator?.Customers.FirstOrDefault(x => x.PlayerId == memId);
@@ -73,7 +73,7 @@ namespace OW.ApiSimulator.Controllers
         [HttpPost]
         [Route("/[controller]/[action]")]
         public IActionResult SetDefaultBalance(
-            [FromQuery] int playerId,
+            [FromQuery] string playerId,
             [FromQuery] string username,
             [FromQuery] string @operator,
             [FromQuery] string currency,

@@ -2,7 +2,7 @@
 {
     public class MemberInfoResult : OWResult
     {
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public string Username { get; set; }
         public string Currency { get; set; }
         public string SiteName { get; set; }
