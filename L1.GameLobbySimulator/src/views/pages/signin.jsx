@@ -16,7 +16,8 @@ const operatorMapper = {
     SBO: "sbo",
     ONEworks_VG: "ow",
     PFF: "pff",
-    ONEworksSeal888: "ow"
+    ONEworksSeal888: "ow",
+    SabaPlay: "sabaplay"
 };
 const IsSystemTypeSC1 = () => {
     return config.systemType === "SC1";
