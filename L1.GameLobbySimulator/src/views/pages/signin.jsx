@@ -215,7 +215,7 @@ export default class SignIn extends React.Component {
 
     handleReloadIframe() {
         const { auth, setting, playerId } = this.state;
-        this.iFrameRef.current.src = `${setting.owUrl}/CreateCustomer?memId=${playerId}&operator=${
+        this.iFrameRef.current.src = `${setting.owUrl}/CreateCustomer?memId=${encodeURIComponent(this.state.playerId)}&operator=${
             operatorMapper[auth.operatorId]
         }&systemType=${config.systemType}`;
     }
