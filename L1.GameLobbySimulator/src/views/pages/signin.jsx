@@ -161,12 +161,12 @@ export default class SignIn extends React.Component {
     }
 
     handleClickSetDefaultBalance(value) {
-        const { setting, playerId, auth, playerName, currency } = this.state;
+        const { setting, playerId, auth, playerName, currency, siteId } = this.state;
         const balance = !isNaN(value) ? value : IsSystemTypeSC1() ? 2000 : 20000;
         Axios.post(
             `${setting.owUrl}/SetDefaultBalance?playerId=${encodeURIComponent(playerId)}&operator=${
                 operatorMapper[auth.operatorId]
-            }&balance=${balance}&systemType=${config.systemType}&username=${playerName}&currency=${currency}`
+            }&balance=${balance}&systemType=${config.systemType}&username=${playerName}&currency=${currency}&siteId=${siteId}`
         )
             .then((data) => {
                 this.setState({ setDefaultBalance: data.data }, () => {
@@ -201,7 +201,7 @@ export default class SignIn extends React.Component {
         const data = await Axios.get("/setting/data").then((data) => data.data);
         const ip = await Axios.get("/signin/ip", { timeout: 10000 }).then((data) => data.data);
         this.setState({ setting: data, ip }, () => {
-            this.iFrameRef.current.src = `${data.owUrl}/CreateCustomer?memId=${encodeURIComponent(this.state.playerId)}&&operator=${
+            this.iFrameRef.current.src = `${data.owUrl}/CreateCustomer?memId=${encodeURIComponent(this.state.playerId)}&siteId=${this.state.siteId}&operator=${
                 operatorMapper[this.state.auth.operatorId]
             }&systemType=${config.systemType}`;
             this.handleSubmit();
@@ -214,8 +214,8 @@ export default class SignIn extends React.Component {
     }
 
     handleReloadIframe() {
-        const { auth, setting, playerId } = this.state;
-        this.iFrameRef.current.src = `${setting.owUrl}/CreateCustomer?memId=${encodeURIComponent(this.state.playerId)}&operator=${
+        const { auth, setting, playerId, siteId } = this.state;
+        this.iFrameRef.current.src = `${setting.owUrl}/CreateCustomer?memId=${encodeURIComponent(playerId)}&siteId=${siteId}&operator=${
             operatorMapper[auth.operatorId]
         }&systemType=${config.systemType}`;
     }

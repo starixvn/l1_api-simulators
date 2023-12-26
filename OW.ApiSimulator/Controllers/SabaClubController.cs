@@ -35,7 +35,7 @@ namespace OW.ApiSimulator.Controllers
 
         [HttpGet]
         [Route("/[controller]/[action]")]
-        public IActionResult CreateCustomer(string memId, string @operator, string systemType = "SC1")
+        public IActionResult CreateCustomer(string memId, string @operator, string siteId, string systemType = "SC1")
         {
             var selectedOperator = GetOperator(@operator);
             var customer = selectedOperator?.Customers.FirstOrDefault(x => x.PlayerId == memId);
@@ -49,6 +49,7 @@ namespace OW.ApiSimulator.Controllers
                     MinBet = (systemType.Equals(SC1) ? 1 : 10),
                     MaxBet = (systemType.Equals(SC1) ? 3000 : 20000),
                     Currency = (systemType.Equals(SC1) ? "$US" : "INH"),
+                    SiteId = siteId,
                 });
         }
 
@@ -64,7 +65,7 @@ namespace OW.ApiSimulator.Controllers
           
             var selectedOperator = GetOperator(model.Operator);
 
-            selectedOperator.Customers.RemoveAll(x => x.PlayerId == model.PlayerId);
+            selectedOperator.Customers.RemoveAll(x => x.PlayerId == model.PlayerId && x.SiteId == model.SiteId);
             selectedOperator.Customers.Add(model);
 
             return View(model);
@@ -77,11 +78,12 @@ namespace OW.ApiSimulator.Controllers
             [FromQuery] string username,
             [FromQuery] string @operator,
             [FromQuery] string currency,
+            [FromQuery] string siteId,
             [FromQuery] int balance = 2000,
             [FromQuery] string systemType = "SC1")
         {
             var selectedOperator = GetOperator(@operator);
-            var player = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == playerId)
+            var player = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == playerId && x.SiteId == siteId)
                 ?? new Customer
                 {
                     Operator = @operator,
@@ -89,7 +91,8 @@ namespace OW.ApiSimulator.Controllers
                     Username = username,
                     Balance = 2000,
                     MinBet = (systemType.Equals(SC1) ? 1 : 10),
-                    MaxBet = (systemType.Equals(SC1) ? 3000 : 20000)
+                    MaxBet = (systemType.Equals(SC1) ? 3000 : 20000),
+                    SiteId = siteId
                 };
             player.Currency = currency ?? (systemType.Equals(SC1) ? "$US" : "INH");
             player.Username = username;
@@ -130,7 +133,7 @@ namespace OW.ApiSimulator.Controllers
         {
             var selectedOperator = GetOperator(@operator);
             var result = selectedOperator.EnterPortalResult;
-            var loginCustomer = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == request.PlayerId);
+            var loginCustomer = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == request.PlayerId && x.SiteId == request.SiteId);
 
             if (result.ErrorCode == 0)
             {
@@ -157,7 +160,7 @@ namespace OW.ApiSimulator.Controllers
         public async Task<IActionResult> GetBalance([FromBody] GetBalanceCall request, [FromRoute] string @operator)
         {
             var selectedOperator = GetOperator(@operator);
-            var customer = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == request.PlayerId);
+            var customer = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == request.PlayerId && x.SiteId == request.SiteId);
 
             var result = new GetBalanceResult();
 
@@ -190,7 +193,7 @@ namespace OW.ApiSimulator.Controllers
         public async Task<IActionResult> PlaceBet([FromBody] PlaceBetCall request, [FromRoute] string @operator)
         {
             var selectedOperator = GetOperator(@operator);
-            var customer = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == request.PlayerId);
+            var customer = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == request.PlayerId && x.SiteId == request.SiteId);
 
             var result = new PlaceBetResult();
             var resultTemplate = selectedOperator.PlaceBetResult;
@@ -245,7 +248,7 @@ namespace OW.ApiSimulator.Controllers
         {
             var selectedOperator = GetOperator(@operator);
             var result = new EndGameResult();
-            var customer = selectedOperator.Customers.Find(x => x.PlayerId == request.PlayerId);
+            var customer = selectedOperator.Customers.Find(x => x.PlayerId == request.PlayerId && x.SiteId == request.SiteId);
             var resultTemplate = selectedOperator.EndGameResult;
 
             var delayTime = customer?.Delay.EndGame > 0 ? customer.Delay.EndGame : resultTemplate.DelayTime;
@@ -313,7 +316,7 @@ namespace OW.ApiSimulator.Controllers
         public async Task<IActionResult> HitJackpot([FromBody] HitJackpotCall request, [FromRoute] string @operator)
         {
             var selectedOperator = GetOperator(@operator);
-            var customer = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == request.PlayerId);
+            var customer = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == request.PlayerId && x.SiteId == request.SiteId);
             var result = selectedOperator.HitJackpotResult;
 
             result.Seq = request?.Seq;
@@ -338,7 +341,7 @@ namespace OW.ApiSimulator.Controllers
         {
             var selectedOperator = GetOperator(@operator);
             var result = new GetBetLimitResult();
-            var customer = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == request.PlayerId);
+            var customer = selectedOperator.Customers.FirstOrDefault(x => x.PlayerId == request.PlayerId && x.SiteId == request.SiteId);
             var resultTemplate = selectedOperator.GetBetLimitResult;
             result.Seq = request.Seq;
 
