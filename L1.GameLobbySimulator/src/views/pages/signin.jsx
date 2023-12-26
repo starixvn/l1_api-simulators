@@ -164,7 +164,7 @@ export default class SignIn extends React.Component {
         const { setting, playerId, auth, playerName, currency } = this.state;
         const balance = !isNaN(value) ? value : IsSystemTypeSC1() ? 2000 : 20000;
         Axios.post(
-            `${setting.owUrl}/SetDefaultBalance?playerId=${playerId}&operator=${
+            `${setting.owUrl}/SetDefaultBalance?playerId=${encodeURIComponent(playerId)}&operator=${
                 operatorMapper[auth.operatorId]
             }&balance=${balance}&systemType=${config.systemType}&username=${playerName}&currency=${currency}`
         )
@@ -201,7 +201,7 @@ export default class SignIn extends React.Component {
         const data = await Axios.get("/setting/data").then((data) => data.data);
         const ip = await Axios.get("/signin/ip", { timeout: 10000 }).then((data) => data.data);
         this.setState({ setting: data, ip }, () => {
-            this.iFrameRef.current.src = `${data.owUrl}/CreateCustomer?memId=${this.state.playerId}&&operator=${
+            this.iFrameRef.current.src = `${data.owUrl}/CreateCustomer?memId=${encodeURIComponent(this.state.playerId)}&&operator=${
                 operatorMapper[this.state.auth.operatorId]
             }&systemType=${config.systemType}`;
             this.handleSubmit();
