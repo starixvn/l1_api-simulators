@@ -8,5 +8,6 @@ export const SC1GameConfigurationURLMapper = {
   export const VG2GameConfigurationURLMapper = {
     LOCAL: "https://l2-proxy.lumigame.com/game/configurations/",
     LOCAL_1: "https://l2-proxy1.lumigame.com/game/configurations/",
+    LOCAL_2: "https://l2-proxy2.lumigame.com/game/configurations/",
   };
   
