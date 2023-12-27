@@ -166,7 +166,7 @@ export default class SignIn extends React.Component {
         Axios.post(
             `${setting.owUrl}/SetDefaultBalance?playerId=${encodeURIComponent(playerId)}&operator=${
                 operatorMapper[auth.operatorId]
-            }&balance=${balance}&systemType=${config.systemType}&username=${playerName}&currency=${currency}&siteId=${siteId}`
+            }&balance=${balance}&systemType=${config.systemType}&username=${encodeURIComponent(playerName)}&currency=${currency}&siteId=${siteId}`
         )
             .then((data) => {
                 this.setState({ setDefaultBalance: data.data }, () => {
