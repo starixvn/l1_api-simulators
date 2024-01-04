@@ -2,7 +2,7 @@
 {
     public class Customer
     {
-        public string PlayerId { get; set; }
+        public int PlayerId { get; set; }
 
         public string Username { get; set; }
 

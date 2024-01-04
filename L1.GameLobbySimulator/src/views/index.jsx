@@ -13,7 +13,7 @@ class Application extends React.Component {
         super();
         const searchParams = new URLSearchParams(history.location.search);
         this.state = {
-            playerId: searchParams.get("obCustId") || ((Math.random() * 10000000) >> 0).toString(),
+            playerId: searchParams.get("obCustId") || (Math.random() * 10000000) >> 0,
             appType: parseInt(searchParams.get("appType")) || 1,
             balance: Number(searchParams.get("balance")) || 0
         };

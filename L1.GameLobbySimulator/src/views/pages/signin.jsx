@@ -263,7 +263,7 @@ export default class SignIn extends React.Component {
                                     <div className="row">
                                         <div className="col-sm-10 col-md-11">
                                             <Input
-                                                type="text"
+                                                type="number"
                                                 id="playerId"
                                                 name="Player ID"
                                                 value={this.state.playerId}

@@ -6,7 +6,7 @@ namespace OW.ApiSimulator.Models.OW
     {
         public string Seq { get; set; }
 
-        public string PlayerId { get; set; }
+        public int PlayerId { get; set; }
 
         public string SiteId { get; set; }
 

@@ -20,7 +20,7 @@
 
         public string SiteId { get; set; }
 
-        public string ObCustId { get; set; }
+        public int ObCustId { get; set; }
 
         public string ObCustName { get; set; }
 
