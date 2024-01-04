@@ -97,7 +97,7 @@ namespace OW.ApiSimulator.Controllers
             player.Currency = currency ?? (systemType.Equals(SC1) ? "$US" : "INH");
             player.Username = username;
             player.Balance = balance;
-            selectedOperator.Customers.RemoveAll(x => x.PlayerId == playerId);
+            selectedOperator.Customers.RemoveAll(x => x.PlayerId == playerId && x.SiteId == siteId);
             selectedOperator.Customers.Add(player);
 
             return Json(true);
