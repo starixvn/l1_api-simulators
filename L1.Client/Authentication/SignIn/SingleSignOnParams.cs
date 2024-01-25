@@ -9,7 +9,7 @@
             string operatorId,
             string operatorSecret,
             string siteId,
-            string playerId,
+            int playerId,
             string playerName,
             string currency,
             string iP,
@@ -41,7 +41,7 @@
             string operatorId,
             string operatorSecret,
             string siteId,
-            string playerId,
+            int playerId,
             string playerName,
             string language,
             string currency,
@@ -86,7 +86,7 @@
 
         public string IP { get; set; }
 
-        public string PlayerId { get; set; }
+        public int PlayerId { get; set; }
 
         public string PlayerName { get; set; }
 
