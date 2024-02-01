@@ -166,7 +166,9 @@ export default class SignIn extends React.Component {
         Axios.post(
             `${setting.owUrl}/SetDefaultBalance?playerId=${encodeURIComponent(playerId)}&operator=${
                 operatorMapper[auth.operatorId]
-            }&balance=${balance}&systemType=${config.systemType}&username=${encodeURIComponent(playerName)}&currency=${currency}&siteId=${siteId}`
+            }&balance=${balance}&systemType=${config.systemType}&username=${encodeURIComponent(
+                playerName
+            )}&currency=${currency}&siteId=${siteId}`
         )
             .then((data) => {
                 this.setState({ setDefaultBalance: data.data }, () => {
@@ -201,9 +203,9 @@ export default class SignIn extends React.Component {
         const data = await Axios.get("/setting/data").then((data) => data.data);
         const ip = await Axios.get("/signin/ip", { timeout: 10000 }).then((data) => data.data);
         this.setState({ setting: data, ip }, () => {
-            this.iFrameRef.current.src = `${data.owUrl}/CreateCustomer?memId=${encodeURIComponent(this.state.playerId)}&siteId=${this.state.siteId}&operator=${
-                operatorMapper[this.state.auth.operatorId]
-            }&systemType=${config.systemType}`;
+            this.iFrameRef.current.src = `${data.owUrl}/CreateCustomer?memId=${encodeURIComponent(this.state.playerId)}&siteId=${
+                this.state.siteId
+            }&operator=${operatorMapper[this.state.auth.operatorId]}&systemType=${config.systemType}`;
             this.handleSubmit();
             this.props.balance && this.handleClickSetDefaultBalance(this.props.balance);
         });
@@ -231,9 +233,9 @@ export default class SignIn extends React.Component {
                 redirectUrl =
                     this.state.appType === 2 || this.state.appType === 4
                         ? `${setting.mobileLocalhost}?token=${token}`
-                        : `${setting.localhost}?token=${token}&gameId=${this.state.gameId}&ref=${this.state.ref}&rurl=${window.btoa(
-                              this.state.returnUrl
-                          )}`;
+                        : `${setting.localhost}?token=${token}&lang=en&gameId=${this.state.gameId}&ref=${
+                              this.state.ref
+                          }&rurl=${window.btoa(this.state.returnUrl)}`;
             }
 
             if (devIp) {
