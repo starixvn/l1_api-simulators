@@ -1,5 +1,5 @@
 # Base image
-FROM hub.lumigame.com/base/node:14.15.1-slim
+FROM hub.lumigame.com/base/node:20.9.0-alpine
 
 USER root
 
