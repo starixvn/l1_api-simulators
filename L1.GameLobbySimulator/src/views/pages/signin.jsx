@@ -233,9 +233,9 @@ export default class SignIn extends React.Component {
                 redirectUrl =
                     this.state.appType === 2 || this.state.appType === 4
                         ? `${setting.mobileLocalhost}?token=${token}`
-                        : `${setting.localhost}?token=${token}&lang=en&gameId=${this.state.gameId}&ref=${
-                              this.state.ref
-                          }&rurl=${window.btoa(this.state.returnUrl)}`;
+                        : `${setting.localhost}?token=${token}&lang=en&gameId=${this.state.gameId}&ref=${this.state.ref}&rurl=${window.btoa(
+                              this.state.returnUrl
+                          )}&op=SP`;
             }
 
             if (devIp) {
@@ -263,7 +263,7 @@ export default class SignIn extends React.Component {
                                     <div className="row">
                                         <div className="col-sm-10 col-md-11">
                                             <Input
-                                                type="number"
+                                                type="text"
                                                 id="playerId"
                                                 name="Player ID"
                                                 value={this.state.playerId}
