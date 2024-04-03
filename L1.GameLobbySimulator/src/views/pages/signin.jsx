@@ -12,7 +12,7 @@ import { showAlert } from "../util.jsx";
 
 const operatorMapper = {
     ONEworks1: "ow",
-    ONEworksVGCash: "ow",
+    ONEworksCash: "ow",
     SBO: "sbo",
     ONEworks_VG: "ow",
     PFF: "pff",
@@ -38,8 +38,8 @@ export default class SignIn extends React.Component {
             ip: "",
             browserUserAgent: navigator.userAgent,
             auth: {
-                operatorId: IsSystemTypeSC1() ? "ONEworks1" : "ONEworksVGCash",
-                operatorSecret: IsSystemTypeSC1() ? "ONEworks1@20luminet&" : "VG@SC123"
+                operatorId: IsSystemTypeSC1() ? "ONEworks1" : "ONEworksCash",
+                operatorSecret: IsSystemTypeSC1() ? "ONEworks1@20luminet&" : "a0508589-34dd-4ca8-8d21-6bc280e19c19"
             },
             token: "",
             redirectUrl: "#",
