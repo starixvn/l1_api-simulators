@@ -224,7 +224,7 @@ export default class SignIn extends React.Component {
 
     render() {
         let redirectUrl = this.state.redirectUrl;
-        const { localhost, token, instantMode, devIp, setting, setDefaultBalance } = this.state;
+        const { localhost, token, instantMode, devIp, setting, setDefaultBalance, language } = this.state;
         const url = IsSystemTypeSC1() ? SC1GameLobbyURLMapper[setting.evn] : VG2GameLobbyURLMapper[setting.evn];
         const qrURL = `${url}/signin?obCustId=${this.state.playerId}`;
 
@@ -233,9 +233,9 @@ export default class SignIn extends React.Component {
                 redirectUrl =
                     this.state.appType === 2 || this.state.appType === 4
                         ? `${setting.mobileLocalhost}?token=${token}`
-                        : `${setting.localhost}?token=${token}&lang=en&gameId=${this.state.gameId}&ref=${this.state.ref}&rurl=${window.btoa(
-                              this.state.returnUrl
-                          )}&op=SP`;
+                        : `${setting.localhost}?token=${token}&lang=${language}&gameId=${this.state.gameId}&ref=${
+                              this.state.ref
+                          }&rurl=${window.btoa(this.state.returnUrl)}&op=SP`;
             }
 
             if (devIp) {
@@ -526,11 +526,7 @@ export default class SignIn extends React.Component {
                                             className="col-sm-12"
                                             style={{ color: "#0277bd" }}
                                             onClick={() =>
-                                                window.open(
-                                                    redirectUrl,
-                                                    "_blank",
-                                                    `width=${this.state.appType === 2 ? 1270 : 1523},height=884`
-                                                )
+                                                window.open(redirectUrl, "_blank", `width=1270,height=880,left=200,top=100,resizable=no,`)
                                             }
                                             id="redirect"
                                         >

@@ -58,11 +58,11 @@ namespace OW.ApiSimulator.Controllers
         public IActionResult CreateCustomer(Customer model)
         {
             var forcedToUseOWOperator = Constants.ForcedToUseOWOperatorsMapper.FirstOrDefault(_operator => _operator.Key == model.Operator);
-            if(forcedToUseOWOperator.Key != null)
+            if (forcedToUseOWOperator.Key != null)
             {
                 model.Operator = forcedToUseOWOperator.Value;
             }
-          
+
             var selectedOperator = GetOperator(model.Operator);
 
             selectedOperator.Customers.RemoveAll(x => x.PlayerId == model.PlayerId && x.SiteId == model.SiteId);
@@ -427,7 +427,7 @@ namespace OW.ApiSimulator.Controllers
                     request.Call.Ip,
                     request.Call.BrowserUserAgent,
                     request.Call.Seq,
-                    (byte)request.Call.GameId,
+                    request.Call.GameId,
                     request.Call.SiteName,
                     false,
                     request.Call.IsMobi ?? false);

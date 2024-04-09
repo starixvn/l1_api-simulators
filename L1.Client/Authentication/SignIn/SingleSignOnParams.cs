@@ -15,7 +15,7 @@
             string iP,
             string browserUserAgent,
             string seq,
-            byte? gameTypeId,
+            int? gameTypeId,
             string siteName,
             bool isCash,
             bool isMobi)
@@ -48,7 +48,7 @@
             string iP,
             string browserUserAgent,
             string seq,
-            byte? gameTypeId,
+            int? gameTypeId,
             string siteName,
             bool isCash,
             bool isMobi)
@@ -90,7 +90,7 @@
 
         public string PlayerName { get; set; }
 
-        public byte? GameTypeId { get; set; }
+        public int? GameTypeId { get; set; }
 
         public byte AppType { get; set; } = AppTypes.SabaClub;
 

@@ -1,20 +1,20 @@
 {
     "evn": "DEV",
-    "systemType": "SC1",
-    "apiUrl": "https://api.lumigame.com",
-    "authUrl": "https://auth.lumigame.com",
+    "systemType": "GN",
+    "apiUrl": "https://gn-api.lumigame.com/",
+    "authUrl": "https://gn-auth.lumigame.com/",
     "client": {
         "id": "game-server",
         "secret": "gameserver@20luminet&"
     },
     "expireIn": 1591262817,
-    "owUrl": "http://localhost:5001/SabaClub",
+    "owUrl": "https://gn-owapi-simulator.lumigame.com/SabaClub",
     "useAuthenticate": true,
     "requestTimeout": 10000,
     "localhost": "http://localhost:7456",
     "mobileLocalhost": "http://localhost:3000",
     "port": 8106,
-    "connectSiteUrl": "https://connectsite.lumigame.com/login",
+    "connectSiteUrl": "https://gn-connectsite.lumigame.com/login",
     "enableCors": true,
     "corsUrls": ["http://localhost:3001"]
 }
