@@ -68,7 +68,8 @@ export default class SignIn extends React.Component {
             deeplink: "",
             isApp: false,
             returnUrl: "",
-            isApp: false
+            isApp: false,
+            local: 0
         };
 
         this.instantModeSize = {
@@ -141,7 +142,15 @@ export default class SignIn extends React.Component {
                 this.setState(token);
             })
             .catch(showAlert);
-
+        setTimeout(() => {
+            let local = "";
+            if (this.state.local != 0) {
+                local = `-${this.state.local}`;
+            }
+            const link = document.getElementById("redirect").innerHTML.replace(`gn-game.lumigame`, `gn-game${local}.lumigame`);
+            const aHtml = `<a href="${link}" target="_blank">${link}</a>`;
+            document.querySelector("#link-local").innerHTML = aHtml;
+        }, 500);
         event && event.preventDefault();
     }
 
@@ -532,8 +541,52 @@ export default class SignIn extends React.Component {
                             <form onSubmit={(event) => this.handleVerifyToken(event)}>
                                 <fieldset className="container">
                                     <legend>Token</legend>
+                                    <div>
+                                        <div className="input-group">
+                                            <input
+                                                id="local-0"
+                                                type="radio"
+                                                value={0}
+                                                onChange={() => this.setState({ local: 0 })}
+                                                checked={this.state.local === 0}
+                                            />
+                                            <label htmlFor="local-0">LOCAL</label>
+                                        </div>
+                                        <div className="input-group">
+                                            <input
+                                                id="local-1"
+                                                type="radio"
+                                                value={1}
+                                                onChange={() => this.setState({ local: 1 })}
+                                                checked={this.state.local === 1}
+                                            />
+                                            <label htmlFor="local-1">LOCAL1</label>
+                                        </div>
+                                        <div className="input-group">
+                                            <input
+                                                id="local-2"
+                                                type="radio"
+                                                value={2}
+                                                onChange={() => this.setState({ local: 2 })}
+                                                checked={this.state.local === 2}
+                                            />
+                                            <label htmlFor="local-2">LOCAL2</label>
+                                        </div>
+                                        <div className="input-group">
+                                            <input
+                                                id="local-3"
+                                                type="radio"
+                                                value={3}
+                                                onChange={() => this.setState({ local: 3 })}
+                                                checked={this.state.local === 3}
+                                            />
+                                            <label htmlFor="local-3">LOCAL3</label>
+                                        </div>
+                                    </div>
                                     <div className="input-group vertical">
-                                        <label htmlFor="redirectUrl">Redirect</label>
+                                        <label htmlFor="redirectUrl">
+                                            Redirect:<div id="link-local"></div>
+                                        </label>
                                         <a
                                             className="col-sm-12"
                                             style={{ color: "#0277bd" }}
