@@ -526,7 +526,7 @@ export default class SignIn extends React.Component {
                                             className="col-sm-12"
                                             style={{ color: "#0277bd" }}
                                             onClick={() =>
-                                                window.open(redirectUrl, "_blank", `width=1270,height=880,left=200,top=100,resizable=no,`)
+                                                window.open(redirectUrl, "_blank", `width=950,height=906,left=200,top=100,resizable=no,`)
                                             }
                                             id="redirect"
                                         >
