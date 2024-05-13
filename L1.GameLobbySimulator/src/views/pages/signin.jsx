@@ -23,6 +23,10 @@ const IsSystemTypeSC1 = () => {
     return config.systemType === "SC1";
 };
 
+const IsSxDSystem = () => {
+    return config.systemType === "GN";
+};
+
 export default class SignIn extends React.Component {
     constructor(props) {
         super(props);
@@ -525,9 +529,13 @@ export default class SignIn extends React.Component {
                                         <a
                                             className="col-sm-12"
                                             style={{ color: "#0277bd" }}
-                                            onClick={() =>
-                                                window.open(redirectUrl, "_blank", `width=950,height=906,left=200,top=100,resizable=no,`)
-                                            }
+                                            onClick={() => {
+                                                const popupStyles = IsSxDSystem()
+                                                    ? "width=950,height=906,left=200,top=100,resizable=no,"
+                                                    : `width=${this.state.appType === 2 ? 1270 : 1523},height=884`;
+
+                                                window.open(redirectUrl, "_blank", popupStyles);
+                                            }}
                                             id="redirect"
                                         >
                                             {redirectUrl}
