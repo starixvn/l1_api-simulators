@@ -189,7 +189,6 @@ export default class SignIn extends React.Component {
             token: null,
             verifyResult: null,
             resource: null,
-            localhost: null,
             devIp: null,
             appType: 3
         });
@@ -198,7 +197,12 @@ export default class SignIn extends React.Component {
             .then((data) => data.data)
             .then((data) => (data.error ? Promise.reject(data.error) : data))
             .then((data) => {
-                window.location.href = data.redirectUrl;
+                let redirectUrl = data.redirectUrl;
+                if (this.state.localhost) {
+                    redirectUrl = `${this.state.setting.localhost}?token=${data.token}&lang=${this.state.language}&gameId=${this.state.gameId}&instant=true&appType=3`;
+                }
+
+                window.open(redirectUrl, "_blank").focus();
             })
             .catch(showAlert);
     }
@@ -515,7 +519,11 @@ export default class SignIn extends React.Component {
                         {setDefaultBalance && <p style={{ color: "green", fontWeight: "bold" }}>Set balance successfully!</p>}
                     </form>
                     {(this.state.appType === 3 || this.state.isOpenOnIframe) && token && (
-                        <iframe ref={this.instantRef} src={redirectUrl} style={this.instantModeSize[instantMode]} />
+                        <iframe
+                            ref={this.instantRef}
+                            src={redirectUrl + (this.state.appType === 3 ? "&instant=true&appType=3" : "")}
+                            style={this.instantModeSize[instantMode]}
+                        />
                     )}
                 </div>
                 <div className="section">

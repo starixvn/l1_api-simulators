@@ -1,14 +1,14 @@
 {
     "evn": "DEV",
-    "systemType": "GN",
-    "apiUrl": "https://gn-api.lumigame.com/",
+    "systemType": "SC1",
+    "apiUrl": "https://l1-api3.lumigame.com",
     "authUrl": "https://gn-auth.lumigame.com/",
     "client": {
         "id": "game-server",
         "secret": "gameserver@20luminet&"
     },
     "expireIn": 1591262817,
-    "owUrl": "https://gn-owapi-simulator.lumigame.com/SabaClub",
+    "owUrl": "https://l1-ows3.lumigame.com/SabaClub",
     "useAuthenticate": true,
     "requestTimeout": 10000,
     "localhost": "http://localhost:7456",
