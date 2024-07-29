@@ -10,7 +10,7 @@
     "expireIn": 1585629268,
     "useAuthenticate": true,
     "requestTimeout": 10000,
-    "owUrl": "http://l2_ow_api_simulator_sit:5000/SabaClub",
+    "owUrl": "https://l2sitows.sgamesuat.com/SabaClub",
     "localhost": "http://localhost:7456",
     "mobileLocalhost": "http://localhost:3000",
     "port": 5000,
