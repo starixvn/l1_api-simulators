@@ -147,7 +147,7 @@ export default class SignIn extends React.Component {
             if (this.state.local != 0) {
                 local = `-${this.state.local}`;
             }
-            const link = document.getElementById("redirect").innerHTML.replace(`gn-game.lumigame`, `gn-game${local}.lumigame`);
+            const link = document.getElementById("redirect").innerHTML.replace(`gn-game.nexentgame`, `gn-game${local}.lumigame`);
             const aHtml = `<a href="${link}" target="_blank">${link}</a>`;
             document.querySelector("#link-local").innerHTML = aHtml;
         }, 500);
