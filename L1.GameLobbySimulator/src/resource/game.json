@@ -1016,5 +1016,15 @@
                 "name": "N/A"
             }
         ]
+    },
+    {
+        "id": 102,
+        "name": "BaccaratX Lobby",
+        "choice": [
+            {
+                "id": 0,
+                "name": "N/A"
+            }
+        ]
     }
 ]
