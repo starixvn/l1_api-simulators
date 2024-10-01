@@ -150,6 +150,10 @@ export default class SignIn extends React.Component {
             const link = document.getElementById("redirect").innerHTML.replace(`gn-game.nexentgame`, `gn-game${local}.lumigame`);
             const aHtml = `<a href="${link}" target="_blank">${link}</a>`;
             document.querySelector("#link-local").innerHTML = aHtml;
+
+            const linkSabaDirect = document.getElementById("redirect").innerHTML.replace(`gn-game.nexentgame`, `gn-core-client-demo.lumigame`);
+            const aHtmlSabaDirect = `<a href="${linkSabaDirect}" target="_blank">${linkSabaDirect}</a>`;
+            document.querySelector("#link-local-saba-direct").innerHTML = aHtmlSabaDirect;
         }, 500);
         event && event.preventDefault();
     }
@@ -587,6 +591,10 @@ export default class SignIn extends React.Component {
                                         <label htmlFor="redirectUrl">
                                             Redirect:<div id="link-local"></div>
                                         </label>
+                                        <label htmlFor="redirectUrl">
+                                            Redirect:<div id="link-local-saba-direct"></div>
+                                        </label>
+
                                         <a
                                             className="col-sm-12"
                                             style={{ color: "#0277bd" }}
