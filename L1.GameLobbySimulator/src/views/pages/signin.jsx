@@ -69,7 +69,8 @@ export default class SignIn extends React.Component {
             isApp: false,
             returnUrl: "",
             isApp: false,
-            disableAward: false
+            disableAward: false,
+            currencyGroup: ""
         };
 
         this.instantModeSize = {
@@ -138,8 +139,11 @@ export default class SignIn extends React.Component {
         Axios.post("/signin/sso", request)
             .then((data) => data.data)
             .then((data) => (data.error ? Promise.reject(data.error) : data))
-            .then((token) => {
-                this.setState(token);
+            .then(({ token, redirectUrl }) => {
+                this.setState({ token, redirectUrl });
+                const urlParams = new URLSearchParams(new URL(redirectUrl).search);
+                const currencyGroup = urlParams.get("cg");
+                this.setState({ currencyGroup });
             })
             .catch(showAlert);
 
@@ -238,7 +242,9 @@ export default class SignIn extends React.Component {
 
     render() {
         let redirectUrl = this.state.redirectUrl;
-        const { localhost, token, instantMode, devIp, setting, setDefaultBalance, language } = this.state;
+
+        const { localhost, token, instantMode, devIp, setting, setDefaultBalance, language, currencyGroup } = this.state;
+
         const url = IsSystemTypeSC1() ? SC1GameLobbyURLMapper[setting.evn] : VG2GameLobbyURLMapper[setting.evn];
         const qrURL = `${url}/signin?obCustId=${this.state.playerId}`;
 
@@ -249,7 +255,7 @@ export default class SignIn extends React.Component {
                         ? `${setting.mobileLocalhost}?token=${token}`
                         : `${setting.localhost}?token=${token}&lang=${language}&gameId=${this.state.gameId}&ref=${
                               this.state.ref
-                          }&rurl=${window.btoa(this.state.returnUrl)}&op=SP`;
+                          }&rurl=${window.btoa(this.state.returnUrl)}&op=SP${currencyGroup ? `&cg=${currencyGroup}` : ``}`;
             }
 
             if (devIp) {
