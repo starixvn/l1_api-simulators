@@ -247,7 +247,7 @@ export default class SignIn extends React.Component {
             }
 
             if (devIp) {
-                redirectUrl = `http://${devIp}?token=${token}`;
+                redirectUrl = `http://${devIp}?token=${token}&appType=${this.state.appType}`;
             }
 
             if (

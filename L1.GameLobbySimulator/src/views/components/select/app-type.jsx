@@ -9,7 +9,7 @@ const appSelectorConfig = {
         { value: 2, name: "Saba Mobi" },
         { value: 3, name: "Mini Saba.Club" },
         { value: 4, name: "Mega Keno" },
-        { value: 6, name: "Desktop Direct" }
+        { value: 7, name: "Mobile Direct" }
     ],
     instantModes: [
         { value: 1, name: "Portrait" },
