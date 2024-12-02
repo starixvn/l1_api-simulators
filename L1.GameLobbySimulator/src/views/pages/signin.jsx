@@ -69,7 +69,8 @@ export default class SignIn extends React.Component {
             isApp: false,
             returnUrl: "",
             isApp: false,
-            local: 0
+            local: 0,
+            disableAward: false,
         };
 
         this.instantModeSize = {
@@ -445,12 +446,21 @@ export default class SignIn extends React.Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </div>
-                                <div className="col-sm-4">
+                                <div className="col-sm-3">
                                     <Input
                                         type="checkbox"
                                         id="disableJackpotGames"
                                         name="Disable Jackpot Games"
                                         value={this.state.disableJackpotGames}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </div>
+                                <div className="col-sm-3">
+                                    <Input
+                                        type="checkbox"
+                                        id="disableAward"
+                                        name="Disable Award"
+                                        value={this.state.disableAward}
                                         onChange={this.handleInputChange}
                                     />
                                 </div>
