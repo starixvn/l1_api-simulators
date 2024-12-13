@@ -9,6 +9,7 @@ import GameSelect from "../components/select/game.jsx";
 import LanguageSelect from "../components/select/language.jsx";
 import { SC1GameLobbyURLMapper, VG2GameLobbyURLMapper } from "../constants/lobby-url";
 import { showAlert } from "../util.jsx";
+import { DefaultCurrencyMapper, OperatorIdMapper, OperatorSecretMapper, OperatorTokenMapper } from "../constants/operator-setting.js";
 
 const operatorMapper = {
     ONEworks1: "ow",
@@ -17,7 +18,8 @@ const operatorMapper = {
     ONEworks_VG: "ow",
     PFF: "pff",
     ONEworksSeal888: "ow",
-    SabaPlay: "sabaplay"
+    SabaPlay: "sabaplay",
+    ONEworksCredit_SK: "sk"
 };
 const IsSystemTypeSC1 = () => {
     return config.systemType === "SC1";
@@ -35,15 +37,15 @@ export default class SignIn extends React.Component {
             playerId: props.playerId,
             playerName: `username_${props.playerId}`,
             language: "vi-VN",
-            currency: IsSystemTypeSC1() ? "$US" : "INH",
+            currency: DefaultCurrencyMapper[config.systemType] || "$US",
             seq: "d,y,lumi",
             siteId: "4100300",
             siteName: "lumi",
             ip: "",
             browserUserAgent: navigator.userAgent,
             auth: {
-                operatorId: IsSystemTypeSC1() ? "ONEworks1" : "ONEworksVGCash",
-                operatorSecret: IsSystemTypeSC1() ? "ONEworks1@20luminet&" : "VG@SC123"
+                operatorId: OperatorIdMapper[config.systemType] || "ONEworks1",
+                operatorSecret: OperatorSecretMapper[config.systemType] || "ONEworks1@20luminet&"
             },
             token: "",
             redirectUrl: "#",
@@ -62,7 +64,7 @@ export default class SignIn extends React.Component {
             expandAdvanceSetting: false,
             instantMode: 1,
             devIp: "",
-            operatorToken: IsSystemTypeSC1() ? "ONEworks1Token" : "ONEworksVGCashToken",
+            operatorToken: OperatorTokenMapper[config.systemType] || "ONEworks1Token",
             setDefaultBalance: false,
             ref: "",
             deeplink: "",
@@ -70,7 +72,8 @@ export default class SignIn extends React.Component {
             returnUrl: "",
             isApp: false,
             simulator: false,
-            disableAward: false
+            disableAward: false,
+            isSK: false
         };
 
         this.instantModeSize = {
@@ -99,6 +102,7 @@ export default class SignIn extends React.Component {
         this.handleChangeAuth = this.handleChangeAuth.bind(this);
         this.handleReloadIframe = this.handleReloadIframe.bind(this);
         this.handleClickSetDefaultBalance = this.handleClickSetDefaultBalance.bind(this);
+        this.handleIsSabaKeno = this.handleIsSabaKeno.bind(this);
 
         this.instantRef = React.createRef();
         this.iFrameRef = React.createRef();
@@ -119,11 +123,20 @@ export default class SignIn extends React.Component {
         this.setState(data);
     }
 
+    handleIsSabaKeno() {
+        const { isSK } = this.state;
+        const auth = {
+            operatorId: isSK ? OperatorIdMapper[config.systemType] : OperatorIdMapper.SK,
+            operatorSecret: isSK ? OperatorSecretMapper[config.systemType] : OperatorSecretMapper.GN
+        };
+        this.setState({ isSK: !isSK, auth });
+    }
+
     handleChangeAuth(data) {
         const state = this.state;
 
         state.auth = Object.assign({}, state.auth, data);
-
+        state.isSK = false;
         this.setState(state);
     }
 
@@ -444,30 +457,42 @@ export default class SignIn extends React.Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </div>
-                                <div className="col-sm-3 col-md-2">
-                                    <Input
-                                        type="checkbox"
-                                        id="isApp"
-                                        name="Is App"
-                                        value={this.state.isApp}
-                                        onChange={this.handleInputChange}
-                                    />
-                                </div>
-                                <div className="col-sm-3">
-                                    <Input
-                                        type="checkbox"
-                                        id="disableJackpotGames"
-                                        name="Disable Jackpot Games"
-                                        value={this.state.disableJackpotGames}
-                                        onChange={this.handleInputChange}
-                                    />
-                                </div>
-                                <div className="col-sm-3">
-                                    <Input
-                                        type="checkbox"
-                                        id="disableAward"
-                                        name="Disable Award"
-                                        value={this.state.disableAward}
+                                {IsSxDSystem() ? (
+                                    <div className="col-sm-3 col-md-2">
+                                        <Input
+                                            type="checkbox"
+                                            id="isSK"
+                                            name="Is Saba Keno"
+                                            value={this.state.isSK}
+                                            onChange={this.handleIsSabaKeno}
+                                        />
+                                    </div>
+                                ) : (
+                                    <>
+                                        <div className="col-sm-3 col-md-2">
+                                            <Input
+                                                type="checkbox"
+                                                id="isApp"
+                                                name="Is App"
+                                                value={this.state.isApp}
+                                                onChange={this.handleInputChange}
+                                            />
+                                        </div>
+                                        <div className="col-sm-3">
+                                            <Input
+                                                type="checkbox"
+                                                id="disableJackpotGames"
+                                                name="Disable Jackpot Games"
+                                                value={this.state.disableJackpotGames}
+                                                onChange={this.handleInputChange}
+                                            />
+                                        </div>
+                                        <div className="col-sm-3">
+                                            <Input
+                                                type="checkbox"
+                                                id="disableAward"
+                                                name="Disable Award"
+                                                value={this.state.disableAward}
                                         onChange={this.handleInputChange}
                                     />
                                 </div>
@@ -495,9 +520,11 @@ export default class SignIn extends React.Component {
                                         id="simulator"
                                         name="Simulator"
                                         value={this.state.simulator}
-                                        onChange={this.handleInputChange}
-                                    />
-                                </div>
+                                                onChange={this.handleInputChange}
+                                            />
+                                        </div>
+                                    </>
+                                )}
                             </div>
                             <div className="col-md-12 row">
                                 <div className="col-sm-8">

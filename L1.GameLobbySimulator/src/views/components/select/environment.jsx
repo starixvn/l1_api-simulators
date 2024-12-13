@@ -1,13 +1,12 @@
 import React from "react";
-import { SC1GameLobbyURLMapper, VG2GameLobbyURLMapper } from "../../constants/lobby-url";
+import { GNGameLobbyURLMapper, SC1GameLobbyURLMapper, VG2GameLobbyURLMapper } from "../../constants/lobby-url";
 import config from "../../../game-client-config.json";
 
 export default class Environment extends React.Component {
     handleChange(data) {
-        if(location.pathname.includes("login")) {
-            window.location.replace(data+'login');
-        }
-        else {
+        if (location.pathname.includes("login")) {
+            window.location.replace(data + "login");
+        } else {
             let url = `${data}signin?obCustId=${this.props.playerId}&appType=${this.props.appType}`;
             this.props.balance && (url += `&balance=${this.props.balance}`);
             window.location.replace(url);
@@ -24,7 +23,21 @@ export default class Environment extends React.Component {
 
     render() {
         const url = window.location.host;
-        const URLMapper = config.systemType === "SC1" ? SC1GameLobbyURLMapper : VG2GameLobbyURLMapper;
+        let URLMapper = {};
+        switch (config.systemType) {
+            case "SC1":
+                URLMapper = SC1GameLobbyURLMapper;
+                break;
+            case "VG2":
+                URLMapper = VG2GameLobbyURLMapper;
+                break;
+            case "GN":
+                URLMapper = GNGameLobbyURLMapper;
+                break;
+            default:
+                URLMapper = SC1GameLobbyURLMapper;
+                break;
+        }
         const currentEnv = Object.values(URLMapper).find((value) => value.includes(url));
 
         return (
