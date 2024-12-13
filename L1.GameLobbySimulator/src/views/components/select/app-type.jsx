@@ -5,10 +5,8 @@ const appSelectorConfig = {
     name: "AppType",
     type: "int",
     options: [
-        { value: 1, name: "Saba.Club" },
-        { value: 2, name: "Saba Mobi" },
-        { value: 3, name: "Mini Saba.Club" },
-        { value: 4, name: "Mega Keno" },
+        { value: 1, name: "Main" },
+        { value: 3, name: "Instant" },
         { value: 6, name: "Desktop Direct" },
         { value: 7, name: "Mobile Direct" }
     ],
