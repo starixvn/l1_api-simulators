@@ -69,7 +69,7 @@ export default class SignIn extends React.Component {
             isApp: false,
             returnUrl: "",
             isApp: false,
-            disableAward: false,
+            disableAward: false
         };
 
         this.instantModeSize = {
@@ -143,7 +143,7 @@ export default class SignIn extends React.Component {
             })
             .catch(showAlert);
 
-            event && event.preventDefault();
+        event && event.preventDefault();
     }
 
     handleVerifyToken(event) {
@@ -258,6 +258,10 @@ export default class SignIn extends React.Component {
                 this.state.isApp
             ) {
                 redirectUrl = `${redirectUrl}&appType=5`;
+            }
+
+            if (redirectUrl && !redirectUrl.includes("appType")) {
+                redirectUrl += `&appType=${this.state.appType}`;
             }
         }
 
