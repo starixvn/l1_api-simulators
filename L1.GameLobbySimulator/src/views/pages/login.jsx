@@ -6,7 +6,7 @@ import config from "../../game-client-config.json";
 import Environment from "../components/select/environment.jsx";
 
 const IsSystemTypeSC1 = () => {
-    return config.systemType === "SC1";
+    return config.systemType === "SC1" || config.systemType === "HD";
 };
 
 function buildLocalStorageKey(key) {

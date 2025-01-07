@@ -20,7 +20,7 @@ const operatorMapper = {
     SabaPlay: "sabaplay"
 };
 const IsSystemTypeSC1 = () => {
-    return config.systemType === "SC1";
+    return config.systemType === "SC1" || config.systemType === "HD";
 };
 
 const IsSxDSystem = () => {
@@ -30,7 +30,7 @@ const IsSxDSystem = () => {
 export default class SignIn extends React.Component {
     constructor(props) {
         super(props);
-
+        console.log(config, config.systemType);
         this.state = {
             playerId: props.playerId,
             playerName: `username_${props.playerId}`,
@@ -48,7 +48,7 @@ export default class SignIn extends React.Component {
             token: "",
             redirectUrl: "#",
             verifyResult: null,
-            gameId: 0,
+            gameId: config.defaultSelectedGameId ?? 0,
             setting: {
                 owUrl: ""
             },
