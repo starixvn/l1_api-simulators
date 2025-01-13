@@ -48,7 +48,7 @@ export default class SignIn extends React.Component {
             token: "",
             redirectUrl: "#",
             verifyResult: null,
-            gameId: config.defaultSelectedGameId ?? 0,
+            gameId: 1001,
             setting: {
                 owUrl: ""
             },
@@ -64,7 +64,7 @@ export default class SignIn extends React.Component {
             devIp: "",
             operatorToken: IsSystemTypeSC1() ? "ONEworks1Token" : "ONEworksVGCashToken",
             setDefaultBalance: false,
-            ref: "",
+            ref: "m_direct",
             deeplink: "",
             isApp: false,
             returnUrl: "",

@@ -11,7 +11,7 @@
     "useAuthenticate": true,
     "requestTimeout": 10000,
     "owUrl": "https://hd-owapi-simulator.lumigame.com/SabaClub",
-    "localhost": "http://localhost:3000",
+    "localhost": "http://localhost:7456",
     "mobileLocalhost": "http://localhost:3000",
     "connectSiteUrl": "https://sp-hd-connectsite.lumigame.com/login",
     "port": 5000,

@@ -17,7 +17,10 @@ const games = {
         { id: 1005, name: "Se Ball", key: "seball" },
         { id: 1006, name: "Lucky Three", key: "luckythree" },
         { id: 1007, name: "Sic Ball", key: "sicball" },
-        { id: 2, name: "Se Die", key: "sedie" }
+        { id: 2, name: "Se Die", key: "sedie" },
+        { id: 10, name: "Baccarat", key: "baccarat" },
+        { id: 22, name: "Vip Se Die", key: "vipsedie" },
+        { id: 26, name: "Vip Fish Prawn Crab", key: "vipfishprawncrab" }
     ]
 };
 
