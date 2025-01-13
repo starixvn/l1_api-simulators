@@ -208,6 +208,11 @@ export default class SignIn extends React.Component {
             .catch(showAlert);
     }
 
+    openGamePopup(redirectUrl) {
+        const encodedUrl = encodeURIComponent(redirectUrl);
+        window.open(`/direct?redirectUrl=${encodedUrl}`, "_blank").focus();
+    }
+
     async componentDidMount() {
         const data = await Axios.get("/setting/data").then((data) => data.data);
         const ip = await Axios.get("/signin/ip", { timeout: 10000 }).then((data) => data.data);
@@ -529,6 +534,17 @@ export default class SignIn extends React.Component {
                                     this.redirectToInstantVersion();
                                 }}
                             />
+                            {this.state.appType === 7 && (
+                                <input
+                                    type="button"
+                                    id="open-game-popup"
+                                    className="tertiary"
+                                    value="Open Game Popup"
+                                    onClick={() => {
+                                        this.openGamePopup(redirectUrl);
+                                    }}
+                                />
+                            )}
                         </div>
                         {setDefaultBalance && <p style={{ color: "green", fontWeight: "bold" }}>Set balance successfully!</p>}
                     </form>
