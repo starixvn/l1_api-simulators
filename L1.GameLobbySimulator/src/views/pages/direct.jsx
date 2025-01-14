@@ -1,16 +1,29 @@
 import React, { Component } from "react";
 
+function updateUrlWithQuery() {
+    const hrefDecoded = decodeURIComponent(globalThis.location?.href);
+    const [baseUrl, queryString] = hrefDecoded ? hrefDecoded.split("?") : ["", ""];
+    const fullUrl = queryString ? `${baseUrl}?${queryString}` : baseUrl;
+    globalThis.history.pushState(null, "", fullUrl);
+}
+
 export default class Direct extends Component {
     render() {
+        const REDIRECT_URL = "redirectUrl";
         const params = new URLSearchParams(window.location.search);
-        const iframeSrc = params.get("redirectUrl");
+        const iframeSrc = params.get(REDIRECT_URL);
 
+        updateUrlWithQuery();
         return (
             <>
                 <style>
                     {`
+                        html, body, #app {
+                            height: 100%;
+                        }
+
                         .direct-container {
-                            height: 100dvh;
+                            height: 100%;
                             display: flex;
                             flex-direction: column;
                         }
@@ -32,6 +45,7 @@ export default class Direct extends Component {
                             width: 100%;
                             height: 100%;
                         }
+                            
                     `}
                 </style>
                 <div className="direct-container">
