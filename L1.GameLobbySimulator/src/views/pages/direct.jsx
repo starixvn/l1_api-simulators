@@ -75,7 +75,7 @@ export default class Direct extends Component {
                 <div className="direct-container">
                     <div className="header">Header</div>
                     <div className="direct">
-                        <iframe className="iframe" title={`Game`} src={iframeSrc} />
+                        <iframe className="iframe" title={`Game`} src={iframeSrc} allow="clipboard-read; clipboard-write *" />
                     </div>
                     <div className="footer">
                         <span>Footer {isClassic ? VERSION_MODE.CLASSIC : VERSION_MODE.COMPACT}</span>
