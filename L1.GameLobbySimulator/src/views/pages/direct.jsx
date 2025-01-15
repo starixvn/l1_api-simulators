@@ -44,6 +44,7 @@ export default class Direct extends Component {
                             height: 100%;
                             display: flex;
                             flex-direction: column;
+                            width: 100%;
                         }
                         .header {
                             background-color: #ccc;
@@ -60,6 +61,7 @@ export default class Direct extends Component {
                         .iframe {
                             width: 100% !important;
                             height: 100%;
+                            border: none;
                         }
                         .toggle-button {
                             padding: 4px;
