@@ -8,8 +8,26 @@ function updateUrlWithQuery() {
 }
 
 export default class Direct extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isClassic: true
+        };
+    }
+
+    toggleView = () => {
+        this.setState((prevState) => ({ isClassic: !prevState.isClassic }));
+    };
+
     render() {
         const REDIRECT_URL = "redirectUrl";
+        const VERSION_MODE = {
+            CLASSIC: "classic",
+            COMPACT: "compact"
+        };
+
+        const { isClassic } = this.state;
+
         const params = new URLSearchParams(window.location.search);
         const iframeSrc = params.get(REDIRECT_URL);
 
@@ -28,24 +46,30 @@ export default class Direct extends Component {
                             flex-direction: column;
                         }
                         .header {
-                            height: 76px;
                             background-color: #ccc;
-                            flex-shrink: 0;
+                            flex: 0 0 ${isClassic ? "76px" : "36px"};
                         }
                         .direct {
                             flex: 1;
                             display: flex;
                         }
                         .footer {
-                            height: 49px;
                             background-color: #ccc;
-                            flex-shrink: 0;
+                            flex: 0 0 48px;
                         }
                         .iframe {
-                            width: 100%;
+                            width: 100% !important;
                             height: 100%;
                         }
-                            
+                        .toggle-button {
+                            padding: 4px;
+                            margin-top: 6px;
+                            margin-left: 60px;
+                            background-color: red;
+                            color: white;
+                            font-weight: bold;
+                            text-transform: uppercase;
+                        }
                     `}
                 </style>
                 <div className="direct-container">
@@ -53,7 +77,12 @@ export default class Direct extends Component {
                     <div className="direct">
                         <iframe className="iframe" title={`Game`} src={iframeSrc} />
                     </div>
-                    <div className="footer">Footer</div>
+                    <div className="footer">
+                        <span>Footer {isClassic ? VERSION_MODE.CLASSIC : VERSION_MODE.COMPACT}</span>
+                        <button className="toggle-button" onClick={this.toggleView}>
+                            Switch to {isClassic ? VERSION_MODE.COMPACT : VERSION_MODE.CLASSIC}
+                        </button>
+                    </div>
                 </div>
             </>
         );
