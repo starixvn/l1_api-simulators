@@ -554,11 +554,11 @@ export default class SignIn extends React.Component {
                                             className="col-sm-12"
                                             style={{ color: "#0277bd" }}
                                             onClick={() => {
-                                                const popupStyles = IsSxDSystem()
-                                                    ? "width=950,height=906,left=200,top=100,resizable=no,"
-                                                    : `width=${this.state.appType === 2 ? 1270 : 1523},height=884`;
-
-                                                window.open(redirectUrl, "_blank", popupStyles);
+                                                window.open(
+                                                    redirectUrl,
+                                                    "_blank",
+                                                    "width=756,height=1638,titlebar=no,menubar=no,toolbar=no"
+                                                );
                                             }}
                                             id="redirect"
                                         >
