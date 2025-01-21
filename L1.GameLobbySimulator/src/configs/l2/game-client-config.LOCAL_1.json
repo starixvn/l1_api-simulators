@@ -14,7 +14,7 @@
     "localhost": "http://localhost:7456",
     "mobileLocalhost": "http://localhost:3000",
     "port": 5000,
-    "connectSiteUrl": "https://connectsite.lumigame.com/login",
+    "connectSiteUrl": "https://l1-connectsite1.lumigame.com/login",
     "enableCors": true,
     "corsUrls": ["https://l2-info1.lumigame.com/", "http://localhost:3001"]
 }
