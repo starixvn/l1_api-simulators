@@ -69,6 +69,7 @@ export default class SignIn extends React.Component {
             isApp: false,
             returnUrl: "",
             isApp: false,
+            simulator: false,
             disableAward: false
         };
 
@@ -233,7 +234,7 @@ export default class SignIn extends React.Component {
 
     render() {
         let redirectUrl = this.state.redirectUrl;
-        const { localhost, token, instantMode, devIp, setting, setDefaultBalance, language } = this.state;
+        const { localhost, token, instantMode, devIp, setting, setDefaultBalance, language, simulator } = this.state;
         const url = IsSystemTypeSC1() ? SC1GameLobbyURLMapper[setting.evn] : VG2GameLobbyURLMapper[setting.evn];
         const qrURL = `${url}/signin?obCustId=${this.state.playerId}`;
 
@@ -245,6 +246,10 @@ export default class SignIn extends React.Component {
                         : `${setting.localhost}?token=${token}&lang=${language}&gameId=${this.state.gameId}&ref=${
                               this.state.ref
                           }&rurl=${window.btoa(this.state.returnUrl)}&op=SP`;
+            }
+
+            if (simulator) {
+                redirectUrl = `${setting.simulatorUrl}?token=${token}&appType=${this.state.appType}`;
             }
 
             if (devIp) {
@@ -452,6 +457,15 @@ export default class SignIn extends React.Component {
                                         id="disableAward"
                                         name="Disable Award"
                                         value={this.state.disableAward}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </div>
+                                <div className="col-sm-3">
+                                    <Input
+                                        type="checkbox"
+                                        id="simulator"
+                                        name="Simulator"
+                                        value={this.state.simulator}
                                         onChange={this.handleInputChange}
                                     />
                                 </div>
