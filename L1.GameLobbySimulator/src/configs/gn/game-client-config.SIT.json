@@ -1,8 +1,8 @@
 {
     "evn": "SIT",
     "systemType": "GN",
-    "apiUrl": "http://gn_sg_api_sit:5000",
-    "authUrl": "http://gn_auth_api_sit:5000",
+    "apiUrl": "http://gn-sg-api-sit-service:5000",
+    "authUrl": "http://gn-auth-api-sit-service:5000",
     "client": {
         "id": "game-server",
         "secret": "gameserver@20luminet&"
