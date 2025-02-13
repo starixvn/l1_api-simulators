@@ -16,5 +16,6 @@
     "port": 8106,
     "connectSiteUrl": "https://connectsite.lumigame.com/login",
     "enableCors": true,
-    "corsUrls": ["http://localhost:3001"]
+    "corsUrls": ["http://localhost:3001"],
+    "simulatorUrl": "http://local3.game-client-simulator.lumigame.com"
 }

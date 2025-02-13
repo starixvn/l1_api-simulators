@@ -14,5 +14,6 @@
     "localhost": "http://localhost:7456",
     "mobileLocalhost": "http://localhost:3000",
     "connectSiteUrl": "https://connectsite.lumigame.com/login",
-    "port": 5000
+    "port": 5000,
+    "simulatorUrl": "http://local.game-client-simulator.lumigame.com"
 }
