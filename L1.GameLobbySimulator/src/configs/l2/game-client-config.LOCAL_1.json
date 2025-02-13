@@ -17,5 +17,5 @@
     "connectSiteUrl": "https://l1-connectsite1.lumigame.com/login",
     "enableCors": true,
     "corsUrls": ["https://l2-info1.lumigame.com/", "http://localhost:3001"],
-    "simulatorUrl": "http://local1.game-client-simulator.lumigame.com"
+    "simulatorUrl": "http://l2-game-client-simulator-local1.lumigame.com"
 }
