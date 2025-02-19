@@ -15,5 +15,6 @@
     "mobileLocalhost": "http://localhost:3000",
     "connectSiteUrl": "https://hd-connectsite.lumigame.com/login",
     "port": 5000,
-    "defaultSelectedGameId": "1001"
+    "defaultSelectedGameId": "1001",
+    "simulatorUrl": "https://hd-game-client-simulator.lumigame.com"
 }
