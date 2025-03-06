@@ -7,11 +7,14 @@ const config = require("../game-client-config.json");
 router.post("/signin/sso", async (req, res) => {
     try {
         const gameId = req.body.gameId;
-        const result = await GameClient.auth.singleSignOn(req.body);
+        const body = { ...req.body };
+        if (gameId > 0) {
+            body.gameTypeId = gameId;
+        }
+        const result = await GameClient.auth.singleSignOn(body);
         const url = new URL(result.redirectUrl);
         const token = url.searchParams.get("token");
-
-        res.send({ token, redirectUrl: `${result.redirectUrl}&gameId=${gameId}` });
+        res.send({ token, redirectUrl: result.redirectUrl });
     } catch (error) {
         res.send({ error });
     }
