@@ -32,9 +32,12 @@ class Application extends React.Component {
             balance,
             handleChangeInput: this.handleChangeInput
         };
+
+        const currentPath = history.location.pathname;
+
         return (
             <Router history={history}>
-                {!location.pathname.includes("login") && <Header {...defaultProps} />}
+                {!currentPath.includes("/direct") && !currentPath.includes("/login") && <Header {...defaultProps} />}
                 <Switch>
                     {routes.map(({ path, component }, key) => (
                         <Route key={key} path={path} render={(props) => React.createElement(component, { ...props, ...defaultProps })} />

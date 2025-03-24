@@ -1,12 +1,12 @@
 # Base image
-FROM hub.lumigame.com/base/node:14.15.1-slim
+FROM hub.lumigame.com/base/node:20.9.0-alpine
 
 USER root
 
 ENV NODE_ENV $NODE_ENV
 RUN mkdir /app && chown node:node /app
 WORKDIR /app
-
+ENV NODE_OPTIONS="--openssl-legacy-provider"
 COPY ./L1.GameLobbySimulator .
 RUN yarn install
 RUN yarn build
