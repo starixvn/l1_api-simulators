@@ -16,6 +16,9 @@
     "port": 8106,
     "connectSiteUrl": "https://gn-connectsite.lumigame.com/login",
     "enableCors": true,
-    "corsUrls": ["http://localhost:3001"],
-    "simulatorUrl": "http://local3.game-client-simulator.lumigame.com"
+    "corsUrls": [
+        "http://localhost:3001"
+    ],
+    "simulatorUrl": "http://local3.game-client-simulator.lumigame.com",
+    "livePageUrl": "https://l2-seal-live-page-client-demo2.lumigame.com"
 }
