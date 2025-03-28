@@ -307,6 +307,7 @@ export default class SignIn extends React.Component {
                                         value={this.state.appType}
                                         instantMode={this.state.instantMode}
                                         isOpenOnIframe={this.state.isOpenOnIframe}
+                                        playerId={this.state.playerId}
                                     />
                                 </div>
                                 <div className="col-sm-12 col-md-6">

@@ -26,7 +26,7 @@ export default class AppType extends React.Component {
     }
 
     openLivePage() {
-       window.open(config.livePageUrl, '_blank');
+       window.open(`${config.livePageUrl}?playerId=${this.props.playerId}`, '_blank');
     }
 
     handleChange(data) {
@@ -52,9 +52,10 @@ export default class AppType extends React.Component {
                         option.value === 6 ? (
                             <div className="input-group" key={option.value}>
                                 <button
-                                    type="button"
-                                    className="live-page-button"
-                                    onClick={() => this.handleChange({ appType: option.value })}
+                                      type="button"
+                                      id="live-page-button"
+                                      className="tertiary"
+                                      onClick={() => this.openLivePage()}
                                 >
                                     {option.name}
                                 </button>
