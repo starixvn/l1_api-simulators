@@ -16,6 +16,10 @@
     "port": 5000,
     "connectSiteUrl": "https://l1-connectsite2.lumigame.com/login",
     "enableCors": true,
-    "corsUrls": ["https://l1-info2.lumigame.com/", "http://localhost:3001"],
-    "simulatorUrl": "http://local2.game-client-simulator.lumigame.com"
+    "corsUrls": [
+        "https://l1-info2.lumigame.com/",
+        "http://localhost:3001"
+    ],
+    "simulatorUrl": "http://local2.game-client-simulator.lumigame.com",
+    "livePageUrl": "https://l1-seal-live-page-client-demo2.lumigame.com"
 }

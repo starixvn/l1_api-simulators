@@ -23,6 +23,10 @@ const IsSystemTypeSC1 = () => {
     return config.systemType === "SC1";
 };
 
+const IsSxDSystem = () => {
+    return config.systemType === "GN";
+};
+
 export default class SignIn extends React.Component {
     constructor(props) {
         super(props);
@@ -187,7 +191,6 @@ export default class SignIn extends React.Component {
             token: null,
             verifyResult: null,
             resource: null,
-            localhost: null,
             devIp: null,
             appType: 3
         });
@@ -196,9 +199,19 @@ export default class SignIn extends React.Component {
             .then((data) => data.data)
             .then((data) => (data.error ? Promise.reject(data.error) : data))
             .then((data) => {
-                window.location.href = data.redirectUrl;
+                let redirectUrl = data.redirectUrl;
+                if (this.state.localhost) {
+                    redirectUrl = `${this.state.setting.localhost}?token=${data.token}&lang=${this.state.language}&gameId=${this.state.gameId}&instant=true&appType=3`;
+                }
+
+                window.open(redirectUrl, "_blank").focus();
             })
             .catch(showAlert);
+    }
+
+    openGamePopup(redirectUrl) {
+        const encodedUrl = encodeURIComponent(redirectUrl);
+        window.open(`/direct?redirectUrl=${encodedUrl}`, "_blank").focus();
     }
 
     async componentDidMount() {
@@ -235,9 +248,13 @@ export default class SignIn extends React.Component {
                 redirectUrl =
                     this.state.appType === 2 || this.state.appType === 4
                         ? `${setting.mobileLocalhost}?token=${token}`
-                        : `${setting.localhost}?token=${token}&lang=en&gameId=${this.state.gameId}&ref=${this.state.ref}&rurl=${window.btoa(
-                              this.state.returnUrl
-                          )}&op=SP`;
+                        : `${setting.localhost}?token=${token}&lang=${language}&gameId=${this.state.gameId}&ref=${
+                              this.state.ref
+                          }&rurl=${window.btoa(this.state.returnUrl)}&op=SP`;
+            }
+
+            if (simulator) {
+                redirectUrl = `${setting.simulatorUrl}?token=${token}&appType=${this.state.appType}`;
             }
 
             if (simulator) {
@@ -245,7 +262,7 @@ export default class SignIn extends React.Component {
             }
 
             if (devIp) {
-                redirectUrl = `http://${devIp}?token=${token}`;
+                redirectUrl = `http://${devIp}?token=${token}&appType=${this.state.appType}`;
             }
 
             if (
@@ -255,6 +272,10 @@ export default class SignIn extends React.Component {
                 this.state.isApp
             ) {
                 redirectUrl = `${redirectUrl}&appType=5`;
+            }
+
+            if (redirectUrl && !redirectUrl.includes("appType")) {
+                redirectUrl += `&appType=${this.state.appType}`;
             }
         }
 
@@ -286,6 +307,7 @@ export default class SignIn extends React.Component {
                                         value={this.state.appType}
                                         instantMode={this.state.instantMode}
                                         isOpenOnIframe={this.state.isOpenOnIframe}
+                                        playerId={this.state.playerId}
                                     />
                                 </div>
                                 <div className="col-sm-12 col-md-6">
@@ -457,6 +479,24 @@ export default class SignIn extends React.Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </div>
+                                <div className="col-sm-3">
+                                    <Input
+                                        type="checkbox"
+                                        id="disableAward"
+                                        name="Disable Award"
+                                        value={this.state.disableAward}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </div>
+                                <div className="col-sm-3">
+                                    <Input
+                                        type="checkbox"
+                                        id="simulator"
+                                        name="Simulator"
+                                        value={this.state.simulator}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </div>
                             </div>
                             <div className="col-md-12 row">
                                 <div className="col-sm-8">
@@ -531,11 +571,26 @@ export default class SignIn extends React.Component {
                                     this.redirectToInstantVersion();
                                 }}
                             />
+                            {this.state.appType === 7 && (
+                                <input
+                                    type="button"
+                                    id="open-game-popup"
+                                    className="tertiary"
+                                    value="Open Game Popup"
+                                    onClick={() => {
+                                        this.openGamePopup(redirectUrl);
+                                    }}
+                                />
+                            )}
                         </div>
                         {setDefaultBalance && <p style={{ color: "green", fontWeight: "bold" }}>Set balance successfully!</p>}
                     </form>
                     {(this.state.appType === 3 || this.state.isOpenOnIframe) && token && (
-                        <iframe ref={this.instantRef} src={redirectUrl} style={this.instantModeSize[instantMode]} />
+                        <iframe
+                            ref={this.instantRef}
+                            src={redirectUrl + (this.state.appType === 3 ? "&instant=true&appType=3" : "")}
+                            style={this.instantModeSize[instantMode]}
+                        />
                     )}
                 </div>
                 <div className="section">
@@ -545,17 +600,19 @@ export default class SignIn extends React.Component {
                                 <fieldset className="container">
                                     <legend>Token</legend>
                                     <div className="input-group vertical">
-                                        <label htmlFor="redirectUrl">Redirect</label>
+                                        <label htmlFor="redirectUrl">
+                                            Redirect:<div id="link-local"></div>
+                                        </label>
                                         <a
                                             className="col-sm-12"
                                             style={{ color: "#0277bd" }}
-                                            onClick={() =>
-                                                window.open(
-                                                    redirectUrl,
-                                                    "_blank",
-                                                    `width=${this.state.appType === 2 ? 1270 : 1523},height=884`
-                                                )
-                                            }
+                                            onClick={() => {
+                                                const popupStyles = IsSxDSystem()
+                                                    ? "width=950,height=906,left=200,top=100,resizable=no,"
+                                                    : `width=${this.state.appType === 2 ? 1270 : 1523},height=884`;
+
+                                                window.open(redirectUrl, "_blank", popupStyles);
+                                            }}
                                             id="redirect"
                                         >
                                             {redirectUrl}
