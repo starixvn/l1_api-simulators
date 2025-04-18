@@ -70,7 +70,7 @@ export default class SignIn extends React.Component {
             returnUrl: "",
             isApp: false,
             simulator: false,
-            disableAward: false,
+            disableAward: false
         };
 
         this.instantModeSize = {
@@ -245,12 +245,13 @@ export default class SignIn extends React.Component {
 
         if (token) {
             if (localhost) {
-                redirectUrl =
-                    this.state.appType === 2 || this.state.appType === 4
-                        ? `${setting.mobileLocalhost}?token=${token}`
-                        : `${setting.localhost}?token=${token}&lang=${language}&gameId=${this.state.gameId}&ref=${
-                              this.state.ref
-                          }&rurl=${window.btoa(this.state.returnUrl)}&op=SP`;
+                if (this.state.appType === 2 || this.state.appType === 4) {
+                    redirectUrl = `${setting.mobileLocalhost}?token=${token}`;
+                } else {
+                    const url = new URL(redirectUrl);
+                    const searchParams = new URLSearchParams(url.search);
+                    redirectUrl = `${setting.localhost}?${searchParams.toString()}`;
+                }
             }
 
             if (simulator) {
