@@ -17,7 +17,8 @@ const operatorMapper = {
     ONEworks_VG: "ow",
     PFF: "pff",
     ONEworksSeal888: "ow",
-    SabaPlay: "sabaplay"
+    SabaPlay: "sabaplay",
+    SabaPlay_HD: "sabaplay_hd"
 };
 const IsSystemTypeSC1 = () => {
     return config.systemType === "SC1";
@@ -30,7 +31,7 @@ const IsSxDSystem = () => {
 export default class SignIn extends React.Component {
     constructor(props) {
         super(props);
-
+        console.log(config, config.systemType);
         this.state = {
             playerId: props.playerId,
             playerName: `username_${props.playerId}`,
@@ -48,7 +49,7 @@ export default class SignIn extends React.Component {
             token: "",
             redirectUrl: "#",
             verifyResult: null,
-            gameId: 0,
+            gameId: 1001,
             setting: {
                 owUrl: ""
             },
@@ -64,7 +65,7 @@ export default class SignIn extends React.Component {
             devIp: "",
             operatorToken: IsSystemTypeSC1() ? "ONEworks1Token" : "ONEworksVGCashToken",
             setDefaultBalance: false,
-            ref: "",
+            ref: "m_direct",
             deeplink: "",
             isApp: false,
             returnUrl: "",
@@ -252,6 +253,10 @@ export default class SignIn extends React.Component {
                     const searchParams = new URLSearchParams(url.search);
                     redirectUrl = `${setting.localhost}?${searchParams.toString()}`;
                 }
+            }
+
+            if (simulator) {
+                redirectUrl = `${setting.simulatorUrl}?token=${token}&appType=${this.state.appType}`;
             }
 
             if (simulator) {
@@ -608,11 +613,11 @@ export default class SignIn extends React.Component {
                                             className="col-sm-12"
                                             style={{ color: "#0277bd" }}
                                             onClick={() => {
-                                                const popupStyles = IsSxDSystem()
-                                                    ? "width=950,height=906,left=200,top=100,resizable=no,"
-                                                    : `width=${this.state.appType === 2 ? 1270 : 1523},height=884`;
-
-                                                window.open(redirectUrl, "_blank", popupStyles);
+                                                window.open(
+                                                    redirectUrl,
+                                                    "_blank",
+                                                    "width=756,height=1638,titlebar=no,menubar=no,toolbar=no"
+                                                );
                                             }}
                                             id="redirect"
                                         >

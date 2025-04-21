@@ -2,15 +2,23 @@ import React from "react";
 import Select from "./select.jsx";
 import Axios from "axios";
 import config from "../../../game-client-config.json";
-import games from "./game-list.js";
-import { SC1GameConfigurationURLMapper, VG2GameConfigurationURLMapper } from "../../constants/game-configuration-url.js";
+import { getGamesBySystem } from "./game-list.js";
+import {
+    SC1GameConfigurationURLMapper,
+    VG2GameConfigurationURLMapper,
+    HDGameConfigurationURLMapper
+} from "../../constants/game-configuration-url.js";
 
 const IsSystemTypeSC1 = () => {
     return config.systemType === "SC1";
 };
 
-const IsGNSystem = () => {
-    return config.systemType === "GN";
+const IsTheRestSystems = () => {
+    return config.systemType !== "SC1" && config.systemType !== "VG2";
+};
+
+const IsSystemTypeHD = () => {
+    return config.systemType === "HD";
 };
 
 export default class Game extends React.Component {
@@ -37,9 +45,23 @@ export default class Game extends React.Component {
             .then((setting) => this.setState({ setting }));
         const { setting } = this.state;
 
-        if (IsGNSystem()) {
-            // Temporary hard code games
-            this.setState({ options: games });
+        if (IsTheRestSystems()) {
+            // Use getGamesBySystem to get games based on system type
+            const systemType = config.systemType;
+            const gameOptions = getGamesBySystem(systemType);
+
+            if (IsSystemTypeHD()) {
+                const url = HDGameConfigurationURLMapper[setting.evn];
+                await Axios.get(url)
+                    .then((data) => data.data)
+                    .then((options) => {
+                        const combinedOptions = gameOptions.concat(options);
+                        console.log(combinedOptions);
+                        this.setState({ options: combinedOptions });
+                    });
+            } else {
+                this.setState({ options: gameOptions });
+            }
 
             return;
         }

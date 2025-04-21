@@ -47,7 +47,7 @@ export default class AppType extends React.Component {
         return (
             <div className="input-group vertical">
                 <label>App Type</label>
-                <div>
+                <div style={{ display: "none" }}>
                     {appSelectorConfig.options.map((option) => (
                         option.value === 6 ? (
                             <div className="input-group" key={option.value}>
