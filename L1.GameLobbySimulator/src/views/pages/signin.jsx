@@ -571,6 +571,8 @@ export default class SignIn extends React.Component {
                             ref={this.instantRef}
                             src={redirectUrl + (this.state.appType === 3 ? "&instant=true&appType=3" : "")}
                             style={this.instantModeSize[instantMode]}
+                            allow="fullscreen"
+                                            allowfullscreen
                         />
                     )}
                 </div>
