@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-router.get(["/", "/signin", "/member", "/setting", "/ow", "/login", "/direct"], function (req, res) {
+router.get(["/", "/signin", "/member", "/setting", "/ow", "/login", "/direct", "/iframe"], function (req, res) {
     res.render("index", { title: "Game Lobby Simulator" });
 });
 
