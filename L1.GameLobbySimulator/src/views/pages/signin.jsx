@@ -530,6 +530,8 @@ export default class SignIn extends React.Component {
                                             height="500"
                                             frameborder="0"
                                             allowtransparency="true"
+                                            allow="fullscreen"
+                                            allowfullscreen
                                         />
                                     </div>
                                 </div>
