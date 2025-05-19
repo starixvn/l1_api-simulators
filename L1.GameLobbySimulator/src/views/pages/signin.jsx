@@ -214,6 +214,11 @@ export default class SignIn extends React.Component {
         window.open(`/direct?redirectUrl=${encodedUrl}`, "_blank").focus();
     }
 
+    openGameIframe(iframeUrl) {
+        const encodedUrl = encodeURIComponent(iframeUrl);
+        window.open(`/iframe?iframeUrl=${encodedUrl}`, "_blank").focus();
+    }
+
     async componentDidMount() {
         const data = await Axios.get("/setting/data").then((data) => data.data);
         const ip = await Axios.get("/signin/ip", { timeout: 10000 }).then((data) => data.data);
@@ -552,6 +557,8 @@ export default class SignIn extends React.Component {
                                             height="500"
                                             frameborder="0"
                                             allowtransparency="true"
+                                            allow="fullscreen"
+                                            allowfullscreen
                                         />
                                     </div>
                                 </div>
@@ -570,6 +577,15 @@ export default class SignIn extends React.Component {
                                 value="Redirect To Instant Version"
                                 onClick={() => {
                                     this.redirectToInstantVersion();
+                                }}
+                            />
+                            <input
+                                type="button"
+                                id="open-game-popup"
+                                className="tertiary"
+                                value="Open Game On Iframe"
+                                onClick={() => {
+                                    this.openGameIframe(redirectUrl);
                                 }}
                             />
                             {this.state.appType === 7 && (
@@ -591,6 +607,8 @@ export default class SignIn extends React.Component {
                             ref={this.instantRef}
                             src={redirectUrl + (this.state.appType === 3 ? "&instant=true&appType=3" : "")}
                             style={this.instantModeSize[instantMode]}
+                            allow="fullscreen"
+                            allowfullscreen
                         />
                     )}
                 </div>

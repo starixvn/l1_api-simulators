@@ -35,9 +35,10 @@ class Application extends React.Component {
 
         const currentPath = history.location.pathname;
 
+        const pathsExcludesHeader = ["/direct", "/login", "/iframe"];
         return (
             <Router history={history}>
-                {!currentPath.includes("/direct") && !currentPath.includes("/login") && <Header {...defaultProps} />}
+                {!pathsExcludesHeader.includes(currentPath) && <Header {...defaultProps} />}
                 <Switch>
                     {routes.map(({ path, component }, key) => (
                         <Route key={key} path={path} render={(props) => React.createElement(component, { ...props, ...defaultProps })} />
