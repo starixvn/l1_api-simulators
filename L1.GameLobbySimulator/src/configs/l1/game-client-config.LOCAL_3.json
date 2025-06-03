@@ -16,5 +16,6 @@
     "connectSiteUrl": "https://l1-connectsite3.lumigame.com/login",
     "port": 5000,
     "simulatorUrl": "http://local3.game-client-simulator.lumigame.com",
-    "livePageUrl": "https://l1-seal-live-page-client-demo3.lumigame.com"
+    "livePageUrl": "https://l1-seal-live-page-client-demo3.lumigame.com",
+    "todayPageUrl": "https://l1-seal-hot-league-wall-client-demo3.lumigame.com"
 }
