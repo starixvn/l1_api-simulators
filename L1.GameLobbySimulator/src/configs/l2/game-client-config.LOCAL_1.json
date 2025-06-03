@@ -20,5 +20,6 @@
         "https://l2-info1.lumigame.com/",
         "http://localhost:3001"
     ],
-    "livePageUrl": "https://l2-seal-live-page-client-demo1.lumigame.com"
+    "livePageUrl": "https://l2-seal-live-page-client-demo1.lumigame.com",
+    "todayPageUrl": "https://l2-seal-hot-league-wall-client-demo1.lumigame.com"
 }

@@ -20,5 +20,6 @@
         "http://localhost:3001"
     ],
     "simulatorUrl": "http://local3.game-client-simulator.lumigame.com",
-    "livePageUrl": "https://l2-seal-live-page-client-demo2.lumigame.com"
+    "livePageUrl": "https://l2-seal-live-page-client-demo2.lumigame.com",
+    "todayPageUrl": "https://l2-seal-hot-league-wall-client-demo2.lumigame.com"
 }

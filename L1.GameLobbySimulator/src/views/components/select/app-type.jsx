@@ -11,6 +11,7 @@ const appSelectorConfig = {
         { value: 4, name: "Mega Keno" },
         { value: 7, name: "Mobile Direct" },
         { value: 6, name: "Live Page" },
+        { value: 8, name: "Today Page" },
     ],
     instantModes: [
         { value: 1, name: "Portrait" },
@@ -26,7 +27,13 @@ export default class AppType extends React.Component {
     }
 
     openLivePage() {
+        this.props.onChange({ appType: 6 });
        window.open(`${config.livePageUrl}?playerId=${this.props.playerId}`, '_blank');
+    }
+
+    openTodayPage() {
+        this.props.onChange({ appType: 8 });
+        window.open(`${config.todayPageUrl}?playerId=${this.props.playerId}`, '_blank');
     }
 
     handleChange(data) {
@@ -34,6 +41,8 @@ export default class AppType extends React.Component {
 
         if (data.appType === 6) {
             this.openLivePage();
+        } else if (data.appType === 8) {
+            this.openTodayPage();
         }
     }
 
@@ -49,13 +58,13 @@ export default class AppType extends React.Component {
                 <label>App Type</label>
                 <div>
                     {appSelectorConfig.options.map((option) => (
-                        option.value === 6 ? (
+                        option.value === 6 || option.value === 8 ? (
                             <div className="input-group" key={option.value}>
                                 <button
                                       type="button"
                                       id="live-page-button"
                                       className="tertiary"
-                                      onClick={() => this.openLivePage()}
+                                      onClick={() => option.value === 6 ? this.openLivePage() : this.openTodayPage()}
                                 >
                                     {option.name}
                                 </button>
