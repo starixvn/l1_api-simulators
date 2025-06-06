@@ -20,7 +20,7 @@
         "https://l2-info2.lumigame.com/",
         "http://localhost:3001"
     ],
-    "simulatorUrl": "http://local2.game-client-simulator.lumigame.com",
+    "simulatorUrl": "http://l2-game-client-simulator-local2.lumigame.com",
     "livePageUrl": "https://l2-seal-live-page-client-demo2.lumigame.com",
     "todayPageUrl": "https://l2-seal-hot-league-wall-client-demo2.lumigame.com"
 }
