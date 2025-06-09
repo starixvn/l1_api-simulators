@@ -28,12 +28,12 @@ export default class AppType extends React.Component {
 
     openLivePage() {
         this.props.onChange({ appType: 6 });
-       window.open(`${config.livePageUrl}?playerId=${this.props.playerId}`, '_blank');
+       window.open(`${config.livePageUrl}?playerId=${this.props.playerId}&currency=${this.props.currency}`, '_blank');
     }
 
     openTodayPage() {
         this.props.onChange({ appType: 8 });
-        window.open(`${config.todayPageUrl}?playerId=${this.props.playerId}`, '_blank');
+        window.open(`${config.todayPageUrl}?playerId=${this.props.playerId}&currency=${this.props.currency}`, '_blank');
     }
 
     handleChange(data) {
