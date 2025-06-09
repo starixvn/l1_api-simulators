@@ -26,9 +26,10 @@ export default class AppType extends React.Component {
     }
 
     openLivePage() {
-       window.open(`${config.livePageUrl}?playerId=${this.props.playerId}`, '_blank');
+       window.open(`${config.livePageUrl}?playerId=${this.props.playerId}&currency=${this.props.currency}`, '_blank');
     }
 
+        window.open(`${config.todayPageUrl}?playerId=${this.props.playerId}&currency=${this.props.currency}`, '_blank');
     handleChange(data) {
         this.props.onChange(data);
 

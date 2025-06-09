@@ -314,6 +314,7 @@ export default class SignIn extends React.Component {
                                         instantMode={this.state.instantMode}
                                         isOpenOnIframe={this.state.isOpenOnIframe}
                                         playerId={this.state.playerId}
+                                        currency={this.state.currency}
                                     />
                                 </div>
                                 <div className="col-sm-12 col-md-6">
