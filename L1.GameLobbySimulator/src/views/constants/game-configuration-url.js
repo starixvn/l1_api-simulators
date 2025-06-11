@@ -16,5 +16,6 @@ export const HDGameConfigurationURLMapper = {
     LOCAL: "https://hd-proxy.lumigame.com/game/configurations/",
     LOCAL_1: "https://hd-proxy1.lumigame.com/game/configurations/",
     LOCAL_2: "https://hd-proxy2.lumigame.com/game/configurations/",
-    SIT: "https://hdsitproxy.sgamesuat.com/sit/game/configurations/"
+    SIT: "https://hdsitproxy.sgamesuat.com/sit/game/configurations/",
+    PROD: "https://proxy.hotdog-games.com/game/configurations/"
 };

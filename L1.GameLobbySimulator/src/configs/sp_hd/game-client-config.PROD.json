@@ -1,7 +1,7 @@
 {
     "evn": "PRO",
     "systemType": "HD",
-    "apiUrl": "http://sp_hd_game_api_prod:5000",
+    "apiUrl": "http://sp_hd_sg_api_prod:5000",
     "authUrl": "http://sp_hd_auth_api_prod:5000",
     "client": {
         "id": "game-server",
