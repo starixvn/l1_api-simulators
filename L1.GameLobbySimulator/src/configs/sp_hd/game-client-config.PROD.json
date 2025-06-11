@@ -1,0 +1,22 @@
+{
+    "evn": "PRO",
+    "systemType": "HD",
+    "apiUrl": "http://sp_hd_game_api_prod:5000",
+    "authUrl": "http://sp_hd_auth_api_prod:5000",
+    "client": {
+        "id": "game-server",
+        "secret": "gameserver@20luminet&"
+    },
+    "expireIn": 1585629268,
+    "useAuthenticate": true,
+    "requestTimeout": 10000,
+    "owUrl": "https://ow.hotdog-games.com/SabaClub",
+    "localhost": "http://localhost:7456",
+    "mobileLocalhost": "http://localhost:3000",
+    "port": 5000,
+    "enableCors": true,
+    "corsUrls": [
+        "https://www.saba.games/",
+        "https://www.hotdog-games.com/"
+    ]
+}
