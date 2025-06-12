@@ -17,6 +17,7 @@
     "enableCors": true,
     "corsUrls": [
         "https://www.saba.games/",
-        "https://www.hotdog-games.com/"
+        "https://www.hotdog-games.com/",
+        "https://lobby.hotdog-games.com/"
     ]
 }
