@@ -11,7 +11,7 @@ import { SC1GameLobbyURLMapper, VG2GameLobbyURLMapper } from "../constants/lobby
 import { showAlert } from "../util.jsx";
 
 const operatorMapper = {
-    ONEworks1: "ow",
+    SabaPlay_HD: "ow",
     ONEworksVGCash: "ow",
     SBO: "sbo",
     ONEworks_VG: "ow",
@@ -42,8 +42,8 @@ export default class SignIn extends React.Component {
             ip: "",
             browserUserAgent: navigator.userAgent,
             auth: {
-                operatorId: IsSystemTypeSC1() ? "ONEworks1" : "ONEworksVGCash",
-                operatorSecret: IsSystemTypeSC1() ? "ONEworks1@20luminet&" : "VG@SC123"
+                operatorId: IsSystemTypeSC1() ? "SabaPlay_HD" : "ONEworksVGCash",
+                operatorSecret: IsSystemTypeSC1() ? "d371cae6-ed52-49c6-9d7f-bae5d6fc5601" : "VG@SC123"
             },
             token: "",
             redirectUrl: "#",
@@ -62,7 +62,7 @@ export default class SignIn extends React.Component {
             expandAdvanceSetting: false,
             instantMode: 1,
             devIp: "",
-            operatorToken: IsSystemTypeSC1() ? "ONEworks1Token" : "ONEworksVGCashToken",
+            operatorToken: IsSystemTypeSC1() ? "SabaPlay_HDToken" : "ONEworksVGCashToken",
             setDefaultBalance: false,
             ref: "m_direct",
             deeplink: "",

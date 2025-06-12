@@ -80,7 +80,7 @@ router.get("/signin/direct", async (req, res) => {
             siteName: "lumi",
             ip: "202.78.231.34, 10.254.5.203",
             browserUserAgent: req.headers["user-agent"],
-            auth: { operatorId: "ONEworks1", operatorSecret: "ONEworks1@20luminet&" },
+            auth: { operatorId: "SabaPlay_HD", operatorSecret: "d371cae6-ed52-49c6-9d7f-bae5d6fc5601" },
             redirectUrl:
                 "https://hdsit.sgamesuat.com/?token=c75d82e4-b0e6-4e16-8712-3622aaee0316&lang=vi-VN&ref=m_direct&op=sg&cg=GrUSD&gameId=1001",
             gameId: gameId,
@@ -109,7 +109,7 @@ router.get("/signin/direct", async (req, res) => {
             expandAdvanceSetting: false,
             instantMode: 1,
             devIp: null,
-            operatorToken: "ONEworks1Token",
+            operatorToken: "SabaPlay_HDToken",
             setDefaultBalance: false,
             ref: "m_direct",
             deeplink: "https://4qwcm.test-app.link/pPv9z8d27ub/?uri=undefined",

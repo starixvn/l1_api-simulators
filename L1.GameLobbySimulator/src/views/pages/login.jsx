@@ -18,7 +18,7 @@ function buildLocalStorageKey(key) {
 }
 
 const operatorMapper = {
-    ONEworks1: "ow",
+    SabaPlay_HD: "ow",
     ONEworksVGCash: "ow",
     SBO: "sbo"
 };
@@ -97,8 +97,8 @@ export default class Login extends React.Component {
             ip,
             browserUserAgent: navigator.userAgent,
             auth: {
-                operatorId: IsSystemTypeSC1() ? "ONEworks1" : "ONEworksVGCash",
-                operatorSecret: IsSystemTypeSC1() ? "ONEworks1@20luminet&" : "VG@SC123"
+                operatorId: IsSystemTypeSC1() ? "SabaPlay_HD" : "ONEworksVGCash",
+                operatorSecret: IsSystemTypeSC1() ? "d371cae6-ed52-49c6-9d7f-bae5d6fc5601" : "VG@SC123"
             },
             gameId: 0,
             domain: "example.com",
