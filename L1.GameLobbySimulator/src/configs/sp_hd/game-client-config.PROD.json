@@ -10,7 +10,7 @@
     "expireIn": 1585629268,
     "useAuthenticate": true,
     "requestTimeout": 10000,
-    "owUrl": "https://ow.hotdog-games.com/SabaClub",
+    "owUrl": "http://sp_hd_ow_api_simulator_PROD:5000/SabaClub",
     "localhost": "http://localhost:7456",
     "mobileLocalhost": "http://localhost:3000",
     "port": 5000,
