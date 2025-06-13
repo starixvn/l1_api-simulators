@@ -5,9 +5,9 @@
     "data": {
       "auth": {
         "partnerId": "SabaPlay_HD",
-        "partnerSecret": "d371cae6-ed52-49c6-9d7f-bae5d6fc5601",
+        "partnerSecret": "SabaPlay_HD",
         "clientId": "SabaPlay_HD",
-        "clientSecret": "d371cae6-ed52-49c6-9d7f-bae5d6fc5601"
+        "clientSecret": "SabaPlay_HD"
       }
     }
   },

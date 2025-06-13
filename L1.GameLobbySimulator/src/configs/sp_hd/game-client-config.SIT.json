@@ -15,5 +15,7 @@
     "mobileLocalhost": "http://localhost:3000",
     "port": 5000,
     "enableCors": true,
-    "corsUrls": ["https://www.saba.games/"]
+    "corsUrls": [
+        "https://www.saba.games/"
+    ]
 }

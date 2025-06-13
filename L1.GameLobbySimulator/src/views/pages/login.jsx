@@ -98,7 +98,7 @@ export default class Login extends React.Component {
             browserUserAgent: navigator.userAgent,
             auth: {
                 operatorId: IsSystemTypeSC1() ? "SabaPlay_HD" : "ONEworksVGCash",
-                operatorSecret: IsSystemTypeSC1() ? "d371cae6-ed52-49c6-9d7f-bae5d6fc5601" : "VG@SC123"
+                operatorSecret: IsSystemTypeSC1() ? "SabaPlay_HD" : "VG@SC123"
             },
             gameId: 0,
             domain: "example.com",

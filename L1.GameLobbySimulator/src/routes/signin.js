@@ -80,7 +80,7 @@ router.get("/signin/direct", async (req, res) => {
             siteName: "lumi",
             ip: "202.78.231.34, 10.254.5.203",
             browserUserAgent: req.headers["user-agent"],
-            auth: { operatorId: "SabaPlay_HD", operatorSecret: "d371cae6-ed52-49c6-9d7f-bae5d6fc5601" },
+            auth: { operatorId: "SabaPlay_HD", operatorSecret: "SabaPlay_HD" },
             redirectUrl:
                 "https://hdsit.sgamesuat.com/?token=c75d82e4-b0e6-4e16-8712-3622aaee0316&lang=vi-VN&ref=m_direct&op=sg&cg=GrUSD&gameId=1001",
             gameId: gameId,
