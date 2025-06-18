@@ -11,7 +11,7 @@ import { SC1GameLobbyURLMapper, VG2GameLobbyURLMapper } from "../constants/lobby
 import { showAlert } from "../util.jsx";
 
 const operatorMapper = {
-    SabaPlay_HD: "ow",
+    SabaPlay_HD: "SabaPlay_HD",
     ONEworksVGCash: "ow",
     SBO: "sbo",
     ONEworks_VG: "ow",
