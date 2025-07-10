@@ -70,7 +70,9 @@ export default class SignIn extends React.Component {
             returnUrl: "",
             isApp: false,
             simulator: false,
-            disableAward: false
+            disableAward: false,
+            playerAvatarUrl: "https://git3.nexdev.net/uploads/-/system/user/avatar/50/avatar.png",
+            playerNickname: "BestPlayer001"
         };
 
         this.instantModeSize = {
@@ -388,6 +390,13 @@ export default class SignIn extends React.Component {
                                         onChange={this.handleInputChange}
                                     />
                                     <Input type="text" id="ref" name="Ref" value={this.state.ref} onChange={this.handleInputChange} />
+                                    <Input
+                                        type="text"
+                                        id="playerAvatarUrl"
+                                        name="Player Avatar Url"
+                                        value={this.state.playerAvatarUrl}
+                                        onChange={this.handleInputChange}
+                                    />
                                 </div>
                                 <div className="col-sm-12 col-md-6">
                                     <Input type="text" id="ip" name="IP" value={this.state.ip} onChange={this.handleInputChange} />
@@ -424,6 +433,14 @@ export default class SignIn extends React.Component {
                                         id="returnUrl"
                                         name="Return Url"
                                         value={this.state.returnUrl}
+                                        onChange={this.handleInputChange}
+                                    />
+
+                                    <Input
+                                        type="text"
+                                        id="playerNickname"
+                                        name="Player Nickname"
+                                        value={this.state.playerNickname}
                                         onChange={this.handleInputChange}
                                     />
                                 </div>
