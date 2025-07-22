@@ -1,5 +1,5 @@
 {
-    "evn": "LOCAL",
+    "evn": "LOCAL_1",
     "systemType": "VG2",
     "apiUrl": "https://l2-api1.lumigame.com",
     "authUrl": "https://l2-auth1.lumigame.com",
@@ -8,17 +8,15 @@
         "secret": "gameserver@20luminet&"
     },
     "expireIn": 1591262817,
-    "owUrl": "https://l2-ows.lumigame.com/SabaClub",
+    "owUrl": "https://l2-ows1.lumigame.com/SabaClub",
     "useAuthenticate": true,
     "requestTimeout": 10000,
     "localhost": "http://localhost:7456",
     "mobileLocalhost": "http://localhost:3000",
-    "port": 8106,
+    "port": 8111,
     "connectSiteUrl": "https://gn-connectsite.lumigame.com/login",
     "enableCors": true,
-    "corsUrls": [
-        "http://localhost:3001"
-    ],
+    "corsUrls": ["http://localhost:3001"],
     "simulatorUrl": "http://local3.game-client-simulator.lumigame.com",
     "livePageUrl": "https://l2-seal-live-page-client-demo2.lumigame.com",
     "todayPageUrl": "https://l2-seal-hot-league-wall-client-demo2.lumigame.com"
