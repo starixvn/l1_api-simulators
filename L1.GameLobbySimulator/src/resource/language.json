@@ -26,5 +26,9 @@
   {
     "value": "zh-Hans",
     "name": "Chinese New Simplified"
+  },
+  {
+    "value": "ja-JP",
+    "name": "Japanese"
   }
 ]
