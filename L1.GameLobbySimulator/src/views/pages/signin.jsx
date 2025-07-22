@@ -71,7 +71,7 @@ export default class SignIn extends React.Component {
             isApp: false,
             simulator: false,
             disableAward: false,
-            playerAvatarUrl: "https://git3.nexdev.net/uploads/-/system/user/avatar/50/avatar.png",
+            playerAvatarUrl: "https://assets.lang.live/gift/fedffb919a921cfab98660bb2400cb07",
             playerNickname: "BestPlayer001"
         };
 
