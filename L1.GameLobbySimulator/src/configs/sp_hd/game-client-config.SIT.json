@@ -1,8 +1,8 @@
 {
     "evn": "SIT",
     "systemType": "HD",
-    "apiUrl": "http://sp_hd_sg_api_sit:5000",
-    "authUrl": "http://sp_hd_auth_api_sit:5000",
+    "apiUrl": "http://sp-hd-sg-api-sit-service:5000",
+    "authUrl": "http://sp-hd-auth-api-sit-service:5000",
     "client": {
         "id": "game-server",
         "secret": "gameserver@20luminet&"
@@ -10,7 +10,7 @@
     "expireIn": 1585629268,
     "useAuthenticate": true,
     "requestTimeout": 10000,
-    "owUrl": "http://sp_hd_ow_api_simulator_SIT:5000/SabaClub",
+    "owUrl": "http://sp-hd-ow-api-simulator-SIT-service:5000/SabaClub",
     "localhost": "http://localhost:7456",
     "mobileLocalhost": "http://localhost:3000",
     "port": 5000,
