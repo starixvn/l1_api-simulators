@@ -1,5 +1,5 @@
 {
-    "evn": "SIT_1",
+    "evn": "SIT",
     "systemType": "HD",
     "apiUrl": "http://sp-hd-sg-api-sit1-service:5000",
     "authUrl": "http://sp-hd-auth-api-sit1-service:5000",
