@@ -1,0 +1,19 @@
+{
+    "evn": "SIT_1",
+    "systemType": "VG2",
+    "apiUrl": "http://l2-sg-api-sit1-service:5000",
+    "authUrl": "http://l2-auth-api-sit1-service:5000",
+    "client": {
+        "id": "game-server",
+        "secret": "gameserver@20luminet&"
+    },
+    "expireIn": 1585629268,
+    "useAuthenticate": true,
+    "requestTimeout": 10000,
+    "owUrl": "http://l2-ow-api-simulator-sit1-service:5000/SabaClub",
+    "localhost": "http://localhost:7456",
+    "mobileLocalhost": "http://localhost:3000",
+    "port": 5000,
+    "enableCors": true,
+    "corsUrls": ["https://www.saba.games/"]
+}
