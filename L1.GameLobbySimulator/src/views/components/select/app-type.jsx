@@ -12,7 +12,7 @@ const appSelectorConfig = {
         { value: 7, name: "Mobile Direct" },
         { value: 9, name: "Lang Live" },
         { value: 6, name: "Live Page" },
-        { value: 8, name: "Today Page" },
+        { value: 8, name: "Today Page" }
     ],
     instantModes: [
         { value: 1, name: "Portrait" },
@@ -27,24 +27,8 @@ export default class AppType extends React.Component {
         this.handleInstantModeChange = this.handleInstantModeChange.bind(this);
     }
 
-    openLivePage() {
-        this.props.onChange({ appType: 6 });
-       window.open(`${config.livePageUrl}?playerId=${this.props.playerId}`, '_blank');
-    }
-
-    openTodayPage() {
-        this.props.onChange({ appType: 8 });
-        window.open(`${config.todayPageUrl}?playerId=${this.props.playerId}`, '_blank');
-    }
-
     handleChange(data) {
         this.props.onChange(data);
-
-        if (data.appType === 6) {
-            this.openLivePage();
-        } else if (data.appType === 8) {
-            this.openTodayPage();
-        }
     }
 
     handleInstantModeChange(event) {
@@ -59,30 +43,17 @@ export default class AppType extends React.Component {
                 <label>App Type</label>
                 <div>
                     {appSelectorConfig.options.map((option) => (
-                        option.value === 6 || option.value === 8 ? (
-                            <div className="input-group" key={option.value}>
-                                <button
-                                      type="button"
-                                      id="live-page-button"
-                                      className="tertiary"
-                                      onClick={() => option.value === 6 ? this.openLivePage() : this.openTodayPage()}
-                                >
-                                    {option.name}
-                                </button>
-                            </div>
-                        ) : (
-                            <div className="input-group" key={option.value}>
-                                <input
-                                    type="radio"
-                                    id={option.value}
-                                    name="appType"
-                                    value={option.value}
-                                    onChange={() => this.handleChange({ appType: option.value })}
-                                    checked={option.value === value}
-                                />
-                                <label htmlFor={option.value}>{option.name}</label>
-                            </div>
-                        )
+                        <div className="input-group" key={option.value}>
+                            <input
+                                type="radio"
+                                id={option.value}
+                                name="appType"
+                                value={option.value}
+                                onChange={() => this.handleChange({ appType: option.value })}
+                                checked={option.value === value}
+                            />
+                            <label htmlFor={option.value}>{option.name}</label>
+                        </div>
                     ))}
 
                     <div>

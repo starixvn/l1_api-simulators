@@ -15,7 +15,5 @@
     "mobileLocalhost": "http://localhost:3000",
     "connectSiteUrl": "https://l1-connectsite1.lumigame.com/login",
     "port": 5000,
-    "simulatorUrl": "http://local1.game-client-simulator.lumigame.com",
-    "livePageUrl": "https://l1-seal-live-page-client-demo1.lumigame.com",
-    "todayPageUrl": "https://l1-seal-hot-league-wall-client-demo1.lumigame.com"
+    "simulatorUrl": "http://local1.game-client-simulator.lumigame.com"
 }
