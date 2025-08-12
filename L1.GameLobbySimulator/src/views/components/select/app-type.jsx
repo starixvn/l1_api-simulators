@@ -11,6 +11,7 @@ const appSelectorConfig = {
         { value: 4, name: "Mega Keno" },
         { value: 7, name: "Mobile Direct" },
         { value: 9, name: "Lang Live" },
+        { value: 10, name: "Original Games" },
         { value: 6, name: "Live Page" },
         { value: 8, name: "Today Page" },
     ],
