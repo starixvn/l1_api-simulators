@@ -5,6 +5,11 @@ export default class Select extends React.Component {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSearchChange = this.handleSearchChange.bind(this);
+
+    this.state = {
+      searchTerm: ""
+    };
   }
 
   handleChange(event) {
@@ -25,6 +30,33 @@ export default class Select extends React.Component {
     this.props.onChange(data);
   }
 
+  handleSearchChange(event) {
+    const searchTerm = event.target.value;
+    this.setState({ searchTerm }, () => {
+      if (!this.props.searchable) return;
+
+      const normalizedSearch = (searchTerm || "").toLowerCase();
+      const filteredOptions = this.props.options.filter(option => (option.name || "").toLowerCase().includes(normalizedSearch));
+
+      if (!normalizedSearch) return;
+
+      // Always select the first filtered option when typing
+      const selectedOption = filteredOptions.length > 0 ? filteredOptions[0] : null;
+
+      if (selectedOption) {
+        const rawValue = selectedOption.value != null ? selectedOption.value : selectedOption.id;
+        let parsedValue = rawValue;
+        if (this.props.type === "float") {
+          parsedValue = parseFloat(rawValue);
+        } else if (this.props.type === "int") {
+          parsedValue = parseInt(rawValue, 10);
+        }
+        this.props.onChange({ [this.props.id]: parsedValue });
+      }
+    });
+  }
+
+
   getType(typeName) {
     if (typeName === "int" || typeName === "float") {
       return "number";
@@ -34,10 +66,25 @@ export default class Select extends React.Component {
   }
 
   render() {
-    const { id, name, value, type, options } = this.props;
+    const { id, name, value, type, options, searchable } = this.props;
+    const { searchTerm } = this.state;
+
+    const normalizedSearch = (searchTerm || "").toLowerCase();
+    const filteredOptions = searchable
+      ? options.filter(option => (option.name || "").toLowerCase().includes(normalizedSearch))
+      : options;
     return (
       <div className="input-group vertical">
         <label htmlFor={id}>{name}</label>
+        {searchable && (
+          <input
+            className="input"
+            type="text"
+            placeholder="Search by name"
+            value={searchTerm}
+            onChange={this.handleSearchChange}
+          />
+        )}
         <select
           className="input"
           type={this.getType(type)}
@@ -45,7 +92,7 @@ export default class Select extends React.Component {
           onChange={event => this.handleChange(event)}
           value={value}
         >
-          {options.map(option => (
+          {filteredOptions.map(option => (
             <option value={option.value || option.id} key={option.value || option.id}>
               {option.name}
             </option>

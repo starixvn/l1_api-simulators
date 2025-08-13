@@ -51,7 +51,17 @@ export default class Game extends React.Component {
     }
 
     render() {
-        const { value, id } = this.props;
-        return <Select {...this.state} id={id} value={value} onChange={this.handleChange} />;
+        const { value, id, appType } = this.props;
+        const selectKey = appType === 10 ? "reset-on-appType-10" : "normal";
+        return (
+            <Select
+                key={selectKey}
+                {...this.state}
+                id={id}
+                value={value}
+                onChange={this.handleChange}
+                searchable={true}
+            />
+        );
     }
 }

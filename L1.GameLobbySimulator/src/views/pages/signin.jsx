@@ -113,6 +113,11 @@ export default class SignIn extends React.Component {
             iFrameElement.src = iFrameElement.src;
         }
 
+        // Auto-select gameId 148 when appType is Original Games (10)
+        if (data.appType === 10) {
+            data.gameId = 148;
+        }
+
         if (data.playerId || data.appType) {
             this.props.handleChangeInput(data);
             data.playerId && this.setState({ playerName: `username_${data.playerId}` });
@@ -335,6 +340,9 @@ export default class SignIn extends React.Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </div>
+                                <div className="col-sm-12 col-md-6">
+                                    <GameSelect onChange={this.handleInputChange} id="gameId" value={this.state.gameId} appType={this.state.appType} />
+                                </div>
                             </div>
                         </fieldset>
                         <fieldset>
@@ -381,7 +389,6 @@ export default class SignIn extends React.Component {
                                     />
                                     <LanguageSelect onChange={this.handleInputChange} id="language" value={this.state.language} />
 
-                                    <GameSelect onChange={this.handleInputChange} id="gameId" value={this.state.gameId} />
                                     <Input
                                         type="text"
                                         id="browserUserAgent"
@@ -395,6 +402,14 @@ export default class SignIn extends React.Component {
                                         id="playerAvatarUrl"
                                         name="Player Avatar Url"
                                         value={this.state.playerAvatarUrl}
+                                        onChange={this.handleInputChange}
+                                    />
+                                    
+                                    <Input
+                                        type="text"
+                                        id="playerNickname"
+                                        name="Player Nickname"
+                                        value={this.state.playerNickname}
                                         onChange={this.handleInputChange}
                                     />
                                 </div>
@@ -433,14 +448,6 @@ export default class SignIn extends React.Component {
                                         id="returnUrl"
                                         name="Return Url"
                                         value={this.state.returnUrl}
-                                        onChange={this.handleInputChange}
-                                    />
-
-                                    <Input
-                                        type="text"
-                                        id="playerNickname"
-                                        name="Player Nickname"
-                                        value={this.state.playerNickname}
                                         onChange={this.handleInputChange}
                                     />
                                 </div>
