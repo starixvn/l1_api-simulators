@@ -34,5 +34,21 @@
     {
         "value": "es-ES",
         "name": "Spanish"
+    },
+    {
+        "value": "tr-TR",
+        "name": "Turkish"
+    },
+    {
+        "value": "fil-PH",
+        "name": "Filipino"
+    },
+    {
+        "value": "ko-KR",
+        "name": "Korean"
+    },
+    {
+        "value": "pt-BR",
+        "name": "Portuguese"
     }
 ]
