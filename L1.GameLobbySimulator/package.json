@@ -7,7 +7,8 @@
         "start": "nodemon ./src",
         "webpack:dev": "webpack --watch --mode development --config ./src/webpack.config.js",
         "dev": "set NODE_OPTIONS=--openssl-legacy-provider && concurrently --kill-others \"npm run webpack:dev\" \"nodemon .\"",
-        "build": "set NODE_OPTIONS=--openssl-legacy-provider && webpack --config ./src/webpack.config.js"
+        "build": "set NODE_OPTIONS=--openssl-legacy-provider && webpack --config ./src/webpack.config.js",
+        "test-coverage": "jest --coverage"
     },
     "description": "GameLobbySimulator",
     "author": {
@@ -20,6 +21,7 @@
         "cors": "^2.8.5",
         "debug": "^2.2.0",
         "express": "^4.14.0",
+        "jest": "^30.0.5",
         "l1.client.node-js": "file:./src/L1.Client.NodeJS",
         "morgan": "^1.7.0",
         "nodemon": "^2.0.2",
