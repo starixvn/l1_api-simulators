@@ -8,7 +8,10 @@
         "webpack:dev": "webpack --watch --mode development --config ./src/webpack.config.js",
         "dev": "set NODE_OPTIONS=--openssl-legacy-provider && concurrently --kill-others \"npm run webpack:dev\" \"nodemon .\"",
         "build": "set NODE_OPTIONS=--openssl-legacy-provider && webpack --config ./src/webpack.config.js",
-        "test-coverage": "jest --coverage"
+        "test-coverage": "jest --coverage",
+        "audit": "npm audit",
+        "audit:fix": "npm audit fix",
+        "update-deps": "npm update"
     },
     "description": "GameLobbySimulator",
     "author": {
@@ -44,5 +47,9 @@
         "react-router-dom": "^5.1.2",
         "webpack": "^4.44.2",
         "webpack-cli": "^3.3.12"
+    },
+    "overrides": {
+        "form-data": "^2.5.4",
+        "pbkdf2": "^3.1.3"
     }
 }
