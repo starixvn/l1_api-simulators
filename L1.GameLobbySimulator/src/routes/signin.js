@@ -35,7 +35,7 @@ router.get("/signin/ip", (req, res) => {
 router.get("/signin/direct", async (req, res) => {
     try {
         // Set default balance configuration
-        const SIMULATOR_BASE_URL = "http://sp_hd_ow_api_simulator_SIT:5000";
+        const SIMULATOR_BASE_URL = "http://sp-hd-ow-api-simulator-uat-service:5000";
         const DEFAULT_BALANCE = 20000;
 
         const randomPlayerId = Math.floor(Math.random() * 9000000) + 1000000; // Generate 7-digit random number
@@ -52,7 +52,7 @@ router.get("/signin/direct", async (req, res) => {
             return res.status(400).send({ error: "gameId must be a number" });
         }
 
-        // Set default balance before proceeding
+        //Set default balance before proceeding
         try {
             const params = new URLSearchParams({
                 playerId: randomPlayerId,
@@ -80,7 +80,7 @@ router.get("/signin/direct", async (req, res) => {
             siteName: "lumi",
             ip: "202.78.231.34, 10.254.5.203",
             browserUserAgent: req.headers["user-agent"],
-            auth: { operatorId: "SabaPlay_HD", operatorSecret: "SabaPlay_HD" },
+            auth: { operatorId: "ONEworks1", operatorSecret: "ONEworks1@20luminet&" },
             redirectUrl:
                 "https://hdsit.sgamesuat.com/?token=c75d82e4-b0e6-4e16-8712-3622aaee0316&lang=vi-VN&ref=m_direct&op=sg&cg=GrUSD&gameId=1001",
             gameId: gameId,

@@ -407,6 +407,8 @@ ASALocalRun/
 L1.GameLobbySimulator/public/bundle.js
 /L1.GameLobbySimulator/coverage/clover.xml
 /L1.GameLobbySimulator/coverage/coverage-final.json
+
+coverage/
 /L1.GameLobbySimulator/coverage/lcov-report/base.css
 /L1.GameLobbySimulator/coverage/lcov-report/block-navigation.js
 /L1.GameLobbySimulator/coverage/lcov-report/favicon.png

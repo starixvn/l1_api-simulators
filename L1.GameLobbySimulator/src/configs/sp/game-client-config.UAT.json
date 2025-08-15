@@ -10,7 +10,7 @@
     "expireIn": 1585629268,
     "useAuthenticate": true,
     "requestTimeout": 10000,
-    "owUrl": "https://hduatow.klu.sgamesuat.com/SabaClub",
+    "owUrl": "http://sp-hd-ow-api-simulator-uat-service:5000/SabaClub",
     "localhost": "http://localhost:7456",
     "mobileLocalhost": "http://localhost:3000",
     "port": 5000,
