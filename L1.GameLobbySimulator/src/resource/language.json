@@ -50,5 +50,9 @@
     {
         "value": "pt-BR",
         "name": "Portuguese"
+    },
+    {
+        "value": "un-UN",
+        "name": "Unsupported"
     }
 ]
