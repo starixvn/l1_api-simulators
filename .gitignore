@@ -405,3 +405,14 @@ ASALocalRun/
 .localhistory/
 
 L1.GameLobbySimulator/public/bundle.js
+/L1.GameLobbySimulator/coverage/clover.xml
+/L1.GameLobbySimulator/coverage/coverage-final.json
+/L1.GameLobbySimulator/coverage/lcov-report/base.css
+/L1.GameLobbySimulator/coverage/lcov-report/block-navigation.js
+/L1.GameLobbySimulator/coverage/lcov-report/favicon.png
+/L1.GameLobbySimulator/coverage/lcov-report/index.html
+/L1.GameLobbySimulator/coverage/lcov-report/prettify.css
+/L1.GameLobbySimulator/coverage/lcov-report/prettify.js
+/L1.GameLobbySimulator/coverage/lcov-report/sort-arrow-sprite.png
+/L1.GameLobbySimulator/coverage/lcov-report/sorter.js
+/L1.GameLobbySimulator/coverage/lcov.info
