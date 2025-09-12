@@ -405,3 +405,5 @@ ASALocalRun/
 .localhistory/
 
 L1.GameLobbySimulator/public/bundle.js
+
+coverage/
