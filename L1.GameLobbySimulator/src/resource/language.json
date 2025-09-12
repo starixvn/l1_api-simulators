@@ -34,5 +34,25 @@
     {
         "value": "es-ES",
         "name": "Spanish"
+    },
+    {
+        "value": "ms-MY",
+        "name": "Malay"
+    },
+    {
+        "value": "hi-IN",
+        "name": "Hindi (India)"
+    },
+    {
+        "value": "bn-BD",
+        "name": "Bangla (Bangladesh)"
+    },
+    {
+        "value": "ko-KR",
+        "name": "Korean"
+    },
+    {
+        "value": "pt-BR",
+        "name": "Portuguese (Brazil)"
     }
 ]
