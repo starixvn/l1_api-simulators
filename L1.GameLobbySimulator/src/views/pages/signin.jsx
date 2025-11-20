@@ -72,7 +72,8 @@ export default class SignIn extends React.Component {
             simulator: false,
             disableAward: false,
             playerAvatarUrl: "https://assets.lang.live/gift/fedffb919a921cfab98660bb2400cb07",
-            playerNickname: "BestPlayer001"
+            playerNickname: "BestPlayer001",
+            xMode:1
         };
 
         this.instantModeSize = {
@@ -337,6 +338,13 @@ export default class SignIn extends React.Component {
                                         id="currency"
                                         name="Currency"
                                         value={this.state.currency}
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <Input
+                                        type="number"
+                                        id="xMode"
+                                        name="xMode"
+                                        value={this.state.xMode}
                                         onChange={this.handleInputChange}
                                     />
                                 </div>
