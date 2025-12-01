@@ -4,6 +4,7 @@ import SettingPage from "./pages/setting.jsx";
 import LoginPage from "./pages/login.jsx";
 import DirectPage from "./pages/direct.jsx";
 import IframePage from "./pages/iframe.jsx";
+import SabaPlayPage from "./pages/sabaPlay.jsx";
 
 export default [
     {
@@ -35,5 +36,10 @@ export default [
         path: "/iframe",
         component: IframePage,
         name: "Iframe"
+    },
+    {
+        path: "/saba-play",
+        component: SabaPlayPage,
+        name: "SabaPlay"
     }
 ];
