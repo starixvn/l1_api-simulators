@@ -35,7 +35,7 @@ const DEFAULTS = {
     PLAYER_ID: "eric011",
     CURRENCY: "UUS",
     AMOUNT: "20000",
-    X_MODE: "100"
+    X_MODE: "1"
 };
 
 const SabaPlay = () => {
