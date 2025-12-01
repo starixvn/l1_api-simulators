@@ -17,5 +17,10 @@
     "port": 5000,
     "simulatorUrl": "http://local.game-client-simulator.lumigame.com",
     "livePageUrl": "https://l1-seal-live-page-client-demo.lumigame.com",
-    "todayPageUrl": "https://l1-seal-hot-league-wall-client-demo.lumigame.com"
+    "todayPageUrl": "https://l1-seal-hot-league-wall-client-demo.lumigame.com",
+    "sabaPlay": {
+        "apiBase": "https://sabaplaywallet.sb3rd.playonesit.com",
+        "operatorPwd": "ub3u9rvj",
+        "operatorSecret": "slo52vhy"
+    }
 }

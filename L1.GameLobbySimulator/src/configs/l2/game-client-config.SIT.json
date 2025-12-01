@@ -15,5 +15,10 @@
     "mobileLocalhost": "http://localhost:3000",
     "port": 5000,
     "enableCors": true,
-    "corsUrls": ["https://www.saba.games/"]
+    "corsUrls": ["https://www.saba.games/"],
+    "sabaPlay": {
+        "apiBase": "https://sabaplaywallet.sb3rd.playonesit.com",
+        "operatorPwd": "ub3u9rvj",
+        "operatorSecret": "slo52vhy"
+    }
 }

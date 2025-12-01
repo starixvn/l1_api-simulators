@@ -3,9 +3,10 @@ import React, { useState } from "react";
 import Input from "../components/input.jsx";
 import { showAlert } from "../util.jsx";
 import CryptoJS from "crypto-js";
+import config from "../../game-client-config.json";
 
 // API Endpoints
-const API_BASE = "http://sabaplaywallet.sb3rd.playonesit.com";
+const API_BASE = config.sabaPlay.apiBase;
 const ENDPOINTS = {
     CREATE_MEMBER: `${API_BASE}/api/wallet/CreateMember`,
     DEPOSIT: `${API_BASE}/api/wallet/Deposit`,
@@ -23,10 +24,10 @@ const GAME_CONFIG = {
     USE_LOBBY: true
 };
 
-// Authentication
+// Authentication - From config file
 const AUTH = {
-    OPERATOR_PWD: "ub3u9rvj",
-    OPERATOR_SECRET: "slo52vhy"
+    OPERATOR_PWD: config.sabaPlay.operatorPwd,
+    OPERATOR_SECRET: config.sabaPlay.operatorSecret
 };
 
 // Default Form Values
@@ -62,8 +63,15 @@ const SabaPlay = () => {
     };
 
     const generateGuid = () => {
+        // Use crypto.randomUUID() for cryptographically secure UUIDs
+        if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+            return crypto.randomUUID();
+        }
+        // Fallback using crypto.getRandomValues() for older browsers
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-            const r = Math.random() * 16 | 0;
+            const array = new Uint8Array(1);
+            crypto.getRandomValues(array);
+            const r = array[0] % 16;
             const v = c === 'x' ? r : (r & 0x3 | 0x8);
             return v.toString(16);
         });
